@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 21:20:12 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:28:04 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/03 22:34:33 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	*ft_memccpy(void *dest, const void *src, int c, unsigned int n)
 	unsigned int	i;
 	const char		*s = src;
 
+	tmp = (char *)dest;
 	i = 0;
 	if (!n && !dest)
 		return ((void *)0);

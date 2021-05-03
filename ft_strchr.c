@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 20:18:53 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:26:12 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/03 22:34:36 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ char	*ft_strchr(const char *str, int c)
 	while (*str)
 	{
 		if (*str == c)
-			return (str);
+			return ((char *)str);
 		str++;
 	}
 	return (0);
