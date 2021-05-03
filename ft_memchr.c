@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 20:55:10 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:23:02 by minskim2         ###   ########.fr       */
+/*   Created: 2021/05/03 22:19:01 by minskim2          #+#    #+#             */
+/*   Updated: 2021/05/03 22:23:06 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_bzero(void *s, unsigned int n)
+void	*ft_memchr(const void *ptr, int value, unsigned int num)
 {
-	unsigned int		i;
-	unsigned char	*temp;
+	unsigned int	i;
 
-	temp = (unsigned char *)s;
 	i = 0;
-	while (i < n)
-		temp[i++] = 0;
-	return (temp);
+	while (i < num)
+	{
+		if (((unsigned char *)ptr)[i] == (unsigned char)value)
+			return ((void *)ptr + i);
+		i++;
+	}
+	return ((void *)0);
 }
