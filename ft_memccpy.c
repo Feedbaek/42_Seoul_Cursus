@@ -6,15 +6,15 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 21:20:12 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:23:05 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/03 22:28:04 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*memccpy(void *dest, const void *src, int c, unsigned int n)
+void	*ft_memccpy(void *dest, const void *src, int c, unsigned int n)
 {
-	char	*tmp;
+	char			*tmp;
 	unsigned int	i;
-	const char	*s = src;
+	const char		*s = src;
 
 	i = 0;
 	if (!n && !dest)

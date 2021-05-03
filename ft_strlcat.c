@@ -6,11 +6,11 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 20:39:46 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:23:08 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/03 22:26:25 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlcat(char *dest, const char * src, unsigned int size)
+unsigned int	ft_strlcat(char *dest, const char *src, unsigned int size)
 {
 	unsigned int i;
 

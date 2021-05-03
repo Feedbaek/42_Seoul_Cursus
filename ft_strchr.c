@@ -6,13 +6,13 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 20:18:53 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:23:09 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/03 22:26:12 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strchr(const char *str, int c)
 {
-	while(*str)
+	while (*str)
 	{
 		if (*str == c)
 			return (str);
