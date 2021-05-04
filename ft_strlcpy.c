@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-static unsigned int ft_strlen(const char *str)
+static unsigned int	ft_strlen(const char *str)
 {
 	unsigned int len;
 
@@ -20,7 +20,7 @@ static unsigned int ft_strlen(const char *str)
 	return (len);
 }
 
-int ft_strlcpy(char *dest, const char *src, unsigned int size)
+int					ft_strlcpy(char *dest, const char *src, unsigned int size)
 {
 	unsigned int i;
 	unsigned int len;
