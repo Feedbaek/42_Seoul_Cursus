@@ -32,6 +32,6 @@ int ft_strncmp(const char *s1, const char *s2, unsigned int n);
 char *ft_strnstr(const char *str, const char *substr, unsigned int len);
 int ft_tolower(int c);
 int ft_toupper(int c);
-int *ft_strlcpy(char *dest, const char *src, unsigned int size);
+int ft_strlcpy(char *dest, const char *src, unsigned int size);
 
 #endif

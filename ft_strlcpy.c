@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 14:25:49 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/04 15:00:05 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/04 15:02:24 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static unsigned int ft_strlen(const char *str)
 	return (len);
 }
 
-int *ft_strlcpy(char *dest, const char *src, unsigned int size)
+int ft_strlcpy(char *dest, const char *src, unsigned int size)
 {
 	unsigned int i;
 	unsigned int len;
