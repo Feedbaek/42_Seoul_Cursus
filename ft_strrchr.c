@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 18:35:04 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/07 22:29:25 by minskim2         ###   ########.fr       */
+/*   Created: 2021/05/05 18:01:16 by minskim2          #+#    #+#             */
+/*   Updated: 2021/05/07 22:29:34 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isprint(int c)
+#include "libft.h"
+
+char	*ft_strrchr(const char *str, int c)
 {
-	if (c > 255)
+	size_t	len;
+
+	if (!ft_isascii((unsigned char)c))
 		return (0);
-	if ((unsigned char)c >= ' ' && (unsigned char)c <= '~')
-		return (1);
+	len = ft_strlen(str);
+	if ((unsigned char)c == 0)
+		return ((char*)str + len);
+	if (!(*str) || len == 0)
+		return (0);
+	while (len-- > 0)
+	{
+		if (!ft_isascii(str[len]))
+			return (0);
+		if ((unsigned char)str[len] == (unsigned char)c)
+			return ((char *)str + len);
+	}
 	return (0);
 }

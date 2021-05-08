@@ -6,13 +6,15 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 20:15:43 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:34:39 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:31:03 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_tolower(int c)
 {
-	if (c >= 'A' && c <= 'Z')
+	if (c > 255)
+		return (c);
+	if ((unsigned char)c >= 'A' && (unsigned char)c <= 'Z')
 		return (c + 32);
 	return (c);
 }

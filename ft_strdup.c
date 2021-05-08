@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 18:35:04 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/07 22:29:25 by minskim2         ###   ########.fr       */
+/*   Created: 2021/05/05 12:55:54 by minskim2          #+#    #+#             */
+/*   Updated: 2021/05/07 22:29:30 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isprint(int c)
+#include "libft.h"
+
+char	*ft_strdup(const char *s1)
 {
-	if (c > 255)
-		return (0);
-	if ((unsigned char)c >= ' ' && (unsigned char)c <= '~')
-		return (1);
-	return (0);
+	char	*p;
+	size_t	len;
+
+	p = (char*)malloc(ft_strlen(s1) + 1);
+	if (!p)
+		return (p);
+	len = ft_strlen(s1);
+	ft_memcpy(p, s1, len);
+	p[len] = 0;
+	return (p);
 }

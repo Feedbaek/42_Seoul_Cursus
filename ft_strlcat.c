@@ -6,13 +6,15 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 20:39:46 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:34:37 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:29:31 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlcat(char *dest, const char *src, unsigned int size)
+#include "libft.h"
+
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	unsigned int i;
+	size_t i;
 
 	i = 0;
 	while (*dest && i < size)
@@ -22,7 +24,7 @@ unsigned int	ft_strlcat(char *dest, const char *src, unsigned int size)
 	}
 	while (i + 1 < size && *src)
 	{
-		*dest = *src;
+		*dest = (unsigned char)*src;
 		dest++;
 		src++;
 		i++;

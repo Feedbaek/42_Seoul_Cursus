@@ -6,13 +6,15 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 20:55:10 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:34:29 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:29:20 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_bzero(void *s, unsigned int n)
+#include "libft.h"
+
+void	ft_bzero(void *s, size_t n)
 {
-	unsigned int	i;
+	size_t			i;
 	unsigned char	*temp;
 
 	temp = (unsigned char *)s;

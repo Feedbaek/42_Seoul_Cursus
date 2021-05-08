@@ -6,13 +6,15 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 21:40:20 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:34:35 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:29:28 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memmove(void *dest, const void *src, unsigned int n)
+#include "libft.h"
+
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned int i;
+	size_t i;
 
 	if (dest == 0 && src == 0)
 		return (0);

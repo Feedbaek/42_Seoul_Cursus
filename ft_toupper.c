@@ -6,13 +6,15 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 18:43:10 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:34:40 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:31:09 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_toupper(int c)
 {
-	if (c >= 'a' && c <= 'z')
+	if (c > 255)
+		return (c);
+	if ((unsigned char)c >= 'a' && (unsigned char)c <= 'z')
 		return (c - 32);
 	return (c);
 }

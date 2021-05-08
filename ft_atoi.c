@@ -6,11 +6,11 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:52:52 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:34:28 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:29:19 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str)
 {
 	int i;
 	int sign;
@@ -33,8 +33,8 @@ int	ft_atoi(char *str)
 	while ('0' <= *str && *str <= '9')
 	{
 		i *= 10;
-		i += (sign * (*str - '0'));
+		i += *str - '0';
 		str++;
 	}
-	return (i);
+	return (sign * i);
 }

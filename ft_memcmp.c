@@ -6,13 +6,15 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 21:52:30 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:34:34 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:29:27 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_memcmp(const void *dest, const void *src, unsigned int num)
+#include "libft.h"
+
+int		ft_memcmp(const void *dest, const void *src, size_t num)
 {
-	unsigned int	i;
+	size_t			i;
 	unsigned char	*temp1;
 	unsigned char	*temp2;
 

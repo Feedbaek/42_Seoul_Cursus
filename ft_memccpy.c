@@ -6,15 +6,17 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 21:20:12 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:34:33 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:29:25 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memccpy(void *dest, const void *src, int c, unsigned int n)
+#include "libft.h"
+
+void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {
-	char			*tmp;
-	unsigned int	i;
-	const char		*s = src;
+	char				*tmp;
+	size_t				i;
+	const unsigned char	*s = src;
 
 	tmp = (char *)dest;
 	i = 0;
@@ -23,11 +25,11 @@ void	*ft_memccpy(void *dest, const void *src, int c, unsigned int n)
 	while (i < n)
 	{
 		tmp[i] = s[i];
-		if ((unsigned char)c == *s)
+		if ((unsigned char)c == s[i])
 			break ;
 		i++;
 	}
 	if (n == i)
-		return ((void *)0);
+		return ((void*)0);
 	return (dest + i + 1);
 }

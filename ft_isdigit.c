@@ -6,13 +6,15 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 18:23:01 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:34:31 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:29:24 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_isdigit(int c)
 {
-	if (c >= '0' && c <= '9')
+	if (c > 255)
+		return (0);
+	if ((unsigned char)c >= '0' && (unsigned char)c <= '9')
 		return (1);
 	return (0);
 }

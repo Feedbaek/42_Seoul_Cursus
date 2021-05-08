@@ -6,13 +6,15 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 22:19:01 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:34:33 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:29:26 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*ft_memchr(const void *ptr, int value, unsigned int num)
+#include "libft.h"
+
+void	*ft_memchr(const void *ptr, int value, size_t num)
 {
-	unsigned int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < num)

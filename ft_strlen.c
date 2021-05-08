@@ -6,13 +6,15 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 20:52:19 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:34:38 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:29:32 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strlen(const char *str)
+#include "libft.h"
+
+size_t	ft_strlen(const char *str)
 {
-	int	cnt;
+	size_t	cnt;
 
 	cnt = 0;
 	while (*str)

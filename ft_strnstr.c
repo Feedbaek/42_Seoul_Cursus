@@ -6,26 +6,29 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:15:36 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/03 22:34:39 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/07 22:29:33 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strnstr(const char *str, const char *substr, unsigned int len)
-{
-	unsigned int i;
+#include "libft.h"
 
-	if (substr[0] == 0)
+char	*ft_strnstr(const char *str, const char *substr, size_t len)
+{
+	size_t i;
+
+	if ((unsigned char)substr[0] == 0)
 		return ((char*)str);
-	while (*str != 0 && len-- > 0)
+	while ((unsigned char)*str != 0 && len > 0)
 	{
 		i = 0;
-		while (str[i] == substr[i] && i < len)
+		while ((unsigned char)str[i] == (unsigned char)substr[i] && i < len)
 		{
 			i++;
-			if (substr[i] == 0)
+			if ((unsigned char)substr[i] == 0)
 				return ((char *)str);
 		}
 		str++;
+		len--;
 	}
 	return (0);
 }
