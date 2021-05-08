@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 17:52:52 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/08 17:58:43 by minskim2         ###   ########.fr       */
+/*   Created: 2021/05/08 20:32:44 by minskim2          #+#    #+#             */
+/*   Updated: 2021/05/08 22:08:27 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
-{
-	int i;
-	int sign;
+#include "libft.h"
 
-	i = 0;
-	sign = 1;
-	while (*str == '\t'
-			|| *str == ' '
-			|| *str == '\n'
-			|| *str == '\f'
-			|| *str == '\v'
-			|| *str == '\r')
-		str++;
-	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-			sign *= -1;
-		str++;
-	}
-	while ('0' <= *str && *str <= '9')
-	{
-		i *= 10;
-		i += *str - '0';
-		str++;
-	}
-	return (sign * i);
+static	void	rec_free(t_list *lst, void (*del)(void *))
+{
+	if (lst->next)
+		rec_free(lst->next, del);
+	ft_lstdelone(lst, del);
+}
+
+void			ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	if (!lst || !del || !*lst)
+		return ;
+	rec_free(*lst, del);
+	*lst = 0;
 }

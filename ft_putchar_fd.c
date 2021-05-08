@@ -1,40 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 17:52:52 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/08 17:58:43 by minskim2         ###   ########.fr       */
+/*   Created: 2021/05/08 16:53:19 by minskim2          #+#    #+#             */
+/*   Updated: 2021/05/08 17:42:18 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
-{
-	int i;
-	int sign;
+#include "libft.h"
 
-	i = 0;
-	sign = 1;
-	while (*str == '\t'
-			|| *str == ' '
-			|| *str == '\n'
-			|| *str == '\f'
-			|| *str == '\v'
-			|| *str == '\r')
-		str++;
-	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-			sign *= -1;
-		str++;
-	}
-	while ('0' <= *str && *str <= '9')
-	{
-		i *= 10;
-		i += *str - '0';
-		str++;
-	}
-	return (sign * i);
+void	ft_putchar_fd(char c, int fd)
+{
+	if (fd < 0)
+		return ;
+	write(fd, &c, 1);
 }
