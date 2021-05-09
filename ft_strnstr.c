@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:15:36 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/07 22:29:33 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/09 13:15:07 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ char	*ft_strnstr(const char *str, const char *substr, size_t len)
 
 	if ((unsigned char)substr[0] == 0)
 		return ((char*)str);
+
+	if (ft_strlen(str) < ft_strlen(substr) || len < ft_strlen(substr))
+		return (0);
 	while ((unsigned char)*str != 0 && len > 0)
 	{
 		i = 0;
