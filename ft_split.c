@@ -6,16 +6,26 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:00:13 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/07 22:29:29 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/10 19:59:40 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static char		**mem_free(char **ret, int i)
+{
+	int		idx;
+
+	idx = 0;
+	while (idx < i)
+		free(ret[i++]);
+	return (0);
+}
+
 static char		*insert_word(char *str, char c)
 {
-	size_t	len;
-	size_t	i;
+	int		len;
+	int		i;
 	char	*word;
 
 	i = 0;
@@ -36,7 +46,7 @@ static char		*insert_word(char *str, char c)
 static size_t	cnt_word(char const *s, char c)
 {
 	char	*str;
-	size_t	word;
+	int		word;
 
 	str = (char*)s;
 	word = 0;
@@ -58,8 +68,8 @@ char			**ft_split(char const *s, char c)
 {
 	char	**ret;
 	char	*str;
-	size_t	i;
-	size_t	word;
+	int		i;
+	int		word;
 
 	i = 0;
 	if (!s)
@@ -75,9 +85,9 @@ char			**ft_split(char const *s, char c)
 			str++;
 			continue ;
 		}
-		ret[i] = insert_word(str, c);
-		str += ft_strlen(ret[i]);
-		i++;
+		if (!(ret[i] = insert_word(str, c)))
+			return (mem_free(ret, i));
+		str += ft_strlen(ret[i++]);
 	}
 	ret[i] = 0;
 	return (ret);

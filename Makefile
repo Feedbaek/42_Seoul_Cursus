@@ -71,6 +71,4 @@ clean:
 fclean:
 	@rm -rf $(NAME) $(OBJECTS) $(OBJECTS_BONUS)
 
-re:
-	@make fclean
-	@make all
+re: fclean all
