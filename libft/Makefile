@@ -1,4 +1,4 @@
-CC=gcc
+C=gcc
 CFLAGS =-Wall -Wextra -Werror
 AR=ar
 ARFLAGS=crs
