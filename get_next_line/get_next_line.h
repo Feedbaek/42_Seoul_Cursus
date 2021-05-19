@@ -13,19 +13,20 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <stdio.h>
 # include <stdlib.h>
-# include <string.h>
 # include <unistd.h>
-
-# ifndef OPEN_MAX
-#  define OPEN_MAX 256
-# endif
 
 void	*ft_memmove(void *dest, const void *src, size_t n);
 size_t	ft_strlen(const char *str);
-char	*ft_gnlcat(char *dest, char *src, size_t size);
+int		ft_gnlcat(char *dest, char *src, size_t size);
 int		get_next_line(int fd, char **line);
 char	*ft_strdup(const char *s1);
+
+typedef struct	s_file
+{
+	int				fd;
+	char			buf[BUFFER_SIZE + 1];
+	struct	s_file	*next_fd;
+}				t_file;
 
 #endif

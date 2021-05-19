@@ -52,7 +52,7 @@ size_t	ft_strlen(const char *str)
 	return (cnt);
 }
 
-char	*ft_gnlcat(char *dest, char *src, size_t size)
+int		ft_gnlcat(char *dest, char *src, size_t size)
 {
 	size_t i;
 
@@ -67,9 +67,7 @@ char	*ft_gnlcat(char *dest, char *src, size_t size)
 	}
 	if (i < size)
 		dest[i] = 0;
-	if (*src == '\n')
-		return (src);
-	return (dest);
+	return (i);
 }
 
 char	*ft_strdup(const char *s1)
