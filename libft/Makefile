@@ -50,20 +50,27 @@ SRCS_BONUS=\
 	ft_lstsize.c
 OBJECTS = $(SRCS:.c=.o)
 OBJECTS_BONUS = $(SRCS_BONUS:.c=.o)
+
+ifdef WITH_BONUS
+	OBJS = $(OBJECTS) $(OBJECTS_BONUS)
+else
+	OBJS = $(OBJECTS)
+endif
+
 HEADER = ./
 
 .PHONY: all clean fclean bonus re
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS)
+$(NAME): $(OBJS)
 	@$(AR) $(ARFLAGS) $@ $^
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $^ -o $@ -I$(HEADER)
 
-bonus: $(OBJECTS) $(OBJECTS_BONUS)
-	@$(AR) $(ARFLAGS) $(NAME) $^
+bonus:
+	@make WITH_BONUS=1 all
 
 clean:
 	@rm -rf $(OBJECTS) $(OBJECTS_BONUS)

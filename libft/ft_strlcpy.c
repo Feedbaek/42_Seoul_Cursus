@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 14:25:49 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/07 22:29:32 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/19 16:46:18 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
 	size_t len;
 
 	i = 0;
-	if (!dest || !src)
-		return (0);
 	len = ft_strlen(src);
 	while (i < len && i + 1 < dstsize)
 	{

@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 12:55:54 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/07 22:29:30 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/16 19:36:00 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strdup(const char *s1)
 	if (!p)
 		return (p);
 	len = ft_strlen(s1);
-	ft_memcpy(p, s1, len);
+	ft_memmove(p, s1, len);
 	p[len] = 0;
 	return (p);
 }

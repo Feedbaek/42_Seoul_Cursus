@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 17:00:13 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/10 19:59:40 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/14 14:10:30 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char		*insert_word(char *str, char c)
 	return (word);
 }
 
-static size_t	cnt_word(char const *s, char c)
+static int	cnt_word(char const *s, char c)
 {
 	char	*str;
 	int		word;

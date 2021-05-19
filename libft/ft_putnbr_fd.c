@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 17:14:46 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/08 17:42:19 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/10 22:40:39 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void		ft_putnbr_fd(int n, int fd)
 {
 	char	c;
 
+	if (fd < 0)
+		return ;
 	if (n < 0)
 		write(fd, "-", 1);
 	if (n < 0)
