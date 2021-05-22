@@ -12,18 +12,18 @@
 
 #include "get_next_line.h"
 
-int		check_fd(int fd, t_file *file_d)
+int		check_fd(int fd, t_file **file_d)
 {
 	t_file	*parser;
 	t_file	*new_fd;
 
-	parser = file_d;
+	parser = *file_d;
 	if (parser)
 		while (*parser)
 		{
 			if (parser->fd == fd)
 			{
-				file_d = parser;
+				*file_d = parser;
 				return (1);
 			}
 			if (!(parser->next_fd))
@@ -33,67 +33,105 @@ int		check_fd(int fd, t_file *file_d)
 	if (!(new_fd = (t_file*)malloc(sizeof(t_file))))
 		return (-1);
 	new_fd->fd = fd;
-	new_fd->buf[BUFFER_SIZE] = 0;
+	new_fd->str = (char*)malloc(1);
+	new_fd->str[0] = 0;
 	new_fd->next_fd = 0;
 	if (parser)
 		parser->next_fd = new_fd;
-	file_d = new_fd;
+	*file_d = new_fd;
 	return (0);
+}
+
+int		ft_split(char *a, char *b, char *str, char *n_location)
+{
+
+	if (!(a = (char*)malloc(n_location - str + 1)))
+		return ;
+	while (str < n_location)
+		*a++ = (unsigned char)*str++;
+	*a = 0;
+	str++;
+	if (!(b = (char*)malloc(ft_strlen(str) + 1)))
+		return (0);
+	while (*str)
+		*b++ = (unsigned char)*str++;
+	*b = 0;
+	return (1);
+}
+
+int		first_process(t_file *file_d, char **str)
+{
+	char	*n_location;
+	char	*first;
+	char	*last;
+
+	if ((n_location = ft_strchr(file_d->str, '\n')))
+	{
+		if (!(ft_split(first, last, file_d->str, n_location)))
+			return (-1);
+		free(file_d->str);
+		file_d->str = last;
+		*str = first;
+		return (1);
+	}
+	*str = file_d->str;
+	return (0);
+}
+
+int		second_process(int fd, t_file *file_d, char **str)
+{
+	int		x;
+	char	*tmp;
+	char	*first;
+	char	*second;
+	char	buf[BUFFER_SIZE + 1];
+
+	buf[BUFFER_SIZE] = 0;
+	if ((x = read(fd, buf, BUFFER_SIZE)) <= 0)
+		return (x);
+	if (ft_strchr(buf, '\n'))
+	{
+		if (!(ft_split(first, second, buf, ft_strchr(buf, '\n'))))
+			return (-1);
+		file_d->str = second;
+		tmp = ft_strjoin(*str, first);
+		free(first);
+		free(*str);
+		*str = tmp;
+		return (0);
+	}
+	tmp = ft_strjoin(*str, buf);
+	free(*str);
+	*str = tmp;
+	return (1);
 }
 
 int		get_next_line(int fd, char **line)
 {
 	char			*str;
-	int				num;
-	static t_file	*file_d;
+	char			*new;
+	static t_file	*file_list;
+	t_file			*file_d;
 	int				x;
 	int				check;
 
-	if (fd < 0 || !line || BUFFER_SIZE <= 0 || (check = check_fd(fd, file_d)) == -1)
+	file_d = file_list;
+	if (fd < 0 || !line || BUFFER_SIZE <= 0 || (check = check_fd(fd, &file_d)) == -1
+		|| (x = first_process(file_d, &str)) == -1)
 		return (-1);
-	if (check == 1)
+	if (x == 1)
 	{
-		if (!(str = (char*)malloc(ft_strlen(file_d->buf) + BUFFER_SIZE + 1)))
-			return (-1);
-		num = ft_gnlcat(str, file_d->buf, ft_strlen(file_d->buf) + BUFFER_SIZE + 1);
-		if ()
+		*line = str;
+		return (1);
 	}
-	x = read(fd, file_d->buf, BUFFER_SIZE);
-	if (x == -1)
-		return (-1);
-	if (!(str = (char*)malloc(x + 1)))
-		return (-1);
-	file_d->buf[x] = 0;
+	x = 1;
+	while (x == 1)
+		x = second_process(fd, file_d, &str);
+	if (x == 0)
+	{
+		free(file_d->str);
 
-/*
-	if (!buf[fd])
-		if (!(buf[fd] = (char*)malloc(BUFFER_SIZE + 1)))
-			return (-1);
-	if (!(str = (char*)malloc(ft_strlen(buf[fd]) + 1))
-		|| (x = read(fd, buf[fd], BUFFER_SIZE)) == -1)
-		return (-1);
-	buf[fd][BUFFER_SIZE] = 0;
-	ft_memmove(str, buf, BUFFER_SIZE + 1);
-	while ((x = read(fd, buf[fd], BUFFER_SIZE)) == 1)
-	{
-		if (!(tmp = ft_strdup(str)))
-			return (-1);
-		free(str);
-		if (!(str = (char*)malloc(ft_strlen(tmp) + x + 1)))
-			return (-1);
-		ft_memmove(str, tmp, ft_strlen(tmp) + 1);
-		free(tmp);
-		check = ft_gnlcat(str, buf, ft_strlen(str) + BUFFER_SIZE + 1);
-		if (*check == '\n')
-		{
-			check++;
-			break ;
-		}
 	}
-	ft_memmove(buf, check, ft_strlen(check));
 	*line = str;
-	if (x == 0 || x == -1)
-		return (x);
-*/
-	return (1);
+	return (x);
 }

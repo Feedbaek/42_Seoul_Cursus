@@ -12,37 +12,12 @@
 
 #include "get_next_line.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
-{
-	size_t i;
-
-	if (dest == 0 && src == 0)
-		return (0);
-	if (dest < src)
-	{
-		i = 0;
-		while (i < n)
-		{
-			((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
-			i++;
-		}
-	}
-	else
-	{
-		i = n;
-		while (i)
-		{
-			((unsigned char *)dest)[i - 1] = ((unsigned char *)src)[i - 1];
-			i--;
-		}
-	}
-	return (dest);
-}
-
 size_t	ft_strlen(const char *str)
 {
 	size_t	cnt;
 
+	if (!str)
+		return (0);
 	cnt = 0;
 	while (*str)
 	{
@@ -52,40 +27,75 @@ size_t	ft_strlen(const char *str)
 	return (cnt);
 }
 
-int		ft_gnlcat(char *dest, char *src, size_t size)
+char	*ft_strchr(const char *str, int c)
+{
+	if (!str)
+		return (0);
+	while (*str)
+	{
+		if (*str == (unsigned char)c)
+			return ((char *)str);
+		str++;
+	}
+	if ((unsigned char)c == 0)
+		return ((char*)str);
+	return (0);
+}
+
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
 	size_t i;
 
 	i = 0;
-	while (dest[i] && i < size)
-		i++;
-	while (i + 1 < size && *src && *src != '\n')
+	while (*dest && i < size)
 	{
-		((unsigned char*)dest)[i] = (unsigned char)*src;
+		dest++;
+		i++;
+	}
+	while (i + 1 < size && *src)
+	{
+		*dest = (unsigned char)*src;
+		dest++;
 		src++;
 		i++;
 	}
 	if (i < size)
-		dest[i] = 0;
+		*dest = 0;
+	while (*src)
+	{
+		i++;
+		src++;
+	}
 	return (i);
 }
 
-char	*ft_strdup(const char *s1)
+size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
 {
-	char	*p;
-	size_t	len;
+	size_t i;
+	size_t len;
 
-	if (!s1)
+	i = 0;
+	len = ft_strlen(src);
+	while (i < len && i + 1 < dstsize)
 	{
-		p = (char*)malloc(1);
-		p[0] = 0;
-		return (p);
+		dest[i] = (unsigned char)src[i];
+		i++;
 	}
-	p = (char*)malloc(ft_strlen(s1) + 1);
-	if (!p)
-		return (p);
-	len = ft_strlen(s1);
-	ft_memmove(p, s1, len);
-	p[len] = 0;
-	return (p);
+	if (dstsize > 0)
+		dest[i] = 0;
+	return (len);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*str;
+
+	if (!s1 || !s2)
+		return (0);
+	str = (char*)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
+		return (0);
+	(void)ft_strlcpy(str, s1, ft_strlen(s1) + 1);
+	(void)ft_strlcat(str, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
+	return (str);
 }
