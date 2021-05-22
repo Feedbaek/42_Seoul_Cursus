@@ -36,11 +36,9 @@ char		*ft_strtrim(char const *s1, char const *set)
 	char	*tmp;
 	size_t	i;
 	size_t	j;
-	size_t	idx;
 
 	if (!is_valid_set(s1, set, &i, &j))
 		return (0);
-	idx = 0;
 	while (ft_strchr(set, s1[i]) && i < j && s1[i])
 		i++;
 	if (i == j || !s1[i])

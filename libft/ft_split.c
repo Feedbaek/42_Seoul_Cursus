@@ -14,7 +14,7 @@
 
 static char		**mem_free(char **ret, int i)
 {
-	int		idx;
+	int idx;
 
 	idx = 0;
 	while (idx < i)
@@ -32,7 +32,7 @@ static char		*insert_word(char *str, char c)
 	len = 0;
 	while ((unsigned char)str[len] != (unsigned char)c && str[len])
 		len++;
-	if (!(word = (char*)malloc(sizeof(char) * len + 1)))
+	if (!(word = (char *)malloc(sizeof(char) * len + 1)))
 		return (0);
 	while (i < len)
 	{
@@ -43,19 +43,19 @@ static char		*insert_word(char *str, char c)
 	return (word);
 }
 
-static int	cnt_word(char const *s, char c)
+static int		cnt_word(char const *s, char c)
 {
 	char	*str;
 	int		word;
 
-	str = (char*)s;
+	str = (char *)s;
 	word = 0;
 	while (*str)
 	{
 		if ((unsigned char)*str == (unsigned char)c)
 		{
 			str++;
-			continue ;
+			continue;
 		}
 		word++;
 		while ((unsigned char)*str != (unsigned char)c && *str)
@@ -75,15 +75,15 @@ char			**ft_split(char const *s, char c)
 	if (!s)
 		return (0);
 	word = cnt_word(s, c);
-	if (!(ret = (char**)malloc(sizeof(char*) * (word + 1))))
+	if (!(ret = (char **)malloc(sizeof(char *) * (word + 1))))
 		return (0);
-	str = (char*)s;
+	str = (char *)s;
 	while (i < word && *str)
 	{
 		if ((unsigned char)*str == (unsigned char)c)
 		{
 			str++;
-			continue ;
+			continue;
 		}
 		if (!(ret[i] = insert_word(str, c)))
 			return (mem_free(ret, i));

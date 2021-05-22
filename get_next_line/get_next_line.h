@@ -25,7 +25,7 @@ char	*ft_strdup(const char *s1);
 typedef struct	s_file
 {
 	int				fd;
-	char			buf[BUFFER_SIZE + 1];
+	char			*buf;
 	struct	s_file	*next_fd;
 }				t_file;
 
