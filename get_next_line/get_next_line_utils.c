@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 22:19:27 by minskim2          #+#    #+#             */
-/*   Updated: 2021/05/23 22:03:49 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/05/23 22:43:32 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,20 @@ size_t	ft_strlen(char *str)
 	return (cnt);
 }
 
-char	*ft_strchr(char *str, int c)
+int		ft_strchr(char *str, int c)
 {
+	int		i;
 	if (!str)
-		return (0);
-	while (*str)
+		return (-1);
+	while (str[i])
 	{
-		if (*str == (unsigned char)c)
-			return ((char *)str);
-		str++;
+		if (str[i] == (unsigned char)c)
+			return (i);
+		i++;
 	}
 	if ((unsigned char)c == 0)
-		return ((char*)str);
-	return (0);
+		return (i);
+	return (-1);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -54,40 +55,12 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (s1)
 		while (*s1)
 			*str++ = (unsigned char)*s1++;
+	free(s1)
 	if (s2)
 		while (*s2)
 			*str++ = (unsigned char)*s2++;
 	*str = 0;
 	return (str);
-}
-
-int		check_fd(int fd, t_file **file_d)
-{
-	t_file	*parser;
-	t_file	*new_fd;
-
-	parser = *file_d;
-	if (parser)
-		while (parser)
-		{
-			if (parser->fd == fd)
-			{
-				*file_d = parser;
-				return (1);
-			}
-			if (!(parser->next_fd))
-				break ;
-			parser = parser->next_fd;
-		}
-	if (!(new_fd = (t_file*)malloc(sizeof(t_file))))
-		return (-1);
-	new_fd->fd = fd;
-	new_fd->str = 0;
-	new_fd->next_fd = 0;
-	if (parser)
-		parser->next_fd = new_fd;
-	*file_d = new_fd;
-	return (0);
 }
 
 char	*ft_strdup(char *s1)
