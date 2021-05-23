@@ -27,22 +27,41 @@ char	*ft_split(char **hi, int n_idx)
 		new_str[i++] = (unsigned char)*str++;
 	new_str[i] = 0;
 	str++;
-	if (!(new_hi = (char*)malloc(ft_strlen(str) - n_idx + 1)))
+	if (!(new_hi = (char*)malloc(ft_strlen(*hi) - n_idx + 1)))
 		return (0);
 	i = 0;
 	while (*str)
-		*new_hi++ = (unsigned char)*str++;
-	*new_hi = 0;
+		new_hi[i++] = (unsigned char)*str++;
+	new_hi[i] = 0;
+	free(*hi);
+	*hi = new_hi;
+	return (new_str);
+}
 
-	*a = first;
-	*b = last;
-	return (1);
+int		WTF_output(char **hi, char **line, int read_size)
+{
+	int		n_idx;
+
+	if (read_size < 0)
+		return (-1);
+	if ((n_idx = ft_strchr(*hi)) >= 0)
+	{
+		*line = ft_split(hi, n_idx);
+		return (1);
+	}
+	if (*hi)
+	{
+		*line = *hi;
+		*hi = 0;
+		return (0);
+	}
+	*line = ft_strdup("");
+	return (0);
 }
 
 int		get_next_line(int fd, char **line)
 {
 	static char	*hi[OPEN_MAX];
-	char		*tmp;
 	char		buf[BUFFER_SIZE + 1];
 	int			read_size;
 	int			n_idx;
@@ -55,7 +74,9 @@ int		get_next_line(int fd, char **line)
 		hi[fd] = ft_strjoin(hi[fd], buf);
 		if (n_idx = ft_strchr(hi[fd]))
 		{
-			tmp = ft_split(&hi[fd], n_idx);
+			*line = ft_split(&hi[fd], n_idx);
+			return (1);
 		}
 	}
+	return (WTF_output());
 }

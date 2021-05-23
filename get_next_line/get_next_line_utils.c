@@ -55,7 +55,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (s1)
 		while (*s1)
 			*str++ = (unsigned char)*s1++;
-	free(s1)
+	free(s1);
 	if (s2)
 		while (*s2)
 			*str++ = (unsigned char)*s2++;
