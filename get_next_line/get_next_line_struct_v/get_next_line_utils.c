@@ -45,12 +45,11 @@ char	*ft_strchr(char *str, int c)
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*str;
-	size_t	i;
+	char	*tmp;
 
-	str = 0;
-	i = 0;
 	if (!(str = (char*)malloc(ft_strlen(s1) + ft_strlen(s2) + 1)))
 		return (0);
+	tmp = str;
 	if (s1)
 		while (*s1)
 			*str++ = (unsigned char)*s1++;
@@ -58,7 +57,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		while (*s2)
 			*str++ = (unsigned char)*s2++;
 	*str = 0;
-	return (str);
+	return (tmp);
 }
 
 int		check_fd(int fd, t_file **file_d)

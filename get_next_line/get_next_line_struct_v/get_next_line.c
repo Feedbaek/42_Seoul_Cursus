@@ -45,13 +45,13 @@ int		first_process(t_file *file_d, char **str)
 	{
 		if (!(ft_split(&first, &last, file_d->str, n_location)))
 			return (-1);
-		free(file_d->str);
+		//free(file_d->str);
 		file_d->str = last;
 		*str = first;
 		return (1);
 	}
 	*str = ft_strdup(file_d->str);
-	free(file_d->str);
+	//free(file_d->str);
 	return (0);
 }
 
@@ -67,7 +67,7 @@ int		second_process(int fd, t_file *file_d, char **str)
 		return (0);
 	if ((x = read(fd, buf, BUFFER_SIZE)) <= 0)
 	{
-		free(buf);
+		//free(buf);
 		return (x);
 	}
 	buf[x] = 0;
@@ -77,15 +77,15 @@ int		second_process(int fd, t_file *file_d, char **str)
 			return (-1);
 		file_d->str = second;
 		tmp = ft_strjoin(*str, first);
-		free(first);
-		free(*str);
-		free(buf);
+		//free(first);
+		//free(*str);
+		//free(buf);
 		*str = tmp;
 		return (0);
 	}
 	tmp = ft_strjoin(*str, buf);
-	free(*str);
-	free(buf);
+	//free(*str);
+	//free(buf);
 	*str = tmp;
 	return (1);
 }
