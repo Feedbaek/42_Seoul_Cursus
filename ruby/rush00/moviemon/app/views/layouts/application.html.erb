@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Moviemon</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+	<script>
+		(function(){
+			document.addEventListener('keydown', function(e){
+				const keyCode = e.keyCode;
+				switch (e.keyCode){
+				case 87:
+					id = "up"
+					break;
+				case 83:
+					id = "down"
+					break;
+				case 65:
+					id = "left"
+					break;
+				case 68:
+					id = "right"
+					break;
+				case 74:
+					id = "b"
+					break;
+				case 75:
+					id = "a"
+					break;
+				case 85:
+					id = "select"
+					break;
+				case 73:
+					id = "start"
+					break;
+				case 80:
+					id = "power"
+					break;
+				default:
+				}
+				console.log('pushed key ' + id);
+				a = document.getElementById(id).getAttribute('href');
+				if (a != "#")
+					window.location.href = a;
+				console.log(a);
+			})
+		})();
+	</script>
+  </head>
+
+  <body>
+	<h1>The Moviemon</h1>
+	<img src="/assets/Gameboy.jpeg" alt="Gameboy" usemap="#gameboy">
+	<%= yield%>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<screen>
+<%# Year, Genre ,Director, rating, abstract%>
+<%if @dex[0] == nil%>
+	<h2>none</h2>
+<%else%>
+	<img style="position:absolute; width: 140px; top:0px;" alt="poster" src="<%=@poster%>">
+	<div style="position:absolute; left:145px; top:0px; font-size:80%">
+		<div>year :
+			<span><%=@year%></span>
+		</div>
+		<div>Genre :
+			<span><%=@genres%></span>
+		</div>
+		<div>Director :
+			<span><%=@director%></span>
+		</div>
+		<div>Rating :
+			<span><%=@rating%></span>
+		</div>
+		<div style="font-size:10%; height:100px; overflow:hidden; text-overflow: ellipsis;">Abstract :
+			<span><%=@abstract%></span>
+		</div>
+	</div>
+<%end%>
+<h style="position: absolute; top: 232px; left: 5px; font-size: 90%;">[Left] Prev &nbsp &nbsp [Right] Next &nbsp &nbsp &nbsp &nbsp [Start] Back</h>
+<map name="gameboy">
+	<area id="up" shape="rect" alt="up" coords="78,486,120,526" href="#"/>
+	<area id="down" shape="rect" alt="down" coords="77,566,120,606" href="#"/>
+	<area id="left" shape="rect" alt="left" coords="32,524,73,568" href="?command=prev&page=<%=@p%>"/>
+	<area id="right" shape="rect" alt="right" coords="124,526,165,566" href="?command=next&page=<%=@p%>"/>
+	<area id="a" shape="circle" alt="a" coords="425,522,33" href="#"/>
+	<area id="b" shape="circle" alt="b" coords="343,559,34" href="#"/>
+	<area id="start" shape="poly" alt="start" coords="282,642,229,666,229,684,241,686,292,664,292,649,289,647" href="/map"/>
+	<area id="select" shape="poly" alt="select" coords="198,641,143,669,145,681,156,687,208,662,211,649" href="#"/>
+	<area id="power" shape="circle" alt="battery" title="" coords="69,184,11" href="/"/>
+</map>
+</screen>
