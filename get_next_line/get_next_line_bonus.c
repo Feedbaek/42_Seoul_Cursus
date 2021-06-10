@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 22:19:35 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/08 14:27:26 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/08 15:34:16 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		link_free(t_file **file_list, int ret, t_file *file_d)
 		}
 		prev->next_fd = file_d->next_fd;
 	}
-	if (ret < 0)
+	if (ret < 0 && file_d->str)
 		free(file_d->str);
 	free(file_d);
 	return (ret);
