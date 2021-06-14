@@ -6,11 +6,24 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:54:45 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/14 17:35:52 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/14 22:47:12 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	cnt;
+
+	cnt = 0;
+	while (*str)
+	{
+		cnt++;
+		str++;
+	}
+	return (cnt);
+}
 
 int		ft_atoi(const char *str)
 {
