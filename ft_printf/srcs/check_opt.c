@@ -6,35 +6,45 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 22:00:18 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/10 22:26:31 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/14 19:43:54 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		check_cnt(char *)
+int		check_dot(char *str, t_format *form)
+{
+	if (*str == '.')
+	{
+		form->dot = 1;
+		return (1);
+	}
+	return (0);
+}
 
 int		check_flag(char *str, t_format *form)
 {
 	if (*str == '0')
 	{
 		form->zero = 1;
-		if (form->left = 1)
+		if (form->left == 1)
 			form->zero = 0;
+		form->step = 1;
+		return (1);
 	}
-	else if (*str == '-')
+	if (*str == '-')
 	{
 		form->left = 1;
 		form->zero = 0;
+		form->step = 1;
+		return (1);
 	}
-	else
-		return (0);
-	return (1);
+	return (0);
 }
 
 int		check_width(char *str, t_format *form, va_list ap)
 {
-	int num;
+	int x;
 
 	if (*str == '*')
 	{
@@ -43,29 +53,62 @@ int		check_width(char *str, t_format *form, va_list ap)
 			form->width *= -1;
 			form->left = 1;
 		}
+		form->step = 2;
+		return (1);
 	}
-	else if (ft_isdigit(*str))
+	else if ((x = ft_atoi(*str)))
 	{
-		num = ft_atoi(str);
-		form->width = ft_atoi(*str);
+		if (x < 0)
+		{
+			form->left = 1;
+			x *= -1;
+		}
+		form->width = x;
+		form->step = 2;
+		return (1);
 	}
-	else
-		return (0);
-	return (1);
+	return (0);
 }
 
 int		check_precision(char *str, t_format *form, va_list ap)
 {
+	int x;
+
 	if (*str == '*')
 	{
 		if ((form->precision = va_arg(ap, int)) < 0)
 			form->precision = -2;
+		form->step = 3;
+		return (1);
 	}
-	else if (ft_isdigit(*str))
+	if ((x = ft_atoi(*str)) || *str == '0')
 	{
-		if (*str < 0)
-			return (0); // 음수가 들어오면 에러;
-		form->precision = ft_atoi(*str);
+		if (x < 0)
+			return (0);
+		form->precision = x;
+		form->step = 3;
+		return (1);
 	}
-	return (1);
+	return (0);
+}
+
+int		check_type(char *str)
+{
+	if (*str == 'd' || *str == 'i')
+		return (1);
+	if (*str == 'u')
+		return (2);
+	if (*str == 'x')
+		return (3);
+	if (*str == 'X')
+		return (4);
+	if (*str == 'p')
+		return (5);
+	if (*str == 'c')
+		return (6);
+	if (*str == 's')
+		return (7);
+	if (*str == '%')
+		return (8);
+	return (0);
 }
