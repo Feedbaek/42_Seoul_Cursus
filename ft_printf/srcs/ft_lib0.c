@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lib.c                                           :+:      :+:    :+:   */
+/*   ft_lib0.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:54:45 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/14 22:47:12 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/15 20:53:53 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,11 @@ int		ft_isdigit(int c)
 	if ((unsigned char)c >= '0' && (unsigned char)c <= '9')
 		return (1);
 	return (0);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (!s || fd < 0)
+		return ;
+	write(fd, s, ft_strlen(s));
 }

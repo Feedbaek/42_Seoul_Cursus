@@ -6,13 +6,13 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 22:00:18 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/14 22:51:54 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/15 20:19:39 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		check_dot(char *str, t_format *form)
+int		check_dot(const char *str, t_format *form)
 {
 	if (*str == '.')
 	{
@@ -22,7 +22,7 @@ int		check_dot(char *str, t_format *form)
 	return (0);
 }
 
-int		check_flag(char *str, t_format *form)
+int		check_flag(const char *str, t_format *form)
 {
 	if (*str == '0')
 	{
@@ -42,7 +42,7 @@ int		check_flag(char *str, t_format *form)
 	return (0);
 }
 
-int		check_width(char *str, t_format *form, va_list ap)
+int		check_width(const char *str, t_format *form, va_list ap)
 {
 	int x;
 
@@ -56,7 +56,7 @@ int		check_width(char *str, t_format *form, va_list ap)
 		form->step = 2;
 		return (1);
 	}
-	else if ((x = ft_atoi(*str)))
+	else if ((x = ft_atoi(str)))
 	{
 		if (x < 0)
 		{
@@ -70,7 +70,7 @@ int		check_width(char *str, t_format *form, va_list ap)
 	return (0);
 }
 
-int		check_precision(char *str, t_format *form, va_list ap)
+int		check_precision(const char *str, t_format *form, va_list ap)
 {
 	int x;
 
@@ -81,7 +81,7 @@ int		check_precision(char *str, t_format *form, va_list ap)
 		form->step = 3;
 		return (1);
 	}
-	if ((x = ft_atoi(*str)) || *str == '0')
+	if ((x = ft_atoi(str)) || *str == '0')
 	{
 		if (x < 0)
 			return (0);
@@ -92,7 +92,7 @@ int		check_precision(char *str, t_format *form, va_list ap)
 	return (0);
 }
 
-int		check_type(char *str)
+int		check_type(const char *str, t_format *form)
 {
 	if (*str == 'd' || *str == 'i')
 		return (1);

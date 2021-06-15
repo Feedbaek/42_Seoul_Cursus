@@ -1,10 +1,17 @@
 CC=gcc
-CFLAGS =-Wall -Wextra -Werror
+CFLAGS =
 AR=ar
 ARFLAGS=crs
 NAME = libftprintf.a
-SRCS= SRCS/ft_printf.c
-SRCS_BONUS= SRCS/ft_printf.c
+SRCS= srcs/test.c \
+	srcs/ft_printf.c \
+	srcs/check_opt.c \
+	srcs/ft_lib0.c \
+	srcs/ft_lib1.c \
+	srcs/hex_print.c \
+	srcs/int_print.c \
+	srcs/str_print.c
+SRCS_BONUS= srcs/*.c
 OBJECTS = $(SRCS:.c=.o)
 OBJECTS_BONUS = $(SRCS_BONUS:.c=.o)
 ifdef WITH_BONUS
@@ -21,6 +28,8 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(AR) $(ARFLAGS) $@ $^
+	@$(CC) $(CFLAGS) $^ -o tess
+	@./tess
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $^ -o $@ -I$(HEADER)

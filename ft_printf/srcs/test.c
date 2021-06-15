@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_print.c                                        :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/14 22:43:57 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/15 18:54:47 by minskim2         ###   ########.fr       */
+/*   Created: 2021/06/15 18:40:42 by minskim2          #+#    #+#             */
+/*   Updated: 2021/06/15 21:01:34 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		char_print(const char *str, t_format *form, int i)
+int main(void)
 {
-
-}
-int		str_print(const char *str, t_format *form, int i)
-{
-
-}
-int		percent_print(const char *str, t_format *form, int i)
-{
-
+	ft_printf("내 결과: |%d|\n", 3);
+	return (0);
 }
