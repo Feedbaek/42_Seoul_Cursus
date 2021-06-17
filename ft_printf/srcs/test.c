@@ -28,8 +28,8 @@ int main(void)
 	printf("출력 수: %d\n", ft_printf("myft printf: |%6s|\n", "str") - 16);
 	printf("출력 수: %d\n", printf("real printf: |%6s|\n", "str") - 16);
 	printf("=============per============\n");
-	printf("출력 수: %d\n", ft_printf("myft printf: |%6%|\n") - 16);
-	printf("출력 수: %d\n", printf("real printf: |%6%|\n") - 16);
+	printf("출력 수: %d\n", ft_printf("myft printf: |%%|\n") - 16);
+	printf("출력 수: %d\n", printf("real printf: |%%|\n") - 16);
 	printf("==============x=============\n");
 	printf("출력 수: %d\n", ft_printf("myft printf: |%010x|\n", -1) - 16);
 	printf("출력 수: %d\n", printf("real printf: |%010x|\n", -1) - 16);

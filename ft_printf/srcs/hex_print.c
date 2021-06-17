@@ -76,15 +76,16 @@ int				addr_print(t_format *form, void * value)
 	if (!(str = ft_hextoa((long long)value)))
 		return (0);
 	len = ft_strlen(str) + 2;
-	write(1, "0x", 2);
 	if (form->left)
 	{
+		write(1, "0x", 2);
 		ft_putstr_fd(str, 1);
 		len = flag_print(len, form);
 	}
 	else
 	{
 		len = flag_print(len, form);
+		write(1, "0x", 2);
 		ft_putstr_fd(str, 1);
 	}
 	free(str);
