@@ -43,5 +43,6 @@ clean:
 
 fclean:
 	@rm -rf $(NAME) $(OBJECTS) $(OBJECTS_BONUS)
+	@rm tess
 
 re: fclean all
