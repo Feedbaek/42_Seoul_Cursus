@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 16:03:06 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/15 20:55:20 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/17 22:35:25 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,27 @@ int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 void	ft_putstr_fd(char *s, int fd);
 
-char	*ft_itoa(int n);
+char	*ft_itoa(long long n);
+int		flag_print(int len, t_format *form);
+
+char	*ft_hextoa(long long n);
 
 int		check_dot(const char *str, t_format *form);
 int		check_flag(const char *str, t_format *form);
 int		check_width(const char *str, t_format *form, va_list ap);
 int		check_precision(const char *str, t_format *form, va_list ap);
-int		check_type(const char *str, t_format *form);
+int		check_type(const char *str);
 
-int		int_print(const char *str, t_format *form, int i);
-int		unint_print(const char *str, t_format *form, int i);
+int		int_print(t_format *form, int value);
+int		unint_print(t_format *form, unsigned int value);
 
-int		char_print(const char *str, t_format *form, int i);
-int		str_print(const char *str, t_format *form, int i);
-int		percent_print(const char *str, t_format *form, int i);
+int		x_print(t_format *form, unsigned int value);
+int		xl_print(t_format *form, unsigned int value);
+int		addr_print(t_format *form, void *value);
 
-int		x_print(const char *str, t_format *form, int i);
-int		xl_print(const char *str, t_format *form, int i);
-int		addr_print(const char *str, t_format *form, int i);
+int		char_print(t_format *form, int value);
+int		str_print(t_format *form, char *value);
+int		percent_print(t_format *form, int value);
 
 int		ft_printf(const char *str, ...);
 

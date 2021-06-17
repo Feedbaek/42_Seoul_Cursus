@@ -6,44 +6,51 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 22:39:00 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/15 20:58:27 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/17 22:32:08 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		int_print(const char *s, t_format *form, int i)
+int		int_print(t_format *form, int value)
 {
 	int		len;
-	int		idx;
 	char	*str;
 
-	idx = 0;
-	if (!(str = ft_itoa(form->value)))
+	if (!(str = ft_itoa(value)))
 		return (0);
 	len = ft_strlen(str);
 	if (form->left)
 	{
 		ft_putstr_fd(str, 1);
-		while (len++ < form->width)
-			write(1, " ", 1);
-	}
-	else if (form->zero)
-	{
-		while (len++ < form->width)
-			write(1, "0", 1);
-		ft_putstr_fd(str, 1);
+		len = flag_print(len, form);
 	}
 	else
 	{
-		while (len++ < form->width)
-			write(1, " ", 1);
+		len = flag_print(len, form);
 		ft_putstr_fd(str, 1);
 	}
 	free(str);
 	return (len);
 }
-int		unint_print(const char *str, t_format *form, int i)
+int		unint_print(t_format *form, unsigned int value)
 {
+	int		len;
+	char	*str;
 
+	if (!(str = ft_itoa(value)))
+		return (0);
+	len = ft_strlen(str);
+	if (form->left)
+	{
+		ft_putstr_fd(str, 1);
+		len = flag_print(len, form);
+	}
+	else
+	{
+		len = flag_print(len, form);
+		ft_putstr_fd(str, 1);
+	}
+	free(str);
+	return (len);
 }

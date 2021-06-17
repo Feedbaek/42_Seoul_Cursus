@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lib1.c                                          :+:      :+:    :+:   */
+/*   ft_lib2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/15 19:56:06 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/17 21:59:39 by minskim2         ###   ########.fr       */
+/*   Created: 2021/06/17 21:59:58 by minskim2          #+#    #+#             */
+/*   Updated: 2021/06/17 22:42:52 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,64 +17,37 @@ static int		cnt_size(long long n)
 	int size;
 
 	size = 1;
-	if (n < 0)
-		size++;
 	while (n)
 	{
-		n /= 10;
+		n /= 16;
 		if (n)
 			size++;
 	}
 	return (size);
 }
 
-static void		iterative_sum(char *str, long long n, int idx)
+static void		iterative_sum(char *str, long long n, int idx, char *hex)
 {
 	while (n)
 	{
-		str[idx--] = n % 10 + '0';
-		n /= 10;
+		str[idx--] = (unsigned char)hex[n % 16];
+		n /= 16;
 	}
 }
 
-char			*ft_itoa(long long n)
+char			*ft_hextoa(long long n)
 {
 	int		size;
 	char	*str;
+	char	*hex;
 
+	hex = "0123456789abcdef";
 	size = cnt_size(n);
 	if (!(str = (char*)malloc(sizeof(char) * size + 1)))
 		return (0);
-	if (n < 0)
-	{
-		if (-(n / 10))
-			iterative_sum(str, -(n / 10), size - 2);
-		str[size - 1] = (unsigned char)('0' - (n % 10));
-		str[0] = '-';
-	}
-	else
-	{
-		if (n / 10)
-			iterative_sum(str, n / 10, size - 2);
-		str[size - 1] = (unsigned char)('0' + (n % 10));
-	}
+	if (n / 16)
+		iterative_sum(str, n / 16, size - 2, hex);
+	str[size - 1] = (unsigned char)(hex[n % 16]);
 	str[size] = 0;
 	return (str);
-}
-
-int		flag_print(int len, t_format *form)
-{
-	if (form->zero)
-		while (len < form->width)
-		{
-			write(1, "0", 1);
-			len++;
-		}
-	else
-		while (len < form->width)
-		{
-			write(1, " ", 1);
-			len++;
-		}
-	return (len);
 }

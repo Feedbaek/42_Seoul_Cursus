@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 20:08:16 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/15 20:58:44 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/17 21:57:38 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int		f_start(const char *format, t_format *form, va_list ap)
 {
 	int	i;
 
-	i = 2;
-	while (!(form->type = check_type(++format, form)))
+	i = 0;
+	format++;
+	while (!(form->type = check_type(format + i)))
 	{
 		if (form->step == 0)
 			i += check_flag(format + i, form);
@@ -37,35 +38,35 @@ int		f_start(const char *format, t_format *form, va_list ap)
 			i += check_width(format + i, form, ap);
 		else if (form->step == 2)
 			i += check_dot(format + i, form);
-		else if (form->step == 2 && form->dot == 1)
+		else if (form->step == 3)
 			i += check_precision(format + i, form, ap);
 		else
 			return (0);
 	}
-	form->value = va_arg(ap, int);
 	return (i);
 }
 
-int		f_write(const char *format, t_format *form, int i)
+int		f_write(t_format *form, va_list ap)
 {
 	int ret;
+
 	ret = 0;
 	if (form->type == 1)
-		ret = int_print(format, form, i);
+		ret = int_print(form, va_arg(ap, int));
 	else if (form->type == 2)
-		ret = unint_print(format, form, i);
+		ret = unint_print(form, va_arg(ap, unsigned int));
 	else if (form->type == 3)
-		ret = x_print(format, form, i);
+		ret = x_print(form, va_arg(ap, unsigned int));
 	else if (form->type == 4)
-		ret = xl_print(format, form, i);
+		ret = xl_print(form, va_arg(ap, unsigned int));
 	else if (form->type == 5)
-		ret = addr_print(format, form, i);
+		ret = addr_print(form, va_arg(ap, void *));
 	else if (form->type == 6)
-		ret = char_print(format, form, i);
+		ret = char_print(form, va_arg(ap, int));
 	else if (form->type == 7)
-		ret = str_print(format, form, i);
+		ret = str_print(form, va_arg(ap, char *));
 	else if (form->type == 8)
-		ret = percent_print(format, form, i);
+		ret = percent_print(form, '%');
 	return (ret);
 }
 
@@ -75,23 +76,22 @@ int		ft_printf(const char *format, ...)
 	t_format	*form;
 	int			size;
 	int			i;
-	int			idx;
 
 	size = 0;
 	va_start(ap, format);
 	if (!(form = (t_format*)malloc(sizeof(t_format))))
 		return (-1);
 	i = 0;
-	while (format + i)
+	while (*(format + i))
 	{
 		if (format[i] == '%')
 		{
 			f_setting(form);
-			if (!(idx = f_start(format + i, form, ap)))
+			if (!(i += f_start(format + i, form, ap)))
 				return (-1);
-			if (!(size = f_write(format + i, form, i)))
+			i += 2;
+			if (!(size += f_write(form, ap)))
 				return (-1);
-			i += idx;
 		}
 		else
 		{
@@ -102,6 +102,5 @@ int		ft_printf(const char *format, ...)
 	}
 	va_end(ap);
 	free(form);
-	write(1, "\n", 1);
 	return (size);
 }
