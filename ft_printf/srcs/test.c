@@ -36,6 +36,9 @@ int main(void)
 	printf("==============xl============\n");
 	printf("출력 수: %d\n", ft_printf("myft printf: |%010X|\n", -1) - 16);
 	printf("출력 수: %d\n", printf("real printf: |%010X|\n", -1) - 16);
+	printf("=============adr============\n");
+	printf("출력 수: %d\n", ft_printf("myft printf: |%017p|\n", "da") - 16);
+	printf("출력 수: %d\n", printf("real printf: |%017p|\n", "da") - 16);
 	printf("============end=============\n");
 	return (0);
 }
