@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 20:08:16 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/17 21:57:38 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/18 14:58:09 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,24 +73,22 @@ int		f_write(t_format *form, va_list ap)
 int		ft_printf(const char *format, ...)
 {
 	va_list		ap;
-	t_format	*form;
+	t_format	form;
 	int			size;
 	int			i;
 
 	size = 0;
 	va_start(ap, format);
-	if (!(form = (t_format*)malloc(sizeof(t_format))))
-		return (-1);
 	i = 0;
 	while (*(format + i))
 	{
 		if (format[i] == '%')
 		{
-			f_setting(form);
-			if (!(i += f_start(format + i, form, ap)))
+			f_setting(&form);
+			if (!(i += f_start(format + i, &form, ap)))
 				return (-1);
 			i += 2;
-			if (!(size += f_write(form, ap)))
+			if (!(size += f_write(&form, ap)))
 				return (-1);
 		}
 		else
@@ -101,6 +99,5 @@ int		ft_printf(const char *format, ...)
 		}
 	}
 	va_end(ap);
-	free(form);
 	return (size);
 }
