@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 22:42:19 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/17 22:50:02 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/18 16:26:18 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ int				x_print(t_format *form, unsigned int value)
 	len = ft_strlen(str);
 	if (form->left)
 	{
-		ft_putstr_fd(str, 1);
-		len = flag_print(len, form);
+		len = ft_putstr_fd(str, len, form);
+		len = flag_print(len, form, value);
 	}
 	else
 	{
-		len = flag_print(len, form);
-		ft_putstr_fd(str, 1);
+		len = flag_print(len, form, value);
+		len = ft_putstr_fd(str, len, form);
 	}
 	free(str);
 	return (len);
@@ -58,11 +58,11 @@ int				xl_print(t_format *form, unsigned int value)
 	if (form->left)
 	{
 		put_xl(str);
-		len = flag_print(len, form);
+		len = flag_print(len, form, value);
 	}
 	else
 	{
-		len = flag_print(len, form);
+		len = flag_print(len, form, value);
 		put_xl(str);
 	}
 	free(str);
@@ -79,14 +79,14 @@ int				addr_print(t_format *form, void * value)
 	if (form->left)
 	{
 		write(1, "0x", 2);
-		ft_putstr_fd(str, 1);
-		len = flag_print(len, form);
+		len =ft_putstr_fd(str, len, form);
+		len = flag_print(len, form, (long long)value);
 	}
 	else
 	{
-		len = flag_print(len, form);
+		len = flag_print(len, form, (long long)value);
 		write(1, "0x", 2);
-		ft_putstr_fd(str, 1);
+		len = ft_putstr_fd(str, len, form);
 	}
 	free(str);
 	return (len);

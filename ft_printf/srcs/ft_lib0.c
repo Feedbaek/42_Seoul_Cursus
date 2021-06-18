@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:54:45 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/15 20:53:53 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/18 20:31:06 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,41 @@ int		ft_isdigit(int c)
 	return (0);
 }
 
-void	ft_putstr_fd(char *s, int fd)
+int		ft_putstr_fd(char *s, int len, t_format *form)
 {
-	if (!s || fd < 0)
-		return ;
-	write(fd, s, ft_strlen(s));
+	int n;
+	int i;
+
+	n = ft_strlen(s);
+	if (*s == '-')
+	{
+		write(1, "-", 1);
+		s++;
+		n--;
+	}
+	if (form->zero == 1 && !form->dot)
+		while (len < form->width)
+		{
+			write(1, "0", 1);
+			len++;
+		}
+	else
+		while (form->precision > n)
+		{
+			write(1, "0", 1);
+			n++;
+			len++;
+		}
+	i = 0;
+	if (*s == '0' && n > form->precision && form->precision == 0)
+	{
+		while (n > form->precision + i && form->width > i)
+		{
+			write(1, " ", 1);
+			i++;
+		}
+	}
+	else
+		write(1, s, ft_strlen(s));
+	return (len);
 }

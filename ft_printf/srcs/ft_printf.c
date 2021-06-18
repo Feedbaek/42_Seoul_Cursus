@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 20:08:16 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/18 14:58:09 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/18 16:02:57 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int		f_start(const char *format, t_format *form, va_list ap)
 	format++;
 	while (!(form->type = check_type(format + i)))
 	{
-		if (form->step == 0)
+		if (form->step == 0 || form->step == 1)
 			i += check_flag(format + i, form);
-		else if (form->step == 1)
-			i += check_width(format + i, form, ap);
 		else if (form->step == 2)
-			i += check_dot(format + i, form);
+			i += check_width(format + i, form, ap);
 		else if (form->step == 3)
+			i += check_dot(format + i, form);
+		else if (form->step == 4)
 			i += check_precision(format + i, form, ap);
 		else
 			return (0);
