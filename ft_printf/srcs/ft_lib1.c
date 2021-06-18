@@ -6,13 +6,13 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 19:56:06 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/18 21:24:31 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/18 22:56:01 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int		cnt_size(long long n)
+int				cnt_size(long long n)
 {
 	int size;
 
@@ -75,6 +75,32 @@ int		flag_print(int len, t_format *form, long long value)
 			write(1, " ", 1);
 			len++;
 			i++;
+		}
+	return (len);
+}
+
+int		str_flag_print(t_format *form, char *value)
+{
+	int i;
+	int len;
+	int n;
+
+	n = ft_strlen(value);
+	i = form->precision;
+	len = 0;
+	if (i > n)
+		while (n < form->width)
+		{
+			write(1, " ", 1);
+			n++;
+			len++;
+		}
+	else
+		while (i < form->width)
+		{
+			write(1, " ", 1);
+			i++;
+			len++;
 		}
 	return (len);
 }

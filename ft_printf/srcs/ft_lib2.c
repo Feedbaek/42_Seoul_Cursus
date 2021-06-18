@@ -6,13 +6,13 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 21:59:58 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/17 22:42:52 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/18 22:04:53 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int		cnt_size(long long n)
+static int		cnt_hsize(long long n)
 {
 	int size;
 
@@ -42,7 +42,7 @@ char			*ft_hextoa(long long n)
 	char	*hex;
 
 	hex = "0123456789abcdef";
-	size = cnt_size(n);
+	size = cnt_hsize(n);
 	if (!(str = (char*)malloc(sizeof(char) * size + 1)))
 		return (0);
 	if (n / 16)

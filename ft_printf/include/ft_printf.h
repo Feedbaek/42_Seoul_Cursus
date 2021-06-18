@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 16:03:06 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/18 16:25:33 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/18 22:47:33 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ typedef struct s_format
 
 size_t	ft_strlen(const char *str);
 int		ft_atoi(const char *str);
-int		ft_isdigit(int c);
-int		ft_putstr_fd(char *s, int fd, t_format *form);
+int		ft_putstr_fd(char *s, int len, t_format *form);
+int		str_ft_putstr_fd(char *s, t_format *form);
 
 char	*ft_itoa(long long n);
 int		flag_print(int len, t_format *form, long long value);
+int		str_flag_print(t_format *form, char *value);
 
+int		cnt_size(long long n);
 char	*ft_hextoa(long long n);
 
 int		check_dot(const char *str, t_format *form);

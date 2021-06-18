@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:54:45 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/18 20:31:06 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/18 22:44:38 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,6 @@ int		ft_atoi(const char *str)
 	return (sign * i);
 }
 
-int		ft_isdigit(int c)
-{
-	if (c > 255)
-		return (0);
-	if ((unsigned char)c >= '0' && (unsigned char)c <= '9')
-		return (1);
-	return (0);
-}
-
 int		ft_putstr_fd(char *s, int len, t_format *form)
 {
 	int n;
@@ -99,5 +90,31 @@ int		ft_putstr_fd(char *s, int len, t_format *form)
 	}
 	else
 		write(1, s, ft_strlen(s));
+	return (len);
+}
+
+int		str_ft_putstr_fd(char *s, t_format *form)
+{
+	int i;
+	int n;
+	int len;
+
+	n = ft_strlen(s);
+	i = 0;
+	if (n > form->precision && form->precision != -1)
+	{
+		len += write(1, s, form->precision);
+		while (n > form->precision + i && form->width > i + len)
+		{
+			write(1, " ", 1);
+			len++;
+			i++;
+		}
+	}
+	else
+	{
+		write(1, s, ft_strlen(s));
+		len++;
+	}
 	return (len);
 }

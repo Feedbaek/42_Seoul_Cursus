@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 22:00:18 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/18 20:14:36 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/18 22:33:46 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int		check_width(const char *str, t_format *form, va_list ap)
 			x *= -1;
 		}
 		form->width = x;
-		return (1);
+		//printf("width: %d\n", form->width);
+		return (cnt_size(x));
 	}
 	return (0);
 }
@@ -76,6 +77,7 @@ int		check_precision(const char *str, t_format *form, va_list ap)
 {
 	int x;
 
+	//printf("str: %s\n", str);
 	form->step = 5;
 	if (*str == '*')
 	{
@@ -83,7 +85,7 @@ int		check_precision(const char *str, t_format *form, va_list ap)
 		{
 			form->dot = 0;
 			form->zero *= -1;
-			form->precision = -2;
+			form->precision = -1;
 		}
 		return (1);
 	}
@@ -92,7 +94,7 @@ int		check_precision(const char *str, t_format *form, va_list ap)
 		if (x < 0)
 			return (0);
 		form->precision = x;
-		return (1);
+		return (cnt_size(x));
 	}
 	return (0);
 }
