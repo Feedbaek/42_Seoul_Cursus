@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:40:42 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/18 20:48:34 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/18 21:17:13 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int main(void)
 {
 	printf("===========start============\n");
 	printf("==========integer===========\n");
-	printf("출력 수: %d\n", ft_printf("myft printf: |%-3.d|\n", 0) - 16);
-	printf("출력 수: %d\n", printf("real printf: |%-3.d|\n", 0) - 16);
+	printf("출력 수: %d\n", ft_printf("myft printf: |%.d|\n", 0) - 16);
+	printf("출력 수: %d\n", printf("real printf: |%.d|\n", 0) - 16);
 	printf("=========unsigned int=======\n");
 	printf("출력 수: %d\n", ft_printf("myft printf: |%06u|\n", 4294967295) - 16);
 	printf("출력 수: %d\n", printf("real printf: |%06u|\n", (unsigned int)4294967295) - 16);

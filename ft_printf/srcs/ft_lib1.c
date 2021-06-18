@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 19:56:06 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/18 17:39:20 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/18 21:24:31 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,5 @@ int		flag_print(int len, t_format *form, long long value)
 			len++;
 			i++;
 		}
-	return (len);
-}
-
-int		precision_print(int len, t_format *form)
-{
-	while (len < form->width)
-	{
-		write(1, "0", 1);
-		len++;
-	}
 	return (len);
 }

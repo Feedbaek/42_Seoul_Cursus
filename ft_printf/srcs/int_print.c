@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 22:39:00 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/18 17:16:53 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/18 21:23:42 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int		int_print(t_format *form, int value)
 		len = flag_print(len, form, value);
 		len = ft_putstr_fd(str, len, form);
 	}
+	if (*str == '0' && form->width == 0 && form->precision == 0)
+		len--;
 	free(str);
 	return (len);
 }
@@ -51,6 +53,8 @@ int		unint_print(t_format *form, unsigned int value)
 		len = flag_print(len, form, value);
 		len = ft_putstr_fd(str, len, form);
 	}
+	if (*str == '0' && form->width == 0 && form->precision == 0)
+		len--;
 	free(str);
 	return (len);
 }
