@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 22:39:00 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/21 17:40:27 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/21 22:02:37 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		int_print(t_format *form, int value)
 	char	*str;
 
 	if (!(str = ft_itoa(value)))
-		return (0);
+		return (-1);
 	len = 0;
 	if (form->left)
 	{
@@ -40,7 +40,7 @@ int		unint_print(t_format *form, unsigned int value)
 	char	*str;
 
 	if (!(str = ft_itoa(value)))
-		return (0);
+		return (-1);
 	len = 0;
 	if (form->left)
 	{

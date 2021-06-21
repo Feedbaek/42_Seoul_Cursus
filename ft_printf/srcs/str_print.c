@@ -6,25 +6,32 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 22:43:57 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/21 21:37:41 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/21 22:11:44 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			char_print(t_format *form, int value)
+static	char	*char_to_str(int value)
+{
+	char *str;
+
+	if (!(str = (char*)malloc(sizeof(char) * 2)))
+		return (0);
+	str[0] = (unsigned char)value;
+	str[1] = 0;
+	return (str);
+}
+
+int				char_print(t_format *form, int value)
 {
 	int		len;
 	char	*str;
 
 	if (!value)
 		str = "";
-	else
-	{
-		str = (char*)malloc(sizeof(char) * 2);
-		str[0] = (unsigned char)value;
-		str[1] = 0;
-	}
+	else if (!(str = char_to_str(value)))
+		return (-1);
 	len = 0;
 	if (form->left)
 	{
@@ -41,7 +48,7 @@ int			char_print(t_format *form, int value)
 	return (len);
 }
 
-int			str_print(t_format *form, char *value)
+int				str_print(t_format *form, char *value)
 {
 	int		len;
 
@@ -61,7 +68,7 @@ int			str_print(t_format *form, char *value)
 	return (len);
 }
 
-static	int	per_flag_print(t_format *form)
+static	int		per_flag_print(t_format *form)
 {
 	int n;
 	int len;
@@ -81,7 +88,7 @@ static	int	per_flag_print(t_format *form)
 	return (len);
 }
 
-int			percent_print(t_format *form, int value)
+int				percent_print(t_format *form, int value)
 {
 	int		len;
 	char	c;

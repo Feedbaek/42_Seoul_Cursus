@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 22:42:19 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/21 20:46:03 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/21 22:02:24 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int				x_print(t_format *form, unsigned int value)
 	char	*str;
 
 	if (!(str = ft_hextoa(value)))
-		return (0);
+		return (-1);
 	len = 0;
 	if (form->left)
 	{
@@ -50,7 +50,7 @@ int				xl_print(t_format *form, unsigned int value)
 	char	*str;
 
 	if (!(str = ft_hextoa(value)))
-		return (0);
+		return (-1);
 	put_xl(str + 2);
 	len = 0;
 	if (form->left)
@@ -73,7 +73,7 @@ int				addr_print(t_format *form, void *value)
 	char	*str;
 
 	if (!(str = ft_hextoa((unsigned long)value)))
-		return (0);
+		return (-1);
 	len = 0;
 	if (form->left)
 	{
