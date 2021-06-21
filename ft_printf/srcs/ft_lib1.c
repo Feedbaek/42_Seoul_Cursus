@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 19:56:06 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/21 18:21:18 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/21 21:36:26 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,22 @@ int				flag_print(t_format *form, char *value)
 
 int				str_flag_print(t_format *form, char *value)
 {
-	int i;
 	int len;
 	int n;
 
 	len = 0;
 	n = ft_strlen(value);
-	while (n < form->width)
-	{
-		len += write(1, " ", 1);
-		n++;
-	}
+	if (form->zero)
+		while (n < form->width)
+		{
+			len += write(1, "0", 1);
+			n++;
+		}
+	else
+		while (n < form->width)
+		{
+			len += write(1, " ", 1);
+			n++;
+		}
 	return (len);
 }

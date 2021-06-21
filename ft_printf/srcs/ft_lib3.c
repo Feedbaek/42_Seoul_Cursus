@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 21:41:35 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/21 17:52:48 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/21 21:37:06 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		char_flag_print(t_format *form, char *value)
 {
-	int i;
 	int len;
 	int n;
 
@@ -39,7 +38,16 @@ int		hex_flag_print(t_format *form, char *value)
 	n = ft_strlen(value);
 	len = 0;
 	i = 0;
-	if (form->zero != 1)
+	if (form->zero)
+	{
+		while (n < form->width && form->precision + i < form->width)
+		{
+			len += write(1, "0", 1);
+			i++;
+			n++;
+		}
+	}
+	else
 	{
 		while (n < form->width && form->precision + i < form->width)
 		{
@@ -54,7 +62,6 @@ int		hex_flag_print(t_format *form, char *value)
 int		ft_puthex_fd(char *s, t_format *form)
 {
 	int n;
-	int nbr;
 	int i;
 	int len;
 
@@ -106,7 +113,6 @@ int		x_flag_print(t_format *form, char *s)
 int		ft_putx_fd(char *s, t_format *form)
 {
 	int n;
-	int nbr;
 	int i;
 	int len;
 

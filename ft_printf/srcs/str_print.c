@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 22:43:57 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/21 20:11:07 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/21 21:37:41 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int			str_print(t_format *form, char *value)
 	return (len);
 }
 
-static	int	per_flag_print(t_format *form, char *c)
+static	int	per_flag_print(t_format *form)
 {
 	int n;
 	int len;
@@ -91,11 +91,11 @@ int			percent_print(t_format *form, int value)
 	if (form->left)
 	{
 		len += write(1, &c, 1);
-		len += per_flag_print(form, &c);
+		len += per_flag_print(form);
 	}
 	else
 	{
-		len += per_flag_print(form, &c);
+		len += per_flag_print(form);
 		len += write(1, &c, 1);
 	}
 	return (len);
