@@ -3,7 +3,7 @@ CFLAGS =
 AR=ar
 ARFLAGS=crs
 NAME = libftprintf.a
-SRCS= srcs/test.c \
+SRCS= \
 	srcs/ft_printf.c \
 	srcs/check_opt.c \
 	srcs/ft_lib0.c \
@@ -30,8 +30,6 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(AR) $(ARFLAGS) $@ $^
-	@$(CC) $(CFLAGS) $^ -o tess
-	@./tess
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $^ -o $@ -I$(HEADER)
@@ -44,6 +42,5 @@ clean:
 
 fclean:
 	@rm -rf $(NAME) $(OBJECTS) $(OBJECTS_BONUS)
-	@rm tess
 
 re: fclean all
