@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 22:42:19 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/18 16:26:18 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/21 20:46:03 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 static	void	put_xl(char *str)
 {
-	char c;
-
 	while (*str)
 	{
-		c = *str;
-		if ((unsigned char)c >= 'a' && (unsigned char)c <= 'z')
-			c -= 32;
-		write(1, &c, 1);
+		if ((unsigned char)*str >= 'a' && (unsigned char)*str <= 'z')
+			*str = *str - 32;
 		str++;
 	}
 }
@@ -33,20 +29,21 @@ int				x_print(t_format *form, unsigned int value)
 
 	if (!(str = ft_hextoa(value)))
 		return (0);
-	len = ft_strlen(str);
+	len = 0;
 	if (form->left)
 	{
-		len = ft_putstr_fd(str, len, form);
-		len = flag_print(len, form, value);
+		len += ft_putx_fd(str + 2, form);
+		len += x_flag_print(form, str + 2);
 	}
 	else
 	{
-		len = flag_print(len, form, value);
-		len = ft_putstr_fd(str, len, form);
+		len += x_flag_print(form, str + 2);
+		len += ft_putx_fd(str + 2, form);
 	}
 	free(str);
 	return (len);
 }
+
 int				xl_print(t_format *form, unsigned int value)
 {
 	int		len;
@@ -54,39 +51,39 @@ int				xl_print(t_format *form, unsigned int value)
 
 	if (!(str = ft_hextoa(value)))
 		return (0);
-	len = ft_strlen(str);
+	put_xl(str + 2);
+	len = 0;
 	if (form->left)
 	{
-		put_xl(str);
-		len = flag_print(len, form, value);
+		len += ft_putx_fd(str + 2, form);
+		len += x_flag_print(form, str + 2);
 	}
 	else
 	{
-		len = flag_print(len, form, value);
-		put_xl(str);
+		len += x_flag_print(form, str + 2);
+		len += ft_putx_fd(str + 2, form);
 	}
 	free(str);
 	return (len);
 }
-int				addr_print(t_format *form, void * value)
+
+int				addr_print(t_format *form, void *value)
 {
 	int		len;
 	char	*str;
 
-	if (!(str = ft_hextoa((long long)value)))
+	if (!(str = ft_hextoa((unsigned long)value)))
 		return (0);
-	len = ft_strlen(str) + 2;
+	len = 0;
 	if (form->left)
 	{
-		write(1, "0x", 2);
-		len =ft_putstr_fd(str, len, form);
-		len = flag_print(len, form, (long long)value);
+		len += ft_puthex_fd(str, form);
+		len += hex_flag_print(form, str);
 	}
 	else
 	{
-		len = flag_print(len, form, (long long)value);
-		write(1, "0x", 2);
-		len = ft_putstr_fd(str, len, form);
+		len += hex_flag_print(form, str);
+		len += ft_puthex_fd(str, form);
 	}
 	free(str);
 	return (len);

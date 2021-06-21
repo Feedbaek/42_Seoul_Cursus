@@ -9,6 +9,7 @@ SRCS= srcs/test.c \
 	srcs/ft_lib0.c \
 	srcs/ft_lib1.c \
 	srcs/ft_lib2.c \
+	srcs/ft_lib3.c \
 	srcs/hex_print.c \
 	srcs/int_print.c \
 	srcs/str_print.c

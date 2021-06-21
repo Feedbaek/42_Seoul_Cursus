@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 16:03:06 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/18 22:47:33 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/21 20:48:45 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,21 @@ typedef struct s_format
 
 size_t	ft_strlen(const char *str);
 int		ft_atoi(const char *str);
-int		ft_putstr_fd(char *s, int len, t_format *form);
-int		str_ft_putstr_fd(char *s, t_format *form);
+int		ft_putstr_fd(char *value, t_format *form);
+int		str_ft_putstr_fd(char *value, t_format *form);
 
 char	*ft_itoa(long long n);
-int		flag_print(int len, t_format *form, long long value);
+int		flag_print(t_format *form, char *value);
 int		str_flag_print(t_format *form, char *value);
 
 int		cnt_size(long long n);
-char	*ft_hextoa(long long n);
+char	*ft_hextoa(unsigned long n);
+
+int		char_flag_print(t_format *form, char *value);
+int		hex_flag_print(t_format *form, char *value);
+int		ft_puthex_fd(char *s, t_format *form);
+int		x_flag_print(t_format *form, char *value);
+int		ft_putx_fd(char *s, t_format *form);
 
 int		check_dot(const char *str, t_format *form);
 int		check_flag(const char *str, t_format *form);

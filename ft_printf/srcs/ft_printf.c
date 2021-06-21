@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 20:08:16 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/18 21:49:45 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/21 20:10:40 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,19 @@ int		f_start(const char *format, t_format *form, va_list ap)
 	format++;
 	while (!(form->type = check_type(format + i)))
 	{
-		if (form->step == 0 || form->step == 1)
+		if ((*(format + i) == '0' || *(format + i) == '-') && form->step == 0)
 			i += check_flag(format + i, form);
-		else if (form->step == 2)
+		else if (form->step == 0)
 			i += check_width(format + i, form, ap);
-		else if (form->step == 3)
+		else if (form->step == 1)
 			i += check_dot(format + i, form);
-		else if (form->step == 4)
+		else if (form->step == 2)
 			i += check_precision(format + i, form, ap);
 		else
 			return (0);
 	}
+	if (form->type)
+		i += 2;
 	return (i);
 }
 
@@ -67,6 +69,8 @@ int		f_write(t_format *form, va_list ap)
 		ret = str_print(form, va_arg(ap, char *));
 	else if (form->type == 8)
 		ret = percent_print(form, '%');
+	else
+		ret = -1;
 	return (ret);
 }
 
@@ -87,16 +91,11 @@ int		ft_printf(const char *format, ...)
 			f_setting(&form);
 			if (!(i += f_start(format + i, &form, ap)))
 				return (-1);
-			i += 2;
-			if (!(size += f_write(&form, ap)))
+			if ((size += f_write(&form, ap)) == -1)
 				return (-1);
 		}
 		else
-		{
-			write(1, format + i, 1);
-			i++;
-			size++;
-		}
+			size += write(1, format + i++, 1);
 	}
 	va_end(ap);
 	return (size);

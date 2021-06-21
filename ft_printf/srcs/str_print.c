@@ -6,71 +6,97 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 22:43:57 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/18 22:43:25 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/21 20:11:07 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		char_print(t_format *form, int value)
-{
-	int len;
-
-	len = 1;
-	if (form->left)
-	{
-		write(1, &value, 1);
-		len = flag_print(len, form, value);
-	}
-	else if (form->zero)
-	{
-		len = flag_print(len, form, value);
-		write(1, &value, 1);
-	}
-	else
-	{
-		len = flag_print(len, form, value);
-		write(1, &value, 1);
-	}
-	return (len);
-}
-int		str_print(t_format *form, char *value)
+int			char_print(t_format *form, int value)
 {
 	int		len;
 	char	*str;
 
-	str = value;
+	if (!value)
+		str = "";
+	else
+	{
+		str = (char*)malloc(sizeof(char) * 2);
+		str[0] = (unsigned char)value;
+		str[1] = 0;
+	}
+	len = 0;
 	if (form->left)
 	{
-		len = str_ft_putstr_fd(str, form);
+		len += write(1, str, 1);
+		len += char_flag_print(form, str);
+	}
+	else
+	{
+		len += char_flag_print(form, str);
+		len += write(1, str, 1);
+	}
+	if (value)
+		free(str);
+	return (len);
+}
+
+int			str_print(t_format *form, char *value)
+{
+	int		len;
+
+	len = 0;
+	if (!value)
+		value = "(null)";
+	if (form->left)
+	{
+		len += str_ft_putstr_fd(value, form);
 		len += str_flag_print(form, value);
 	}
 	else
 	{
-		len = str_flag_print(form, value);
-		len += str_ft_putstr_fd(str, form);
+		len += str_flag_print(form, value);
+		len += str_ft_putstr_fd(value, form);
 	}
 	return (len);
 }
-int		percent_print(t_format *form, int value)
+
+static	int	per_flag_print(t_format *form, char *c)
 {
+	int n;
 	int len;
 
-	len = 1;
-	if (form->left)
+	len = 0;
+	n = 1;
+	if (form->zero)
 	{
-		write(1, &value, 1);
-		len = flag_print(len, form, value);
-	}
-	else if (form->zero)
-	{
-		len = flag_print(len, form, value);
-		write(1, &value, 1);
+		while (n++ < form->width)
+			len += write(1, "0", 1);
 	}
 	else
 	{
-		len = flag_print(len, form, value);
-		write(1, &value, 1);
+		while (n++ < form->width)
+			len += write(1, " ", 1);
+	}
+	return (len);
+}
+
+int			percent_print(t_format *form, int value)
+{
+	int		len;
+	char	c;
+
+	c = (char)value;
+	len = 0;
+	if (form->left)
+	{
+		len += write(1, &c, 1);
+		len += per_flag_print(form, &c);
+	}
+	else
+	{
+		len += per_flag_print(form, &c);
+		len += write(1, &c, 1);
 	}
 	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 19:56:06 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/18 22:56:01 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/21 18:21:18 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,45 +62,43 @@ char			*ft_itoa(long long n)
 	return (str);
 }
 
-int		flag_print(int len, t_format *form, long long value)
-{
-	int i;
-
-	i = 0;
-	if (value < 0)
-		i++;
-	if (form->zero != 1)
-		while (len < form->width && form->precision + i < form->width)
-		{
-			write(1, " ", 1);
-			len++;
-			i++;
-		}
-	return (len);
-}
-
-int		str_flag_print(t_format *form, char *value)
+int				flag_print(t_format *form, char *value)
 {
 	int i;
 	int len;
 	int n;
 
 	n = ft_strlen(value);
-	i = form->precision;
+	if (*value == '0' && form->precision == 0)
+		n = 0;
 	len = 0;
-	if (i > n)
-		while (n < form->width)
+	i = 0;
+	if (*value == '-')
+		i++;
+	if (form->zero != 1)
+	{
+		while (n < form->width && form->precision + i < form->width)
 		{
-			write(1, " ", 1);
-			n++;
-			len++;
-		}
-	else
-		while (i < form->width)
-		{
-			write(1, " ", 1);
+			len += write(1, " ", 1);
 			i++;
-			len++;
+			n++;
 		}
+	}
+	return (len);
+}
+
+int				str_flag_print(t_format *form, char *value)
+{
+	int i;
+	int len;
+	int n;
+
+	len = 0;
+	n = ft_strlen(value);
+	while (n < form->width)
+	{
+		len += write(1, " ", 1);
+		n++;
+	}
 	return (len);
 }
