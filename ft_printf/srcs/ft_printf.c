@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 20:08:16 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/21 21:17:23 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/22 22:08:43 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		f_start(const char *format, t_format *form, va_list ap)
 	int	i;
 
 	i = 0;
+	f_setting(form);
 	format++;
 	while (!(form->type = check_type(format + i)))
 	{
@@ -80,19 +81,21 @@ int		ft_printf(const char *format, ...)
 	t_format	form;
 	int			size;
 	int			i;
+	int			x;
 
 	size = 0;
-	va_start(ap, format);
 	i = 0;
+	va_start(ap, format);
 	while (*(format + i))
 	{
 		if (format[i] == '%')
 		{
-			f_setting(&form);
-			if (!(i += f_start(format + i, &form, ap)))
+			if (!(x = f_start(format + i, &form, ap)))
 				return (-1);
-			if ((size += f_write(&form, ap)) == -1)
+			i += x;
+			if ((x = f_write(&form, ap)) == -1)
 				return (-1);
+			size += x;
 		}
 		else
 			size += write(1, format + i++, 1);
