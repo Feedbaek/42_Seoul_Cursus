@@ -13,7 +13,16 @@ SRCS= \
 	srcs/hex_print.c \
 	srcs/int_print.c \
 	srcs/str_print.c
-SRCS_BONUS= srcs/*.c
+SRCS_BONUS= \
+	srcs/ft_printf.c \
+	srcs/check_opt.c \
+	srcs/ft_lib0.c \
+	srcs/ft_lib1.c \
+	srcs/ft_lib2.c \
+	srcs/ft_lib3.c \
+	srcs/hex_print.c \
+	srcs/int_print.c \
+	srcs/str_print.c
 OBJECTS = $(SRCS:.c=.o)
 OBJECTS_BONUS = $(SRCS_BONUS:.c=.o)
 ifdef WITH_BONUS
