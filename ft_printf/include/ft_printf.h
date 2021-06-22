@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 16:03:06 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/21 21:55:52 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/23 02:37:00 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef	struct	s_format
 	int precision;
 	int type;
 	int step;
-	int value;
 }				t_format;
 
 size_t			ft_strlen(const char *str);

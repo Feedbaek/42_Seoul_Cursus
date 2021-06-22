@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 20:08:16 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/23 02:09:56 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/23 02:36:51 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static	void	f_setting(t_format *form)
 	form->precision = -1;
 	form->type = 0;
 	form->step = 0;
-	form->value = 0;
 }
 
 static	int		f_start(const char *format, t_format *form, va_list ap)
