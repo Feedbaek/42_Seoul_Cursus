@@ -6,13 +6,13 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/09 20:08:16 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/22 22:08:43 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/06/23 02:36:51 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	f_setting(t_format *form)
+static	void	f_setting(t_format *form)
 {
 	form->zero = 0;
 	form->left = 0;
@@ -21,10 +21,9 @@ void	f_setting(t_format *form)
 	form->precision = -1;
 	form->type = 0;
 	form->step = 0;
-	form->value = 0;
 }
 
-int		f_start(const char *format, t_format *form, va_list ap)
+static	int		f_start(const char *format, t_format *form, va_list ap)
 {
 	int	i;
 
@@ -49,7 +48,7 @@ int		f_start(const char *format, t_format *form, va_list ap)
 	return (i);
 }
 
-int		f_write(t_format *form, va_list ap)
+static	int		f_write(t_format *form, va_list ap)
 {
 	int ret;
 
@@ -75,7 +74,7 @@ int		f_write(t_format *form, va_list ap)
 	return (ret);
 }
 
-int		ft_printf(const char *format, ...)
+int				ft_printf(const char *format, ...)
 {
 	va_list		ap;
 	t_format	form;
@@ -87,7 +86,6 @@ int		ft_printf(const char *format, ...)
 	i = 0;
 	va_start(ap, format);
 	while (*(format + i))
-	{
 		if (format[i] == '%')
 		{
 			if (!(x = f_start(format + i, &form, ap)))
@@ -99,7 +97,6 @@ int		ft_printf(const char *format, ...)
 		}
 		else
 			size += write(1, format + i++, 1);
-	}
 	va_end(ap);
 	return (size);
 }
