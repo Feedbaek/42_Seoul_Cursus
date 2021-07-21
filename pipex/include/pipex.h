@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 23:26:52 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/21 23:29:11 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/07/21 23:43:02 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 # define PIPEX_H
 
 # include <stdlib.h>
+# include <unistd.h>
 
 #endif
