@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 23:26:08 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/25 03:25:34 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/07/25 18:52:05 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,49 +15,58 @@
 static void connect_pipe(int pipefd[2], int fd)
 {
 	dup2(pipefd[fd], fd);
-	close(pipefd[fd]);
+	close(pipefd[0]);
+	close(pipefd[1]);
 }
 
-static void cmd_init(const char *line, t_cmd *cmd, char **envp)
+static void cmd_init(const char *line, t_cmd *x, char **envp)
 {
 	char	**split;
 
-	cmd->path = path_finder(envp, cmd);
 	split = ft_split(line, ' ');
-	cmd->cmd = ft_strjoin("/bin/", split[0]);
-	cmd->argv = split;
+	if (!path_finder(envp, x, split[0]))
+		perror("init error");
+	x->argv = split;
 }
 
 static void parent_proc(char **argv, char **envp, t_cmd *cmd_arg)
 {
 	redirect_out(OUT_FILE);
-	connect_pipe(pipefd, STDIN_FILENO);
+	connect_pipe(cmd_arg->pipe, STDIN_FILENO);
 	cmd_init(CMD_2, cmd_arg, envp);
-	if (execve(cmd_arg->cmd, cmd_arg->argv, cmd_arg->path) == -1)
-		perror(cmd_arg->cmd);
+	if (execve(cmd_arg->cmd, cmd_arg->argv, 0) == -1)
+		perror("parent error");
 }
 
-int	main(int argc, char const **argv, char **envp)
+static void child_proc(char **argv, char **envp, t_cmd *cmd_arg)
 {
-	int		pipefd[2];
+	redirect_in(IN_FILE);
+	connect_pipe(cmd_arg->pipe, STDOUT_FILENO);
+	cmd_init(CMD_1, cmd_arg, envp);
+	if (execve(cmd_arg->cmd, cmd_arg->argv, 0) == -1)
+		perror("child error");
+}
+
+int	main(int argc, char **argv, char **envp)
+{
 	pid_t	pid;
 	t_cmd	cmd_arg;
+	int		status;
 
 	if (argc != 5)
 		return (0);
-	pipe(pipefd);
+	pipe(cmd_arg.pipe);
 	pid = fork();
-	if (pid != 0)
+	if (pid > 0)
 	{
+		waitpid(pid, &status, 0);
+		if (WIFEXITED(status) == 0)
+			exit(1);
 		parent_proc(argv, envp, &cmd_arg);
 	}
 	else
 	{
-		redirect_in(IN_FILE);
-		connect_pipe(pipefd, STDOUT_FILENO);
-		cmd_init(CMD_1, &cmd_arg);
-		if (execve(cmd_arg.cmd, cmd_arg.argv, cmd_arg.path) == -1)
-			perror(cmd_arg.cmd);
+		child_proc(argv, envp, &cmd_arg);
 	}
 	return (0);
 }

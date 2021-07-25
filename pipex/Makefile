@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/21 23:23:28 by minskim2          #+#    #+#              #
-#    Updated: 2021/07/25 03:04:17 by minskim2         ###   ########.fr        #
+#    Updated: 2021/07/25 17:50:53 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ HEADER = include
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $^ -o $@ -I$(HEADER)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $^ -o $@ -I$(HEADER)
