@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/07 17:00:13 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/24 20:53:50 by minskim2         ###   ########.fr       */
+/*   Created: 2021/07/24 20:52:14 by minskim2          #+#    #+#             */
+/*   Updated: 2021/07/24 20:52:41 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
 static char		**mem_free(char **ret, int i)
 {

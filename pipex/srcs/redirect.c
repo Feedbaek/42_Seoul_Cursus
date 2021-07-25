@@ -1,19 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/21 23:26:08 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/21 23:40:53 by minskim2         ###   ########.fr       */
+/*   Created: 2021/07/24 14:21:22 by minskim2          #+#    #+#             */
+/*   Updated: 2021/07/25 03:25:35 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int		main(int n, char *str[])
+int redirect_in(const char *file)
 {
+	int fd;
 
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+	{
+		perror(file);
+		return (-1);
+	}
+	dup2(fd, STDIN_FILENO);
+	close(fd);
 	return (0);
+}
+
+int redirect_out(const char *file)
+{
+	int fd;
+
+	fd = open(file, O_RDWR | O_CREAT, 0644);
+	if (fd < 0)
+	{
+		perror(file);
+		return (-1);
+	}
+	dup2(fd, STDOUT_FILENO);
+	close(fd);
+	return(0);
 }

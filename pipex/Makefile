@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/21 23:23:28 by minskim2          #+#    #+#              #
-#    Updated: 2021/07/21 23:23:37 by minskim2         ###   ########.fr        #
+#    Updated: 2021/07/25 03:04:17 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,11 @@ CFLAGS = -Werror -Wextra -Wall
 NAME = pipex
 SRCS= \
 	srcs/pipex.c \
+	srcs/ft_split.c \
+	srcs/ft_strjoin.c \
+	srcs/path_finder.c \
+	srcs/redirect.c \
+	srcs/utils.c \
 
 SRCS_BONUS= \
 
