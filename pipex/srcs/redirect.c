@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 14:21:22 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/25 03:25:35 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/07/25 19:37:20 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int redirect_out(const char *file)
 {
 	int fd;
 
-	fd = open(file, O_RDWR | O_CREAT, 0644);
+	fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 	{
 		perror(file);

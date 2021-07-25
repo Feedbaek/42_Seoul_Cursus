@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 23:26:08 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/25 18:52:05 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/07/25 19:26:33 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void parent_proc(char **argv, char **envp, t_cmd *cmd_arg)
 	redirect_out(OUT_FILE);
 	connect_pipe(cmd_arg->pipe, STDIN_FILENO);
 	cmd_init(CMD_2, cmd_arg, envp);
-	if (execve(cmd_arg->cmd, cmd_arg->argv, 0) == -1)
+	if (execve(cmd_arg->cmd, cmd_arg->argv, envp) == -1)
 		perror("parent error");
 }
 
@@ -43,7 +43,7 @@ static void child_proc(char **argv, char **envp, t_cmd *cmd_arg)
 	redirect_in(IN_FILE);
 	connect_pipe(cmd_arg->pipe, STDOUT_FILENO);
 	cmd_init(CMD_1, cmd_arg, envp);
-	if (execve(cmd_arg->cmd, cmd_arg->argv, 0) == -1)
+	if (execve(cmd_arg->cmd, cmd_arg->argv, envp) == -1)
 		perror("child error");
 }
 
@@ -59,7 +59,7 @@ int	main(int argc, char **argv, char **envp)
 	pid = fork();
 	if (pid > 0)
 	{
-		waitpid(pid, &status, 0);
+		wait(&status);
 		if (WIFEXITED(status) == 0)
 			exit(1);
 		parent_proc(argv, envp, &cmd_arg);
