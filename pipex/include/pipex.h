@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 23:26:52 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/25 17:21:56 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/07/26 15:00:59 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 typedef struct s_cmd
 {
 	int		pipe[2];
+	pid_t	pid;
+	int		status;
 	char	*cmd;
 	char	**argv;
 	char	**path;
