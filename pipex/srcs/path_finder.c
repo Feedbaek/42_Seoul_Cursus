@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 01:57:54 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/26 16:24:34 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/07/26 17:22:13 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static int	path_split(char **envp, t_cmd *x)
 	{
 		tmp = *parser;
 		*parser = ft_strjoin(*parser, "/");
+		if (!*parser)
+			return (0);
 		parser++;
 		free(tmp);
 	}
