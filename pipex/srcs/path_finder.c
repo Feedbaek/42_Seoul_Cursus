@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 01:57:54 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/26 16:00:35 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/07/26 16:24:34 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	path_finder(char **envp, t_cmd *x, char*split)
 	while (*parser)
 	{
 		x->cmd = ft_strjoin(*parser, split);
+		if (!x->cmd)
+			return (0);
 		if (!access(x->cmd, mode))
 			return (1);
 		free(x->cmd);
