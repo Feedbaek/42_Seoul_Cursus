@@ -6,15 +6,15 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 20:52:14 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/25 17:58:46 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/07/26 15:54:24 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static char		**mem_free(char **ret, int i)
+static char	**mem_free(char **ret, int i)
 {
-	int idx;
+	int	idx;
 
 	idx = 0;
 	while (idx < i)
@@ -22,7 +22,7 @@ static char		**mem_free(char **ret, int i)
 	return (0);
 }
 
-static char		*insert_word(char *str, char c)
+static char	*insert_word(char *str, char c)
 {
 	int		len;
 	int		i;
@@ -32,7 +32,8 @@ static char		*insert_word(char *str, char c)
 	len = 0;
 	while ((unsigned char)str[len] != (unsigned char)c && str[len])
 		len++;
-	if (!(word = (char *)malloc(sizeof(char) * len + 1)))
+	word = (char *)malloc(sizeof(char) * len + 1);
+	if (!word)
 		return (0);
 	while (i < len)
 	{
@@ -43,7 +44,7 @@ static char		*insert_word(char *str, char c)
 	return (word);
 }
 
-static int		cnt_word(char const *s, char c)
+static int	cnt_word(char const *s, char c)
 {
 	char	*str;
 	int		word;
@@ -55,7 +56,7 @@ static int		cnt_word(char const *s, char c)
 		if ((unsigned char)*str == (unsigned char)c)
 		{
 			str++;
-			continue;
+			continue ;
 		}
 		word++;
 		while ((unsigned char)*str != (unsigned char)c && *str)
@@ -64,7 +65,7 @@ static int		cnt_word(char const *s, char c)
 	return (word);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**ret;
 	char	*str;
@@ -72,10 +73,9 @@ char			**ft_split(char const *s, char c)
 	int		word;
 
 	i = 0;
-	if (!s)
-		return (0);
 	word = cnt_word(s, c);
-	if (!(ret = (char **)malloc(sizeof(char *) * (word + 1))))
+	ret = (char **)malloc(sizeof(char *) * (word + 1));
+	if (!ret)
 		return (0);
 	str = (char *)s;
 	while (i < word && *str)
@@ -83,9 +83,10 @@ char			**ft_split(char const *s, char c)
 		if ((unsigned char)*str == (unsigned char)c)
 		{
 			str++;
-			continue;
+			continue ;
 		}
-		if (!(ret[i] = insert_word(str, c)))
+		ret[i] = insert_word(str, c);
+		if (!ret[i])
 			return (mem_free(ret, i));
 		str += ft_strlen(ret[i++]);
 	}

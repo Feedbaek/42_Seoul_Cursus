@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 23:26:52 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/26 15:00:59 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/07/26 15:46:20 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,5 @@ int		redirect_in(const char *file);
 int		redirect_out(const char *file);
 
 # define CHILD 0
-
-# define IN_FILE argv[1]
-# define OUT_FILE argv[4]
-# define CMD_1 argv[2]
-# define CMD_2 argv[3]
 
 #endif

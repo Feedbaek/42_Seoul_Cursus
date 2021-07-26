@@ -6,13 +6,13 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 20:45:45 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/25 03:25:29 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/07/26 15:48:57 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-size_t			ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
 	size_t	cnt;
 
@@ -27,8 +27,8 @@ size_t			ft_strlen(const char *str)
 
 static	size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
 {
-	size_t i;
-	size_t len;
+	size_t	i;
+	size_t	len;
 
 	i = 0;
 	len = ft_strlen(src);
@@ -44,7 +44,7 @@ static	size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
 
 static	size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (*dest && i < size)
@@ -75,7 +75,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (0);
-	str = (char*)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
 		return (0);
 	(void)ft_strlcpy(str, s1, ft_strlen(s1) + 1);

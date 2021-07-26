@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 01:57:54 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/26 14:50:06 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/07/26 16:00:35 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	path_split(char **envp, t_cmd *x)
 	char	**parser;
 
 	while (*envp && ft_strncmp(*envp, "PATH", 4))
-		++envp;
+		envp++;
 	if (!(*envp))
 		return (0);
 	path = *envp;
@@ -37,7 +37,7 @@ static int	path_split(char **envp, t_cmd *x)
 	return (1);
 }
 
-int			path_finder(char **envp, t_cmd *x, char*split)
+int	path_finder(char **envp, t_cmd *x, char*split)
 {
 	int		mode;
 	char	**parser;

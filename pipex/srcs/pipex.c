@@ -6,20 +6,20 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 23:26:08 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/26 15:35:31 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/07/26 16:01:00 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void connect_pipe(int pipefd[2], int fd)
+static void	connect_pipe(int pipefd[2], int fd)
 {
 	dup2(pipefd[fd], fd);
 	close(pipefd[0]);
 	close(pipefd[1]);
 }
 
-static void cmd_init(const char *line, t_cmd *x, char **envp)
+static void	cmd_init(const char *line, t_cmd *x, char **envp)
 {
 	char	**split;
 
@@ -32,11 +32,11 @@ static void cmd_init(const char *line, t_cmd *x, char **envp)
 	x->argv = split;
 }
 
-static void parent_proc(char **argv, char **envp, t_cmd *cmd_arg)
+static void	parent_proc(char **argv, char **envp, t_cmd *cmd_arg)
 {
-	redirect_out(OUT_FILE);
+	redirect_out(argv[4]);
 	connect_pipe(cmd_arg->pipe, STDIN_FILENO);
-	cmd_init(CMD_2, cmd_arg, envp);
+	cmd_init(argv[3], cmd_arg, envp);
 	waitpid(cmd_arg->pid, &(cmd_arg->status), WNOWAIT);
 	if (execve(cmd_arg->cmd, cmd_arg->argv, envp) == -1)
 	{
@@ -45,11 +45,11 @@ static void parent_proc(char **argv, char **envp, t_cmd *cmd_arg)
 	}
 }
 
-static void child_proc(char **argv, char **envp, t_cmd *cmd_arg)
+static void	child_proc(char **argv, char **envp, t_cmd *cmd_arg)
 {
-	redirect_in(IN_FILE);
+	redirect_in(argv[1]);
 	connect_pipe(cmd_arg->pipe, STDOUT_FILENO);
-	cmd_init(CMD_1, cmd_arg, envp);
+	cmd_init(argv[2], cmd_arg, envp);
 	if (execve(cmd_arg->cmd, cmd_arg->argv, envp) == -1)
 	{
 		perror("child error");

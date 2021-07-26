@@ -6,15 +6,15 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 14:21:22 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/26 14:32:08 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/07/26 15:58:54 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int redirect_in(const char *file)
+int	redirect_in(const char *file)
 {
-	int fd;
+	int	fd;
 
 	fd = open(file, O_RDWR);
 	if (fd < 0)
@@ -27,9 +27,9 @@ int redirect_in(const char *file)
 	return (0);
 }
 
-int redirect_out(const char *file)
+int	redirect_out(const char *file)
 {
-	int fd;
+	int	fd;
 
 	fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
@@ -39,5 +39,5 @@ int redirect_out(const char *file)
 	}
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
-	return(0);
+	return (0);
 }
