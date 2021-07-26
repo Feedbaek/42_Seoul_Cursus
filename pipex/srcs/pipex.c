@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 23:26:08 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/26 16:01:00 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/07/26 16:15:43 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	connect_pipe(int pipefd[2], int fd)
 static void	cmd_init(const char *line, t_cmd *x, char **envp)
 {
 	char	**split;
-
 	split = ft_split(line, ' ');
 	if (!path_finder(envp, x, split[0]))
 	{

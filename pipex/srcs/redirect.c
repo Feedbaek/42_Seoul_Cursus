@@ -6,13 +6,13 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/24 14:21:22 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/26 15:58:54 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/07/26 16:12:35 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	redirect_in(const char *file)
+void	redirect_in(const char *file)
 {
 	int	fd;
 
@@ -20,14 +20,13 @@ int	redirect_in(const char *file)
 	if (fd < 0)
 	{
 		perror(file);
-		return (-1);
+		exit (1);
 	}
 	dup2(fd, STDIN_FILENO);
 	close(fd);
-	return (0);
 }
 
-int	redirect_out(const char *file)
+void	redirect_out(const char *file)
 {
 	int	fd;
 
@@ -35,9 +34,8 @@ int	redirect_out(const char *file)
 	if (fd < 0)
 	{
 		perror(file);
-		return (-1);
+		exit (1);
 	}
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
-	return (0);
 }
