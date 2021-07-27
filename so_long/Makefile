@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/07/28 01:46:13 by minskim2         ###   ########.fr        #
+#    Updated: 2021/07/28 02:32:06 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ CFLAGS = -Werror -Wextra -Wall
 NAME = so_long
 minilibx = srcs/minilibx_opengl_20191021
 SRCS = srcs/so_long.c \
+	srcs/gnl/get_next_line_utils.c \
+	srcs/gnl/get_next_line.c \
 
 SRCS_BONUS= \
 
