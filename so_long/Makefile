@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/07/28 02:32:06 by minskim2         ###   ########.fr        #
+#    Updated: 2021/07/30 02:44:10 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,10 @@ CFLAGS = -Werror -Wextra -Wall
 NAME = so_long
 minilibx = srcs/minilibx_opengl_20191021
 SRCS = srcs/so_long.c \
+	srcs/config.c \
+	srcs/key_input.c \
 	srcs/gnl/get_next_line_utils.c \
-	srcs/gnl/get_next_line.c \
-
+	srcs/gnl/get_next_line.c
 SRCS_BONUS= \
 
 OBJECTS = $(SRCS:.c=.o)
@@ -33,13 +34,16 @@ HEADER = include
 
 .PHONY: all clean fclean re bonus
 
-all: $(NAME)
+all: make_mini $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -L $(minilibx) -lmlx -framework OpenGL -framework AppKit $^ -o $@
+
 %.o: %.c
-	make -C $(minilibx)
 	$(CC) $(CFLAGS) -c $^ -o $@ -I $(HEADER) -I $(minilibx)
+
+make_mini:
+	make -C $(minilibx)
 
 bonus:
 	make WITH_BONUS=1 all

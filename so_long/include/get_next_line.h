@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 22:19:22 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/28 01:55:42 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/07/30 01:58:20 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #  define BUFFER_SIZE 100
 # endif
 
-typedef struct	s_file
+typedef struct s_file
 {
 	int				fd;
 	char			*str;
@@ -35,7 +35,7 @@ int				link_free(t_file **file_list, int ret, t_file *file_d);
 int				ret_free(char *buf, int ret);
 int				ft_split(char **hi, int n_idx, char **line);
 int				wtf_output(t_file *file_d, char **line,
-				int read_size, char *buf);
+					int read_size, char *buf);
 t_file			*check_fd(int fd, t_file **file_list);
 
 int				get_next_line(int fd, char **line);
