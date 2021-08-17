@@ -6,14 +6,14 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/07/30 02:44:10 by minskim2         ###   ########.fr        #
+#    Updated: 2021/08/17 20:44:57 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=gcc
 CFLAGS = -Werror -Wextra -Wall
 NAME = so_long
-minilibx = srcs/minilibx_opengl_20191021
+minilibx = srcs/minilibx_mms_20210621
 SRCS = srcs/so_long.c \
 	srcs/config.c \
 	srcs/key_input.c \
@@ -37,13 +37,14 @@ HEADER = include
 all: make_mini $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -L $(minilibx) -lmlx -framework OpenGL -framework AppKit $^ -o $@
+	$(CC) $(CFLAGS) -L . -lmlx -framework OpenGL -framework AppKit $^ -o $@
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $^ -o $@ -I $(HEADER) -I $(minilibx)
 
 make_mini:
 	make -C $(minilibx)
+	mv ./$(minilibx)/libmlx.dylib .
 
 bonus:
 	make WITH_BONUS=1 all
@@ -54,7 +55,7 @@ clean:
 
 fclean:
 	rm -rf $(NAME) $(OBJECTS) $(OBJECTS_BONUS)
+	rm libmlx.dylib
 	make clean -C $(minilibx)
 
 re: fclean all
-	make re -C ${minilibx}
