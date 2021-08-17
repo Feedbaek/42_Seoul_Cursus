@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 18:19:25 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/30 02:02:16 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/17 21:50:18 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,16 @@ typedef struct s_param
 {
 	int	x;
 	int	y;
-}				t_param;
+}	t_param;
+
+typedef struct s_img
+{
+	void	*img_ptr;
+	int		*data;
+	int		*size_l;
+	int		bpp;
+	int		endian;
+}	t_img;
 
 void	param_init(t_param *param);
 int		key_press(int key, t_param *param);

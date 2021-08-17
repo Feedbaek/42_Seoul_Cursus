@@ -6,14 +6,15 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/08/17 20:44:57 by minskim2         ###   ########.fr        #
+#    Updated: 2021/08/17 20:53:43 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=gcc
 CFLAGS = -Werror -Wextra -Wall
 NAME = so_long
-minilibx = srcs/minilibx_mms_20210621
+minilibx_path = srcs/minilibx_mms_20210621
+minilibx = libmlx.dylib
 SRCS = srcs/so_long.c \
 	srcs/config.c \
 	srcs/key_input.c \
@@ -40,22 +41,22 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -L . -lmlx -framework OpenGL -framework AppKit $^ -o $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $^ -o $@ -I $(HEADER) -I $(minilibx)
+	$(CC) $(CFLAGS) -c $^ -o $@ -I $(HEADER) -I $(minilibx_path)
 
 make_mini:
-	make -C $(minilibx)
-	mv ./$(minilibx)/libmlx.dylib .
+	make -C $(minilibx_path)
+	mv ./$(minilibx_path)/$(minilibx) .
 
 bonus:
 	make WITH_BONUS=1 all
 
 clean:
 	rm -rf $(OBJECTS) $(OBJECTS_BONUS)
-	make clean -C $(minilibx)
+	make clean -C $(minilibx_path)
 
 fclean:
+	make clean -C $(minilibx_path)
 	rm -rf $(NAME) $(OBJECTS) $(OBJECTS_BONUS)
-	rm libmlx.dylib
-	make clean -C $(minilibx)
+	rm -rf $(minilibx)
 
 re: fclean all
