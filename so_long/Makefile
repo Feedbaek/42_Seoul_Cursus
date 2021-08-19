@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/08/17 20:53:43 by minskim2         ###   ########.fr        #
+#    Updated: 2021/08/18 20:19:55 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,13 +35,14 @@ HEADER = include
 
 .PHONY: all clean fclean re bonus
 
-all: make_mini $(NAME)
+all: $(NAME)
+	#$(make_mini)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -L . -lmlx -framework OpenGL -framework AppKit $^ -o $@
+	$(CC) $(CFLAGS) -g -L . -lmlx -framework OpenGL -framework AppKit $^ -o $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $^ -o $@ -I $(HEADER) -I $(minilibx_path)
+	$(CC) $(CFLAGS) -g -c $^ -o $@ -I $(HEADER) -I $(minilibx_path)
 
 make_mini:
 	make -C $(minilibx_path)
@@ -52,11 +53,14 @@ bonus:
 
 clean:
 	rm -rf $(OBJECTS) $(OBJECTS_BONUS)
-	make clean -C $(minilibx_path)
+	#make clean -C $(minilibx_path)
 
 fclean:
-	make clean -C $(minilibx_path)
+	#make clean -C $(minilibx_path)
 	rm -rf $(NAME) $(OBJECTS) $(OBJECTS_BONUS)
-	rm -rf $(minilibx)
+	#rm -rf $(minilibx)
 
 re: fclean all
+
+test: re
+	./$(NAME)

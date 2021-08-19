@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 18:19:25 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/18 13:25:13 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/19 00:20:02 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@
 # define KEY_D 2
 # define KEY_ESC 53
 
+# define TILE_SIZE 60
+# define COL 5
+# define ROW 5
+# define WIDTH TILE_SIZE * COL
+# define HEIGHT TILE_SIZE * ROW
+
 typedef struct s_param
 {
 	int	x;
@@ -44,11 +50,13 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_mlx
+typedef struct s_game
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-}	t_mlx;
+	t_img	img;
+	int		map[ROW][COL];
+}	t_game;
 
 void	param_init(t_param *param);
 int		key_press(int key, t_param *param);
