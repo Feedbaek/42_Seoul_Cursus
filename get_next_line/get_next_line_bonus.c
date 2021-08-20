@@ -6,11 +6,11 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 22:19:35 by minskim2          #+#    #+#             */
-/*   Updated: 2021/06/08 15:34:16 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/20 15:05:20 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 int		link_free(t_file **file_list, int ret, t_file *file_d)
 {

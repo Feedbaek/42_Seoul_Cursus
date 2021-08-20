@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/08/18 20:19:55 by minskim2         ###   ########.fr        #
+#    Updated: 2021/08/20 14:49:00 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,12 @@ NAME = so_long
 minilibx_path = srcs/minilibx_mms_20210621
 minilibx = libmlx.dylib
 SRCS = srcs/so_long.c \
-	srcs/config.c \
+	srcs/init.c \
 	srcs/key_input.c \
+	srcs/tools.c \
+	srcs/draw.c \
+	srcs/search.c \
+	srcs/setting.c \
 	srcs/gnl/get_next_line_utils.c \
 	srcs/gnl/get_next_line.c
 SRCS_BONUS= \

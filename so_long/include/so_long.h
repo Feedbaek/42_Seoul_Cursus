@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 18:19:25 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/19 00:20:02 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/20 14:48:49 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # define X_EVENT_KEY_PRESS 2
 # define X_EVENT_KEY_RELEASE 3
+# define X_EVENT_KEY_EXIT 17
 
 # define KEY_W 13
 # define KEY_A 0
@@ -29,9 +30,9 @@
 # define KEY_D 2
 # define KEY_ESC 53
 
-# define TILE_SIZE 60
-# define COL 5
-# define ROW 5
+# define TILE_SIZE 64
+# define COL 15
+# define ROW 15
 # define WIDTH TILE_SIZE * COL
 # define HEIGHT TILE_SIZE * ROW
 
@@ -39,6 +40,7 @@ typedef struct s_param
 {
 	int	x;
 	int	y;
+	int	num_collect;
 }	t_param;
 
 typedef struct s_img
@@ -54,11 +56,27 @@ typedef struct s_game
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	char	map[ROW][COL];
+	t_param	param;
 	t_img	img;
-	int		map[ROW][COL];
 }	t_game;
 
-void	param_init(t_param *param);
-int		key_press(int key, t_param *param);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+
+void	minilibx_init(t_game *game);
+void	img_init(t_game	*game);
+void	location_init(t_game *game);
+void	map_init(t_game *game);
+
+void	search_map(t_game *game);
+void	set_map(t_game *game);
+
+int		key_press(int key, t_game *game);
+int		exit_click(void);
+
+void	draw_tiles(t_game *game);
+void	draw_pixels_of_tile(t_game *game, int row, int col);
+void	draw_object(t_game *game);
+void	put_object(t_game *game, int row, int col, char *path);
 
 #endif
