@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 18:19:25 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/20 14:48:49 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/20 19:14:14 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,15 @@
 # define KEY_ESC 53
 
 # define TILE_SIZE 64
-# define COL 15
-# define ROW 15
-# define WIDTH TILE_SIZE * COL
-# define HEIGHT TILE_SIZE * ROW
 
 typedef struct s_param
 {
 	int	x;
 	int	y;
+	int walk;
 	int	num_collect;
+	int row;
+	int col;
 }	t_param;
 
 typedef struct s_img
@@ -56,20 +55,22 @@ typedef struct s_game
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	char	map[ROW][COL];
+	char	**map;
 	t_param	param;
 	t_img	img;
 }	t_game;
 
 void	*ft_memcpy(void *dest, const void *src, size_t n);
+void	*exit_so_long(void);
 
-void	minilibx_init(t_game *game);
+void	minilibx_init(t_game *game, char *file);
 void	img_init(t_game	*game);
 void	location_init(t_game *game);
 void	map_init(t_game *game);
 
 void	search_map(t_game *game);
 void	set_map(t_game *game);
+void	map_parse(t_game *game, char *file);
 
 int		key_press(int key, t_game *game);
 int		exit_click(void);

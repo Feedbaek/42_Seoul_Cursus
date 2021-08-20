@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/08/20 14:49:00 by minskim2         ###   ########.fr        #
+#    Updated: 2021/08/20 19:27:39 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS = srcs/so_long.c \
 	srcs/draw.c \
 	srcs/search.c \
 	srcs/setting.c \
+	srcs/map_parse.c \
 	srcs/gnl/get_next_line_utils.c \
 	srcs/gnl/get_next_line.c
 SRCS_BONUS= \
@@ -67,4 +68,4 @@ fclean:
 re: fclean all
 
 test: re
-	./$(NAME)
+	./$(NAME) map1.ber

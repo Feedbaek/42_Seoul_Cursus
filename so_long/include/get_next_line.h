@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 22:19:22 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/30 01:58:20 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/20 15:20:33 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 42
 # endif
 
 typedef struct s_file
