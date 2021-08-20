@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 18:19:25 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/20 20:07:35 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/20 21:09:28 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ typedef struct s_param
 {
 	int	x;
 	int	y;
-	int walk;
+	int	walk;
 	int	num_collect;
-	int row;
-	int col;
+	int	row;
+	int	col;
 }	t_param;
 
 typedef struct s_img

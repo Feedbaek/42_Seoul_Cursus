@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/08/20 20:37:47 by minskim2         ###   ########.fr        #
+#    Updated: 2021/08/20 23:11:29 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,9 @@ SRCS = srcs/so_long.c \
 	srcs/search.c \
 	srcs/setting.c \
 	srcs/map_parse.c \
+	srcs/gnl/get_next_line.c \
 	srcs/gnl/get_next_line_utils.c \
-	srcs/gnl/get_next_line.c
+	srcs/gnl/get_next_line_utils2.c
 SRCS_BONUS= \
 
 OBJECTS = $(SRCS:.c=.o)
@@ -43,7 +44,7 @@ HEADER = include
 all: make_mini $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -g -L . -lmlx -framework OpenGL -framework AppKit $^ -o $@
+	$(CC) $(CFLAGS) -g -L . -lmlx -framework OpenGL -I $(HEADER) -framework AppKit $^ -o $@
 
 %.o: %.c
 	$(CC) $(CFLAGS) -g -c $^ -o $@ -I $(HEADER) -I $(minilibx_path)

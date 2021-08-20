@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 14:40:28 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/20 18:38:51 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/20 21:14:34 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	cnt_collect(t_game *game)
 {
-	int row;
-	int col;
+	int	row;
+	int	col;
 
 	row = 0;
 	game->param.num_collect = 0;

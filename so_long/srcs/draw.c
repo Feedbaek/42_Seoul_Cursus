@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 13:53:54 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/20 20:14:59 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/20 21:39:36 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	put_object(t_game *game, int row, int col, char *path)
 
 void	draw_object(t_game *game)
 {
-	int row;
-	int col;
+	int	row;
+	int	col;
 
 	row = 0;
 	while (row < game->param.row)
@@ -62,9 +62,11 @@ void	draw_pixels_of_tile(t_game *game, int row, int col)
 		while (tile_col < TILE_SIZE)
 		{
 			if (tile_row == TILE_SIZE - 1 || tile_col == TILE_SIZE - 1)
-				game->img.data[(tile_row + row) * game->param.col * TILE_SIZE + col + tile_col] = 0xb3b3b3;
+				game->img.data[(tile_row + row) *game->param.col * TILE_SIZE
+					+ col + tile_col] = 0xb3b3b3;
 			else
-				game->img.data[(tile_row + row) * game->param.col * TILE_SIZE + col + tile_col] = 0xFFFFFF;
+				game->img.data[(tile_row + row) *game->param.col * TILE_SIZE
+					+ col + tile_col] = 0xFFFFFF;
 			tile_col++;
 		}
 		tile_row++;
@@ -73,8 +75,8 @@ void	draw_pixels_of_tile(t_game *game, int row, int col)
 
 void	draw_tiles(t_game *game)
 {
-	int row;
-	int col;
+	int	row;
+	int	col;
 
 	row = 0;
 	while (row < game->param.row)
@@ -88,5 +90,6 @@ void	draw_tiles(t_game *game)
 		}
 		row++;
 	}
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img_ptr, 0, 0);
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+		game->img.img_ptr, 0, 0);
 }

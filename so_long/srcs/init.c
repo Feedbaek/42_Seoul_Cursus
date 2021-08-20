@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 01:47:24 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/20 20:14:59 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/20 21:41:20 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,28 @@ void	minilibx_init(t_game *game, char *file)
 	map_parse(game, file);
 	set_map(game);
 	game->param.walk = 0;
-	game->win_ptr = mlx_new_window(game->mlx_ptr, game->param.col * TILE_SIZE, game->param.row * TILE_SIZE, "Welcome So_long");
+	game->win_ptr = mlx_new_window(game->mlx_ptr, game->param.col * TILE_SIZE,
+			game->param.row * TILE_SIZE, "Welcome So_long");
 	if (!game->win_ptr)
 		exit_so_long("mlx_new_window");
 }
 
 void	img_init(t_game	*game)
 {
-	game->img.img_ptr = mlx_new_image(game->mlx_ptr, game->param.col * TILE_SIZE, game->param.row * TILE_SIZE);
+	game->img.img_ptr = mlx_new_image(game->mlx_ptr,
+			game->param.col * TILE_SIZE, game->param.row * TILE_SIZE);
 	if (!game->img.img_ptr)
 		exit_so_long("mlx_new_image");
-	game->img.data = (int *)mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.size_l, &game->img.endian);
+	game->img.data = (int *)mlx_get_data_addr(game->img.img_ptr,
+			&game->img.bpp, &game->img.size_l, &game->img.endian);
 	if (!game->img.data)
 		exit_so_long("mlx_get_data_addr");
 }
 
 void	location_init(t_game *game)
 {
-	int row;
-	int col;
+	int	row;
+	int	col;
 
 	row = 0;
 	while (row < game->param.row)
@@ -62,7 +65,8 @@ void	location_init(t_game *game)
 void	map_init(t_game *game)
 {
 	draw_tiles(game);
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img_ptr, 0, 0);
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+		game->img.img_ptr, 0, 0);
 	location_init(game);
 	draw_object(game);
 }

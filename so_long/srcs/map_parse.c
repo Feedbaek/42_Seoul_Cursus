@@ -6,11 +6,21 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 14:57:13 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/20 20:14:57 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/20 21:13:11 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
+
+int	set_open(int *size, int *status, char *file)
+{
+	int	fd;
+
+	*size = 0;
+	*status = 1;
+	fd = open(file, O_RDONLY);
+	return (fd);
+}
 
 void	map_parse(t_game *game, char *file)
 {
@@ -20,9 +30,7 @@ void	map_parse(t_game *game, char *file)
 	char	**arr_str;
 	char	**new_arr_str;
 
-	size = 0;
-	status = 1;
-	fd = open(file, O_RDONLY);
+	fd = set_open(&size, &status, file);
 	arr_str = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!arr_str || fd < 0)
 		exit_so_long("malloc or open");

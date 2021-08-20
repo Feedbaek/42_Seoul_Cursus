@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 22:19:27 by minskim2          #+#    #+#             */
-/*   Updated: 2021/07/28 01:49:58 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/20 23:12:09 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ size_t	ft_strlen(char *str)
 	return (cnt);
 }
 
-int		ft_strchr(char *str)
+int	ft_strchr(char *str)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -49,7 +49,7 @@ char	*ft_strdup(char *s1)
 	int		i;
 
 	i = 0;
-	p = (char*)malloc(ft_strlen(s1) + 1);
+	p = (char *)malloc(ft_strlen(s1) + 1);
 	if (!p)
 		return (p);
 	while (s1[i])
@@ -70,8 +70,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = 0;
 	if (!s1)
 		return (ft_strdup(s2));
-	if (!(str = (char*)malloc(sizeof(char) *
-	(ft_strlen(s1) + ft_strlen(s2) + 1))))
+	str = (char *)malloc(sizeof(char) * \
+	(ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
 	{
 		free(s1);
 		free(s2);
@@ -87,27 +88,27 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-t_file	*check_fd(int fd, t_file **file_list)
+int	check_fd(int fd, t_file **file_list, t_file **parser)
 {
-	t_file			*prev;
-	t_file			*parser;
+	t_file	*prev;
 
-	parser = *file_list;
-	while (parser)
+	*parser = *file_list;
+	while (*parser)
 	{
-		if (parser->fd == fd)
-			return (parser);
-		prev = parser;
-		parser = parser->next_fd;
+		if ((*parser)->fd == fd)
+			return (1);
+		prev = *parser;
+		*parser = (*parser)->next_fd;
 	}
-	if (!(parser = (t_file*)malloc(sizeof(t_file))))
+	*parser = (t_file *)malloc(sizeof(t_file));
+	if (!parser)
 		return (0);
-	parser->fd = fd;
-	parser->str = 0;
-	parser->next_fd = 0;
+	(*parser)->fd = fd;
+	(*parser)->str = 0;
+	(*parser)->next_fd = 0;
 	if (!*file_list)
-		*file_list = parser;
+		*file_list = *parser;
 	else
-		prev->next_fd = parser;
-	return (parser);
+		prev->next_fd = *parser;
+	return (1);
 }
