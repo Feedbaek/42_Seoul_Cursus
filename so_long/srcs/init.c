@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 01:47:24 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/20 18:40:54 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/20 20:14:59 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,24 @@
 void	minilibx_init(t_game *game, char *file)
 {
 	game->mlx_ptr = mlx_init();
+	if (!game->mlx_ptr)
+		exit_so_long("mlx_init");
 	map_parse(game, file);
 	set_map(game);
 	game->param.walk = 0;
 	game->win_ptr = mlx_new_window(game->mlx_ptr, game->param.col * TILE_SIZE, game->param.row * TILE_SIZE, "Welcome So_long");
+	if (!game->win_ptr)
+		exit_so_long("mlx_new_window");
 }
 
 void	img_init(t_game	*game)
 {
 	game->img.img_ptr = mlx_new_image(game->mlx_ptr, game->param.col * TILE_SIZE, game->param.row * TILE_SIZE);
+	if (!game->img.img_ptr)
+		exit_so_long("mlx_new_image");
 	game->img.data = (int *)mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.size_l, &game->img.endian);
+	if (!game->img.data)
+		exit_so_long("mlx_get_data_addr");
 }
 
 void	location_init(t_game *game)
@@ -53,24 +61,6 @@ void	location_init(t_game *game)
 
 void	map_init(t_game *game)
 {
-	//char src[ROW][COL] = {
-	//{'1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'},
-	//{'1', 'P', '1', '0', '1', '0', '0', '0', 'C', '1', '0', '1', '0', '0', '1'},
-	//{'1', '0', 'C', '0', '0', '1', '0', '1', '1', '0', '0', '0', '1', '0', '1'},
-	//{'1', '1', '0', '1', '0', '0', '0', '0', '1', '0', '1', '0', '1', '0', '1'},
-	//{'1', '0', '1', '1', '0', '1', '1', '0', '0', '0', '1', '0', '1', '0', '1'},
-	//{'1', '0', '0', '0', '0', '0', '0', '0', '1', '0', '1', '0', '1', '0', '1'},
-	//{'1', '0', '1', '1', '1', '1', '1', '0', '1', '1', '1', '1', '1', '0', '1'},
-	//{'1', '0', '0', '1', 'C', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'},
-	//{'1', '1', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'},
-	//{'1', 'C', '0', '0', '1', '0', '0', '0', '0', '0', '1', '0', '1', '0', '1'},
-	//{'1', '1', '1', '0', '1', '0', '1', '0', '1', '0', '1', '0', '0', '0', '1'},
-	//{'1', '0', '0', '0', '1', 'C', '1', '0', '1', '0', '1', '0', '1', '0', '1'},
-	//{'1', '0', '1', '1', '1', '1', '1', '0', '1', '0', '1', '0', '1', '0', '1'},
-	//{'1', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '1', 'E', '1'},
-	//{'1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'}
-	//};
-	//ft_memcpy(game->map, src, sizeof(char) * ROW * COL);
 	draw_tiles(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img_ptr, 0, 0);
 	location_init(game);

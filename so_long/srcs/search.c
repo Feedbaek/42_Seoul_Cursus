@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 14:01:55 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/20 18:55:10 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/20 20:11:13 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	reach_exit(t_game *game)
 {
 	if (game->map[game->param.y][game->param.x] == 'E' && game->param.num_collect == 0)
 	{
-		printf("wow, clear!!! your step: %d\n", game->param.walk);
+		printf("wow, clear!!! your step is: %d\n", game->param.walk);
 		exit(0);
 	}
 }

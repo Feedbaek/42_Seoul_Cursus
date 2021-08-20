@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 21:42:34 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/20 19:26:59 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/20 20:29:50 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	main(int argc, char *argv[])
 {
 	t_game	game;
 
-	(void)argc;
+	if (argc != 2)
+		exit_so_long("argc");
 	minilibx_init(&game, argv[1]);
 	img_init(&game);
 	map_init(&game);

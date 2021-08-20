@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/08/20 19:27:39 by minskim2         ###   ########.fr        #
+#    Updated: 2021/08/20 20:37:47 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,7 @@ HEADER = include
 
 .PHONY: all clean fclean re bonus
 
-all: $(NAME)
-	#$(make_mini)
+all: make_mini $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -g -L . -lmlx -framework OpenGL -framework AppKit $^ -o $@
@@ -58,12 +57,12 @@ bonus:
 
 clean:
 	rm -rf $(OBJECTS) $(OBJECTS_BONUS)
-	#make clean -C $(minilibx_path)
+	make clean -C $(minilibx_path)
 
 fclean:
-	#make clean -C $(minilibx_path)
+	make clean -C $(minilibx_path)
 	rm -rf $(NAME) $(OBJECTS) $(OBJECTS_BONUS)
-	#rm -rf $(minilibx)
+	rm -rf $(minilibx)
 
 re: fclean all
 

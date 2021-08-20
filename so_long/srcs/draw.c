@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 13:53:54 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/20 18:27:49 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/20 20:14:59 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	put_object(t_game *game, int row, int col, char *path)
 	row *= TILE_SIZE;
 	col *= TILE_SIZE;
 	img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, path, &width, &height);
+	if (!img_ptr)
+		exit_so_long("put_object");
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, img_ptr, col, row);
 }
 

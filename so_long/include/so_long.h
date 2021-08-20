@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 18:19:25 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/20 19:14:14 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/20 20:07:35 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_game
 }	t_game;
 
 void	*ft_memcpy(void *dest, const void *src, size_t n);
-void	*exit_so_long(void);
+void	*exit_so_long(char *error);
 
 void	minilibx_init(t_game *game, char *file);
 void	img_init(t_game	*game);
