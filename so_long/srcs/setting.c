@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 14:40:28 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/21 21:02:04 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/21 21:51:40 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	set_map(t_game *game)
 {
 	cnt_object(game);
 	if (game->param.num_collect < 1 || game->param.num_exit < 1
-		|| game->param.num_player != 1)
+		|| game->param.num_player < 1)
 		exit_so_long("invalid map");
 	check_map(game);
 }

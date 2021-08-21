@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 01:47:24 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/21 20:17:51 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/21 21:50:06 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ void	location_init(t_game *game)
 			{
 				game->param.x = col;
 				game->param.y = row;
+				put_object(game, game->param.y, game->param.x, "./img/player.xpm");
 				return ;
 			}
 			col++;
 		}
 		row++;
 	}
-	put_object(game, game->param.y, game->param.x, "./img/player.xpm");
 }
 
 void	map_init(t_game *game)
