@@ -6,13 +6,13 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 22:19:35 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/21 16:07:25 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/21 19:40:43 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <get_next_line.h>
 
-int	link_free(t_file **file_list, int ret, t_file *file_d)
+static	int	link_free(t_file **file_list, int ret, t_file *file_d)
 {
 	t_file	*prev;
 	t_file	*parser;
@@ -73,7 +73,7 @@ int	ft_split(char **hi, int n_idx, char **line)
 	return (1);
 }
 
-int	wtf_output(t_file *file_d, char **line, int read_size, char *buf)
+static	int	wtf_output(t_file *file_d, char **line, int read_size, char *buf)
 {
 	int	n_idx;
 

@@ -6,16 +6,17 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 01:49:16 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/20 21:37:32 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/21 19:48:07 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 
-void	when_walk(int *loc, int value, int *walk)
+static	void	when_walk(int *loc, int value, int *walk)
 {
 	*loc += value;
 	*walk += 1;
+	printf("walk: %d\n", *walk);
 }
 
 int	key_press(int key, t_game *game)

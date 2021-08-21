@@ -6,13 +6,13 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 14:01:55 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/20 21:37:29 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/21 19:48:21 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <so_long.h>
 
-void	get_collect(t_game *game)
+static	void	get_collect(t_game *game)
 {
 	if (game->map[game->param.y][game->param.x] == 'C')
 	{
@@ -21,7 +21,7 @@ void	get_collect(t_game *game)
 	}
 }
 
-void	reach_exit(t_game *game)
+static	void	reach_exit(t_game *game)
 {
 	if (game->map[game->param.y][game->param.x] == 'E'
 		&& game->param.num_collect == 0)

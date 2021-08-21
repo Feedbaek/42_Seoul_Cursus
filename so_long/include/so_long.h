@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/27 18:19:25 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/20 21:09:28 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/21 20:07:36 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_param
 	int	y;
 	int	walk;
 	int	num_collect;
+	int	num_player;
+	int	num_exit;
 	int	row;
 	int	col;
 }	t_param;
