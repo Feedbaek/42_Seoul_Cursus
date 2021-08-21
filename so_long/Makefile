@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/08/20 23:11:29 by minskim2         ###   ########.fr        #
+#    Updated: 2021/08/21 15:54:14 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,26 +44,25 @@ HEADER = include
 all: make_mini $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -g -L . -lmlx -framework OpenGL -I $(HEADER) -framework AppKit $^ -o $@
+	$(CC) $(CFLAGS) -g -L ./$(minilibx_path) -lmlx -framework OpenGL -framework AppKit $^ -o $@
+	install_name_tool -change $(minilibx) $(minilibx_path)/$(minilibx) $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -g -c $^ -o $@ -I $(HEADER) -I $(minilibx_path)
 
 make_mini:
 	make -C $(minilibx_path)
-	mv ./$(minilibx_path)/$(minilibx) .
 
 bonus:
 	make WITH_BONUS=1 all
 
 clean:
-	rm -rf $(OBJECTS) $(OBJECTS_BONUS)
 	make clean -C $(minilibx_path)
+	rm -rf $(OBJECTS) $(OBJECTS_BONUS)
 
 fclean:
 	make clean -C $(minilibx_path)
 	rm -rf $(NAME) $(OBJECTS) $(OBJECTS_BONUS)
-	rm -rf $(minilibx)
 
 re: fclean all
 
