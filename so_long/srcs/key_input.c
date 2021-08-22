@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 01:49:16 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/21 19:48:07 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/22 14:59:24 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ int	key_press(int key, t_game *game)
 		exit(0);
 	}
 	search_map(game);
-	draw_tiles(game);
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
-		game->img.img_ptr, 0, 0);
+	mlx_clear_window(game->mlx_ptr, game->win_ptr);
 	draw_object(game);
 	return (0);
 }

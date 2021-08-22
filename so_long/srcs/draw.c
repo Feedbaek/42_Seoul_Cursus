@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 13:53:54 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/20 21:39:36 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/22 14:59:13 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,55 +41,11 @@ void	draw_object(t_game *game)
 				put_object(game, row, col, "./img/collectible.xpm");
 			else if (game->map[row][col] == 'E')
 				put_object(game, row, col, "./img/exit.xpm");
+			else if (game->map[row][col] == '1')
+				put_object(game, row, col, "./img/wall.xpm");
 			col++;
 		}
 		row++;
 	}
 	put_object(game, game->param.y, game->param.x, "./img/player.xpm");
-}
-
-void	draw_pixels_of_tile(t_game *game, int row, int col)
-{
-	int	tile_row;
-	int	tile_col;
-
-	row *= TILE_SIZE;
-	col *= TILE_SIZE;
-	tile_row = 0;
-	while (tile_row < TILE_SIZE)
-	{
-		tile_col = 0;
-		while (tile_col < TILE_SIZE)
-		{
-			if (tile_row == TILE_SIZE - 1 || tile_col == TILE_SIZE - 1)
-				game->img.data[(tile_row + row) *game->param.col * TILE_SIZE
-					+ col + tile_col] = 0xb3b3b3;
-			else
-				game->img.data[(tile_row + row) *game->param.col * TILE_SIZE
-					+ col + tile_col] = 0xFFFFFF;
-			tile_col++;
-		}
-		tile_row++;
-	}
-}
-
-void	draw_tiles(t_game *game)
-{
-	int	row;
-	int	col;
-
-	row = 0;
-	while (row < game->param.row)
-	{
-		col = 0;
-		while (col < game->param.col)
-		{
-			if (game->map[row][col] == '1')
-				draw_pixels_of_tile(game, row, col);
-			col++;
-		}
-		row++;
-	}
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
-		game->img.img_ptr, 0, 0);
 }
