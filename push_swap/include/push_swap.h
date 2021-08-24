@@ -6,15 +6,15 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:31 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/24 18:50:46 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/25 00:04:53 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include <unistd.h>
-#include <stdlib.h>
+# include <unistd.h>
+# include <stdlib.h>
 
 typedef struct s_inform
 {
@@ -24,6 +24,11 @@ typedef struct s_inform
 	int	size_b;
 }	t_inform;
 
+size_t	ft_strlen(const char *str);
+int		ft_atoi(const char *str);
+
 void	*ft_memcpy(void *dest, const void *src, size_t n);
+void	error_push_swap(char *error);
+void	ft_putstr(char *str);
 
 #endif
