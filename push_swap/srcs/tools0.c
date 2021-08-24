@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:48:37 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/23 21:27:10 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/24 18:29:46 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,6 @@ size_t	ft_strlen(const char *str)
 		str++;
 	}
 	return (cnt);
-}
-
-void	*ft_memcpy(void *dest, const void *src, size_t n)
-{
-	unsigned char	*tmp;
-	unsigned char	*s;
-
-	s = (unsigned char*)src;
-	tmp = (unsigned char*)dest;
-	if (!n || dest == src)
-		return (dest);
-	while (n--)
-		*tmp++ = *s++;
-	return (dest);
 }
 
 int	ft_atoi(const char *str)

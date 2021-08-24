@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/22 21:42:31 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/24 18:50:46 by minskim2         ###   ########.fr       */
+/*   Created: 2021/08/24 17:51:36 by minskim2          #+#    #+#             */
+/*   Updated: 2021/08/24 17:59:18 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-
-#include <unistd.h>
-#include <stdlib.h>
-
-typedef struct s_inform
+void	sa(int *stack_a)
 {
-	int	*stack_a;
-	int	*stack_b;
-	int	size_a;
-	int	size_b;
-}	t_inform;
+	int	tmp;
 
-void	*ft_memcpy(void *dest, const void *src, size_t n);
+	tmp = stack_a[0];
+	stack_a[0] = stack_a[1];
+	stack_a[1] = tmp;
+}
 
-#endif
+void	sb(int *stack_b)
+{
+	int	tmp;
+
+	tmp = stack_b[0];
+	stack_b[0] = stack_b[1];
+	stack_b[1] = tmp;
+}
+
+void	ss(int *stack_a, int *stack_b)
+{
+	sa(stack_a);
+	sb(stack_b);
+}
