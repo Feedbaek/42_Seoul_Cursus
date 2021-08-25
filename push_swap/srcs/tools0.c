@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:48:37 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/25 00:06:03 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/25 16:00:14 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	ft_atoi(const char *str)
 
 	i = 0;
 	sign = 1;
+	while (*str == ' ')
+		str++;
 	if (*str == '+' || *str == '-')
 	{
 		if (*str == '-')
@@ -45,5 +47,7 @@ int	ft_atoi(const char *str)
 			error_push_swap("Error\n");
 		str++;
 	}
+	if (*str != 0)
+		error_push_swap("Error\n");
 	return (i);
 }

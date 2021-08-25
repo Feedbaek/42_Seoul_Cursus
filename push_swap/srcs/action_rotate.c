@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 21:06:34 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/25 00:04:02 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/25 14:38:42 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,40 @@
 
 void	ra(t_inform *inform)
 {
+	int	idx;
 	int	tmp;
-	int	*parser;
 
 	if (inform->size_a < 2)
 		return ;
+	idx = 0;
 	tmp = inform->stack_a[0];
-	parser = inform->stack_a;
-	while (*parser)
+	while (idx < inform->size_a - 1)
 	{
-		*parser = *(parser + 1);
-		parser++;
+		inform->stack_a[idx] = inform->stack_a[idx + 1];
+		idx++;
 	}
-	inform->stack_a[inform->size_a - 1] = tmp;
-	ft_putstr("ra\n");
+	inform->stack_a[idx] = tmp;
 }
 
 void	rb(t_inform *inform)
 {
+	int	idx;
 	int	tmp;
-	int	*parser;
 
 	if (inform->size_b < 2)
 		return ;
+	idx = 0;
 	tmp = inform->stack_b[0];
-	parser = inform->stack_b;
-	while (*parser)
+	while (idx < inform->size_b - 1)
 	{
-		*parser = *(parser + 1);
-		parser++;
+		inform->stack_b[idx] = inform->stack_b[idx + 1];
+		idx++;
 	}
-	inform->stack_b[inform->size_b - 1] = tmp;
-	ft_putstr("rb\n");
+	inform->stack_b[idx] = tmp;
 }
 
 void	rr(t_inform *inform)
 {
 	ra(inform);
 	rb(inform);
-	ft_putstr("rr\n");
 }
