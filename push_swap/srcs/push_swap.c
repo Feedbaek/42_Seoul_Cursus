@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:05 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/25 21:24:14 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/26 13:42:43 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@
 void	test(t_inform *inform)
 {
 	(void)inform;
-	//int	i;
+	int	i;
 
-	//i = 0;
-	//printf("stack_a: ");
-	//while (i < inform->size_a)
-	//{
-	//	printf("%d ", inform->stack_a[i]);
-	//	i++;
-	//}
-	//printf("stack_b: ");
-	//i = 0;
-	//while (i < inform->size_b)
-	//{
-	//	printf("%d ", inform->stack_b[i]);
-	//	i++;
-	//}
-	//printf("\n");
+	i = 0;
+	printf("stack_a: ");
+	while (i < inform->size_a)
+	{
+		printf("%d ", inform->stack_a[i]);
+		i++;
+	}
+	printf("stack_b: ");
+	i = 0;
+	while (i < inform->size_b)
+	{
+		printf("%d ", inform->stack_b[i]);
+		i++;
+	}
+	printf("\n");
 }
 
 int		is_sorted(int *stack, int n)
@@ -64,7 +64,6 @@ void	quick_a(t_inform *inform, int size)
 	{
 		if (*(inform->stack_a) < pivot)
 		{
-			//printf("stack[0]: %d, pivot: %d\n",*(inform->stack_a), pivot);
 			pb(inform);
 			cnt_push++;
 		}
