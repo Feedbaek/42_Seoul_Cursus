@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:05 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/26 23:35:07 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/27 23:51:40 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,6 @@ void	sort_3(t_inform *inform)
 	}
 }
 
-void	sort_5(t_inform *inform)
-{
-
-}
-
 void	quick_a(t_inform *inform, int size)
 {
 	int	pivot;
@@ -103,19 +98,41 @@ void	quick_a(t_inform *inform, int size)
 		return (sort_2(inform));
 	if (size == 3)
 		return (sort_3(inform));
-	//if (size == 5)
-	//	return (sort_5(inform));
 	pivot = *(inform->stack_a);
 	ra(inform);
-	while (*(inform->stack_a) != pivot) // 최적화 필요
+	if (size > (inform->size_a / 2))
 	{
-		if (*(inform->stack_a) < pivot)
+		while (*(inform->stack_a) != pivot)
 		{
-			pb(inform);
-			cnt_push++;
+			if (*(inform->stack_a) < pivot)
+			{
+				pb(inform);
+				cnt_push++;
+			}
+			else
+				ra(inform);
 		}
-		else
-			ra(inform);
+	}
+	else
+	{
+		i = 0;
+		while (i < size)
+		{
+			if (*(inform->stack_a) < pivot)
+			{
+				pb(inform);
+				cnt_push++;
+			}
+			else
+				ra(inform);
+			i++;
+		}
+		i = 0;
+		while (i < size - cnt_push + 1)
+		{
+			rra(inform);
+			i++;
+		}
 	}
 	if (!is_sorted(inform->stack_a, size - cnt_push))
 	{
@@ -145,5 +162,6 @@ int	main(int argc, char *argv[])
 		return (0);
 	init_stack(&inform, argc, argv);
 	quick(&inform);
+	//test(&inform);
 	return (0);
 }
