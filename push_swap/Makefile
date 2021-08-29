@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/08/25 17:50:22 by minskim2         ###   ########.fr        #
+#    Updated: 2021/08/29 16:05:20 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,12 @@ CC=gcc
 CFLAGS = -Werror -Wextra -Wall
 NAME = push_swap
 SRCS =	srcs/push_swap.c \
+	srcs/push_swap_b.c \
 	srcs/tools0.c \
 	srcs/tools1.c \
 	srcs/ft_split.c \
 	srcs/init.c \
+	srcs/find_pivot.c \
 	srcs/action_swap.c \
 	srcs/action_push.c \
 	srcs/action_rotate.c \
@@ -40,10 +42,10 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) -g $(CFLAGS) $^ -o $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $^ -o $@ -I $(HEADER)
+	$(CC) -g $(CFLAGS) -c $^ -o $@ -I $(HEADER)
 
 bonus:
 	make WITH_BONUS=1 all

@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:31 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/25 20:50:05 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/29 14:24:59 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ int		cnt_word(char *str, char c);
 char	**ft_split(char *str, char c);
 
 void	init_stack(t_inform *inform, int argc, char *argv[]);
+
+void	quick_a(t_inform *inform, int size);
+void	quick_b(t_inform *inform, int size);
+
+void	real_quick_sort(int *stack, int left, int right);
+int		find_pivot(t_inform *inform, int size);
 
 void	pa(t_inform *inform);
 void	pb(t_inform *inform);
