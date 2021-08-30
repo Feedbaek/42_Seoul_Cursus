@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/08/29 16:05:20 by minskim2         ###   ########.fr        #
+#    Updated: 2021/08/30 17:55:36 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ CC=gcc
 CFLAGS = -Werror -Wextra -Wall
 NAME = push_swap
 SRCS =	srcs/push_swap.c \
-	srcs/push_swap_b.c \
 	srcs/tools0.c \
 	srcs/tools1.c \
 	srcs/ft_split.c \

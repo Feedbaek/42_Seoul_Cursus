@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_v3.c                                     :+:      :+:    :+:   */
+/*   push_swap_v2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:05 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/29 17:40:38 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/29 01:13:31 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	test(t_inform *inform)
 	printf("\n");
 }
 
-static	int	is_sorted(int *stack, int n)
+int	is_sorted(int *stack, int n)
 {
 	int	i;
 
@@ -48,20 +48,21 @@ static	int	is_sorted(int *stack, int n)
 	return (1);
 }
 
-static	void	sort_2(t_inform *inform)
+void	sort_2(t_inform *inform)
 {
 	if (inform->stack_a[0] > inform->stack_a[1])
 		sa(inform);
 }
 
-static	void	sort_3(t_inform *inform)
-{
-	// 1 3 2	2 1 3 sa 123
-	// 2 1 3	2 1 3 sa 123
-	// 2 3 1	1 2 3
-	// 3 1 2	3 1 2 ra 123
+	// 2 3 1	ra 31-2 sa 13-2 rra 213 sa 123
+	// 1 3 2	ra 32-1 sa 23-1 rra 123
 
-	// 3 2 1	ra 213 sa 123
+	// 2 1 3	sa 123
+	// 3 1 2	sa 132 ra 32-1 sa 23-1 rra 123
+	// 3 2 1	sa 231 ra 31-2 sa 13-2 rra 213 sa 123
+
+void	sort_3(t_inform *inform)
+{
 	if (inform->stack_a[0] < inform->stack_a[1])
 	{
 		ra(inform);
@@ -84,7 +85,7 @@ static	void	sort_3(t_inform *inform)
 	}
 }
 
-static	int	sort_end(t_inform *inform, int size)
+int	sort_end(t_inform *inform, int size)
 {
 	if (is_sorted(inform->stack_a, size) || size < 2)
 		return (1);
@@ -101,16 +102,11 @@ static	int	sort_end(t_inform *inform, int size)
 	return (0);
 }
 
-static	void	partition(t_inform *inform, int size, int *cnt_push)
+void	quick_sort_size_big(t_inform *inform, int *cnt_push, int pivot)
 {
-	int	pivot;
-	int	i;
-
-	pivot = find_pivot(inform, size);
-	i = 0;
-	while (i++ < size)
+	while (*(inform->stack_a) != pivot)
 	{
-		if (inform->stack_a[0] < pivot)
+		if (*(inform->stack_a) < pivot)
 		{
 			pb(inform);
 			(*cnt_push)++;
@@ -118,30 +114,73 @@ static	void	partition(t_inform *inform, int size, int *cnt_push)
 		else
 			ra(inform);
 	}
+}
+
+void	quick_sort_size_small(t_inform *inform, int size, int *cnt_push, int pivot)
+{
+	int	i;
+
 	i = 0;
-	while (i < size - *cnt_push)
+	while (i < size)
+	{
+		if (*(inform->stack_a) < pivot)
+		{
+			pb(inform);
+			(*cnt_push)++;
+		}
+		else
+			ra(inform);
+		i++;
+	}
+	i = 0;
+	while (i < size - *cnt_push + 1)
 	{
 		rra(inform);
 		i++;
 	}
 }
 
+void	quick_sort(t_inform *inform, int size, int *cnt_push)
+{
+	int	pivot;
+
+	pivot = *(inform->stack_a);
+	ra(inform);
+	if (size > (inform->size_a / 2))
+		quick_sort_size_big(inform, cnt_push, pivot);
+	else
+		quick_sort_size_small(inform, size, cnt_push, pivot);
+}
+
 void	quick_a(t_inform *inform, int size)
 {
+	int	pivot;
 	int	i;
 	int	cnt_push;
 
 	cnt_push = 0;
-	i = 0;
 	if (sort_end(inform, size))
 		return ;
-	partition(inform, size, &cnt_push);
+	pivot = *(inform->stack_a);
+	quick_sort(inform, size, &cnt_push);
 	if (!is_sorted(inform->stack_a, size - cnt_push))
+	{
+		pb(inform);
+		cnt_push++;
 		quick_a(inform, size - cnt_push);
+	}
 	i = 0;
-	while (i++ < cnt_push)
+	while (i < cnt_push)
+	{
 		pa(inform);
+		i++;
+	}
 	quick_a(inform, cnt_push);
+}
+
+void	quick(t_inform *inform)
+{
+	quick_a(inform, inform->size_a);
 }
 
 // 만약 pivot 작업을 하는 구간이 정/역으로 정렬되어 있으면 pivot을 나눌 필요가 없음.
@@ -156,9 +195,7 @@ int	main(int argc, char *argv[])
 	if (argc < 2)
 		return (0);
 	init_stack(&inform, argc, argv);
-	//test(&inform);
-	//real_quick_sort(inform.stack_a, 0, inform.size_a - 1);
-	quick_a(&inform, inform.size_a);
+	quick(&inform);
 	//test(&inform);
 	return (0);
 }

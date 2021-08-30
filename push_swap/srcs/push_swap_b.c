@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:05 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/29 12:49:09 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/08/30 17:55:07 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ static	void	quick_sort(t_inform *inform, int size, int *cnt_push)
 
 void	quick_b(t_inform *inform, int size)
 {
-	int	pivot;
 	int	i;
 	int	cnt_push;
 
@@ -140,7 +139,6 @@ void	quick_b(t_inform *inform, int size)
 	i = 0;
 	if (sort_end(inform, size))
 		return ;
-	pivot = *(inform->stack_b);
 	quick_sort(inform, size, &cnt_push);
 	if (!is_sorted(inform->stack_b, size - cnt_push))
 	{
