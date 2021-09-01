@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:05 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/31 21:50:23 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/01 16:53:48 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,16 @@ void	cnt_instruction(t_inform *inform, t_predict *predict, int i, int j)
 	}
 }
 
+void	find_index(t_inform *inform, int *i, int *j)
+{
+	// 최댓값인지 체크
+
+	// 최솟값인지 체크
+
+	// 이전 인덱스보다 크고 다음 인덱스보다 작은 위치 찾기
+	// -> 인덱스가 0이거나 size-1인 경우 생각하기
+}
+
 void	find_instruction(t_inform *inform, t_predict *predict)
 {
 	int			i;
@@ -90,21 +100,22 @@ void	find_instruction(t_inform *inform, t_predict *predict)
 	while (i < inform->size_b)
 	{
 		init_predict(&tmp);
+		tmp.cnt_sum = inform->size_a + inform->size_b;
 		j = 0;
-		while (j < inform->size_a)
+		while (j < inform->size_a)	// 최대값인 경우, 최소값인 경우, 사이값인 경우 나눠서 찾기
 		{
 			if (inform->stack_b[i] < inform->stack_a[j])
 			{
 				if ((i == 0 && inform->stack_b[i] > inform->stack_a[inform->size_a - 1]) || i > 0)
+				{
+					cnt_instruction(inform, &tmp, i, j);
 					break ;
+				}
 			}
 			j++;
 		}
-		cnt_instruction(inform, &tmp, i, j);
 		if (tmp.cnt_sum < predict->cnt_sum)
-		{
 			*predict = tmp;
-		}
 		i++;
 	}
 	printf("ra: %d, rb: %d, cnt_a: %d, cnt_b: %d, cnt_sum: %d\n",predict->ra, predict->rb, predict->cnt_a, predict->cnt_b, predict->cnt_sum);
