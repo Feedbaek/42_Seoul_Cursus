@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:05 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/01 16:53:48 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/02 01:16:04 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,13 @@ void	cnt_instruction(t_inform *inform, t_predict *predict, int i, int j)
 	}
 }
 
+int	find_max();
+
 void	find_index(t_inform *inform, int *i, int *j)
 {
+	int	max;
 	// 최댓값인지 체크
+	max = find_max(inform);
 
 	// 최솟값인지 체크
 
@@ -94,6 +98,7 @@ void	find_instruction(t_inform *inform, t_predict *predict)
 {
 	int			i;
 	int			j;
+	int			limit;
 	t_predict	tmp;
 
 	i = 0;
@@ -104,6 +109,7 @@ void	find_instruction(t_inform *inform, t_predict *predict)
 		j = 0;
 		while (j < inform->size_a)	// 최대값인 경우, 최소값인 경우, 사이값인 경우 나눠서 찾기
 		{
+
 			if (inform->stack_b[i] < inform->stack_a[j])
 			{
 				if ((i == 0 && inform->stack_b[i] > inform->stack_a[inform->size_a - 1]) || i > 0)
