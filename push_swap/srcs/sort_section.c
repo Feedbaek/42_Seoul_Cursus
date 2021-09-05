@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 16:48:29 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/05 16:14:01 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/05 19:14:42 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	sorted_num(int *stack, int i, int size)
 			return (i);
 		i++;
 	}
-	return (i);
+	return (size - 1);
 }
 
 void	sort_3(t_inform *inform)

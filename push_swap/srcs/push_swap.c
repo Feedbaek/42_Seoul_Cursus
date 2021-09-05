@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:05 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/05 18:56:45 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/05 19:29:31 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ int	find_min(int *stack, int size, int *idx)
 		}
 		i++;
 	}
-	printf("min: %d\n", min);
 	return (min);
 }
 
@@ -143,7 +142,6 @@ void	find_index(t_inform *inform, int *i, int *j)
 		}
 		(*j)++;
 	}
-	error_push_swap("Except\n");
 }
 
 void	find_instruction(t_inform *inform, t_predict *predict)
@@ -276,6 +274,7 @@ void	move_section(t_inform *inform, int idx)
 			ra(inform);
 			idx--;
 		}
+	//test(inform);
 }
 
 void	push_to_b(t_inform *inform, int len)
@@ -288,7 +287,6 @@ void	push_to_b(t_inform *inform, int len)
 		pb(inform);
 		i++;
 	}
-	test(inform);
 }
 
 int	find_long_section(t_inform *inform)
@@ -299,11 +297,11 @@ int	find_long_section(t_inform *inform)
 	int	len;
 
 	i = 0;
-	len = -1;
-	while (i < inform->size_a)
+	len = 0;
+	while (i < inform->size_a - 1)
 	{
 		j = sorted_num(inform->stack_a, i, inform->size_a);
-		if (j - i > len)
+		if (j - i + 1 > len)
 		{
 			len = j - i + 1;
 			idx = j;
@@ -311,9 +309,8 @@ int	find_long_section(t_inform *inform)
 		i = j;
 		i++;
 	}
+	//printf("idx: %d, len : %d\n", idx, len);
 	move_section(inform, idx);
-	if (len == 1)
-		len = 2;
 	return (len);
 }
 
@@ -368,9 +365,9 @@ int	main(int argc, char *argv[])
 	init_stack(&inform, argc, argv);
 	//test(&inform);
 	//real_quick_sort(inform.stack_a, 0, inform.size_a - 1);
-	test(&inform);
+	//test(&inform);
 	sort_start(&inform);
+	//test(&inform);
 	//quick_a(&inform, inform.size_a);
-	test(&inform);
 	return (0);
 }
