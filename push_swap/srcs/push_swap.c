@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:05 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/05 17:12:44 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/05 18:56:45 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,6 +288,7 @@ void	push_to_b(t_inform *inform, int len)
 		pb(inform);
 		i++;
 	}
+	test(inform);
 }
 
 int	find_long_section(t_inform *inform)
@@ -341,7 +342,6 @@ void	sort_start(t_inform *inform)
 	int	len;
 
 	len = find_long_section(inform);
-	test(inform);
 	if (is_sorted(inform->stack_a, inform->size_a))
 		return ;
 	if (inform->size_a == 2 || inform->size_a == 3)
