@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 16:48:29 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/31 19:54:04 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/05 16:14:01 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	sort_5(t_inform *inform, int len)
 	}
 	else
 		push_to_b(inform, 5 - len);
-	test(inform);
 	push_to_a(inform);
 }
 
