@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:31 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/31 19:43:49 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/06 14:58:41 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
 
 typedef struct s_inform
 {
@@ -61,6 +60,15 @@ void	sort_2_3(t_inform *inform);
 void	push_to_a(t_inform *inform);
 void	push_to_b(t_inform *inform, int len);
 
+void	quick_a(t_inform *inform, int size);
+
+void	init_predict(t_predict *predict);
+void	find_instruction(t_inform *inform, t_predict *predict);
+void	cnt_instruction(t_inform *inform, t_predict *predict, int i, int j);
+void	run_instruction(t_inform *inform, t_predict *predict);
+int		find_min(int *stack, int size, int *idx);
+int		find_long_section(t_inform *inform);
+
 void	pa(t_inform *inform);
 void	pb(t_inform *inform);
 void	sa(t_inform *inform);
@@ -72,7 +80,5 @@ void	rr(t_inform *inform);
 void	rra(t_inform *inform);
 void	rrb(t_inform *inform);
 void	rrr(t_inform *inform);
-
-void	test(t_inform *inform);
 
 #endif

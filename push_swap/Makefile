@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/08/31 16:49:04 by minskim2         ###   ########.fr        #
+#    Updated: 2021/09/06 14:57:17 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,16 +14,22 @@ CC=gcc
 CFLAGS = -Werror -Wextra -Wall
 NAME = push_swap
 SRCS =	srcs/push_swap.c \
+	srcs/push_swap_v2.c \
 	srcs/tools0.c \
 	srcs/tools1.c \
 	srcs/ft_split.c \
 	srcs/init.c \
-	srcs/find_pivot.c \
+	srcs/cnt_instruction.c \
+	srcs/run_instruction.c \
 	srcs/sort_section.c \
+	srcs/section.c \
+	srcs/find_pivot.c \
+	srcs/find.c \
 	srcs/action_swap.c \
 	srcs/action_push.c \
 	srcs/action_rotate.c \
 	srcs/action_reverse_rotate.c
+
 SRCS_BONUS=
 
 HEADER = include
