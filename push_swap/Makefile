@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/09/06 16:06:41 by minskim2         ###   ########.fr        #
+#    Updated: 2021/09/06 16:23:12 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,10 +69,10 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) -g $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@
 
 %.o: %.c
-	$(CC) -g $(CFLAGS) -c $^ -o $@ -I $(HEADER)
+	$(CC) $(CFLAGS) -c $^ -o $@ -I $(HEADER)
 
 bonus:
 	make WITH_BONUS=1 all
