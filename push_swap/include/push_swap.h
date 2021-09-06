@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:31 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/06 14:58:41 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/06 16:04:28 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <get_next_line.h>
 
 typedef struct s_inform
 {
@@ -34,9 +35,9 @@ typedef struct s_predict
 	int	cnt_sum;
 }	t_predict;
 
-size_t	ft_strlen(const char *str);
 int		ft_atoi(const char *str);
-
+size_t	ft_strlen(char *str);
+int		ft_strncmp(char *s1, char *s2, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	error_push_swap(char *error);
 void	ft_putstr(char *str);
@@ -61,6 +62,7 @@ void	push_to_a(t_inform *inform);
 void	push_to_b(t_inform *inform, int len);
 
 void	quick_a(t_inform *inform, int size);
+void	sort_start(t_inform *inform);
 
 void	init_predict(t_predict *predict);
 void	find_instruction(t_inform *inform, t_predict *predict);

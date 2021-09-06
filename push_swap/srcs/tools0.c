@@ -6,16 +6,18 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:48:37 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/25 16:00:14 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/06 16:07:11 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen(char *str)
 {
 	size_t	cnt;
 
+	if (!str)
+		return (0);
 	cnt = 0;
 	while (*str)
 	{
