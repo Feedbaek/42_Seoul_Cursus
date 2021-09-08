@@ -6,14 +6,15 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/09/06 16:23:12 by minskim2         ###   ########.fr        #
+#    Updated: 2021/09/08 20:33:20 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=gcc
 CFLAGS = -Werror -Wextra -Wall
 SRCS =	srcs/push_swap.c \
-	srcs/push_swap_v2.c \
+	srcs/quick_a.c \
+	srcs/quick_b.c \
 	srcs/sort_start.c \
 	srcs/tools0.c \
 	srcs/tools1.c \
@@ -31,8 +32,9 @@ SRCS =	srcs/push_swap.c \
 	srcs/action_reverse_rotate.c
 
 SRCS_BONUS = srcs/checker.c \
+	srcs/quick_a.c \
+	srcs/quick_b.c \
 	srcs/sort_start.c \
-	srcs/push_swap_v2.c \
 	srcs/tools0.c \
 	srcs/tools1.c \
 	srcs/ft_split.c \
@@ -57,7 +59,7 @@ OBJECTS = $(SRCS:.c=.o)
 OBJECTS_BONUS = $(SRCS_BONUS:.c=.o)
 
 ifdef WITH_BONUS
-	NAME = checker_test
+	NAME = checker
 	OBJS = $(OBJECTS_BONUS)
 else
 	NAME = push_swap
@@ -69,10 +71,10 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) -g $^ -o $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $^ -o $@ -I $(HEADER)
+	$(CC) $(CFLAGS) -g -c $^ -o $@ -I $(HEADER)
 
 bonus:
 	make WITH_BONUS=1 all

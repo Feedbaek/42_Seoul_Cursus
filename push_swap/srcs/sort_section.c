@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 16:48:29 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/06 14:20:04 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/08 19:10:28 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,6 @@ void	sort_3(t_inform *inform)
 
 void	sort_5(t_inform *inform, int len)
 {
-	int	i;
-
-	i = 0;
 	if (len < 3)
 	{
 		pb(inform);

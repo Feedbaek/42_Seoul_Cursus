@@ -1,29 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap.v3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/08 17:31:12 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/08 20:41:53 by minskim2         ###   ########.fr       */
+/*   Created: 2021/08/22 21:42:05 by minskim2          #+#    #+#             */
+/*   Updated: 2021/09/08 17:14:23 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
-
-void	test(t_inform *inform)
-{
-	int	i;
-
-	i = 0;
-	while (i < inform->size_a)
-	{
-		printf("%d ", inform->stack_a[i]);
-		i++;
-	}
-	printf("\n");
-}
 
 int	main(int argc, char *argv[])
 {
@@ -32,9 +19,9 @@ int	main(int argc, char *argv[])
 	if (argc < 2)
 		return (0);
 	init_stack(&inform, argc, argv);
-	test(&inform);
-	quick_a(&inform, inform.size_a);
-	test(&inform);
+	if (inform.size_a > 100)
+		quick_a(&inform, inform.size_a);
+	else
+		sort_start(&inform);
 	return (0);
 }
-

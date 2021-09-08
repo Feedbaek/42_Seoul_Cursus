@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:31 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/06 16:04:28 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/08 20:30:34 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <get_next_line.h>
 
 typedef struct s_inform
@@ -51,7 +52,7 @@ void	quick_a(t_inform *inform, int size);
 void	quick_b(t_inform *inform, int size);
 
 void	real_quick_sort(int *stack, int left, int right);
-int		find_pivot(t_inform *inform, int size);
+int		find_pivot(int *stack, int size);
 
 int		is_sorted(int *stack, int n);
 int		sorted_num(int *stack, int i, int size);
@@ -62,6 +63,7 @@ void	push_to_a(t_inform *inform);
 void	push_to_b(t_inform *inform, int len);
 
 void	quick_a(t_inform *inform, int size);
+void	quick_b(t_inform *inform, int size);
 void	sort_start(t_inform *inform);
 
 void	init_predict(t_predict *predict);

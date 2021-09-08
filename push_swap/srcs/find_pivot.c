@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/29 12:56:11 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/06 14:33:21 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/08 20:30:20 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	real_quick_sort(int *stack, int left, int right)
 	}
 }
 
-int	find_pivot(t_inform *inform, int size)
+int	find_pivot(int *stack, int size)
 {
 	int	*copy;
 	int	i;
@@ -73,7 +73,7 @@ int	find_pivot(t_inform *inform, int size)
 	i = 0;
 	while (i < size)
 	{
-		copy[i] = inform->stack_a[i];
+		copy[i] = stack[i];
 		i++;
 	}
 	real_quick_sort(copy, 0, size - 1);
