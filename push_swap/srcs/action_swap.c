@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 17:51:36 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/26 13:43:44 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/09 17:14:40 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	sb(t_inform *inform)
 
 	if (inform->size_b < 2)
 		return ;
-	tmp = inform->stack_a[0];
-	inform->stack_a[0] = inform->stack_a[1];
-	inform->stack_a[1] = tmp;
+	tmp = inform->stack_b[0];
+	inform->stack_b[0] = inform->stack_b[1];
+	inform->stack_b[1] = tmp;
 	if (inform->r)
 		ft_putstr("sb\n");
 }

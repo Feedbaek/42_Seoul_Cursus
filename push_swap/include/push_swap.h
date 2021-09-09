@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:31 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/08 20:30:34 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/09 17:55:23 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,11 @@ void	push_to_b(t_inform *inform, int len);
 
 void	quick_a(t_inform *inform, int size);
 void	quick_b(t_inform *inform, int size);
+void	sort_end(t_inform *inform);
 void	sort_start(t_inform *inform);
 
 void	init_predict(t_predict *predict);
+int		find_min(int *stack, int size, int *idx);
 void	find_instruction(t_inform *inform, t_predict *predict);
 void	cnt_instruction(t_inform *inform, t_predict *predict, int i, int j);
 void	run_instruction(t_inform *inform, t_predict *predict);
@@ -84,5 +86,7 @@ void	rr(t_inform *inform);
 void	rra(t_inform *inform);
 void	rrb(t_inform *inform);
 void	rrr(t_inform *inform);
+
+void	test(t_inform *inform);
 
 #endif

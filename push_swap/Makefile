@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/09/08 20:33:20 by minskim2         ###   ########.fr        #
+#    Updated: 2021/09/09 20:11:09 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,6 @@ clean:
 	rm -rf $(OBJECTS) $(OBJECTS_BONUS)
 
 fclean:
-	rm -rf push_swap checker_test $(OBJECTS) $(OBJECTS_BONUS)
+	rm -rf push_swap $(OBJECTS) $(OBJECTS_BONUS)
 
 re: fclean all
