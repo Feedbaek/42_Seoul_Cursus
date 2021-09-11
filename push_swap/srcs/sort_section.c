@@ -6,23 +6,31 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 16:48:29 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/08 19:10:28 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/11 14:52:23 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-int	is_sorted(int *stack, int n)
+int	is_sorted(int *stack, int n, int opt)
 {
 	int	i;
 
 	i = 0;
-	while (i < n - 1)
-	{
-		if (stack[i] > stack[i + 1])
-			return (0);
-		i++;
-	}
+	if (opt == 0)
+		while (i < n - 1)
+		{
+			if (stack[i] > stack[i + 1])
+				return (0);
+			i++;
+		}
+	else
+		while (i < n - 1)
+		{
+			if (stack[i] < stack[i + 1])
+				return (0);
+			i++;
+		}
 	return (1);
 }
 
@@ -39,7 +47,7 @@ int	sorted_num(int *stack, int i, int size)
 
 void	sort_3(t_inform *inform)
 {
-	if (is_sorted(inform->stack_a, inform->size_a))
+	if (is_sorted(inform->stack_a, inform->size_a, 0))
 		return ;
 	if (inform->stack_a[0] > inform->stack_a[2])
 		ra(inform);

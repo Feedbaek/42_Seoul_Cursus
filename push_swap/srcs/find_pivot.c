@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/29 12:56:11 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/08 20:30:20 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/11 15:06:23 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,24 @@ int	find_pivot(int *stack, int size)
 	ret = copy[size / 2 - 1];
 	free(copy);
 	return (ret);
+}
+
+void	find_pivot_2(int *stack, int size, int *big_pivot, int *small_pivot)
+{
+	int	*copy;
+	int	i;
+
+	copy = (int *)malloc(sizeof(int) * size);
+	if (!copy)
+		error_push_swap("Error\n");
+	i = 0;
+	while (i < size)
+	{
+		copy[i] = stack[i];
+		i++;
+	}
+	real_quick_sort(copy, 0, size - 1);
+	*big_pivot = copy[2 * (size / 3) - 1];
+	*small_pivot = copy[(size / 3) - 1];
+	free(copy);
 }

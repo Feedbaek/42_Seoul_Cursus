@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:09:52 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/09 19:40:49 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/11 14:14:05 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,13 @@ static	void	partition(t_inform *inform, int size, int *cnt_push)
 	i = 0;
 	while (i < size)
 	{
-		if (inform->stack_a[0] < pivot)
+		if (inform->stack_a[0] > pivot)
+			ra(inform);
+		else
 		{
 			pb(inform);
 			(*cnt_push)++;
 		}
-		else
-			ra(inform);
 		i++;
 	}
 	i = 0;

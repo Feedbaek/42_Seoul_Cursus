@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:09:52 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/09 19:40:31 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/11 14:15:37 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ static	void	partition(t_inform *inform, int size, int *cnt_push)
 	i = 0;
 	while (i < size)
 	{
-		if (inform->stack_b[0] > pivot)
+		if (inform->stack_b[0] < pivot)
+			rb(inform);
+		else
 		{
 			pa(inform);
 			(*cnt_push)++;
 		}
-		else
-			rb(inform);
 		i++;
 	}
 	i = 0;
@@ -110,8 +110,8 @@ void	quick_b(t_inform *inform, int size)
 	if (quick_sort_end(inform, size))
 		return ;
 	partition(inform, size, &cnt_push);
-	quick_b(inform, size - cnt_push);
 	quick_a(inform, cnt_push);
+	quick_b(inform, size - cnt_push);
 	i = 0;
 	while (i++ < cnt_push)
 		pb(inform);

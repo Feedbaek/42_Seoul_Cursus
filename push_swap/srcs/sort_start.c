@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:55:11 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/06 15:55:53 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/11 14:52:11 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	sort_start(t_inform *inform)
 	int	len;
 
 	len = find_long_section(inform);
-	if (is_sorted(inform->stack_a, inform->size_a))
+	if (is_sorted(inform->stack_a, inform->size_a, 0))
 		return ;
 	if (inform->size_a == 2 || inform->size_a == 3)
 	{

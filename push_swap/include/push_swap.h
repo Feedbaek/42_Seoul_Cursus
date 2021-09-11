@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:31 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/09 17:55:23 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/11 14:50:40 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ void	quick_b(t_inform *inform, int size);
 
 void	real_quick_sort(int *stack, int left, int right);
 int		find_pivot(int *stack, int size);
+void	find_pivot_2(int *stack, int size, int *big_pivot, int *small_pivot);
 
-int		is_sorted(int *stack, int n);
+int		is_sorted(int *stack, int n, int opt);
 int		sorted_num(int *stack, int i, int size);
 void	sort_5(t_inform *inform, int len);
 void	sort_2_3(t_inform *inform);
@@ -74,6 +75,9 @@ void	cnt_instruction(t_inform *inform, t_predict *predict, int i, int j);
 void	run_instruction(t_inform *inform, t_predict *predict);
 int		find_min(int *stack, int size, int *idx);
 int		find_long_section(t_inform *inform);
+
+void	a_to_b(t_inform *inform, int size);
+void	b_to_a(t_inform *inform, int size);
 
 void	pa(t_inform *inform);
 void	pb(t_inform *inform);
