@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:31:12 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/11 16:04:58 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/11 19:09:00 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ int	main(int argc, char *argv[])
 	}
 	//sort_end(&inform);
 	//quick_a(&inform, inform.size_a);
-	//test(&inform);
+	test(&inform);
 	a_to_b(&inform, inform.size_a);
-	//test(&inform);
+	test(&inform);
 	return (0);
 }
 

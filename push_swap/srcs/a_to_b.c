@@ -6,13 +6,13 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:17:50 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/11 16:00:27 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/11 19:12:04 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	call_rrr(t_inform *inform, int cnt_ra, int cnt_rb)
+static	void	call_rrr(t_inform *inform, int cnt_ra, int cnt_rb)
 {
 	int	i;
 	int	num_rrr;
@@ -31,6 +31,46 @@ void	call_rrr(t_inform *inform, int cnt_ra, int cnt_rb)
 		rrb(inform);
 }
 
+static	void	sort_3(t_inform *inform)
+{
+	if (is_sorted(inform->stack_a, 3, 0))
+		return ;
+	if (inform->stack_a[0] < inform->stack_a[1])
+	{
+		ra(inform);
+		sa(inform);
+		rra(inform);
+		if (inform->stack_a[0] > inform->stack_a[1])
+			sa(inform);
+	}
+	else
+	{
+		sa(inform);
+		if (inform->stack_a[1] > inform->stack_a[2])
+		{
+			ra(inform);
+			sa(inform);
+			rra(inform);
+			if (inform->stack_a[0] > inform->stack_a[1])
+				sa(inform);
+		}
+	}
+}
+
+static	int	check_pivot(t_inform *inform, int pivot, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (inform->stack_a[i] < pivot)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	a_to_b(t_inform *inform, int size)
 {
 	int	big_pivot;
@@ -39,9 +79,13 @@ void	a_to_b(t_inform *inform, int size)
 	int	cnt_rb;
 	int	cnt_pb;
 
-	if (size < 3)
+	if (is_sorted(inform->stack_a, size, 0))
+		return ;
+	if (size <= 3)
 	{
-		if (size == 2 && inform->stack_a[0] > inform->stack_a[1])
+		if (size == 3)
+			sort_3(inform);
+		else if (size == 2 && inform->stack_a[0] > inform->stack_a[1])
 			sa(inform);
 		return ;
 	}
@@ -51,6 +95,8 @@ void	a_to_b(t_inform *inform, int size)
 	find_pivot_2(inform->stack_a, size, &big_pivot, &small_pivot);
 	while (0 < size--)
 	{
+		if (check_pivot(inform, big_pivot, size + 1))
+			break ;
 		if (inform->stack_a[0] >= big_pivot)
 		{
 			ra(inform);
@@ -71,49 +117,4 @@ void	a_to_b(t_inform *inform, int size)
 	a_to_b(inform, cnt_ra);
 	b_to_a(inform, cnt_pb);
 	//b_to_a(inform, cnt_pb - cnt_rb);
-}
-
-void	b_to_a(t_inform *inform, int size)
-{
-	int	big_pivot;
-	int	small_pivot;
-	int	cnt_ra;
-	int	cnt_rb;
-	int	cnt_pa;
-
-
-	if (size < 3)
-	{
-		if (size == 2 && inform->stack_b[0] < inform->stack_b[1])
-			sb(inform);
-		while (size-- > 0)
-			pa(inform);
-		return ;
-	}
-	cnt_ra = 0;
-	cnt_pa = 0;
-	cnt_rb = 0;
-	find_pivot_2(inform->stack_b, size, &big_pivot, &small_pivot);
-	while (0 < size--)
-	{
-		if (inform->stack_b[0] < small_pivot)
-		{
-			rb(inform);
-			cnt_rb++;
-		}
-		else
-		{
-			pa(inform);
-			cnt_pa++;
-			if (inform->stack_a[0] < big_pivot)
-			{
-				ra(inform);
-				cnt_ra++;
-			}
-		}
-	}
-	a_to_b(inform, cnt_pa - cnt_ra);
-	call_rrr(inform, cnt_ra, cnt_rb);
-	a_to_b(inform, cnt_ra);
-	b_to_a(inform, cnt_rb);
 }

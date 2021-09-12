@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/09/11 14:45:15 by minskim2         ###   ########.fr        #
+#    Updated: 2021/09/11 17:09:03 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ CC=gcc
 CFLAGS = -Werror -Wextra -Wall
 SRCS =	srcs/push_swap.c \
 	srcs/a_to_b.c \
+	srcs/b_to_a.c \
 	srcs/quick_a.c \
 	srcs/quick_b.c \
 	srcs/sort_start.c \
@@ -34,6 +35,7 @@ SRCS =	srcs/push_swap.c \
 
 SRCS_BONUS = srcs/checker.c \
 	srcs/a_to_b.c \
+	srcs/b_to_a.c \
 	srcs/quick_a.c \
 	srcs/quick_b.c \
 	srcs/sort_start.c \
