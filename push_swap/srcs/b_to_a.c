@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 17:06:26 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/12 18:16:14 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/12 18:29:36 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	b_to_a(t_inform *inform, int size)
 	int	cnt_rb;
 	int	cnt_pa;
 	int	cnt_skip;
+	int	check_rr;
 
 	if (is_sorted(inform->stack_b, size, 1))
 	{
@@ -100,6 +101,7 @@ void	b_to_a(t_inform *inform, int size)
 	cnt_pa = 0;
 	cnt_rb = 0;
 	cnt_skip = 0;
+	check_rr = 0;
 	find_pivot_2(inform->stack_b, size, &big_pivot, &small_pivot);
 	while (0 < size--)
 	{
@@ -110,20 +112,32 @@ void	b_to_a(t_inform *inform, int size)
 		}
 		if (inform->stack_b[0] <= small_pivot)
 		{
-			rb(inform);
+			if (check_rr)
+			{
+				rr(inform);
+				check_rr = 0;
+			}
+			else
+				rb(inform);
 			cnt_rb++;
 		}
 		else
 		{
+			if (check_rr)
+				ra(inform);
+			check_rr = 0;
 			pa(inform);
 			cnt_pa++;
 			if (inform->stack_a[0] < big_pivot)
 			{
-				ra(inform);
+				check_rr = 1;
+				//ra(inform);
 				cnt_ra++;
 			}
 		}
 	}
+	if (check_rr)
+		ra(inform);
 	a_to_b(inform, cnt_pa - cnt_ra);
 	call_rrr(inform, cnt_ra, cnt_rb);
 	a_to_b(inform, cnt_ra);
