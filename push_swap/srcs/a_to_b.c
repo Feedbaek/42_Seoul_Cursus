@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:17:50 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/11 19:12:04 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/12 17:52:37 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	a_to_b(t_inform *inform, int size)
 	int	cnt_ra;
 	int	cnt_rb;
 	int	cnt_pb;
+	int	cnt_skip;
 
 	if (is_sorted(inform->stack_a, size, 0))
 		return ;
@@ -92,11 +93,15 @@ void	a_to_b(t_inform *inform, int size)
 	cnt_ra = 0;
 	cnt_pb = 0;
 	cnt_rb = 0;
+	cnt_skip = 0;
 	find_pivot_2(inform->stack_a, size, &big_pivot, &small_pivot);
 	while (0 < size--)
 	{
 		if (check_pivot(inform, big_pivot, size + 1))
+		{
+			cnt_skip = size + 1;
 			break ;
+		}
 		if (inform->stack_a[0] >= big_pivot)
 		{
 			ra(inform);
@@ -114,7 +119,7 @@ void	a_to_b(t_inform *inform, int size)
 		}
 	}
 	call_rrr(inform, cnt_ra, cnt_rb);
-	a_to_b(inform, cnt_ra);
+	a_to_b(inform, cnt_ra + cnt_skip);
 	b_to_a(inform, cnt_pb);
 	//b_to_a(inform, cnt_pb - cnt_rb);
 }
