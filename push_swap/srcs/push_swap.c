@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:31:12 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/13 18:32:18 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/13 19:48:07 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char *argv[])
 	init_stack(&inform, argc, argv);
 	if (is_sorted(inform.stack_a, inform.size_a, 0))
 		return (0);
-	if (inform.size_a <= 5)
+	if (inform.size_a == 5 || inform.size_a <= 3)
 	{
 		len = find_long_section(&inform);
 		if (inform.size_a == 2 || inform.size_a == 3)

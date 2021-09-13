@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:31 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/13 18:47:25 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/13 19:16:46 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_param
 {
 	int	cnt_ra;
 	int	cnt_rb;
+	int	cnt_pa;
 	int	cnt_pb;
 	int	cnt_skip;
 	int	check_rr;
@@ -96,6 +97,11 @@ void	a_to_b_init_cnt(t_param *param);
 int		a_to_b_check_pivot(t_inform *inform, int pivot, int size);
 void	a_to_b_sort_3(t_inform *inform);
 void	a_to_b_call_rrr(t_inform *inform, int cnt_ra, int cnt_rb);
+int		set_b_to_a(t_inform *inform, t_param *param, int size);
+void	b_to_a_init_cnt(t_param *param);
+int		b_to_a_check_pivot(t_inform *inform, int pivot, int size);
+void	b_to_a_sort_3(t_inform *inform);
+void	b_to_a_call_rrr(t_inform *inform, int cnt_ra, int cnt_rb);
 
 void	pa(t_inform *inform);
 void	pb(t_inform *inform);
