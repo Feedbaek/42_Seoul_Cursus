@@ -6,37 +6,11 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:31:12 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/13 20:58:24 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/13 21:05:47 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
-
-int	is_sorted(int *stack, int n, int opt)
-{
-	int	i;
-
-	i = 0;
-	if (opt == 0)
-	{
-		while (i < n - 1)
-		{
-			if (stack[i] > stack[i + 1])
-				return (0);
-			i++;
-		}
-	}
-	else
-	{
-		while (i < n - 1)
-		{
-			if (stack[i] < stack[i + 1])
-				return (0);
-			i++;
-		}
-	}
-	return (1);
-}
 
 static	void	main_sort_3(t_inform *inform)
 {

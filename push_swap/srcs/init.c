@@ -6,11 +6,37 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 17:46:27 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/13 20:48:28 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/13 21:04:16 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
+
+int	is_sorted(int *stack, int n, int opt)
+{
+	int	i;
+
+	i = 0;
+	if (opt == 0)
+	{
+		while (i < n - 1)
+		{
+			if (stack[i] > stack[i + 1])
+				return (0);
+			i++;
+		}
+	}
+	else
+	{
+		while (i < n - 1)
+		{
+			if (stack[i] < stack[i + 1])
+				return (0);
+			i++;
+		}
+	}
+	return (1);
+}
 
 static void	valid_check(t_inform *inform, int value, int n)
 {
