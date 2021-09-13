@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:04:56 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/13 21:28:49 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/13 21:33:37 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	main(int argc, char *argv[])
 		if (status == -1)
 			error_push_swap("Error\n");
 		run_cmd(line, &inform);
+		free(line);
 	}
 	if (is_sorted(inform.stack_a, inform.size_a, 0) && inform.size_b == 0)
 		ft_putstr("OK\n");
