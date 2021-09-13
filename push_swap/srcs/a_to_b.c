@@ -6,149 +6,109 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 14:17:50 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/12 20:39:49 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/13 18:48:16 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-static	void	call_rrr(t_inform *inform, int cnt_ra, int cnt_rb)
+void	a_to_b_while(t_inform *inform, t_param *param)
 {
-	int	i;
-	int	num_rrr;
-
-	num_rrr = cnt_ra;
-	if (cnt_ra > cnt_rb)
-		num_rrr = cnt_rb;
-	i = 0;
-	while (i++ < num_rrr)
-		rrr(inform);
-	i = 0;
-	while (i++ < cnt_ra - num_rrr)
-		rra(inform);
-	i = 0;
-	while (i++ < cnt_rb - num_rrr)
-		rrb(inform);
-}
-
-static	void	sort_3(t_inform *inform)
-{
-	if (is_sorted(inform->stack_a, 3, 0))
-		return ;
-	if (inform->stack_a[0] < inform->stack_a[1])
+	if (inform->stack_a[0] >= param->big_pivot)
 	{
-		ra(inform);
-		sa(inform);
-		rra(inform);
-		if (inform->stack_a[0] > inform->stack_a[1])
-			sa(inform);
+		if (param->check_rr)
+		{
+			rr(inform);
+			param->check_rr = 0;
+		}
+		else
+			ra(inform);
+		param->cnt_ra++;
 	}
 	else
 	{
-		sa(inform);
-		if (inform->stack_a[1] > inform->stack_a[2])
+		if (param->check_rr)
+			rb(inform);
+		param->check_rr = 0;
+		pb(inform);
+		param->cnt_pb++;
+		if (inform->stack_b[0] >= param->small_pivot)
 		{
-			ra(inform);
-			sa(inform);
-			rra(inform);
-			if (inform->stack_a[0] > inform->stack_a[1])
-				sa(inform);
+			param->check_rr = 1;
+			param->cnt_rb++;
 		}
 	}
 }
 
-static	int	check_pivot(t_inform *inform, int pivot, int size)
+void	first_a_to_b_while(t_inform *inform, t_param *param)
 {
-	int	i;
-
-	i = 0;
-	while (i < size)
+	if (inform->stack_a[0] >= param->big_pivot)
 	{
-		if (inform->stack_a[i] < pivot)
-			return (0);
-		i++;
+		if (param->check_rr)
+		{
+			rr(inform);
+			param->check_rr = 0;
+		}
+		else
+			ra(inform);
+		param->cnt_ra++;
 	}
-	return (1);
+	else
+	{
+		if (param->check_rr)
+			rb(inform);
+		param->check_rr = 0;
+		pb(inform);
+		param->cnt_pb++;
+		if (inform->stack_b[0] < param->small_pivot)
+		{
+			param->check_rr = 1;
+			param->cnt_rb++;
+		}
+	}
 }
 
 void	a_to_b(t_inform *inform, int size)
 {
-	int	big_pivot;
-	int	small_pivot;
-	int	cnt_ra;
-	int	cnt_rb;
-	int	cnt_pb;
-	int	cnt_skip;
-	int	check_rr;
+	t_param	param;
 
-	if (is_sorted(inform->stack_a, size, 0))
+	if (set_a_to_b(inform, &param, size))
 		return ;
-	if (size == 5)
-	{
-		big_pivot = find_pivot(inform->stack_a, 5);
-		while (size-- > 0)
-		{
-			if (inform->stack_a[0] <= big_pivot)
-				pb(inform);
-		}
-		sort_3(inform);
-		pa(inform);
-		pa(inform);
-		if (inform->stack_a[0] > inform->stack_a[1])
-			sa(inform);
-		return ;
-	}
-	if (size <= 3)
-	{
-		if (size == 3)
-			sort_3(inform);
-		else if (size == 2 && inform->stack_a[0] > inform->stack_a[1])
-			sa(inform);
-		return ;
-	}
-	cnt_ra = 0;
-	cnt_pb = 0;
-	cnt_rb = 0;
-	cnt_skip = 0;
-	check_rr = 0;
-	find_pivot_2(inform->stack_a, size, &big_pivot, &small_pivot);
 	while (0 < size--)
 	{
-		if (check_pivot(inform, big_pivot, size + 1))
+		if (a_to_b_check_pivot(inform, param.big_pivot, size + 1))
 		{
-			cnt_skip = size + 1;
+			param.cnt_skip = size + 1;
 			break ;
 		}
-		if (inform->stack_a[0] >= big_pivot)
-		{
-			if (check_rr)
-			{
-				rr(inform);
-				check_rr = 0;
-			}
-			else
-				ra(inform);
-			cnt_ra++;
-		}
-		else
-		{
-			if (check_rr)
-				rb(inform);
-			check_rr = 0;
-			pb(inform);
-			cnt_pb++;
-			if (inform->stack_b[0] < small_pivot)
-			{
-				check_rr = 1;
-				//rb(inform);
-				cnt_rb++;
-			}
-		}
+		a_to_b_while(inform, &param);
 	}
-	if (check_rr)
+	if (param.check_rr)
 		rb(inform);
-	call_rrr(inform, cnt_ra, cnt_rb);
-	a_to_b(inform, cnt_ra + cnt_skip);
-	b_to_a(inform, cnt_pb);
-	//b_to_a(inform, cnt_pb - cnt_rb);
+	a_to_b_call_rrr(inform, param.cnt_ra, param.cnt_rb);
+	a_to_b(inform, param.cnt_ra + param.cnt_skip);
+	b_to_a(inform, param.cnt_rb);
+	b_to_a(inform, param.cnt_pb - param.cnt_rb);
+}
+
+void	first_a_to_b(t_inform *inform, int size)
+{
+	t_param	param;
+
+	if (set_a_to_b(inform, &param, size))
+		return ;
+	while (0 < size--)
+	{
+		if (a_to_b_check_pivot(inform, param.big_pivot, size + 1))
+		{
+			param.cnt_skip = size + 1;
+			break ;
+		}
+		first_a_to_b_while(inform, &param);
+	}
+	if (param.check_rr)
+		rb(inform);
+	a_to_b(inform, param.cnt_ra + param.cnt_skip);
+	b_to_a(inform, param.cnt_pb - param.cnt_rb);
+	b_to_a(inform, param.cnt_rb);
 }

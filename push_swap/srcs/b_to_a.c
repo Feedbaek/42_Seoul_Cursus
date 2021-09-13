@@ -6,13 +6,13 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 17:06:26 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/12 20:33:48 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/13 16:46:55 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	call_rrr(t_inform *inform, int cnt_ra, int cnt_rb)
+static	void	call_rrr(t_inform *inform, int cnt_ra, int cnt_rb)
 {
 	int	i;
 	int	num_rrr;
@@ -87,22 +87,6 @@ void	b_to_a(t_inform *inform, int size)
 			pa(inform);
 		return ;
 	}
-	if (size == 5)
-	{
-		big_pivot = find_pivot(inform->stack_b, 5);
-		while (size-- > 0)
-		{
-			if (inform->stack_b[0] > big_pivot)
-				pa(inform);
-		}
-		a_to_b(inform, 3);
-		if (inform->stack_b[0] < inform->stack_b[1])
-			sb(inform);
-		size = 0;
-		while (size++ < 2)
-			pa(inform);
-		return ;
-	}
 	if (size <= 3)
 	{
 		if (size == 3)
@@ -147,7 +131,6 @@ void	b_to_a(t_inform *inform, int size)
 			if (inform->stack_a[0] < big_pivot)
 			{
 				check_rr = 1;
-				//ra(inform);
 				cnt_ra++;
 			}
 		}

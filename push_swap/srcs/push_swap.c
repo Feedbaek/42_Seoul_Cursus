@@ -6,32 +6,11 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:31:12 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/12 20:36:04 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/13 18:32:18 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
-
-void	test(t_inform *inform)
-{
-	int	i;
-
-	i = 0;
-	printf("stack_a: ");
-	while (i < inform->size_a)
-	{
-		printf("%d ", inform->stack_a[i]);
-		i++;
-	}
-	i = 0;
-	printf("stack_b: ");
-	while (i < inform->size_b)
-	{
-		printf("%d ", inform->stack_b[i]);
-		i++;
-	}
-	printf("\n");
-}
 
 int	main(int argc, char *argv[])
 {
@@ -50,20 +29,14 @@ int	main(int argc, char *argv[])
 		{
 			sort_2_3(&inform);
 			sort_end(&inform);
-			return (0);
 		}
 		if (inform.size_a == 5)
 		{
 			sort_5(&inform, len);
 			sort_end(&inform);
-			return (0);
 		}
+		return (0);
 	}
-	//sort_end(&inform);
-	//quick_a(&inform, inform.size_a);
-	test(&inform);
-	a_to_b(&inform, inform.size_a);
-	test(&inform);
+	first_a_to_b(&inform, inform.size_a);
 	return (0);
 }
-
