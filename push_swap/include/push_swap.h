@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 21:42:31 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/13 19:16:46 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/13 21:27:57 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_inform
 	int	size_a;
 	int	size_b;
 	int	r;
+	int	checker;
 }	t_inform;
 
 typedef struct s_predict

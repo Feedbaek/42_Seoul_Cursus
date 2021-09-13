@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:04:56 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/13 21:07:13 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/13 21:28:49 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int argc, char *argv[])
 	if (argc < 2)
 		return (0);
 	init_stack(&inform, argc, argv);
+	inform.checker = 0;
 	status = 1;
 	while (status == 1)
 	{

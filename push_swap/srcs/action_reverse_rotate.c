@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 21:46:53 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/26 13:43:27 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/13 21:30:28 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	rra(t_inform *inform)
 		idx--;
 	}
 	inform->stack_a[0] = tmp;
-	if (inform->r)
+	if (inform->r && inform->checker)
 		ft_putstr("rra\n");
 }
 
@@ -46,7 +46,7 @@ void	rrb(t_inform *inform)
 		idx--;
 	}
 	inform->stack_b[0] = tmp;
-	if (inform->r)
+	if (inform->r && inform->checker)
 		ft_putstr("rrb\n");
 }
 
@@ -55,6 +55,7 @@ void	rrr(t_inform *inform)
 	inform->r = 0;
 	rra(inform);
 	rrb(inform);
-	ft_putstr("rrr\n");
+	if (inform->checker)
+		ft_putstr("rrr\n");
 	inform->r = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 17:59:26 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/26 13:42:58 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/13 21:27:39 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ static int	*new_stack(int size)
 	if (!new_stack)
 		error_push_swap("Error\n");
 	return (new_stack);
+}
+
+void	size_0(int **n_stack, int *stack, int size)
+{
+	if (size != 0)
+	{
+		*n_stack = new_stack(size);
+		ft_memcpy(*n_stack, &stack[1], sizeof(int) * size);
+	}
+	free(stack);
 }
 
 void	pa(t_inform *inform)
@@ -41,14 +51,10 @@ void	pa(t_inform *inform)
 	inform->stack_a = new_stack_a;
 	size = --inform->size_b;
 	new_stack_b = 0;
-	if (size != 0)
-	{
-		new_stack_b = new_stack(size);
-		ft_memcpy(new_stack_b, &inform->stack_b[1], sizeof(int) * size);
-	}
-	free(inform->stack_b);
+	size_0(&new_stack_b, inform->stack_b, size);
 	inform->stack_b = new_stack_b;
-	ft_putstr("pa\n");
+	if (inform->checker)
+		ft_putstr("pa\n");
 }
 
 void	pb(t_inform *inform)
@@ -70,12 +76,8 @@ void	pb(t_inform *inform)
 	inform->stack_b = new_stack_b;
 	size = --inform->size_a;
 	new_stack_a = 0;
-	if (size != 0)
-	{
-		new_stack_a = new_stack(size);
-		ft_memcpy(new_stack_a, &inform->stack_a[1], sizeof(int) * size);
-	}
-	free(inform->stack_a);
+	size_0(&new_stack_a, inform->stack_a, size);
 	inform->stack_a = new_stack_a;
-	ft_putstr("pb\n");
+	if (inform->checker)
+		ft_putstr("pb\n");
 }

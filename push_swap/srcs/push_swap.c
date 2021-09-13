@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 17:31:12 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/13 21:05:47 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/13 21:28:35 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	main(int argc, char *argv[])
 	if (argc < 2)
 		return (0);
 	init_stack(&inform, argc, argv);
+	inform.checker = 1;
 	if (is_sorted(inform.stack_a, inform.size_a, 0))
 		return (0);
 	if (inform.size_a == 5)
