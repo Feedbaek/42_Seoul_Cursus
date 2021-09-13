@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/27 18:16:02 by minskim2          #+#    #+#              #
-#    Updated: 2021/09/13 19:19:15 by minskim2         ###   ########.fr        #
+#    Updated: 2021/09/13 20:49:10 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,19 +17,11 @@ SRCS =	srcs/push_swap.c \
 	srcs/set_a_to_b.c \
 	srcs/b_to_a.c \
 	srcs/set_b_to_a.c \
-	srcs/quick_a.c \
-	srcs/quick_b.c \
-	srcs/sort_start.c \
 	srcs/tools0.c \
 	srcs/tools1.c \
 	srcs/ft_split.c \
 	srcs/init.c \
-	srcs/cnt_instruction.c \
-	srcs/run_instruction.c \
-	srcs/sort_section.c \
-	srcs/section.c \
 	srcs/find_pivot.c \
-	srcs/find.c \
 	srcs/action_swap.c \
 	srcs/action_push.c \
 	srcs/action_rotate.c \
