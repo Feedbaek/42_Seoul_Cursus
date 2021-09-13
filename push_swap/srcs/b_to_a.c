@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 17:06:26 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/12 18:29:36 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/12 20:33:48 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,22 @@ void	b_to_a(t_inform *inform, int size)
 	if (is_sorted(inform->stack_b, size, 1))
 	{
 		while (size-- > 0)
+			pa(inform);
+		return ;
+	}
+	if (size == 5)
+	{
+		big_pivot = find_pivot(inform->stack_b, 5);
+		while (size-- > 0)
+		{
+			if (inform->stack_b[0] > big_pivot)
+				pa(inform);
+		}
+		a_to_b(inform, 3);
+		if (inform->stack_b[0] < inform->stack_b[1])
+			sb(inform);
+		size = 0;
+		while (size++ < 2)
 			pa(inform);
 		return ;
 	}
