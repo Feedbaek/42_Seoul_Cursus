@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:04:56 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/13 21:33:37 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/15 17:42:20 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ int	main(int argc, char *argv[])
 		ft_putstr("OK\n");
 	else
 		ft_putstr("KO\n");
-	exit(0);
+	return (0);
 }
