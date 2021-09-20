@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:04:56 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/20 16:47:41 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/20 16:51:33 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	run_cmd_1(char *cmd, t_inform *inform)
 
 void	run_cmd(char *cmd, t_inform *inform)
 {
-	if (ft_strlen(cmd) == 3)
+	if (ft_strlen(cmd) == 4)
 	{
 		if (ft_strncmp(cmd, "rra", 3) == 0)
 			rra(inform);
@@ -43,7 +43,7 @@ void	run_cmd(char *cmd, t_inform *inform)
 		else if (ft_strncmp(cmd, "rrr", 3) == 0)
 			rrr(inform);
 	}
-	else if (ft_strlen(cmd) == 2)
+	else if (ft_strlen(cmd) == 3)
 		run_cmd_1(cmd, inform);
 	else
 		error_push_swap("Error\n");
