@@ -6,13 +6,14 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/15 19:26:51 by minskim2          #+#    #+#              #
-#    Updated: 2021/09/19 21:38:17 by minskim2         ###   ########.fr        #
+#    Updated: 2021/09/21 01:52:26 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=gcc
 CFLAGS = -Werror -Wextra -Wall
-SRCS =	srcs/philo.c
+SRCS =	srcs/philo.c \
+	srcs/tools0.c
 
 SRCS_BONUS =
 

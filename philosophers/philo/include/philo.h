@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:55:38 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/20 14:42:03 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/21 01:28:19 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,18 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <pthread.h>
+
+typedef struct s_philo
+{
+	int				philo_num;
+	int				time_die;
+	int				time_eat;
+	int				time_sleep;
+	int				time_opt;
+	pthread_t		*philos;
+	pthread_mutex_t	*forks;
+}	t_philo;
+
+int	ft_atoi(char *str);
 
 #endif
