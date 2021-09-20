@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 18:30:02 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/20 16:57:14 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/21 00:33:14 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ int	ft_strncmp(char *s1, char *s2, size_t n)
 void	error_push_swap(char *error)
 {
 	write(2, error, ft_strlen(error));
-	exit(0);
+	exit(1);
 }
