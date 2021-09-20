@@ -6,7 +6,16 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:20:08 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/19 21:38:14 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/20 15:22:27 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <philo.h>
+
+int	main(int argc, char *argv[])
+{
+	if (argc < 5 || argc > 6)
+		return (0);
+
+	return (0);
+}
