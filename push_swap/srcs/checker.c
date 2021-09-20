@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:04:56 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/15 17:42:20 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/20 16:47:41 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void	run_cmd(char *cmd, t_inform *inform)
 		else if (ft_strncmp(cmd, "rrr", 3) == 0)
 			rrr(inform);
 	}
-	else
+	else if (ft_strlen(cmd) == 2)
 		run_cmd_1(cmd, inform);
+	else
+		error_push_swap("Error\n");
 }
 
 int	main(int argc, char *argv[])
