@@ -1,5 +1,6 @@
 .DS_Store
 *.dSYM/
-*-tester
-*_tester
+*-tester*
+*_tester*
+tester*
 .vscode
