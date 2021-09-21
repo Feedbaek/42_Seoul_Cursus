@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:55:38 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/21 01:28:19 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/21 21:42:03 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,20 @@
 
 typedef struct s_philo
 {
+	int	life;
+	int	fork;
+}	t_philo;
+
+typedef struct s_simul
+{
 	int				philo_num;
 	int				time_die;
 	int				time_eat;
 	int				time_sleep;
 	int				time_opt;
-	pthread_t		*philos;
-	pthread_mutex_t	*forks;
-}	t_philo;
+	pthread_t		*thread;
+	pthread_mutex_t	*mutex;
+}	t_simul;
 
 int	ft_atoi(char *str);
 
