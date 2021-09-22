@@ -6,66 +6,35 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:20:08 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/21 21:42:13 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/09/22 20:05:06 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-int	init_philo(t_simul *simul, int argc, char **argv)
-{
-	if (argc < 5 || argc > 6)
-		return (0);
-	simul->philo_num = ft_atoi(argv[1]);
-	simul->time_die = ft_atoi(argv[2]);
-	simul->time_eat = ft_atoi(argv[3]);
-	simul->time_sleep = ft_atoi(argv[4]);
-	if (simul->philo_num < 1 || simul->time_die < 1 || simul->time_eat < 1 || simul->time_sleep < 1)
-		return (0);
-	if (argc == 6)
-	{
-		simul->time_opt = ft_atoi(argv[5]);
-		if (simul->time_opt < 1)
-			return (0);
-	}
-	else
-		simul->time_opt = 0;
-	simul->thread = (pthread_t *)malloc(sizeof(pthread_t) * simul->philo_num);
-	simul->mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * simul->philo_num);
-	if (!simul->thread || !simul->mutex)
-		return (0);
-	return (1);
-}
-
 void	*philo_survive(void *p)
 {
-	printf("%d ", ((t_simul *)p)->philo_num--);
-	return (p);
-}
-
-int	make_pthread(t_simul *simul)
-{
-	int	i;
-	int	status;
-
-	i = 0;
-	while (i < 10)
+	while (1)
 	{
-		status = pthread_create(&simul->thread[i], NULL, philo_survive, (void *)simul);
-		usleep(50);
-		if (status < 0)
-			return (0);
-		i++;
+		// 생각 시간
+		// if 왼쪽 포크가 있으면,
+		// pthread_muxtex_lock(왼쪽 포크);
+		// if 오른쪽 포크가 있으면,
+		// pthread_muxtex_lock(오른쪽 포크);
+		// 식사 타임
+		// pthread_mutex_unlock(왼쪽 포크);
+		// pthread_mutex_unlock(오른쪽 포크);
+		// 식사 끝나면자는 시간
 	}
-	return (1);
+	return (p);
 }
 
 int	main(int argc, char **argv)
 {
 	t_simul	simul;
 
-	if (!init_philo(&simul, argc, argv))
+	if (!init_simul(&simul, argc, argv) || !init_pthread(&simul))
 		return (-1);
-	make_pthread(&simul);
+	// mutex_destroy 필요
 	return (0);
 }
