@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:51:44 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/04 20:45:14 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/05 00:08:15 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	init_simul(t_simul *simul, int argc, char **argv)
 	}
 	else
 		simul->time_opt = 0;
-	simul->thread = (pthread_t *)malloc(sizeof(pthread_t) * simul->philo_num);
+	simul->thread = (pthread_t *)malloc(sizeof(pthread_t) * (simul->philo_num + 1));
 	simul->mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * simul->philo_num);
 	simul->philo = (t_philo *)malloc(sizeof(t_philo) * simul->philo_num);
 	if (!simul->thread || !simul->mutex || !simul->philo)

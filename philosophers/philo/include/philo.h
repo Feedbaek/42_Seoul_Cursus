@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:55:38 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/04 21:23:21 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/05 00:54:44 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_philo
 	int				philo_num;
 	int				num;
 	int				life;
-	double			age;
+	size_t			age;
 	int				fork;
 	int				status;
 	int				time_eat;
