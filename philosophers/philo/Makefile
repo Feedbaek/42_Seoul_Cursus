@@ -6,14 +6,15 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/15 19:26:51 by minskim2          #+#    #+#              #
-#    Updated: 2021/09/30 20:22:19 by minskim2         ###   ########.fr        #
+#    Updated: 2021/10/04 20:41:45 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=gcc
 CFLAGS = -Werror -Wextra -Wall
 SRCS =	srcs/philo.c \
-	srcs/tools0.i
+	srcs/tools0.c \
+	srcs/init.c
 
 SRCS_BONUS =
 
@@ -35,10 +36,10 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -g $^ -o $@ -pthread
+	$(CC) $(CFLAGS) -g $^ -o $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) -g -c $^ -o $@ -I $(HEADER) -pthread
+	$(CC) $(CFLAGS) -g -c $^ -o $@ -I $(HEADER)
 
 bonus:
 	make WITH_BONUS=1 all
