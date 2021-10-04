@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:55:38 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/04 20:45:21 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/04 21:23:21 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_philo
 	int				time_opt;
 	int				num_eat;
 	pthread_mutex_t	*mutex;
+	struct timeval	time_to_die;
 }	t_philo;
 
 typedef struct s_simul

@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:20:08 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/04 20:43:43 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/04 21:28:38 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	*running_pthread(void *p)
 	philo = (t_philo *)p;
 	idx = philo->num - 1;
 	gettimeofday(&start, NULL);
+	gettimeofday(&philo->time_to_die, NULL);
 	while (philo->num_eat < philo->time_opt)
 	{
 		// 생각 시간
@@ -68,6 +69,7 @@ void	*running_pthread(void *p)
 		// 식사 타임
 		philo->status = EAT;
 		gettimeofday(&end, NULL);
+		gettimeofday(&philo->time_to_die, NULL);
 		philo->age = (end.tv_sec - start.tv_sec) + ((end.tv_usec - start.tv_usec) / (double)1000000);
 		print_status(philo);
 		usleep(philo->num_eat);
@@ -85,6 +87,20 @@ void	*running_pthread(void *p)
 		usleep(philo->time_sleep);
 	}
 	return (p);
+}
+
+void	mornitor_pthread(t_simul *simul)
+{
+	int	i;
+
+	while (1)
+	{
+		i = 0;
+		while (i < simul->philo_num)
+		{
+			if (simul->philo[i].time_to_die == )
+		}
+	}
 }
 
 void	wait_pthread(t_simul *simul)
