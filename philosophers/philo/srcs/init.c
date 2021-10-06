@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:51:44 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/06 19:30:27 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/06 22:46:27 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	init_philo(t_simul *simul)
 		simul->philo[i].time_sleep = simul->time_sleep;
 		simul->philo[i].time_opt = simul->time_opt;
 		simul->philo[i].num_eat = 0;
+		simul->philo[i].end_eat = 0;
+		simul->philo[i].end_game = 0;
 		simul->philo[i].mutex = simul->mutex;
+		simul->philo[i].start_point = &simul->start_point;
 		i++;
 	}
 }
@@ -43,6 +46,8 @@ int	init_simul(t_simul *simul, int argc, char **argv)
 	simul->time_die = ft_atoi(argv[2]);
 	simul->time_eat = ft_atoi(argv[3]);
 	simul->time_sleep = ft_atoi(argv[4]);
+	simul->start_point = 0;
+	simul->end = 0;
 	if (simul->philo_num < 1 || simul->time_die < 1 || simul->time_eat < 1 || simul->time_sleep < 1)
 		return (0);
 	if (argc == 6)
