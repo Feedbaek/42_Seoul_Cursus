@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:20:08 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/05 01:09:32 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/06 17:26:05 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	wait_pthread(t_simul *simul)
 	int	*ret;
 
 	i = 0;
-	status = pthread_create(&simul->thread[simul->philo_num], NULL, mornitor_pthread, (void *)&simul);
+	status = pthread_create(&simul->thread[simul->philo_num], NULL, mornitor_pthread, (void *)simul);
 	if (status < 0)
 		return (0);
 	pthread_join(simul->thread[simul->philo_num], (void *)&ret);
@@ -142,7 +142,7 @@ int	main(int argc, char **argv)
 	if (!init_simul(&simul, argc, argv) || !init_pthread_mutex(&simul))
 		return (-1);
 	if (!wait_pthread(&simul))
-	//	return (-1);
+		return (-1);
 	// mutex_destroy 필요
 	return (0);
 }
