@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:55:38 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/05 00:54:44 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/06 18:22:01 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_philo
 	size_t			age;
 	int				fork;
 	int				status;
+	int				change;
 	int				time_eat;
 	int				time_sleep;
 	int				time_opt;

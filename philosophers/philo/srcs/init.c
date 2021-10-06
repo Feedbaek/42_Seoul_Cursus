@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:51:44 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/06 17:23:50 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/06 19:30:27 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	init_philo(t_simul *simul)
 		simul->philo[i].life = simul->time_die;
 		simul->philo[i].fork = 0;
 		simul->philo[i].status = THINK;
+		simul->philo[i].change = 0;
 		simul->philo[i].time_eat = simul->time_eat;
 		simul->philo[i].time_sleep = simul->time_sleep;
 		simul->philo[i].time_opt = simul->time_opt;
@@ -52,6 +53,7 @@ int	init_simul(t_simul *simul, int argc, char **argv)
 	}
 	else
 		simul->time_opt = 0;
+	//printf("%d %d %d %d %d\n", simul->philo_num, simul->time_die, simul->time_eat, simul->time_sleep, simul->time_opt);
 	simul->thread = (pthread_t *)malloc(sizeof(pthread_t) * (simul->philo_num + 1));
 	simul->mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * simul->philo_num);
 	simul->philo = (t_philo *)malloc(sizeof(t_philo) * simul->philo_num);
