@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:55:38 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/06 22:46:19 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/08 17:11:16 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ int	ft_atoi(char *str);
 int		init_simul(t_simul *simul, int argc, char **argv);
 void	init_philo(t_simul *simul);
 int		init_pthread_mutex(t_simul *simul);
-
+// pthread.c
+void	print_msg(t_philo *philo);
 void	*running_pthread(void *p);
+void	*mornitor_pthread(void *s);
+void	*running_pthread(void *p);
+int		wait_pthread(t_simul *simul);
 
 #endif
