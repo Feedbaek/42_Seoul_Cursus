@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:07:09 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/08 17:08:45 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/08 18:18:35 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	*running_pthread(void *p)
 
 	philo = (t_philo *)p;
 	idx = philo->num - 1;
+	philo->change = 1;
 	while (1)
 	{
 		usleep(50);
@@ -40,11 +41,11 @@ void	*running_pthread(void *p)
 			break ;
 	}
 	gettimeofday(&start, NULL);
+	usleep(50);
 	while (1)
 	{
 		// 생각 시간
 		philo->status = THINK;
-		philo->change = 1;
 		gettimeofday(&end, NULL);
 		usleep(50);
 		//philo->age = (end.tv_sec - start.tv_sec) * 1000 + ((end.tv_usec - start.tv_usec) / 1000);
@@ -57,6 +58,7 @@ void	*running_pthread(void *p)
 			philo->status = FORK;
 			philo->change = 1;
 			gettimeofday(&end, NULL);
+			usleep(50);
 			//philo->age = (end.tv_sec - start.tv_sec) * 1000 + ((end.tv_usec - start.tv_usec) / 1000);
 			//print_status(philo);
 		// if 오른쪽 포크가 있으면,
@@ -69,11 +71,13 @@ void	*running_pthread(void *p)
 			philo->status = FORK;
 			philo->change = 1;
 			gettimeofday(&end, NULL);
+			usleep(50);
 			//philo->age = (end.tv_sec - start.tv_sec) * 1000 + ((end.tv_usec - start.tv_usec) / 1000);
 			//print_status(philo);
 			pthread_mutex_lock(&philo->mutex[idx]);
 		}
 		// 식사 타임
+		usleep(50);
 		philo->status = EAT;
 		philo->change = 1;
 		gettimeofday(&end, NULL);
@@ -83,7 +87,7 @@ void	*running_pthread(void *p)
 		pthread_mutex_unlock(&philo->mutex[idx]);
 		pthread_mutex_unlock(&philo->mutex[(idx + 1) % philo->philo_num]);
 		philo->num_eat += 1;
-		if (philo->time_eat && philo->num_eat >= philo->time_opt)
+		if (philo->time_opt && philo->num_eat >= philo->time_opt)
 			philo->end_eat = 1;
 		if (philo->end_game)
 			return (p);
@@ -97,8 +101,8 @@ void	*running_pthread(void *p)
 		//philo->age = (end.tv_sec - start.tv_sec) * 1000 + ((end.tv_usec - start.tv_usec) / 1000);
 		//print_status(philo);
 		usleep(philo->time_sleep * 1000);
+		philo->change = 1;
 	}
-	printf("=== end thread: %d ===\n", philo->num);
 	return (p);
 }
 
@@ -137,7 +141,10 @@ void	*mornitor_pthread(void *s)
 				i = 0;
 				while(i < simul->philo_num)
 				{
-					simul->philo[i].end_game = 1;
+					pthread_detach(simul->thread[i]);
+					pthread_mutex_unlock(&simul->mutex[i]);
+					pthread_mutex_destroy(&simul->mutex[i]);
+					//simul->philo[i].end_game = 1;
 					i++;
 				}
 				return (s);
@@ -145,12 +152,6 @@ void	*mornitor_pthread(void *s)
 			if (!simul->philo[i].end_eat)
 				check_end = 0;
 			i++;
-			//gettimeofday(&check_time, NULL);
-			//if ((check.tv_sec - simul->philo[i].time_to_die.tv_sec) * 1000 + ((check.tv_usec - simul->philo[i].time_to_die.tv_usec) / 1000) >= simul->time_die)
-			//{
-			//	printf("========= death %d : %ld ==========\n", i + 1, (check.tv_sec - simul->philo[i].time_to_die.tv_sec) * 1000 + ((check.tv_usec - simul->philo[i].time_to_die.tv_usec) / 1000));
-			//	return (0);
-			//}
 		}
 		if (check_end)
 		{
@@ -158,7 +159,10 @@ void	*mornitor_pthread(void *s)
 			i = 0;
 			while(i < simul->philo_num)
 			{
-				simul->philo[i].end_game = 1;
+				pthread_detach(simul->thread[i]);
+				pthread_mutex_unlock(&simul->mutex[i]);
+				pthread_mutex_destroy(&simul->mutex[i]);
+				//simul->philo[i].end_game = 1;
 				i++;
 			}
 			return (s);
@@ -186,23 +190,23 @@ void	*mornitor_pthread(void *s)
 
 int	wait_pthread(t_simul *simul)
 {
-	int	i;
+	//int	i;
 	int	status;
 	//int	*ret;
 
-	i = 0;
+	//i = 0;
 	status = pthread_create(&simul->thread[simul->philo_num], NULL, mornitor_pthread, (void *)simul);
 	if (status < 0)
 		return (0);
-	while(i < simul->philo_num)
-	{
-		pthread_join(simul->thread[i], NULL);
-		pthread_mutex_unlock(&simul->mutex[i]);
-		pthread_mutex_destroy(&simul->mutex[i]);
-		i++;
-	}
-	simul->end = 1;
-	if (!pthread_detach(simul->thread[simul->philo_num]))
+	//while(i < simul->philo_num)
+	//{
+	//	pthread_join(simul->thread[i], NULL);
+	//	pthread_mutex_unlock(&simul->mutex[i]);
+	//	pthread_mutex_destroy(&simul->mutex[i]);
+	//	i++;
+	//}
+	//simul->end = 1;
+	pthread_join(simul->thread[simul->philo_num], NULL);
 		return (1);
 	//if (ret == 0)
 	//	return (0);
