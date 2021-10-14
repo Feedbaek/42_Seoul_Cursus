@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:52:21 by minskim2          #+#    #+#             */
-/*   Updated: 2021/09/21 14:25:55 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:45:32 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,14 @@
 
 int	ft_atoi(char *str)
 {
-	int i;
-	int sign;
+	int	i;
+	int	sign;
 
 	i = 0;
 	sign = 1;
-	while (*str == '\t'
-			|| *str == ' '
-			|| *str == '\n'
-			|| *str == '\f'
-			|| *str == '\v'
-			|| *str == '\r')
+	while (*str == '\t' || *str == ' '
+		|| *str == '\n' || *str == '\f'
+		|| *str == '\v' || *str == '\r')
 		str++;
 	if (*str == '+' || *str == '-')
 	{
@@ -41,4 +38,16 @@ int	ft_atoi(char *str)
 	if (*str)
 		return (0);
 	return (sign * i);
+}
+
+void	print_msg(t_philo *philo)
+{
+	if (philo->status == THINK)
+		printf("%ld %d is thinking\n", philo->age, philo->num);
+	else if (philo->status == FORK)
+		printf("%ld %d has taken a fork\n", philo->age, philo->num);
+	else if (philo->status == EAT)
+		printf("%ld %d is eating\n", philo->age, philo->num);
+	else if (philo->status == SLEEP)
+		printf("%ld %d is sleeping\n", philo->age, philo->num);
 }

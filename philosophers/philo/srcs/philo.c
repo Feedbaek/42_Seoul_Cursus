@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:20:08 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/08 17:11:32 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/14 14:26:00 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(int argc, char **argv)
 		return (-1);
 	if (!wait_pthread(&simul))
 		return (-1);
-	// mutex_destroy 필요
 	free(simul.mutex);
 	free(simul.philo);
 	free(simul.thread);

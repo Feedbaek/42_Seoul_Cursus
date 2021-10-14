@@ -6,13 +6,13 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:51:44 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/06 22:46:27 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/14 17:52:20 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
-void	init_philo(t_simul *simul)
+static void	init_philo(t_simul *simul)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ void	init_philo(t_simul *simul)
 	}
 }
 
-int	init_simul(t_simul *simul, int argc, char **argv)
+static int	start_init(int argc, char **argv, t_simul *simul)
 {
 	if (argc < 5 || argc > 6)
 		return (0);
@@ -47,8 +47,18 @@ int	init_simul(t_simul *simul, int argc, char **argv)
 	simul->time_eat = ft_atoi(argv[3]);
 	simul->time_sleep = ft_atoi(argv[4]);
 	simul->start_point = 0;
-	simul->end = 0;
-	if (simul->philo_num < 1 || simul->time_die < 1 || simul->time_eat < 1 || simul->time_sleep < 1)
+	if (!simul->philo_num || !simul->time_die
+		|| !simul->time_eat || !simul->time_sleep)
+		return (0);
+	return (1);
+}
+
+int	init_simul(t_simul *simul, int argc, char **argv)
+{
+	if (!start_init(argc, argv, simul))
+		return (0);
+	if (simul->philo_num < 1 || simul->time_die < 1
+		|| simul->time_eat < 1 || simul->time_sleep < 1)
 		return (0);
 	if (argc == 6)
 	{
@@ -58,9 +68,10 @@ int	init_simul(t_simul *simul, int argc, char **argv)
 	}
 	else
 		simul->time_opt = 0;
-	//printf("%d %d %d %d %d\n", simul->philo_num, simul->time_die, simul->time_eat, simul->time_sleep, simul->time_opt);
-	simul->thread = (pthread_t *)malloc(sizeof(pthread_t) * (simul->philo_num + 1));
-	simul->mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * simul->philo_num);
+	simul->thread = (pthread_t *)malloc(sizeof(pthread_t) \
+		* (simul->philo_num + 1));
+	simul->mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) \
+		* simul->philo_num);
 	simul->philo = (t_philo *)malloc(sizeof(t_philo) * simul->philo_num);
 	if (!simul->thread || !simul->mutex || !simul->philo)
 		return (0);
@@ -76,7 +87,8 @@ int	init_pthread_mutex(t_simul *simul)
 	i = 0;
 	while (i < simul->philo_num)
 	{
-		status = pthread_create(&simul->thread[i], NULL, running_pthread, (void *)&simul->philo[i]);
+		status = pthread_create(&simul->thread[i], NULL, \
+			running_pthread, (void *)&simul->philo[i]);
 		if (status < 0 || pthread_mutex_init(&simul->mutex[i], NULL))
 			return (0);
 		i++;
