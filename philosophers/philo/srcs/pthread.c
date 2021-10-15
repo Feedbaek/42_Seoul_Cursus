@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:07:09 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/14 17:42:18 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/15 21:19:12 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,28 @@ static t_philo	*running_start(void *p, int *idx)
 	while (1)
 	{
 		usleep(50);
-		if (philo->start_point)
+		if (*philo->start_point)
 			break ;
 	}
-	usleep(50);
 	return (philo);
 }
 
 static void	running_think(t_philo *philo, int idx)
 {
 	philo->status = THINK;
-	usleep(50);
-	if (idx)
+	if (idx % 2 == 0)
 	{
 		pthread_mutex_lock(&philo->mutex[idx]);
 		philo->status = FORK;
 		philo->change = 1;
-		usleep(50);
 		pthread_mutex_lock(&philo->mutex[(idx + 1) % philo->philo_num]);
 	}
 	else
 	{
+		usleep(100);
 		pthread_mutex_lock(&philo->mutex[(idx + 1) % philo->philo_num]);
 		philo->status = FORK;
 		philo->change = 1;
-		usleep(50);
 		pthread_mutex_lock(&philo->mutex[idx]);
 	}
 }
@@ -60,7 +57,6 @@ void	*running_pthread(void *p)
 	while (1)
 	{
 		running_think(philo, idx);
-		usleep(50);
 		philo->status = EAT;
 		philo->change = 1;
 		usleep(philo->time_eat * 1000);
@@ -69,11 +65,10 @@ void	*running_pthread(void *p)
 		philo->num_eat += 1;
 		if (philo->time_opt && philo->num_eat >= philo->time_opt)
 			philo->end_eat = 1;
-		if (philo->end_game)
-			return (p);
 		philo->status = SLEEP;
 		philo->change = 1;
 		usleep(philo->time_sleep * 1000);
+		usleep(200);
 		philo->change = 1;
 	}
 	return (p);

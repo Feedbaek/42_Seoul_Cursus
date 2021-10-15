@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:55:38 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/14 17:41:37 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/15 20:03:40 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_philo
 	int				end_game;
 	int				*start_point;
 	pthread_mutex_t	*mutex;
+	struct timeval	start_eat;
 	struct timeval	last_eat;
 }	t_philo;
 
