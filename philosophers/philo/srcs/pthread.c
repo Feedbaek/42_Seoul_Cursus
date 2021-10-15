@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:07:09 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/15 21:19:12 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/16 03:23:15 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static t_philo	*running_start(void *p, int *idx)
 static void	running_think(t_philo *philo, int idx)
 {
 	philo->status = THINK;
+	usleep(300);
 	if (idx % 2 == 0)
 	{
 		pthread_mutex_lock(&philo->mutex[idx]);
@@ -68,7 +69,6 @@ void	*running_pthread(void *p)
 		philo->status = SLEEP;
 		philo->change = 1;
 		usleep(philo->time_sleep * 1000);
-		usleep(200);
 		philo->change = 1;
 	}
 	return (p);
