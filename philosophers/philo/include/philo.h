@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:55:38 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/15 20:03:40 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/16 02:49:46 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int		init_simul(t_simul *simul, int argc, char **argv);
 int		init_pthread_mutex(t_simul *simul);
 // pthread.c
 int		end_mutex(t_simul *simul);
-void	print_msg(t_philo *philo);
 void	*running_pthread(void *p);
 // mornitor.c
 void	*mornitor_pthread(void *s);
