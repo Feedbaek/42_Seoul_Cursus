@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:07:09 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/16 03:23:15 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/19 21:42:28 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_philo	*running_start(void *p, int *idx)
 
 	philo = (t_philo *)p;
 	*idx = philo->num - 1;
-	philo->change = 1;
+	philo->status = THINK;
 	while (1)
 	{
 		usleep(50);
@@ -30,22 +30,22 @@ static t_philo	*running_start(void *p, int *idx)
 
 static void	running_think(t_philo *philo, int idx)
 {
-	philo->status = THINK;
-	usleep(300);
+	usleep(200);
+	print_msg(philo, THINK);
 	if (idx % 2 == 0)
 	{
 		pthread_mutex_lock(&philo->mutex[idx]);
-		philo->status = FORK;
-		philo->change = 1;
+		print_msg(philo, FORK);
 		pthread_mutex_lock(&philo->mutex[(idx + 1) % philo->philo_num]);
+		print_msg(philo, FORK);
 	}
 	else
 	{
 		usleep(100);
 		pthread_mutex_lock(&philo->mutex[(idx + 1) % philo->philo_num]);
-		philo->status = FORK;
-		philo->change = 1;
+		print_msg(philo, FORK);
 		pthread_mutex_lock(&philo->mutex[idx]);
+		print_msg(philo, FORK);
 	}
 }
 
@@ -58,18 +58,16 @@ void	*running_pthread(void *p)
 	while (1)
 	{
 		running_think(philo, idx);
-		philo->status = EAT;
-		philo->change = 1;
+		print_msg(philo, EAT);
 		usleep(philo->time_eat * 1000);
+		gettimeofday(&philo->last_eat, NULL);
 		pthread_mutex_unlock(&philo->mutex[idx]);
 		pthread_mutex_unlock(&philo->mutex[(idx + 1) % philo->philo_num]);
 		philo->num_eat += 1;
 		if (philo->time_opt && philo->num_eat >= philo->time_opt)
 			philo->end_eat = 1;
-		philo->status = SLEEP;
-		philo->change = 1;
+		print_msg(philo, SLEEP);
 		usleep(philo->time_sleep * 1000);
-		philo->change = 1;
 	}
 	return (p);
 }

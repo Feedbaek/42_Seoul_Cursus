@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:55:38 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/16 02:49:46 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/19 20:41:22 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define EAT 2
 # define SLEEP 3
 # define DIE 4
+# define END 5
 
 typedef struct s_philo
 {
@@ -42,7 +43,7 @@ typedef struct s_philo
 	int				end_game;
 	int				*start_point;
 	pthread_mutex_t	*mutex;
-	struct timeval	start_eat;
+	struct timeval	start_time;
 	struct timeval	last_eat;
 }	t_philo;
 
@@ -62,7 +63,7 @@ typedef struct s_simul
 
 // tools0.c
 int		ft_atoi(char *str);
-void	print_msg(t_philo *philo);
+void	print_msg(t_philo *philo, int status);
 // init.c
 int		init_simul(t_simul *simul, int argc, char **argv);
 int		init_pthread_mutex(t_simul *simul);

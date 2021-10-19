@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/15 19:26:51 by minskim2          #+#    #+#              #
-#    Updated: 2021/10/14 17:42:51 by minskim2         ###   ########.fr        #
+#    Updated: 2021/10/19 19:34:45 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,10 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@ -pthread
+	$(CC) $(CFLAGS) $^ -o $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -g $^ -o $@ -I $(HEADER) -pthread
+	$(CC) $(CFLAGS) -c $^ -o $@ -I $(HEADER)
 
 bonus:
 	make WITH_BONUS=1 all

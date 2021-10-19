@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:52:21 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/16 02:49:37 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/19 20:50:32 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,24 @@ int	ft_atoi(char *str)
 	return (sign * i);
 }
 
-void	print_msg(t_philo *philo)
+void	print_msg(t_philo *philo, int status)
 {
-	if (philo->status == THINK)
-		printf("%ld %d is thinking\n", philo->age, philo->num);
-	else if (philo->status == FORK)
-		printf("%ld %d has taken a fork\n", philo->age, philo->num);
-	else if (philo->status == EAT)
-		printf("%ld %d is eating\n", philo->age, philo->num);
-	else if (philo->status == SLEEP)
-		printf("%ld %d is sleeping\n", philo->age, philo->num);
+	struct timeval	current_time;
+	size_t			time;
+
+	if (philo->status == DIE)
+		return ;
+	gettimeofday(&current_time, NULL);
+	time = (current_time.tv_sec - philo->start_time.tv_sec) \
+		* 1000 + ((current_time.tv_usec - philo->start_time.tv_usec) / 1000);
+	if (status == DIE)
+		printf("%ld %d is died\n", time, philo->num);
+	else if (status == THINK)
+		printf("%ld %d is thinking\n", time, philo->num);
+	else if (status == FORK)
+		printf("%ld %d has taken a fork\n", time, philo->num);
+	else if (status == EAT)
+		printf("%ld %d is eating\n", time, philo->num);
+	else if (status == SLEEP)
+		printf("%ld %d is sleeping\n", time, philo->num);
 }
