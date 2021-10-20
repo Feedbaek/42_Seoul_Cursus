@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:07:09 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/19 21:42:28 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/20 21:57:17 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static t_philo	*running_start(void *p, int *idx)
 	philo = (t_philo *)p;
 	*idx = philo->num - 1;
 	philo->status = THINK;
+	if (philo->num == philo->philo_num)
+		*philo->last_start_point = 1;
 	while (1)
 	{
 		usleep(50);
@@ -34,17 +36,30 @@ static void	running_think(t_philo *philo, int idx)
 	print_msg(philo, THINK);
 	if (idx % 2 == 0)
 	{
-		pthread_mutex_lock(&philo->mutex[idx]);
-		print_msg(philo, FORK);
+		//while (philo->philo[philo->philo_num - 1].num_eat < philo->philo[philo->philo_num - 2].num_eat)
+		//	usleep(100);
+		//while (get_time_diff(philo->last_eat, philo->philo[(idx + 1) % philo->philo_num].last_eat) > 0)
+		//	;
+		//		get_time_diff(philo->last_eat, philo->philo[(idx - 1 + philo->philo_num) % philo->philo_num].last_eat) > 0)
+		//	;
 		pthread_mutex_lock(&philo->mutex[(idx + 1) % philo->philo_num]);
+		print_msg(philo, FORK);
+		pthread_mutex_lock(&philo->mutex[idx]);
 		print_msg(philo, FORK);
 	}
 	else
 	{
-		usleep(100);
-		pthread_mutex_lock(&philo->mutex[(idx + 1) % philo->philo_num]);
-		print_msg(philo, FORK);
+		if (philo->num_eat)
+			usleep(100);
+		//while (philo->philo[idx + 1].num_eat == philo->num_eat)
+		//	usleep(100);
+		//while (get_time_diff(philo->last_eat, philo->philo[(idx + 1) % philo->philo_num].last_eat) > 0)
+		//	;
+		//		get_time_diff(philo->last_eat, philo->philo[(idx - 1 + philo->philo_num) % philo->philo_num].last_eat) > 0)
+		//	;
 		pthread_mutex_lock(&philo->mutex[idx]);
+		print_msg(philo, FORK);
+		pthread_mutex_lock(&philo->mutex[(idx + 1) % philo->philo_num]);
 		print_msg(philo, FORK);
 	}
 }
@@ -80,6 +95,11 @@ int	end_mutex(t_simul *simul)
 	while (i < simul->philo_num)
 	{
 		pthread_detach(simul->thread[i]);
+		i++;
+	}
+	i = 0;
+	while (i < simul->philo_num)
+	{
 		pthread_mutex_unlock(&simul->mutex[i]);
 		pthread_mutex_destroy(&simul->mutex[i]);
 		i++;
@@ -96,5 +116,6 @@ int	wait_pthread(t_simul *simul)
 	if (status < 0)
 		return (0);
 	pthread_join(simul->thread[simul->philo_num], NULL);
+	end_mutex(simul);
 	return (1);
 }

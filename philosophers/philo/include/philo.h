@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:55:38 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/19 20:41:22 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/20 21:27:24 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,11 @@ typedef struct s_philo
 	int				end_eat;
 	int				end_game;
 	int				*start_point;
+	int				*last_start_point;
 	pthread_mutex_t	*mutex;
 	struct timeval	start_time;
 	struct timeval	last_eat;
+	struct s_philo	*philo;
 }	t_philo;
 
 typedef struct s_simul
@@ -55,6 +57,7 @@ typedef struct s_simul
 	int				time_sleep;
 	int				time_opt;
 	int				start_point;
+	int				last_start_point;
 	int				end;
 	pthread_t		*thread;
 	pthread_mutex_t	*mutex;
@@ -64,6 +67,7 @@ typedef struct s_simul
 // tools0.c
 int		ft_atoi(char *str);
 void	print_msg(t_philo *philo, int status);
+int		get_time_diff(struct timeval current_time, struct timeval start_time);
 // init.c
 int		init_simul(t_simul *simul, int argc, char **argv);
 int		init_pthread_mutex(t_simul *simul);

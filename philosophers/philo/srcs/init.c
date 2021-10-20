@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:51:44 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/19 20:09:18 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/20 17:48:59 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	init_philo(t_simul *simul)
 		simul->philo[i].end_game = 0;
 		simul->philo[i].mutex = simul->mutex;
 		simul->philo[i].start_point = &simul->start_point;
+		simul->philo[i].last_start_point = &simul->last_start_point;
+		simul->philo[i].philo = simul->philo;
 		i++;
 	}
 }
@@ -47,6 +49,7 @@ static int	start_init(int argc, char **argv, t_simul *simul)
 	simul->time_eat = ft_atoi(argv[3]);
 	simul->time_sleep = ft_atoi(argv[4]);
 	simul->start_point = 0;
+	simul->last_start_point = 0;
 	if (!simul->philo_num || !simul->time_die
 		|| !simul->time_eat || !simul->time_sleep)
 		return (0);
