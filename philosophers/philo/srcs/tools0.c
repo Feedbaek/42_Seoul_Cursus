@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:52:21 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/20 21:27:10 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/21 21:09:56 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,16 @@ void	print_msg(t_philo *philo, int status)
 	struct timeval	current_time;
 	size_t			time;
 
-	if (philo->status == DIE)
+	if (status != DIE && *philo->end_game)
 		return ;
 	gettimeofday(&current_time, NULL);
 	time = (current_time.tv_sec - philo->start_time.tv_sec) \
 		* 1000 + ((current_time.tv_usec - philo->start_time.tv_usec) / 1000);
 	if (status == DIE)
-		printf("%ld %d is died: eat:%d\n", time, philo->num, philo->num_eat);
+	{
+		usleep(10000);
+		printf("%ld %d is died: eat:%d\n", philo->dead_time, philo->num, philo->num_eat);
+	}
 	else if (status == THINK)
 		printf("%ld %d is thinking: eat:%d\n", time, philo->num, philo->num_eat);
 	else if (status == FORK)
@@ -60,6 +63,7 @@ void	print_msg(t_philo *philo, int status)
 		printf("%ld %d is eating: eat:%d\n", time, philo->num, philo->num_eat);
 	else if (status == SLEEP)
 		printf("%ld %d is sleeping: eat:%d\n", time, philo->num, philo->num_eat);
+	philo->change = 0;
 }
 
 int		get_time_diff(struct timeval current_time, struct timeval start_time)

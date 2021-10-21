@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:55:38 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/20 21:27:24 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/21 21:07:34 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_philo
 	int				philo_num;
 	int				num;
 	int				life;
-	size_t			age;
+	size_t			dead_time;
 	int				fork;
 	int				status;
 	int				change;
@@ -40,7 +40,7 @@ typedef struct s_philo
 	int				time_opt;
 	int				num_eat;
 	int				end_eat;
-	int				end_game;
+	int				*end_game;
 	int				*start_point;
 	int				*last_start_point;
 	pthread_mutex_t	*mutex;
@@ -58,7 +58,7 @@ typedef struct s_simul
 	int				time_opt;
 	int				start_point;
 	int				last_start_point;
-	int				end;
+	int				end_game;
 	pthread_t		*thread;
 	pthread_mutex_t	*mutex;
 	t_philo			*philo;

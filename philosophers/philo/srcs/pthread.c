@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:07:09 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/20 21:57:17 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/21 20:57:34 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,33 +33,27 @@ static t_philo	*running_start(void *p, int *idx)
 static void	running_think(t_philo *philo, int idx)
 {
 	usleep(200);
+	philo->change = 1;
 	print_msg(philo, THINK);
+	//if (philo->num_eat == 0)
 	if (idx % 2 == 0)
 	{
-		//while (philo->philo[philo->philo_num - 1].num_eat < philo->philo[philo->philo_num - 2].num_eat)
-		//	usleep(100);
-		//while (get_time_diff(philo->last_eat, philo->philo[(idx + 1) % philo->philo_num].last_eat) > 0)
-		//	;
-		//		get_time_diff(philo->last_eat, philo->philo[(idx - 1 + philo->philo_num) % philo->philo_num].last_eat) > 0)
-		//	;
 		pthread_mutex_lock(&philo->mutex[(idx + 1) % philo->philo_num]);
+		philo->change = 1;
 		print_msg(philo, FORK);
 		pthread_mutex_lock(&philo->mutex[idx]);
+		philo->change = 1;
 		print_msg(philo, FORK);
 	}
 	else
 	{
-		if (philo->num_eat)
-			usleep(100);
-		//while (philo->philo[idx + 1].num_eat == philo->num_eat)
-		//	usleep(100);
-		//while (get_time_diff(philo->last_eat, philo->philo[(idx + 1) % philo->philo_num].last_eat) > 0)
-		//	;
-		//		get_time_diff(philo->last_eat, philo->philo[(idx - 1 + philo->philo_num) % philo->philo_num].last_eat) > 0)
-		//	;
+		if (philo->num_eat == 0)
+			usleep(philo->time_eat * 1000);
 		pthread_mutex_lock(&philo->mutex[idx]);
+		philo->change = 1;
 		print_msg(philo, FORK);
 		pthread_mutex_lock(&philo->mutex[(idx + 1) % philo->philo_num]);
+		philo->change = 1;
 		print_msg(philo, FORK);
 	}
 }
@@ -73,6 +67,7 @@ void	*running_pthread(void *p)
 	while (1)
 	{
 		running_think(philo, idx);
+		philo->change = 1;
 		print_msg(philo, EAT);
 		usleep(philo->time_eat * 1000);
 		gettimeofday(&philo->last_eat, NULL);
@@ -81,6 +76,7 @@ void	*running_pthread(void *p)
 		philo->num_eat += 1;
 		if (philo->time_opt && philo->num_eat >= philo->time_opt)
 			philo->end_eat = 1;
+		philo->change = 1;
 		print_msg(philo, SLEEP);
 		usleep(philo->time_sleep * 1000);
 	}
@@ -111,11 +107,12 @@ int	wait_pthread(t_simul *simul)
 {
 	int	status;
 
+	usleep(10000);
 	status = pthread_create(&simul->thread[simul->philo_num], \
 	NULL, mornitor_pthread, (void *)simul);
 	if (status < 0)
 		return (0);
 	pthread_join(simul->thread[simul->philo_num], NULL);
-	end_mutex(simul);
+	//end_mutex(simul);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:20:08 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/20 20:38:44 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/21 20:06:23 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	main(int argc, char **argv)
 {
 	t_simul	simul;
 
+	if (argc < 5 || argc > 6)
+		return (-1);
 	if (!init_simul(&simul, argc, argv) || !init_pthread_mutex(&simul))
 		return (-1);
 	if (!wait_pthread(&simul))
