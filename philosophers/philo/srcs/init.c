@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:51:44 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/21 21:11:18 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/22 00:30:19 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	init_philo(t_simul *simul)
 		simul->philo[i].start_point = &simul->start_point;
 		simul->philo[i].last_start_point = &simul->last_start_point;
 		simul->philo[i].philo = simul->philo;
+		simul->philo[i].print_lock = &simul->print_lock;
 		i++;
 	}
 }
@@ -88,6 +89,8 @@ int	init_pthread_mutex(t_simul *simul)
 	int	i;
 	int	status;
 
+	if (pthread_mutex_init(&simul->print_lock, NULL))
+		return (0);
 	i = 0;
 	while (i < simul->philo_num)
 	{
