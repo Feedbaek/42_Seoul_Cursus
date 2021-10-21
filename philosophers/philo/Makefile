@@ -38,7 +38,7 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ -pthread
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $^ -o $@ -I $(HEADER)
