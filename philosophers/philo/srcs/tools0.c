@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:52:21 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/22 02:05:29 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/22 14:41:09 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ void	print_msg(t_philo *philo, int status)
 
 	if (status != DIE && *philo->end_game)
 		return ;
-	gettimeofday(&current_time, NULL);
+	//usleep(philo->num * 5);
+	//gettimeofday(&current_time, NULL);
+	current_time = *philo->current_time;
 	//if (status != DIE)
 	//	pthread_mutex_lock(philo->print_lock);
 	time = (current_time.tv_sec - philo->start_time.tv_sec) \

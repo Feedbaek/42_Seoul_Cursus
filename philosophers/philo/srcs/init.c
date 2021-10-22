@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:51:44 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/22 00:30:19 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/22 14:12:33 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	init_philo(t_simul *simul)
 		simul->philo[i].last_start_point = &simul->last_start_point;
 		simul->philo[i].philo = simul->philo;
 		simul->philo[i].print_lock = &simul->print_lock;
+		simul->philo[i].current_time = &simul->current_time;
 		i++;
 	}
 }

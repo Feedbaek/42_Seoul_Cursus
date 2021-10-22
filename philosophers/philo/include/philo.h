@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:55:38 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/22 00:29:56 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/22 14:11:16 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_philo
 	pthread_mutex_t	*mutex;
 	pthread_mutex_t	*print_lock;
 	struct timeval	start_time;
+	struct timeval	*current_time;
 	struct timeval	last_eat;
 	struct s_philo	*philo;
 }	t_philo;
@@ -60,6 +61,7 @@ typedef struct s_simul
 	int				start_point;
 	int				last_start_point;
 	int				end_game;
+	struct timeval	current_time;
 	pthread_t		*thread;
 	pthread_mutex_t	*mutex;
 	pthread_mutex_t	print_lock;

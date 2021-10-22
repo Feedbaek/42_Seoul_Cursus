@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:07:09 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/22 01:26:27 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/22 14:58:50 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	running_think(t_philo *philo, int idx)
 {
 	usleep(200);
 	print_msg(philo, THINK);
-	//if (philo->num_eat == 0)
 	if (idx % 2 == 0)
 	{
 		pthread_mutex_lock(&philo->mutex[(idx + 1) % philo->philo_num]);
@@ -44,8 +43,9 @@ static void	running_think(t_philo *philo, int idx)
 	}
 	else
 	{
+		usleep(50);
 		if (philo->num_eat == 0)
-			usleep(philo->time_eat * 1000);
+			usleep(philo->time_eat * 900);
 		pthread_mutex_lock(&philo->mutex[idx]);
 		print_msg(philo, FORK);
 		pthread_mutex_lock(&philo->mutex[(idx + 1) % philo->philo_num]);
@@ -61,6 +61,8 @@ void	*running_pthread(void *p)
 	philo = running_start(p, &idx);
 	while (1)
 	{
+		if (*philo->end_game)
+			return (p);
 		running_think(philo, idx);
 		print_msg(philo, EAT);
 		usleep(philo->time_eat * 1000);

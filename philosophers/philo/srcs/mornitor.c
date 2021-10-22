@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:40:30 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/22 02:11:37 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/22 14:44:49 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,27 @@ static int	check_die(t_simul *simul)
 {
 	int				i;
 	int				check_end;
-	struct timeval	current_time;
 
 	check_end = 1;
 	i = 0;
+	gettimeofday(&simul->current_time, NULL);
 	while (i < simul->philo_num)
 	{
-		gettimeofday(&current_time, NULL);
-		if ((current_time.tv_sec - simul->philo[i].last_eat.tv_sec) * 1000 \
-		+ ((current_time.tv_usec - simul->philo[i].last_eat.tv_usec) \
+		if ((simul->current_time.tv_sec - simul->philo[i].last_eat.tv_sec) * 1000 \
+		+ ((simul->current_time.tv_usec - simul->philo[i].last_eat.tv_usec) \
 		/ 1000) > simul->time_die)
 		{
-			simul->philo[i].dead_time = (current_time.tv_sec - simul->philo[i].start_time.tv_sec) \
-				* 1000 + ((current_time.tv_usec - simul->philo[i].start_time.tv_usec) / 1000);
+			simul->philo[i].dead_time = (simul->current_time.tv_sec - simul->philo[i].start_time.tv_sec) \
+				* 1000 + ((simul->current_time.tv_usec - simul->philo[i].start_time.tv_usec) / 1000);
 			//pthread_mutex_lock(&simul->print_lock);
-			usleep(simul->philo_num * 50);
-			if ((current_time.tv_sec - simul->philo[i].last_eat.tv_sec) * 1000 \
-				+ ((current_time.tv_usec - simul->philo[i].last_eat.tv_usec) \
+			usleep(simul->philo_num * 10);
+			if ((simul->current_time.tv_sec - simul->philo[i].last_eat.tv_sec) * 1000 \
+				+ ((simul->current_time.tv_usec - simul->philo[i].last_eat.tv_usec) \
 				/ 1000) > simul->time_die)
 			{
-				usleep(simul->philo_num * 50);
-				if ((current_time.tv_sec - simul->philo[i].last_eat.tv_sec) * 1000 \
-					+ ((current_time.tv_usec - simul->philo[i].last_eat.tv_usec) \
+				usleep(simul->philo_num * 20);
+				if ((simul->current_time.tv_sec - simul->philo[i].last_eat.tv_sec) * 1000 \
+					+ ((simul->current_time.tv_usec - simul->philo[i].last_eat.tv_usec) \
 					/ 1000) > simul->time_die)
 				{
 					end_mutex(simul);
@@ -81,7 +80,6 @@ void	*mornitor_pthread(void *s)
 	simul->start_point = 1;
 	while (1)
 	{
-		usleep(200);
 		if (check_die(simul))
 			return (s);
 	}
