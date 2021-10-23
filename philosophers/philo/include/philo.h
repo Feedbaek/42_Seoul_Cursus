@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:55:38 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/22 14:11:16 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/23 17:56:02 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_philo
 	int				time_eat;
 	int				time_sleep;
 	int				time_opt;
+	int				num_start_eat;
 	int				num_eat;
 	int				end_eat;
 	int				*end_game;

@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:51:44 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/22 14:12:33 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/23 17:56:15 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	init_philo(t_simul *simul)
 		simul->philo[i].time_eat = simul->time_eat;
 		simul->philo[i].time_sleep = simul->time_sleep;
 		simul->philo[i].time_opt = simul->time_opt;
+		simul->philo[i].num_start_eat = 0;
 		simul->philo[i].num_eat = 0;
 		simul->philo[i].end_eat = 0;
 		simul->philo[i].end_game = &simul->end_game;
