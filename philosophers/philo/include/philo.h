@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:55:38 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/23 21:21:08 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/24 00:45:28 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,8 @@ typedef struct s_philo
 {
 	int				philo_num;
 	int				num;
-	int				life;
-	size_t			dead_time;
-	int				fork;
+	int				dead_time;
 	int				status;
-	int				change;
 	int				time_eat;
 	int				time_sleep;
 	int				time_opt;
@@ -75,11 +72,10 @@ int		get_time_diff(struct timeval current_time, struct timeval start_time);
 int		init_simul(t_simul *simul, int argc, char **argv);
 int		init_pthread_mutex(t_simul *simul);
 // pthread.c
-int		end_mutex(t_simul *simul);
 void	*running_pthread(void *p);
 // mornitor.c
 void	*mornitor_pthread(void *s);
 void	*running_pthread(void *p);
-int		wait_pthread(t_simul *simul);
+int		wait_mornitor(t_simul *simul);
 
 #endif

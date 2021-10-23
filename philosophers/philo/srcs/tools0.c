@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:52:21 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/22 14:41:09 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/24 00:45:43 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,33 +43,32 @@ int	ft_atoi(char *str)
 void	print_msg(t_philo *philo, int status)
 {
 	struct timeval	current_time;
-	size_t			time;
+	int				time;
 
 	if (status != DIE && *philo->end_game)
 		return ;
-	//usleep(philo->num * 5);
-	//gettimeofday(&current_time, NULL);
 	current_time = *philo->current_time;
-	//if (status != DIE)
-	//	pthread_mutex_lock(philo->print_lock);
 	time = (current_time.tv_sec - philo->start_time.tv_sec) \
 		* 1000 + ((current_time.tv_usec - philo->start_time.tv_usec) / 1000);
 	if (status == DIE)
-		printf("%ldms %d is died: eat:%d\n", philo->dead_time, philo->num, philo->num_eat);
+		printf("%dms %d is died: eat:%d\n", philo->dead_time, \
+		philo->num, philo->num_eat);
 	else if (status == THINK)
-		printf("%ldms %d is thinking: eat:%d\n", time, philo->num, philo->num_eat);
+		printf("%dms %d is thinking: eat:%d\n", time, philo->num, \
+		philo->num_eat);
 	else if (status == FORK)
-		printf("%ldms %d has taken a fork: eat:%d\n", time, philo->num, philo->num_eat);
+		printf("%dms %d has taken a fork: eat:%d\n", time, philo->num, \
+		philo->num_eat);
 	else if (status == EAT)
-		printf("%ldms %d is eating: eat:%d\n", time, philo->num, philo->num_eat);
+		printf("%dms %d is eating: eat:%d\n", time, philo->num, \
+		philo->num_eat);
 	else if (status == SLEEP)
-		printf("%ldms %d is sleeping: eat:%d\n", time, philo->num, philo->num_eat);
-	philo->change = 0;
-	//if (status != DIE)
-	//	pthread_mutex_unlock(philo->print_lock);
+		printf("%dms %d is sleeping: eat:%d\n", time, philo->num, \
+		philo->num_eat);
 }
 
-int		get_time_diff(struct timeval current_time, struct timeval start_time)
+int	get_time_diff(struct timeval current_time, struct timeval start_time)
 {
-	return ((current_time.tv_sec - start_time.tv_sec) * 1000 + ((current_time.tv_usec - start_time.tv_usec) / 1000));
+	return ((current_time.tv_sec - start_time.tv_sec) * 1000 \
+	+ ((current_time.tv_usec - start_time.tv_usec) / 1000));
 }

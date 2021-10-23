@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:40:30 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/23 21:56:19 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/24 00:25:50 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	loop_check(t_simul *simul, int i, int *check_end)
 				simul->philo[i].last_eat) > simul->time_die)
 			{
 				*(simul->philo[i].end_game) = 1;
+				usleep(200);
 				print_msg(&simul->philo[i], DIE);
 				return (1);
 			}
@@ -83,4 +84,39 @@ void	*mornitor_pthread(void *s)
 		if (check_die(simul))
 			return (s);
 	return (s);
+}
+
+static int	end_mutex(t_simul *simul)
+{
+	int	i;
+
+	i = 0;
+	while (i < simul->philo_num)
+	{
+		pthread_detach(simul->thread[i]);
+		i++;
+	}
+	i = 0;
+	while (i < simul->philo_num)
+	{
+		pthread_mutex_unlock(&simul->mutex[i]);
+		pthread_mutex_destroy(&simul->mutex[i]);
+		i++;
+	}
+	return (1);
+}
+
+int	wait_mornitor(t_simul *simul)
+{
+	int	status;
+
+	usleep(10000);
+	status = pthread_create(&simul->thread[simul->philo_num], \
+	NULL, mornitor_pthread, (void *)simul);
+	if (status < 0)
+		return (0);
+	pthread_join(simul->thread[simul->philo_num], NULL);
+	end_mutex(simul);
+	usleep(10000);
+	return (1);
 }
