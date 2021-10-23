@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:52:21 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/24 00:45:43 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/24 00:53:18 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,19 @@ void	print_msg(t_philo *philo, int status)
 	time = (current_time.tv_sec - philo->start_time.tv_sec) \
 		* 1000 + ((current_time.tv_usec - philo->start_time.tv_usec) / 1000);
 	if (status == DIE)
-		printf("%dms %d is died: eat:%d\n", philo->dead_time, \
+		printf("%d %d is died: eat:%d\n", philo->dead_time, \
 		philo->num, philo->num_eat);
 	else if (status == THINK)
-		printf("%dms %d is thinking: eat:%d\n", time, philo->num, \
+		printf("%d %d is thinking: eat:%d\n", time, philo->num, \
 		philo->num_eat);
 	else if (status == FORK)
-		printf("%dms %d has taken a fork: eat:%d\n", time, philo->num, \
+		printf("%d %d has taken a fork: eat:%d\n", time, philo->num, \
 		philo->num_eat);
 	else if (status == EAT)
-		printf("%dms %d is eating: eat:%d\n", time, philo->num, \
+		printf("%d %d is eating: eat:%d\n", time, philo->num, \
 		philo->num_eat);
 	else if (status == SLEEP)
-		printf("%dms %d is sleeping: eat:%d\n", time, philo->num, \
+		printf("%d %d is sleeping: eat:%d\n", time, philo->num, \
 		philo->num_eat);
 }
 
