@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:07:09 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/23 18:56:01 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/23 21:42:24 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static t_philo	*running_start(void *p, int *idx)
 
 static void	running_think(t_philo *philo, int idx)
 {
-	//usleep(500);
 	print_msg(philo, THINK);
 	if (idx % 2 == 0)
 	{
