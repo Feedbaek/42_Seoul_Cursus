@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:07:09 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/24 00:36:34 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/24 01:02:56 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ static t_philo	*running_start(void *p, int *idx)
 		if (*philo->start_point)
 			break ;
 	}
-	if (*idx % 2 == 1)
-		usleep(philo->time_eat * 300);
 	return (philo);
 }
 
@@ -59,6 +57,8 @@ static void	running_think(t_philo *philo, int idx)
 		usleep_to_eat(philo, idx);
 	else
 	{
+		if (philo->num_start_eat == 0)
+			usleep(philo->time_eat * 300);
 		if (philo->num_start_eat >= philo->philo[(idx - 1 + philo->philo_num) \
 		% philo->philo_num].num_start_eat)
 			usleep(philo->time_eat * 500);
