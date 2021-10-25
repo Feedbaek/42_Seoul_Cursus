@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:52:21 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/24 00:53:18 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/25 21:27:59 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,16 @@ void	print_msg(t_philo *philo, int status)
 	time = (current_time.tv_sec - philo->start_time.tv_sec) \
 		* 1000 + ((current_time.tv_usec - philo->start_time.tv_usec) / 1000);
 	if (status == DIE)
-		printf(RED"%d %d is died: eat:%d\n"RESET, philo->dead_time, \
-		philo->num, philo->num_eat);
+		printf(RED"%d %d is died\n"RESET, philo->dead_time, \
+		philo->num);
 	else if (status == THINK)
-		printf(GREEN"%d %d is thinking: eat:%d\n"RESET, time, philo->num, \
-		philo->num_eat);
+		printf(GREEN"%d %d is thinking\n"RESET, time, philo->num);
 	else if (status == FORK)
-		printf("%d %d has taken a fork: eat:%d\n"RESET, time, philo->num, \
-		philo->num_eat);
+		printf("%d %d has taken a fork\n"RESET, time, philo->num);
 	else if (status == EAT)
-		printf(CYAN"%d %d is eating: eat:%d\n"RESET, time, philo->num, \
-		philo->num_eat);
+		printf(CYAN"%d %d is eating\n"RESET, time, philo->num);
 	else if (status == SLEEP)
-		printf(YELLOW"%d %d is sleeping: eat:%d\n"RESET, time, philo->num, \
-		philo->num_eat);
+		printf(YELLOW"%d %d is sleeping\n"RESET, time, philo->num);
 }
 
 int	get_time_diff(struct timeval current_time, struct timeval start_time)

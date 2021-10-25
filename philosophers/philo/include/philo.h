@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:55:38 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/24 00:45:28 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/25 21:21:35 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-
-#define RED 	"\x1b[31m"
-#define GREEN 	"\x1b[32m"
-#define YELLOW 	"\x1b[33m"
-#define BLUE 	"\x1b[34m"
-#define MAGENTA "\x1b[35m"
-#define CYAN	"\x1b[36m"
-#define RESET 	"\x1b[0m"
+# define RED "\x1b[31m"
+# define GREEN "\x1b[32m"
+# define YELLOW "\x1b[33m"
+# define BLUE "\x1b[34m"
+# define MAGENTA "\x1b[35m"
+# define CYAN "\x1b[36m"
+# define RESET "\x1b[0m"
 
 # define THINK 0
 # define FORK 1
