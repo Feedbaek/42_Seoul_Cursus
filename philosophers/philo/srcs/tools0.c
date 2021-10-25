@@ -51,19 +51,19 @@ void	print_msg(t_philo *philo, int status)
 	time = (current_time.tv_sec - philo->start_time.tv_sec) \
 		* 1000 + ((current_time.tv_usec - philo->start_time.tv_usec) / 1000);
 	if (status == DIE)
-		printf("%d %d is died: eat:%d\n", philo->dead_time, \
+		printf(RED"%d %d is died: eat:%d\n"RESET, philo->dead_time, \
 		philo->num, philo->num_eat);
 	else if (status == THINK)
-		printf("%d %d is thinking: eat:%d\n", time, philo->num, \
+		printf(GREEN"%d %d is thinking: eat:%d\n"RESET, time, philo->num, \
 		philo->num_eat);
 	else if (status == FORK)
-		printf("%d %d has taken a fork: eat:%d\n", time, philo->num, \
+		printf("%d %d has taken a fork: eat:%d\n"RESET, time, philo->num, \
 		philo->num_eat);
 	else if (status == EAT)
-		printf("%d %d is eating: eat:%d\n", time, philo->num, \
+		printf(CYAN"%d %d is eating: eat:%d\n"RESET, time, philo->num, \
 		philo->num_eat);
 	else if (status == SLEEP)
-		printf("%d %d is sleeping: eat:%d\n", time, philo->num, \
+		printf(YELLOW"%d %d is sleeping: eat:%d\n"RESET, time, philo->num, \
 		philo->num_eat);
 }
 
