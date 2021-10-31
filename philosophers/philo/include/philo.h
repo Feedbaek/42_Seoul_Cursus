@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 19:55:38 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/25 21:21:35 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/31 14:11:23 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_philo
 	int				num_start_eat;
 	int				num_eat;
 	int				end_eat;
+	int				ready;
 	int				*end_game;
 	int				*start_point;
 	int				*last_start_point;

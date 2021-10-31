@@ -6,11 +6,34 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:07:09 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/24 01:02:56 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/31 14:31:48 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
+
+static void	check_ready(t_philo *philo)
+{
+	int	i;
+	int	flag;
+
+	while (1)
+	{
+		i = 0;
+		flag = 1;
+		while (i < philo->philo_num)
+		{
+			if (!philo->philo[i].ready)
+				flag = 0;
+			i++;
+		}
+		if (flag)
+		{
+			*philo->last_start_point = 1;
+			return ;
+		}
+	}
+}
 
 static t_philo	*running_start(void *p, int *idx)
 {
@@ -19,8 +42,8 @@ static t_philo	*running_start(void *p, int *idx)
 	philo = (t_philo *)p;
 	*idx = philo->num - 1;
 	philo->status = THINK;
-	if (philo->num == philo->philo_num)
-		*philo->last_start_point = 1;
+	philo->ready = 1;
+	check_ready(philo);
 	while (1)
 	{
 		usleep(50);

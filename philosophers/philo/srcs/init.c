@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:51:44 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/23 21:21:19 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/31 14:11:33 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	init_philo(t_simul *simul)
 		simul->philo[i].num_start_eat = 0;
 		simul->philo[i].num_eat = 0;
 		simul->philo[i].end_eat = 0;
+		simul->philo[i].ready = 0;
 		simul->philo[i].end_game = &simul->end_game;
 		simul->philo[i].mutex = simul->mutex;
 		simul->philo[i].start_point = &simul->start_point;
@@ -92,7 +93,7 @@ int	init_pthread_mutex(t_simul *simul)
 	{
 		status = pthread_create(&simul->thread[i], NULL, \
 			running_pthread, (void *)&simul->philo[i]);
-		if (status < 0 || pthread_mutex_init(&simul->mutex[i], NULL))
+		if (status != 0 || pthread_mutex_init(&simul->mutex[i], NULL))
 			return (0);
 		i++;
 	}
