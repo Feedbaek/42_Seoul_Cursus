@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 17:07:09 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/31 14:31:48 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/31 17:17:04 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ void	*running_pthread(void *p)
 		if (*philo->end_game)
 			return (p);
 		running_think(philo, idx);
-		print_msg(philo, EAT);
 		philo->num_start_eat += 1;
+		print_msg(philo, EAT);
 		usleep(philo->time_eat * 1000);
 		gettimeofday(&philo->last_eat, NULL);
 		pthread_mutex_unlock(&philo->mutex[idx]);
