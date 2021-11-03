@@ -12,18 +12,30 @@
 
 #include <philo.h>
 
+int	free_simul(t_simul *simul, int fr, int er)
+{
+	if (fr)
+	{
+		free(simul->mutex);
+		free(simul->philo);
+		free(simul->thread);
+	}
+	if (er)
+		printf("Error\n");
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_simul	simul;
 
 	if (argc < 5 || argc > 6)
-		return (-1);
-	if (!init_simul(&simul, argc, argv) || !init_pthread_mutex(&simul))
-		return (-1);
+		return (free_simul(&simul, 0, 1));
+	if (!init_simul(&simul, argc, argv))
+		return (free_simul(&simul, 0, 1));
+	if (!init_pthread_mutex(&simul))
+		return (free_simul(&simul, 1, 1));
 	if (!wait_mornitor(&simul))
-		return (-1);
-	free(simul.mutex);
-	free(simul.philo);
-	free(simul.thread);
-	return (0);
+		return (free_simul(&simul, 1, 1));
+	return (free_simul(&simul, 1, 0));
 }
