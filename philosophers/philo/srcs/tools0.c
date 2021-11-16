@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 00:52:21 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/21 21:09:56 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/31 17:17:17 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,30 +43,28 @@ int	ft_atoi(char *str)
 void	print_msg(t_philo *philo, int status)
 {
 	struct timeval	current_time;
-	size_t			time;
+	int				time;
 
 	if (status != DIE && *philo->end_game)
 		return ;
-	gettimeofday(&current_time, NULL);
+	current_time = *philo->current_time;
 	time = (current_time.tv_sec - philo->start_time.tv_sec) \
 		* 1000 + ((current_time.tv_usec - philo->start_time.tv_usec) / 1000);
 	if (status == DIE)
-	{
-		usleep(10000);
-		printf("%ld %d is died: eat:%d\n", philo->dead_time, philo->num, philo->num_eat);
-	}
+		printf(RED"%d %d is died\n"RESET, philo->dead_time, \
+		philo->num);
 	else if (status == THINK)
-		printf("%ld %d is thinking: eat:%d\n", time, philo->num, philo->num_eat);
+		printf(GREEN"%d %d is thinking\n"RESET, time, philo->num);
 	else if (status == FORK)
-		printf("%ld %d has taken a fork: eat:%d\n", time, philo->num, philo->num_eat);
+		printf("%d %d has taken a fork\n"RESET, time, philo->num);
 	else if (status == EAT)
-		printf("%ld %d is eating: eat:%d\n", time, philo->num, philo->num_eat);
+		printf(CYAN"%d %d is eating\n"RESET, time, philo->num);
 	else if (status == SLEEP)
-		printf("%ld %d is sleeping: eat:%d\n", time, philo->num, philo->num_eat);
-	philo->change = 0;
+		printf(YELLOW"%d %d is sleeping\n"RESET, time, philo->num);
 }
 
-int		get_time_diff(struct timeval current_time, struct timeval start_time)
+int	get_time_diff(struct timeval current_time, struct timeval start_time)
 {
-	return ((current_time.tv_sec - start_time.tv_sec) * 1000 + ((current_time.tv_usec - start_time.tv_usec) / 1000));
+	return ((current_time.tv_sec - start_time.tv_sec) * 1000 \
+	+ ((current_time.tv_usec - start_time.tv_usec) / 1000));
 }

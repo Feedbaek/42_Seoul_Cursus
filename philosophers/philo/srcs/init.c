@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 19:51:44 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/21 21:11:18 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/10/31 14:11:33 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ static void	init_philo(t_simul *simul)
 		simul->philo[i].philo_num = simul->philo_num;
 		simul->philo[i].num = i + 1;
 		simul->philo[i].dead_time = 0;
-		simul->philo[i].life = simul->time_die;
-		simul->philo[i].fork = 0;
 		simul->philo[i].status = THINK;
-		simul->philo[i].change = 0;
 		simul->philo[i].time_eat = simul->time_eat;
 		simul->philo[i].time_sleep = simul->time_sleep;
 		simul->philo[i].time_opt = simul->time_opt;
+		simul->philo[i].num_start_eat = 0;
 		simul->philo[i].num_eat = 0;
 		simul->philo[i].end_eat = 0;
+		simul->philo[i].ready = 0;
 		simul->philo[i].end_game = &simul->end_game;
 		simul->philo[i].mutex = simul->mutex;
 		simul->philo[i].start_point = &simul->start_point;
 		simul->philo[i].last_start_point = &simul->last_start_point;
 		simul->philo[i].philo = simul->philo;
+		simul->philo[i].current_time = &simul->current_time;
 		i++;
 	}
 }
@@ -93,7 +93,7 @@ int	init_pthread_mutex(t_simul *simul)
 	{
 		status = pthread_create(&simul->thread[i], NULL, \
 			running_pthread, (void *)&simul->philo[i]);
-		if (status < 0 || pthread_mutex_init(&simul->mutex[i], NULL))
+		if (status != 0 || pthread_mutex_init(&simul->mutex[i], NULL))
 			return (0);
 		i++;
 	}
