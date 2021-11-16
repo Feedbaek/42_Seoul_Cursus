@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:40:30 by minskim2          #+#    #+#             */
-/*   Updated: 2021/10/31 17:07:13 by minskim2         ###   ########.fr       */
+/*   Updated: 2021/11/16 21:45:19 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ static int	loop_check(t_simul *simul, int i, int *check_end)
 	{
 		simul->philo[i].dead_time = get_time_diff(simul->current_time, \
 			simul->philo[i].start_time);
-		usleep(10000);
+		usleep(5000);
 		if (get_time_diff(simul->current_time, \
 			simul->philo[i].last_eat) > simul->time_die)
 		{
-			usleep(simul->philo_num * 50);
+			usleep(simul->philo_num * 70);
 			if (get_time_diff(simul->current_time, \
 				simul->philo[i].last_eat) > simul->time_die)
 			{
 				*(simul->philo[i].end_game) = 1;
-				usleep(200);
+				usleep(10000);
 				print_msg(&simul->philo[i], DIE);
 				return (1);
 			}
