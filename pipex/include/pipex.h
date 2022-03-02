@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 23:26:52 by minskim2          #+#    #+#             */
-/*   Updated: 2021/08/19 21:40:26 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:49:48 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <sys/wait.h>
 
 typedef struct s_cmd
 {
