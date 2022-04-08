@@ -6,14 +6,15 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:52:34 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/01 17:53:21 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/08 18:52:42 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
 
-#include <string>
+# include <string>
+# include <iostream>
 
 class Contact {
 private:
@@ -26,18 +27,14 @@ private:
 	std::string	darkest_secret;
 public:
 	void	contact_add(std::string first_name, std::string last_name,
-	std::string nickname, std::string phone_number, std::string darkest_secret) {
-		this->index++;
-		this->first_name = first_name;
-		this->last_name = last_name;
-		this->nickname = nickname;
-		this->phone_number = phone_number;
-		this->darkest_secret = darkest_secret;
-	}
-	Contact(void) {
-		this->index = this->size;
-		this->size = this->size + 1;
-	}
+		std::string nickname, std::string phone_number, std::string darkest_secret);
+	void	get_index(void);
+	void	get_first_name(void);
+	void	get_last_name(void);
+	void	get_nickname(void);
+	void	get_phone_number(void);
+	void	get_darkest_secret(void);
+	Contact(void);
 };
 
 #endif
