@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:35:34 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/08 18:45:28 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/08 22:44:32 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,34 @@
 
 void	ADD(PhoneBook &book) {
 	std::string f_name, l_name, n_name, p_num, d_secret;
-	//Contact *c = new Contact();
+	std::cout << "Input first name, last name, nickname, phone number, darkest secret" << std::endl;
 	std::cin >> f_name >> l_name >> n_name >> p_num >> d_secret;
-	//c->contact_add(f_name, l_name, n_name, p_num, d_secret);
 	book.add(f_name, l_name, n_name, p_num, d_secret);
 }
 
-//std::string	convert(std::string str) {
-//	std::string *s = new std::string();
-//	for (int i=0; i<str.size(); i++) {
-//		if (i == 9) {
-//			if (str.size() > 10) {
-//				*s += '.';
-//				break;
-//			}
-//		}
-//		*s += str[i];
-//	}
-//}
-
 void	SEARCH(PhoneBook &book) {
-	Contact **arr;
-
-	arr = book.get_Contact();
-	for (int i=0; i<8; i++) {
-
-	}
+	std::cout << "Index|First Name|Last Name|Nickname" << std::endl;
+	book.search();
 }
 
-int		EXIT(PhoneBook &book, int exit) {
-	Contact **arr = book.get_Contact();
-	for (int i=0; i<8; i++) {
-		delete(arr[i]);
-	}
+int		EXIT(int exit) {
 	return (exit);
 }
 
 int		main(void) {
 	PhoneBook book;
+	std::string input;
+	book.set_contact();
+	std::cout << "ADD or SEARCH or EXIT" << std::endl;
+	while (1) {
+		std::cout << "> ";
+		std::getline(std::cin, input);
+		if (input == "EXIT")
+			return (EXIT(0));
+		else if (input == "ADD")
+			ADD(book);
+		else if (input == "SEARCH")
+			SEARCH(book);
+	}
 	return (0);
 }

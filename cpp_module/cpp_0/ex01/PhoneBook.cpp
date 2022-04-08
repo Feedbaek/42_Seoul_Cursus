@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 16:44:10 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/08 18:59:17 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/08 22:36:03 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	PhoneBook::add(std::string f_name, std::string l_name, std::string n_name, 
 }
 
 void	PhoneBook::search(void) {
-	for (int i=0; i<8; i++) {
+	for (int i=0; i<8 && i<this->input_cnt; i++) {
 		this->arr[i].get_index();
 		std::cout << "|";
 		this->arr[i].get_first_name();
@@ -30,6 +30,6 @@ void	PhoneBook::search(void) {
 	}
 }
 
-//Contact**	PhoneBook::get_Contact(void) {
-//	return (this->arr);
-//}
+void	PhoneBook::set_contact(void) {
+	this->input_cnt = 0;
+}

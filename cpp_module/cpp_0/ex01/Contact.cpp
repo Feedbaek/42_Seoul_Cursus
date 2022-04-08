@@ -6,17 +6,18 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 16:26:00 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/08 18:58:58 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/08 22:36:08 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 
+int		Contact::size = 0;
+
 void	Contact::contact_add(std::string first_name, std::string last_name,
 std::string nickname, std::string phone_number, std::string darkest_secret) {
 	this->index = this->size;
 	this->size = this->size + 1;
-	//this->index++;
 	this->first_name = first_name;
 	this->last_name = last_name;
 	this->nickname = nickname;
@@ -25,7 +26,7 @@ std::string nickname, std::string phone_number, std::string darkest_secret) {
 }
 void	Contact::get_index(void) {
 	std::string s = std::to_string(this->index);
-	int i;
+	size_t i;
 	for (i=0; i<9 && i<s.size(); i++) {
 		std::cout << s[i];
 	}
@@ -38,7 +39,7 @@ void	Contact::get_index(void) {
 }
 void	Contact::get_first_name(void) {
 	std::string s = this->first_name;
-	int i;
+	size_t i;
 	for (i=0; i<9 && i<s.size(); i++) {
 		std::cout << s[i];
 	}
@@ -51,7 +52,7 @@ void	Contact::get_first_name(void) {
 }
 void	Contact::get_last_name(void) {
 	std::string s = this->last_name;
-	int i;
+	size_t i;
 	for (i=0; i<9 && i<s.size(); i++) {
 		std::cout << s[i];
 	}
@@ -64,7 +65,7 @@ void	Contact::get_last_name(void) {
 }
 void	Contact::get_nickname(void) {
 	std::string s = this->nickname;
-	int i;
+	size_t i;
 	for (i=0; i<9 && i<s.size(); i++) {
 		std::cout << s[i];
 	}
@@ -77,7 +78,7 @@ void	Contact::get_nickname(void) {
 }
 void	Contact::get_phone_number(void) {
 	std::string s = this->phone_number;
-	int i;
+	size_t i;
 	for (i=0; i<9 && i<s.size(); i++) {
 		std::cout << s[i];
 	}
@@ -90,7 +91,7 @@ void	Contact::get_phone_number(void) {
 }
 void	Contact::get_darkest_secret(void) {
 	std::string s = this->darkest_secret;
-	int i;
+	size_t i;
 	for (i=0; i<9 && i<s.size(); i++) {
 		std::cout << s[i];
 	}
@@ -101,7 +102,6 @@ void	Contact::get_darkest_secret(void) {
 			std::cout << s[9];
 	}
 }
-Contact::Contact(void) {
-	this->index = this->size;
-	this->size = this->size + 1;
+void	Contact::set_size(void) {
+	this->size = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:52:34 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/08 18:52:42 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/08 22:36:21 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ public:
 	void	get_nickname(void);
 	void	get_phone_number(void);
 	void	get_darkest_secret(void);
-	Contact(void);
+	void	set_size(void);
 };
 
 #endif
