@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:35:34 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/08 22:44:32 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/09 19:48:47 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ADD(PhoneBook &book) {
 	std::string f_name, l_name, n_name, p_num, d_secret;
 	std::cout << "Input first name, last name, nickname, phone number, darkest secret" << std::endl;
 	std::cin >> f_name >> l_name >> n_name >> p_num >> d_secret;
+	std::cin.ignore(5, '\n');
 	book.add(f_name, l_name, n_name, p_num, d_secret);
 }
 

@@ -6,15 +6,15 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/01 16:18:04 by minskim2          #+#    #+#              #
-#    Updated: 2022/04/09 19:59:24 by minskim2         ###   ########.fr        #
+#    Updated: 2022/04/09 20:25:57 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CCPP = c++
 CPPFLAGS = -Wall -Wextra -Werror
-SRCS = main.cpp PhoneBook.cpp Contact.cpp
+SRCS = Account.cpp tests.cpp
 HEADER = ./
-NAME = My_Awesome_PhoneBook
+NAME = Dreams
 OBJECTS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
