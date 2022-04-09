@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 22:23:30 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/09 22:43:35 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/10 01:22:29 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ Zombie::Zombie(std::string name) {
 	this->name = name;
 }
 
-Zombie::~Zombie() {
+Zombie::~Zombie(void) {
 	std::cout << this->name << " dead\n";
 }

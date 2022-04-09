@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 22:18:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/09 22:34:37 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/10 01:22:25 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ private:
 	std::string	name;
 public:
 	void	announce(void);
-	Zombie* newZombie(std::string name);
-	void randomChump(std::string name);
 	Zombie(std::string name);
-	~Zombie();
+	~Zombie(void);
 };
+
+Zombie*	newZombie(std::string name);
+void	randomChump(std::string name);
 
 #endif
