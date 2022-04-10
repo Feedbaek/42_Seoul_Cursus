@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 20:30:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/10 22:20:02 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/10 23:41:12 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	Harl::error(void) {
 }
 
 void	Harl::complain(std::string level) {
-	void	(Harl::*fp[4])(void) = { &Harl::debug, &Harl::info, &Harl::warning, &Harl::error };
+	void	(Harl::*fp[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 	std::string	keyword[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
 	for (int i=0; i<4; i++)
