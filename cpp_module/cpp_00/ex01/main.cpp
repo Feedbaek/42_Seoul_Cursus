@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:35:34 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/09 19:48:47 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/10 21:49:27 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ADD(PhoneBook &book) {
 }
 
 void	SEARCH(PhoneBook &book) {
-	std::cout << "Index|First Name|Last Name|Nickname" << std::endl;
+	std::cout << "     Index|First Name| Last Name|  Nickname" << std::endl;
 	book.search();
 }
 

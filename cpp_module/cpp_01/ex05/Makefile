@@ -5,16 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/04/01 16:18:04 by minskim2          #+#    #+#              #
-#    Updated: 2022/04/10 21:12:37 by minskim2         ###   ########.fr        #
+#    Created: 2022/04/10 20:29:12 by minskim2          #+#    #+#              #
+#    Updated: 2022/04/10 22:17:59 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CCPP = c++
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98
-SRCS = Account.cpp tests.cpp
+SRCS = main.cpp Harl.cpp
 HEADER = ./
-NAME = Dreams
+NAME = haha
 OBJECTS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
@@ -23,7 +23,7 @@ all: $(NAME)
 	$(CCPP) $(CPPFLAGS) -c $^ -o $@ -I$(HEADER)
 
 $(NAME): $(OBJECTS)
-	$(CCPP) $(CPPFLAGS) -o $@ $^
+	$(CCPP) $(CPPFLAGS) $^ -o $@
 
 clean:
 	rm -rf $(OBJECTS)

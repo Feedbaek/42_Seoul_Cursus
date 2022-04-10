@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 16:26:00 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/08 22:36:08 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/10 21:47:10 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,82 +25,48 @@ std::string nickname, std::string phone_number, std::string darkest_secret) {
 	this->darkest_secret = darkest_secret;
 }
 void	Contact::get_index(void) {
-	std::string s = std::to_string(this->index);
-	size_t i;
-	for (i=0; i<9 && i<s.size(); i++) {
-		std::cout << s[i];
-	}
-	if (i == 9) {
-		if (s.size() > 10)
-			std::cout << ".";
-		else
-			std::cout << s[9];
-	}
+	std::stringstream ss;
+	ss << this->index;
+	std::string s = ss.str();
+	std::cout << std::setw(10);
+	if (s.length() > 10)
+		s = s.substr(0, 9) + ".";
+	std::cout << s;
 }
 void	Contact::get_first_name(void) {
 	std::string s = this->first_name;
-	size_t i;
-	for (i=0; i<9 && i<s.size(); i++) {
-		std::cout << s[i];
-	}
-	if (i == 9) {
-		if (s.size() > 10)
-			std::cout << ".";
-		else
-			std::cout << s[9];
-	}
+	std::cout << std::setw(10);
+	if (s.length() > 10)
+		s = s.substr(0, 9) + ".";
+	std::cout << s;
 }
 void	Contact::get_last_name(void) {
 	std::string s = this->last_name;
-	size_t i;
-	for (i=0; i<9 && i<s.size(); i++) {
-		std::cout << s[i];
-	}
-	if (i == 9) {
-		if (s.size() > 10)
-			std::cout << ".";
-		else
-			std::cout << s[9];
-	}
+	std::cout << std::setw(10);
+	if (s.length() > 10)
+		s = s.substr(0, 9) + ".";
+	std::cout << s;
 }
 void	Contact::get_nickname(void) {
 	std::string s = this->nickname;
-	size_t i;
-	for (i=0; i<9 && i<s.size(); i++) {
-		std::cout << s[i];
-	}
-	if (i == 9) {
-		if (s.size() > 10)
-			std::cout << ".";
-		else
-			std::cout << s[9];
-	}
+	std::cout << std::setw(10);
+	if (s.length() > 10)
+		s = s.substr(0, 9) + ".";
+	std::cout << s;
 }
 void	Contact::get_phone_number(void) {
 	std::string s = this->phone_number;
-	size_t i;
-	for (i=0; i<9 && i<s.size(); i++) {
-		std::cout << s[i];
-	}
-	if (i == 9) {
-		if (s.size() > 10)
-			std::cout << ".";
-		else
-			std::cout << s[9];
-	}
+	std::cout << std::setw(10);
+	if (s.length() > 10)
+		s = s.substr(0, 9) + ".";
+	std::cout << s;
 }
 void	Contact::get_darkest_secret(void) {
 	std::string s = this->darkest_secret;
-	size_t i;
-	for (i=0; i<9 && i<s.size(); i++) {
-		std::cout << s[i];
-	}
-	if (i == 9) {
-		if (s.size() > 10)
-			std::cout << ".";
-		else
-			std::cout << s[9];
-	}
+	std::cout << std::setw(10);
+	if (s.length() > 10)
+		s = s.substr(0, 9) + ".";
+	std::cout << s;
 }
 void	Contact::set_size(void) {
 	this->size = 0;

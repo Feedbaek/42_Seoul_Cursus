@@ -6,12 +6,12 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/01 16:18:04 by minskim2          #+#    #+#              #
-#    Updated: 2022/04/01 16:30:42 by minskim2         ###   ########.fr        #
+#    Updated: 2022/04/10 21:00:18 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CCPP = c++
-CPPFLAGS = -Wall -Wextra -Werror
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 SRCS = megaphone.cpp
 NAME = megaphone
 OBJECTS = $(SRCS:.cpp=.o)
