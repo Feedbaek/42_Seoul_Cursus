@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 16:26:00 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/10 21:47:10 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/12 17:08:53 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,49 +24,59 @@ std::string nickname, std::string phone_number, std::string darkest_secret) {
 	this->phone_number = phone_number;
 	this->darkest_secret = darkest_secret;
 }
-void	Contact::get_index(void) {
+std::string	Contact::get_index(void) {
 	std::stringstream ss;
 	ss << this->index;
 	std::string s = ss.str();
 	std::cout << std::setw(10);
 	if (s.length() > 10)
 		s = s.substr(0, 9) + ".";
-	std::cout << s;
+	return (s);
 }
-void	Contact::get_first_name(void) {
+int	Contact::get_int_index(void) {
+	return (this->index);
+}
+std::string	Contact::get_first_name(void) {
 	std::string s = this->first_name;
 	std::cout << std::setw(10);
 	if (s.length() > 10)
 		s = s.substr(0, 9) + ".";
-	std::cout << s;
+	return (s);
 }
-void	Contact::get_last_name(void) {
+std::string	Contact::get_last_name(void) {
 	std::string s = this->last_name;
 	std::cout << std::setw(10);
 	if (s.length() > 10)
 		s = s.substr(0, 9) + ".";
-	std::cout << s;
+	return (s);
 }
-void	Contact::get_nickname(void) {
+std::string	Contact::get_nickname(void) {
 	std::string s = this->nickname;
 	std::cout << std::setw(10);
 	if (s.length() > 10)
 		s = s.substr(0, 9) + ".";
-	std::cout << s;
+	return (s);
 }
-void	Contact::get_phone_number(void) {
+std::string	Contact::get_phone_number(void) {
 	std::string s = this->phone_number;
 	std::cout << std::setw(10);
 	if (s.length() > 10)
 		s = s.substr(0, 9) + ".";
-	std::cout << s;
+	return (s);
 }
-void	Contact::get_darkest_secret(void) {
+std::string	Contact::get_darkest_secret(void) {
 	std::string s = this->darkest_secret;
 	std::cout << std::setw(10);
 	if (s.length() > 10)
 		s = s.substr(0, 9) + ".";
-	std::cout << s;
+	return (s);
+}
+void	Contact::print_inform(void) {
+	std::cout << this->first_name << "\n";
+	std::cout << this->last_name << "\n";
+	std::cout << this->nickname << "\n";
+	std::cout << this->phone_number << "\n";
+	std::cout << this->darkest_secret << "\n";
 }
 void	Contact::set_size(void) {
 	this->size = 0;

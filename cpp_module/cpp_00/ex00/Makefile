@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/01 16:18:04 by minskim2          #+#    #+#              #
-#    Updated: 2022/04/10 21:00:18 by minskim2         ###   ########.fr        #
+#    Updated: 2022/04/12 16:44:18 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJECTS = $(SRCS:.cpp=.o)
 all: $(NAME)
 
 %.o: %.cpp
-	$(CCPP) -c $^ -o $@
+	$(CCPP) $(CPPFLAGS) -c $^ -o $@
 
 $(NAME): $(OBJECTS)
 	$(CCPP) $(CPPFLAGS) $^ -o $@
