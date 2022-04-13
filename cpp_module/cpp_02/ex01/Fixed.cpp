@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/12 22:31:26 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/13 16:21:42 by minskim2         ###   ########.fr       */
+/*   Created: 2022/04/13 15:35:44 by minskim2          #+#    #+#             */
+/*   Updated: 2022/04/13 16:17:12 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,18 @@ int		Fixed::getRawBits(void) const {
 	std::cout << "getRawBits member function called\n";
 	return (this->fixed_point);
 }
-void	Fixed::setRawBits(int const raw) {
-	std::cout << "setRawBits member function called\n";
+void	Fixed::setRawBits(const int raw) {
 	this->fixed_point = raw;
 }
 Fixed::Fixed() {
 	std::cout << "Default constructor called\n";
 	this->fixed_point = 0;
+}
+Fixed::Fixed(const int value) {
+	this->fixed_point = value;
+}
+Fixed::Fixed(const float value) {
+	this->fixed_point = value;
 }
 Fixed::~Fixed() {
 	std::cout << "Destructor called\n";
@@ -35,4 +40,10 @@ Fixed	&Fixed::operator=(const Fixed &a) {
 	std::cout << "Copy assignment operator called\n";
 	this->fixed_point = a.getRawBits();
 	return (*this);
+}
+
+std::ostream &operator<<(std::ostream &out, const Fixed &value)
+{
+	out << value.toFloat();
+	return (out);
 }

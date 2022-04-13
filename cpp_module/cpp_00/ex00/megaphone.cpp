@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 15:30:25 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/12 20:20:55 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/13 17:35:59 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	main(int argc, char **argv) {
 		return (0);
 	}
 	for (int i=1; i<argc; i++) {
-		std::string s(argv[i]);
 		for (size_t j=0; j<strlen(argv[i]); j++) {
 			argv[i][j] = toupper(argv[i][j]);
 		}
+		std::string s(argv[i]);
 		std::cout << s;
 	}
 	std::cout << std::endl;;
