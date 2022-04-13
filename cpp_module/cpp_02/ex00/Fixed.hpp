@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 22:31:17 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/12 22:41:16 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/13 11:01:10 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 class Fixed {
 private:
 	int	fixed_point;
-	static const int fractional_bits;
+	static const int fractional_bits = 8;
 public:
 	Fixed();
 	~Fixed();

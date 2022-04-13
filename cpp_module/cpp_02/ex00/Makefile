@@ -6,24 +6,24 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/12 16:03:39 by minskim2          #+#    #+#              #
-#    Updated: 2022/04/12 21:36:51 by minskim2         ###   ########.fr        #
+#    Updated: 2022/04/13 11:28:27 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-SRCS = main.cpp
+SRCS = main.cpp Fixed.cpp
 HEADER = ./
-NAME = haha
+NAME = a.out
 OBJECTS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
 %.o: %.cpp
-	$(CCXX) $(CPPFLAGS) -c $^ -o $@ -I$(HEADER)
+	$(CXX) $(CXXFLAGS) -c $^ -o $@ -I$(HEADER)
 
 $(NAME): $(OBJECTS)
-	$(CCXX) $^ -o $@
+	$(CXX) $^ -o $@
 
 clean:
 	rm -rf $(OBJECTS)
