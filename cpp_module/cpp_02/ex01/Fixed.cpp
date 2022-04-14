@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:35:44 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/13 16:17:12 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/13 22:45:46 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ Fixed	&Fixed::operator=(const Fixed &a) {
 	std::cout << "Copy assignment operator called\n";
 	this->fixed_point = a.getRawBits();
 	return (*this);
+}
+
+float	Fixed::toFloat(void) {
+	//return ((float)this->value)
 }
 
 std::ostream &operator<<(std::ostream &out, const Fixed &value)
