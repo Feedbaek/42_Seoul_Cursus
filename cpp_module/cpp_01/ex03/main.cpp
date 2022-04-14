@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 14:06:13 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/10 15:02:50 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/14 16:38:27 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int main() {
 	{
 		Weapon club = Weapon("crude spiked club");
 		HumanB jim("Jim");
+		jim.attack();
 		jim.setWeapon(club);
 		jim.attack();
 		club.setType("some other type of club");
