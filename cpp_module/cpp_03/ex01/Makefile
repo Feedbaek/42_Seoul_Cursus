@@ -5,14 +5,14 @@
 #                                                     +:+ +:+         +:+      #
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/04/14 22:08:50 by minskim2          #+#    #+#              #
-#    Updated: 2022/04/15 12:59:03 by minskim2         ###   ########.fr        #
+#    Created: 2022/04/15 14:53:35 by minskim2          #+#    #+#              #
+#    Updated: 2022/04/15 14:54:30 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-SRCS = main.cpp ClapTrap.cpp
+SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp
 HEADER = ./
 NAME = a.out
 OBJECTS = $(SRCS:.cpp=.o)
