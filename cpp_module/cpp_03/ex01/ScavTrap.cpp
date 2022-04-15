@@ -6,15 +6,14 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 14:59:52 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/15 16:09:32 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/15 17:24:17 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap() {
-	hp = 100;
-	energy = 50;
+ScavTrap::ScavTrap() : ClapTrap() {
+
 }
 ScavTrap::ScavTrap(ScavTrap &a) {
 

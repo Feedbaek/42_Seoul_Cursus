@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 22:10:02 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/15 13:35:31 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/15 17:24:23 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <iostream>
 
 class ClapTrap {
-private:
+protected:
 	std::string	name;
 	unsigned int	hp;
 	unsigned int	energy;
