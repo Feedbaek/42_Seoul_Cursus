@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:11:26 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/10 18:16:20 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/15 12:38:56 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int main(int argc, char const *argv[]) {
 	Sed s;
 	if (argc != 4) {
 		std::cout << "Parameters Error\n";
-		return (0);
+		return (1);
 	}
 	s.replace(argv[1], argv[2], argv[3]);
 	return 0;

@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 16:16:17 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/10 21:58:33 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/15 12:36:25 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,26 @@ std::string	Sed::s1_to_s2(std::string line, std::string s1, std::string s2) {
 void	Sed::replace(std::string file, std::string s1, std::string s2) {
 	if (file.length() == 0) {
 		std::cout << "Error: file\n";
-		exit(0);
+		exit(1);
 	}
 	else if (s1.length() == 0) {
 		std::cout << "Error: s1\n";
-		exit(0);
+		exit(1);
 	}
 	else if (s2.length() == 0) {
 		std::cout << "Error: s2\n";
-		exit(0);
+		exit(1);
 	}
 	std::ifstream ifs(file.c_str(), std::ios::in);
 	if (ifs.fail()) {
 		std::cout << "Error: input file open\n";
-		exit(0);
+		exit(1);
 	}
 	file += ".replace";
 	std::ofstream ofs(file.c_str(), std::ios::out | std::ios::trunc);
 	if (ofs.fail()) {
 		std::cout << "Error: output file open\n";
-		exit(0);
+		exit(1);
 	}
 	std::string line;
 	while (std::getline(ifs, line)) {
