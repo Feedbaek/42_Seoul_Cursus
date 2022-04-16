@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 22:09:43 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/15 13:50:52 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/16 15:41:03 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,25 @@ bool	ClapTrap::check_dead(void) {
 }
 
 ClapTrap::ClapTrap() {
-	std::cout << "Unknown ClapTrap is here\n";
 	this->name = "";
 	this->hp = 10;
 	this->energy = 10;
 	this->damage = 0;
+	std::cout << "ClapTrap default constructor Unknown called\n";
 }
 ClapTrap::ClapTrap(std::string name) {
-	std::cout << "ClapTrap "+name+" is here\n";
 	this->name = name;
 	this->hp = 10;
 	this->energy = 10;
 	this->damage = 0;
+	std::cout << "ClapTrap string constructor " << this->name << " called\n";
 }
 ClapTrap::ClapTrap(const ClapTrap &a) {
 	*this = a;
+	std::cout << "ClapTrap copy constructor " << this->name << " called\n";
 }
 ClapTrap::~ClapTrap() {
-	std::cout << "Good bye ClapTrap\n";
+	std::cout << "ClapTrap destructor " << this->name << " called\n";
 }
 
 ClapTrap	&ClapTrap::operator=(const ClapTrap &a) {
@@ -46,6 +47,7 @@ ClapTrap	&ClapTrap::operator=(const ClapTrap &a) {
 	this->hp = a.hp;
 	this->energy = a.energy;
 	this->damage = a.damage;
+	std::cout << "ClapTrap operator= " << this->name << " called\n";
 	return (*this);
 }
 

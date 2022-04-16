@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/14 22:09:43 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/16 15:41:25 by minskim2         ###   ########.fr       */
+/*   Created: 2022/04/16 16:11:25 by minskim2          #+#    #+#             */
+/*   Updated: 2022/04/16 16:11:27 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ ClapTrap::ClapTrap(std::string name) {
 	std::cout << "ClapTrap string constructor " << this->name << " called\n";
 }
 ClapTrap::ClapTrap(const ClapTrap &a) {
-	std::cout << "ClapTrap copy constructor " << this->name << " called\n";
 	*this = a;
+	std::cout << "ClapTrap copy constructor " << this->name << " called\n";
 }
 ClapTrap::~ClapTrap() {
 	std::cout << "ClapTrap destructor " << this->name << " called\n";
