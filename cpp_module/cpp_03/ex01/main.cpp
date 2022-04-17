@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 15:24:49 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/16 15:25:41 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/17 20:14:43 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	main(void)
 
 	std::cout << std::endl;
 
+	b.guardGate();
 	b.guardGate();
 
 	std::cout << std::endl;
