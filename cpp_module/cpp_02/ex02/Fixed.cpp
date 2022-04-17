@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 20:07:13 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/14 21:54:27 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/17 16:44:22 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ bool	Fixed::operator>= (const Fixed &a) const {
 	return (this->fixed_point >= a.fixed_point);
 }
 bool	Fixed::operator<= (const Fixed &a) const {
-	return (this->fixed_point >= a.fixed_point);
+	return (this->fixed_point <= a.fixed_point);
 }
 bool	Fixed::operator== (const Fixed &a) const {
 	return (this->fixed_point == a.fixed_point);
