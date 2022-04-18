@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   WrongCat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 14:45:20 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/18 15:23:52 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/17 16:37:05 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-# define CAT_HPP
+#ifndef WRONGCAT_HPP
+# define WRONGCAT_HPP
 
-# include "Animal.hpp"
+# include "WrongAnimal.hpp"
 
-class Cat :public Animal {
+class WrongCat :public WrongAnimal {
 private:
 
 public:
-	Cat();
-	Cat(const Cat &a);
-	~Cat();
+	WrongCat();
+	WrongCat(const WrongCat &a);
+	~WrongCat();
 
-	Cat &operator=(const Cat &a);
+	WrongCat &operator=(const WrongCat &a);
 
 	void	makeSound() const;
 };

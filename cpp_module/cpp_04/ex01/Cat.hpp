@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 14:45:20 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/18 15:23:52 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/18 16:52:24 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,23 @@
 # define CAT_HPP
 
 # include "Animal.hpp"
+# include "Brain.hpp"
 
 class Cat :public Animal {
 private:
+	Brain	*brain;
 
 public:
 	Cat();
+	Cat(const Brain &brain);
 	Cat(const Cat &a);
 	~Cat();
 
 	Cat &operator=(const Cat &a);
 
 	void	makeSound() const;
+	void	setter(std::string str, int n);
+	std::string	getter();
 };
 
 #endif

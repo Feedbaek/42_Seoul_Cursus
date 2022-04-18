@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 14:45:05 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/18 15:27:21 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/18 17:18:33 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "Animal.hpp"
 
-Dog::Dog() {
-	this->type = "Dog";
-	std::cout << "Dog default constructor\n";
+Animal::Animal() {
+	std::cout << "Animal default constructor\n";
+	this->type = "Animal";
 }
-Dog::Dog(const Dog &a) :Animal(a){
+Animal::Animal(const Animal &a) {
+	std::cout << "Animal copy constructor\n";
 	*this = a;
-	std::cout << "Dog copy constructor\n";
 }
-Dog::~Dog() {
-	std::cout << "Dog destructor\n";
+Animal::~Animal() {
+	std::cout << "Animal destructor\n";
 }
 
-Dog &Dog::operator=(const Dog &a) {
+Animal &Animal::operator=(const Animal &a) {
 	this->type = a.type;
 	return (*this);
 }
 
-void	Dog::makeSound() const {
-	std::cout << "bark!\n";
+std::string	Animal::getType() const {
+	return (this->type);
 }

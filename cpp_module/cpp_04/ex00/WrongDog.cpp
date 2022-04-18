@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   WrongDog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 14:45:05 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/18 15:27:21 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:01:57 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "WrongDog.hpp"
 
-Dog::Dog() {
-	this->type = "Dog";
-	std::cout << "Dog default constructor\n";
+WrongDog::WrongDog() {
+	this->type = "WrongDog";
+	std::cout << "WrongDog default constructor\n";
 }
-Dog::Dog(const Dog &a) :Animal(a){
+WrongDog::WrongDog(const WrongDog &a) :WrongAnimal() {
 	*this = a;
-	std::cout << "Dog copy constructor\n";
+	std::cout << "WrongDog copy constructor\n";
 }
-Dog::~Dog() {
-	std::cout << "Dog destructor\n";
+WrongDog::~WrongDog() {
+	std::cout << "WrongDog destructor\n";
 }
 
-Dog &Dog::operator=(const Dog &a) {
+WrongDog &WrongDog::operator=(const WrongDog &a) {
 	this->type = a.type;
 	return (*this);
 }
 
-void	Dog::makeSound() const {
+void	WrongDog::makeSound() const {
 	std::cout << "bark!\n";
 }

@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 14:45:20 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/17 16:36:30 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/18 15:54:49 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ protected:
 public:
 	Animal();
 	Animal(const Animal &a);
-	~Animal();
+	virtual ~Animal();
 
 	Animal &operator= (const Animal &a);
 
-	void	makeSound() const;
+	virtual void	makeSound() const;
 
 	std::string	getType() const;
 };
