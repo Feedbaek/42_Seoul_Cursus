@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 14:45:20 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/18 16:52:24 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/22 17:27:55 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ public:
 	Cat();
 	Cat(const Brain &brain);
 	Cat(const Cat &a);
-	~Cat();
+	virtual ~Cat();
 
 	Cat &operator=(const Cat &a);
 

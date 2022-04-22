@@ -6,18 +6,18 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 14:45:20 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/17 16:20:47 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/22 17:55:29 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ANIMAL_HPP
 # define ANIMAL_HPP
 
-#include <iostream>
+# include <iostream>
 
 class Animal {
-protected:
-	std::string	type;
+private:
+	std::string	name;
 
 public:
 	Animal();

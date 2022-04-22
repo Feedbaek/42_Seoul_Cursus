@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 14:45:05 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/18 17:03:12 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:33:39 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ Dog::Dog(const Brain &a) {
 }
 Dog::Dog(const Dog &a) :Animal(a){
 	std::cout << "Dog copy constructor\n";
+	this->brain = new Brain();
 	*this = a;
 }
 Dog::~Dog() {
@@ -33,7 +34,6 @@ Dog::~Dog() {
 
 Dog &Dog::operator=(const Dog &a) {
 	this->type = a.type;
-	this->brain = new Brain();
 	*this->brain = *a.brain;
 	return (*this);
 }
