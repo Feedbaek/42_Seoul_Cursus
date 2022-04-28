@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 14:45:20 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/22 20:29:54 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/04/28 21:51:13 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <iostream>
 # include <exception>
+
+class Form;
 
 class Bureaucrat {
 private:
@@ -41,6 +43,8 @@ public:
 	int	getGrade();
 	void	upGrade();
 	void	downGrade();
+
+	void	signForm(Form &a);
 };
 
 std::ostream& operator<<(std::ostream &out, Bureaucrat &b);

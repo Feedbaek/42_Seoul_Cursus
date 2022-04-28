@@ -6,13 +6,13 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/17 14:43:01 by minskim2          #+#    #+#              #
-#    Updated: 2022/04/22 17:31:14 by minskim2         ###   ########.fr        #
+#    Updated: 2022/04/28 21:37:41 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-SRCS = main.cpp Bureaucrat.cpp
+SRCS = main.cpp Bureaucrat.cpp Form.cpp
 HEADER = ./
 NAME = a.out
 OBJECTS = $(SRCS:.cpp=.o)
