@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:58:34 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/29 19:36:57 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/05/03 20:33:01 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ Form &Form::operator=(const Form &a) {
 	return *this;
 }
 
-std::string	Form::getName() {
+std::string	Form::getName() const {
 	return this->name;
 }
 int	Form::getExec() {

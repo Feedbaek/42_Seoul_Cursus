@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 21:30:08 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/29 19:35:59 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/05/03 20:41:36 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FORM_HPP
 
 # include <iostream>
+# include <fstream>
 # include <exception>
 # include "Bureaucrat.hpp"
 
@@ -40,7 +41,7 @@ public:
 
 	Form &operator=(const Form &a);
 
-	std::string	getName();
+	std::string	getName() const;
 	int	getExec();
 	int	getSign();
 	bool	getIsSigned();
