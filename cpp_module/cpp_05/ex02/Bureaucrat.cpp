@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 17:33:06 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/28 21:51:18 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/05/04 21:59:42 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &a) {
 	return *this;
 }
 
-std::string	Bureaucrat::getName() {
+std::string	Bureaucrat::getName() const {
 	return this->name;
 }
-int	Bureaucrat::getGrade() {
+int	Bureaucrat::getGrade() const {
 	return this->grade;
 }
 void	Bureaucrat::upGrade() {
@@ -70,6 +70,18 @@ void	Bureaucrat::signForm(Form &a) {
 	} catch (std::exception& e) {
 		std::cerr  << this->name << " cannot sign "
 		<< a.getName() << " because " << e.what() << std::endl;
+	}
+}
+
+void Bureaucrat::executeForm(const Form &a) {
+	try {
+		a.execute(*this);
+		std::cout << this->name << " executes "
+		<< a.getType() << " : " << a.getName() << std::endl;
+	} catch (std::exception& e) {
+		std::cerr << this->name << " cannot execute "
+		<< a.getType() << " : " << a.getName() << " because "
+		<< a.getType() << " : " << e.what() << std::endl;
 	}
 }
 

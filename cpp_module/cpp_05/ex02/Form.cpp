@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:58:34 by minskim2          #+#    #+#             */
-/*   Updated: 2022/05/04 16:49:31 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/05/04 21:07:13 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	Form::beSigned(Bureaucrat &a) {
 	}
 }
 
-void Form::executable(Bureaucrat& b){
+void Form::executable(const Bureaucrat& b) const {
 	if (!this->getIsSigned())
 		throw DoesNotSignedException();
 	if (b.getGrade() > this->exec_grade)

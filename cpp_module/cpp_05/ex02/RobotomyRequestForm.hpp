@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 19:59:41 by minskim2          #+#    #+#             */
-/*   Updated: 2022/05/04 22:22:20 by minskim2         ###   ########.fr       */
+/*   Created: 2022/05/04 22:06:55 by minskim2          #+#    #+#             */
+/*   Updated: 2022/05/04 22:22:09 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHRUBBERYCREATION_HPP
-# define SHRUBBERYCREATION_HPP
+#ifndef ROBOTOMYREQUESTFORM_HPP
+# define ROBOTOMYREQUESTFORM_HPP
 
 # include <iostream>
 # include "Form.hpp"
 
-class ShrubberyCreationForm : public Form {
+class RobotomyRequestForm : public Form {
 private:
-	ShrubberyCreationForm();
+	RobotomyRequestForm();
 
 public:
-	ShrubberyCreationForm(std::string target);
-	ShrubberyCreationForm(const ShrubberyCreationForm &a);
-	~ShrubberyCreationForm();
+	RobotomyRequestForm(std::string str);
+	RobotomyRequestForm(const RobotomyRequestForm &a);
+	~RobotomyRequestForm();
 
-	ShrubberyCreationForm &operator=(const ShrubberyCreationForm &a);
+	RobotomyRequestForm &operator=(const RobotomyRequestForm &a);
 
 	void	execute(const Bureaucrat &a) const;
 };

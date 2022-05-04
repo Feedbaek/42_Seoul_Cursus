@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 14:45:20 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/28 21:51:13 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/05/04 21:42:48 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ public:
 
 	Bureaucrat &operator=(const Bureaucrat &a);
 
-	std::string	getName();
-	int	getGrade();
+	std::string	getName() const;
+	int	getGrade() const ;
 	void	upGrade();
 	void	downGrade();
 
 	void	signForm(Form &a);
+	void	executeForm(const Form &a);
 };
 
 std::ostream& operator<<(std::ostream &out, Bureaucrat &b);

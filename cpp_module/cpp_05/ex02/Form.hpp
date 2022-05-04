@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 21:30:08 by minskim2          #+#    #+#             */
-/*   Updated: 2022/05/04 16:48:57 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/05/04 21:06:01 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ public:
 
 	void	beSigned(Bureaucrat &a);
 
-	void executable(Bureaucrat& b);
+	void executable(const Bureaucrat& b) const;
 	virtual void execute(const Bureaucrat& b) const = 0;
 };
 
