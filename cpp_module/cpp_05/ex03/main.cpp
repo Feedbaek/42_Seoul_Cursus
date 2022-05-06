@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 20:17:34 by minskim2          #+#    #+#             */
-/*   Updated: 2022/05/06 20:33:03 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/05/06 20:41:38 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int main(void) {
 	Intern i;
-	Bureaucrat b1("Admin", 1);
-	Bureaucrat b2("Jseo", 15);
-	Bureaucrat b3("Dohykim", 70);
-	Bureaucrat b4("Hyson", 140);
+	Bureaucrat b1("Admini", 1);
+	Bureaucrat b2("Jelly", 15);
+	Bureaucrat b3("Doking", 70);
+	Bureaucrat b4("Hydra", 140);
 
 	Form* f1 = i.makeForm("PresidentialPardonForm", "Chang Chen");
 	Form* f2 = i.makeForm("RobotomyRequestForm", "Terminator");
