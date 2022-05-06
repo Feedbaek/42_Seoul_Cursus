@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/17 14:43:01 by minskim2          #+#    #+#              #
-#    Updated: 2022/04/29 19:29:56 by minskim2         ###   ########.fr        #
+#    Updated: 2022/05/06 19:27:28 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ clean:
 	rm -rf $(OBJECTS)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -rf $(NAME) Fangorn_shrubbery
 
 re: fclean all
 

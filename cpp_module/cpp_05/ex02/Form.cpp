@@ -6,17 +6,17 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:58:34 by minskim2          #+#    #+#             */
-/*   Updated: 2022/05/04 21:07:13 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/05/06 19:13:35 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 
 const char	*Form::GradeTooHighException::what(void) const throw() {
-	return ("Form Grade Too High");
+	return ("Grade Too High");
 }
 const char	*Form::GradeTooLowException::what(void) const throw() {
-	return ("Form Grade Too Low");
+	return ("Grade Too Low");
 }
 const char	*Form::DoesNotSignedException::what(void) const throw() {
 	return ("Not Signed");
@@ -88,6 +88,6 @@ void Form::executable(const Bureaucrat& b) const {
 }
 
 std::ostream& operator<<(std::ostream &out, Form &b) {
-	out << b.getName() + ", form sign grade: " << b.getSign() << " exec grade: " << b.getExec() << " signed: " << std::boolalpha << b.getIsSigned();
+	out << b.getName() + ", type: " + b.getType() + ", sign grade: " << b.getSign() << ", exec grade: " << b.getExec() << ", signed: " << std::boolalpha << b.getIsSigned();
 	return out;
 }

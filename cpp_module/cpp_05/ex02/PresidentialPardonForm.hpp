@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
+/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/04 22:06:55 by minskim2          #+#    #+#             */
-/*   Updated: 2022/05/06 17:55:34 by minskim2         ###   ########.fr       */
+/*   Created: 2022/05/06 18:31:47 by minskim2          #+#    #+#             */
+/*   Updated: 2022/05/06 18:43:47 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ROBOTOMYREQUESTFORM_HPP
-# define ROBOTOMYREQUESTFORM_HPP
+#ifndef PRESIDENTIALPARDONFORM_HPP
+# define PRESIDENTIALPARDONFORM_HPP
 
-# include <iostream>
-# include <cstdlib>
-# include <ctime>
 # include "Form.hpp"
 
-class RobotomyRequestForm : public Form {
+class PresidentialPardonForm : public Form {
 private:
-	RobotomyRequestForm();
-	static int seed;
+	PresidentialPardonForm();
 
 public:
-	RobotomyRequestForm(std::string str);
-	RobotomyRequestForm(const RobotomyRequestForm &a);
-	~RobotomyRequestForm();
+	PresidentialPardonForm(std::string str);
+	PresidentialPardonForm(const PresidentialPardonForm &a);
+	~PresidentialPardonForm();
 
-	RobotomyRequestForm &operator=(const RobotomyRequestForm &a);
+	PresidentialPardonForm	&operator=(const PresidentialPardonForm &a);
 
 	void	execute(const Bureaucrat &a) const;
 };
+
 
 #endif

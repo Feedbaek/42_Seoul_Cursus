@@ -6,17 +6,17 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:58:34 by minskim2          #+#    #+#             */
-/*   Updated: 2022/04/28 21:52:14 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/05/06 19:10:25 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 
 const char	*Form::GradeTooHighException::what(void) const throw() {
-	return ("Form Grade Too High");
+	return ("Grade Too High");
 }
 const char	*Form::GradeTooLowException::what(void) const throw() {
-	return ("Form Grade Too Low");
+	return ("Grade Too Low");
 }
 Form::Form() :sign_grade(0), exec_grade(0) {
 }
