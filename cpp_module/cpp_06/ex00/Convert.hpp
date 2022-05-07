@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 21:07:09 by minskim2          #+#    #+#             */
-/*   Updated: 2022/05/06 21:12:48 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/05/07 23:27:18 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CONVERT_HPP
 
 # include <iostream>
+# include <string>
 
 class Convert {
 private:
@@ -29,6 +30,17 @@ public:
 	~Convert();
 
 	Convert	&operator=(const Convert &a);
+
+	char	toChar() const;
+	int		toInt() const;
+	float	toFloat() const;
+	double	toDouble() const;
+
+	bool	getError() const;
+	double	getValue() const;
+	std::string	getInput() const;
 };
+
+std::ostream	&operator<<(std::ostream &o, const Convert &c);
 
 #endif
