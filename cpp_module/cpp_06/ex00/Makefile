@@ -6,12 +6,12 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/17 14:43:01 by minskim2          #+#    #+#              #
-#    Updated: 2022/05/08 00:02:23 by minskim2         ###   ########.fr        #
+#    Updated: 2022/05/11 13:04:58 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 SRCS = main.cpp Convert.cpp
 HEADER = ./
 NAME = convert

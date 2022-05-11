@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Data.cpp                                           :+:      :+:    :+:   */
+/*   ABC.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 17:26:39 by minskim2          #+#    #+#             */
-/*   Updated: 2022/05/11 12:48:58 by minskim2         ###   ########.fr       */
+/*   Created: 2022/05/11 13:31:48 by minskim2          #+#    #+#             */
+/*   Updated: 2022/05/11 13:37:48 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Data.hpp"
+#ifndef ABC_HPP
+# define ABC_HPP
 
-uintptr_t	serialize(Data* ptr) {
-	uintptr_t ret = reinterpret_cast<uintptr_t>(new char[sizeof(int)]);
-	*(reinterpret_cast<int*>(ret)) = ptr->value;
-	return ret;
-}
+#include "Base.hpp"
 
-Data*		deserialize(uintptr_t raw) {
-	Data*	ret = new Data;
-	ret->value = *reinterpret_cast<int*>(raw);
-	return ret;
-}
+class A : public Base {
+};
+
+class B : public Base {
+};
+
+class C : public Base {
+};
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 17:19:54 by minskim2          #+#    #+#             */
-/*   Updated: 2022/05/10 17:25:37 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/05/11 13:10:38 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DATA_HPP
 
 # include <iostream>
+# include <stdint.h>
 
 typedef struct s_data {
 	int	value;
