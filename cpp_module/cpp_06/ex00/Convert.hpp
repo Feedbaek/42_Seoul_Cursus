@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 21:07:09 by minskim2          #+#    #+#             */
-/*   Updated: 2022/05/09 22:13:00 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/05/13 15:27:35 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ public:
 	float	toFloat() const;
 	double	toDouble() const;
 
-	bool	getError() const;
-	double	getValue() const;
 	std::string	getInput() const;
 	class ImpossibleException : public std::exception {
 		public:

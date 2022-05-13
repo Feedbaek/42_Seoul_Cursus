@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 22:40:17 by minskim2          #+#    #+#             */
-/*   Updated: 2022/05/09 22:06:35 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/05/13 15:43:13 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,13 @@ Convert	&Convert::operator=(const Convert &a) {
 }
 
 char	Convert::toChar() const {
-	try {
-		int tmp = std::stoi(this->_input);
-		if (isprint(tmp))
-			return static_cast<char>(tmp);
-		else if (tmp > 255 || tmp < 0)
-			throw Convert::ImpossibleException();
-		else
-			throw Convert::NonDisplayableException();
-	} catch (std::exception &e) {
+	int tmp = this->toInt();
+	if (isprint(tmp))
+		return static_cast<char>(tmp);
+	else if (tmp > 255 || tmp < 0)
 		throw Convert::ImpossibleException();
-	}
+	else
+		throw Convert::NonDisplayableException();
 }
 int		Convert::toInt() const {
 	try {
