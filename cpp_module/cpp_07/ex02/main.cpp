@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/13 15:51:48 by minskim2          #+#    #+#             */
-/*   Updated: 2022/05/13 15:53:35 by minskim2         ###   ########.fr       */
+/*   Created: 2022/05/13 21:56:27 by minskim2          #+#    #+#             */
+/*   Updated: 2022/05/13 22:02:16 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ int main(int, char**)
 	{
 		numbers[i] = rand();
 	}
-	delete [] mirror;//
+	delete [] mirror;
 	return 0;
 }
