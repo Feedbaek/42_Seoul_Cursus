@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/17 14:43:01 by minskim2          #+#    #+#              #
-#    Updated: 2022/05/14 19:36:28 by minskim2         ###   ########.fr        #
+#    Updated: 2022/05/14 19:58:54 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ $(NAME): $(OBJECTS)
 clean:
 	rm -rf $(OBJECTS)
 
-fclean: clean
+fclean:
+	rm -rf $(OBJECTS)
 	rm -rf $(NAME)
 
 re:
