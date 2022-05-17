@@ -6,13 +6,13 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/17 14:43:01 by minskim2          #+#    #+#              #
-#    Updated: 2022/05/14 20:03:55 by minskim2         ###   ########.fr        #
+#    Updated: 2022/05/17 21:23:31 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-SRCS = main.cpp
+SRCS = main.cpp Span.cpp
 HEADER = ./
 NAME = a.out
 OBJECTS = $(SRCS:.cpp=.o)

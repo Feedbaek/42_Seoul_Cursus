@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 17:49:53 by minskim2          #+#    #+#             */
-/*   Updated: 2022/05/15 22:36:29 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/05/17 21:28:41 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ public:
 
 	template<typename T>
 	void	addRange(T begin, T end) {
-		if (std::distance(begin, end) > this->_vec.capacity() - this->_vec.size())
+		if (std::distance(begin, end) > static_cast<int>(this->_vec.capacity() - this->_vec.size()))
 			throw Span::CannotStoreException();
 		while (begin != end) {
 			this->_vec.push_back(*begin);
