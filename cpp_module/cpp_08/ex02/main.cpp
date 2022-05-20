@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 13:49:50 by minskim2          #+#    #+#             */
-/*   Updated: 2022/05/18 14:41:34 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/05/18 17:58:14 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,21 @@ void test_normal(void) {
 	std::stack<int> s(mstack);
 }
 
-void list_normal(void) {
-	std::list<int> mstack;
-	mstack.push_back(5);
-	mstack.push_back(17);
-	std::cout << mstack.back() << std::endl;
-	mstack.pop_back();
-	std::cout << mstack.size() << std::endl;
-	mstack.push_back(3);
-	mstack.push_back(5);
-	mstack.push_back(737);
-	//[...]
-	mstack.push_back(0);
-	std::list<int>::iterator it = mstack.begin();
-	std::list<int>::iterator ite = mstack.end();
-	++it;
-	--it;
-	while (it != ite) {
-		std::cout << *it << std::endl;
-		++it;
+void test_const_iterator(void) {
+	MutantStack<char> mstack;
+	mstack.push('a');
+	mstack.push('b');
+	mstack.push('c');
+	mstack.push('d');
+	mstack.push('e');
+	MutantStack<char>::const_iterator cit = mstack.cbegin();
+	MutantStack<char>::const_iterator cite = mstack.cend();
+	++cit;
+	--cit;
+	while (cit != cite) {
+		std::cout << *cit << std::endl;
+		++cit;
 	}
-	std::list<int> s(mstack);
 }
 
 void test_reverse_iterator(void) {
@@ -75,32 +69,32 @@ void test_reverse_iterator(void) {
 		++rit;
 	}
 }
-void list_reverse_iterator(void) {
-	std::list<double> mstack;
-	mstack.push_back(1.0);
-	mstack.push_back(2.0);
-	mstack.push_back(3.0);
-	mstack.push_back(4.0);
-	mstack.push_back(5.0);
-	std::list<double>::reverse_iterator rit = mstack.rbegin();
-	std::list<double>::reverse_iterator rite = mstack.rend();
-	++rit;
-	--rit;
-	while (rit != rite) {
-		std::cout << *rit << std::endl;
-		++rit;
+
+void test_const_reverse_iterator(void) {
+	MutantStack<std::string> mstack;
+	mstack.push("hi");
+	mstack.push("42");
+	mstack.push("Seoul");
+	mstack.push("guys");
+	mstack.push("minskim2");
+	MutantStack<std::string>::const_reverse_iterator crit = mstack.crbegin();
+	MutantStack<std::string>::const_reverse_iterator crite = mstack.crend();
+	++crit;
+	--crit;
+	while (crit != crite) {
+		std::cout << *crit << std::endl;
+		++crit;
 	}
 }
 
 int main(void) {
-	std::cout << "<MutantStack>\n";
 	test_normal();
-	std::cout << "<list>\n";
-	list_normal();
 	std::cout << std::endl;
-	std::cout << "<MutantStack>\n";
+	test_const_iterator();
+	std::cout << std::endl;
 	test_reverse_iterator();
-	std::cout << "<list>\n";
-	list_reverse_iterator();
+	std::cout << std::endl;
+	test_const_reverse_iterator();
+	std::cout << std::endl;
 	return 0;
 }
