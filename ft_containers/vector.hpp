@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/06/09 22:54:44 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/06/11 00:11:53 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,13 @@
 namespace ft {
 
 template<typename T>
-class vector_iterator {
+class vector_iterator : public iterator<random_access_iterator_tag, T> {
 public:
-	typedef random_access_iterator_tag	iterator_category;
-	typedef T							value_type;
-	typedef value_type&					reference;
-	typedef const value_type&			const_reference;
-	typedef value_type*					pointer;
-	typedef const value_type*			const_pointer;
-	typedef std::ptrdiff_t				difference_type;
+	typedef typename iterator<random_access_iterator_tag, T>::iterator			iterator_category;
+	typedef typename iterator<random_access_iterator_tag, T>::value_type		value_type;
+	typedef typename iterator<random_access_iterator_tag, T>::reference			reference;
+	typedef typename iterator<random_access_iterator_tag, T>::pointer			pointer;
+	typedef typename iterator<random_access_iterator_tag, T>::difference_type	difference_type;
 
 protected:
 	pointer p;
@@ -51,13 +49,13 @@ public:
 	reference operator*() {
 		return *p;
 	}
-	const_reference operator*() const {
+	const reference operator*() const {
 		return *p;
 	}
 	pointer operator->() {
 		return p;
 	}
-	const_pointer operator->() const {
+	const pointer operator->() const {
 		return p;
 	}
 	virtual vector_iterator& operator++() {
@@ -112,7 +110,7 @@ public:
 	virtual reference operator[](int value) {
 		return *(p + value);
 	}
-	virtual const_reference operator[](int value) const {
+	virtual const reference operator[](int value) const {
 		return *(p + value);
 	}
 };
@@ -132,7 +130,7 @@ public:
 	typedef vector_reverse_iterator<iterator>					reverse_iterator;
 	typedef vector_reverse_iterator<const_iterator>				const_reverse_iterator;
 	typedef typename iterator_traits<iterator>::difference_type	difference_type;
-	typedef size_t size_type;
+	typedef size_t												 size_type;
 
 private:
 	allocator_type _alloc;
@@ -141,12 +139,16 @@ private:
 	size_type _size;
 
 public:
-	explicit vector() : _container(0), _capacity(0), _size(0) {}
-	explicit vector(size_type n, const value_type& val=value_type()) : _container(0), _capacity(0), _size(0) {
-
+	explicit vector(const allocator_type& alloc = allocator_type()) : _alloc(alloc), _container(0), _capacity(0), _size(0) {}
+	explicit vector(size_type n, const value_type& val=value_type(), const allocator_type& alloc = allocator_type()) : _alloc(alloc), _container(0), _capacity(0), _size(0) {
+		_container = _alloc.allocate(n);
+		_capacity = n;
+		for (int i=0; i<n; i++) {
+			alloc.construct(_container + i, val);
+		}
 	}
 	template<typename Iter>
-	vector(Iter first, Iter last) {
+	vector(Iter first, Iter last, const allocator_type& alloc = allocator_type()) {
 
 	}
 	vector(const vector& a) {
@@ -162,13 +164,13 @@ public:
 		return iterator(this->_container);
 	}
 	const_iterator begin() const {
-		return const_iterator(this->_container)
+		return const_iterator(this->_container);
 	}
 	iterator end() {
 		return iterator(this->_container + this->_size);
 	}
 	const_iterator end() const {
-		return const_iterator(this->_container + this->_size)
+		return const_iterator(this->_container + this->_size);
 	}
 	reverse_iterator rbegin() {
 		return reverse_iterator(this->end());
