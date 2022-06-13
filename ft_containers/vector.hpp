@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/06/11 00:11:53 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/06/12 20:29:07 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <cstddef>
 
 # include "iterator.hpp"
+# include "enable_if.hpp"
 
 namespace ft {
 
@@ -139,17 +140,19 @@ private:
 	size_type _size;
 
 public:
-	explicit vector(const allocator_type& alloc = allocator_type()) : _alloc(alloc), _container(0), _capacity(0), _size(0) {}
-	explicit vector(size_type n, const value_type& val=value_type(), const allocator_type& alloc = allocator_type()) : _alloc(alloc), _container(0), _capacity(0), _size(0) {
+	explicit vector(const allocator_type& alloc = allocator_type())
+		: _alloc(alloc), _container(0), _capacity(0), _size(0) {}
+	explicit vector(size_type n, const value_type& val=value_type(), const allocator_type& alloc = allocator_type())
+		: _alloc(alloc), _container(0), _capacity(0), _size(0) {
 		_container = _alloc.allocate(n);
 		_capacity = n;
-		for (int i=0; i<n; i++) {
-			alloc.construct(_container + i, val);
-		}
+		for (size_type i=0; i<n; i++)
+			_alloc.construct(_container + i, val);
 	}
 	template<typename Iter>
-	vector(Iter first, Iter last, const allocator_type& alloc = allocator_type()) {
-
+	vector(Iter first, Iter last, const allocator_type& alloc = allocator_type(), typename enable_if<std::is_integral<T>::value, T>::type* = 0)
+		: _alloc(alloc), _container(0), _capacity(0), _size(0) {
+		insert(_container, first, last);
 	}
 	vector(const vector& a) {
 
@@ -188,6 +191,23 @@ public:
 	size_type size() const {
 		return this->_size;
 	}
+	size_type max_size() const {
+		return _alloc.max_size();
+	}
+	void resize(size_type n, value_type val = value_type()) {
+		if (n > _capacity)
+			reserve(n);
+		if (n > _size) {
+			for (size_type i=_size; i<n; i++)
+				_alloc.construct(_container + i, val);
+			_size = n;
+		} else if (n < _size) {
+			for (size_type i=n; i<_size; i++) {
+				_alloc.destroy()
+			}
+		}
+	}
+
 };
 
 }
