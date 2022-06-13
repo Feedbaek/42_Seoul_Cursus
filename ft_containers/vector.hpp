@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/06/12 20:29:07 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/06/13 22:48:48 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,22 @@
 
 # include <memory>
 # include <cstddef>
+# include <iterator>
 
 # include "iterator.hpp"
 # include "enable_if.hpp"
+# include "is_integral.hpp"
 
 namespace ft {
 
 template<typename T>
 class vector_iterator : public iterator<random_access_iterator_tag, T> {
 public:
-	typedef typename iterator<random_access_iterator_tag, T>::iterator			iterator_category;
-	typedef typename iterator<random_access_iterator_tag, T>::value_type		value_type;
-	typedef typename iterator<random_access_iterator_tag, T>::reference			reference;
-	typedef typename iterator<random_access_iterator_tag, T>::pointer			pointer;
-	typedef typename iterator<random_access_iterator_tag, T>::difference_type	difference_type;
+	typedef typename iterator<random_access_iterator_tag, T>::iterator_category	iterator_category;
+	typedef typename iterator<random_access_iterator_tag, T>::value_type			value_type;
+	typedef typename iterator<random_access_iterator_tag, T>::reference				reference;
+	typedef typename iterator<random_access_iterator_tag, T>::pointer				pointer;
+	typedef typename iterator<random_access_iterator_tag, T>::difference_type		difference_type;
 
 protected:
 	pointer p;
@@ -150,7 +152,7 @@ public:
 			_alloc.construct(_container + i, val);
 	}
 	template<typename Iter>
-	vector(Iter first, Iter last, const allocator_type& alloc = allocator_type(), typename enable_if<std::is_integral<T>::value, T>::type* = 0)
+	vector(Iter first, Iter last, const allocator_type& alloc = allocator_type(), typename enable_if<!is_integral<Iter>::value, Iter>::type* = 0)
 		: _alloc(alloc), _container(0), _capacity(0), _size(0) {
 		insert(_container, first, last);
 	}
@@ -162,6 +164,8 @@ public:
 	vector& operator=(const vector& a) {
 
 	}
+
+	// Iterators:
 
 	iterator begin() {
 		return iterator(this->_container);
@@ -188,6 +192,8 @@ public:
 		return const_reverse_iterator(this->begin());
 	}
 
+	// Capacity:
+
 	size_type size() const {
 		return this->_size;
 	}
@@ -195,17 +201,130 @@ public:
 		return _alloc.max_size();
 	}
 	void resize(size_type n, value_type val = value_type()) {
-		if (n > _capacity)
-			reserve(n);
+		if (n > _capacity) {
+			if (n < 2 * _capacity)
+				reserve(2 * _capacity);
+			else
+				reserve(n);
+		}
 		if (n > _size) {
 			for (size_type i=_size; i<n; i++)
 				_alloc.construct(_container + i, val);
 			_size = n;
 		} else if (n < _size) {
-			for (size_type i=n; i<_size; i++) {
-				_alloc.destroy()
-			}
+			for (size_type i=n; i<_size; i++)
+				_alloc.destroy();
+			_size = n;
 		}
+	}
+	size_type capacity() const {
+		return _capacity;
+	}
+	bool empty() const {
+		return _size == 0;
+	}
+	void reserve(size_type n) {
+		if (n > max_size())
+			throw std::length_error("vector::reserve");
+		if (n > _capacity) {
+			pointer _new_container = _alloc.allocate(n);
+			for (size_type i=0; i<_size; i++) {
+				_alloc.construct(_new_container + i, _container[i]);
+				_alloc.destroy(_container + i);
+			}
+			_alloc.deallocate(_container, _capacity);
+			_container = _new_container;
+		}
+		_capacity = n;
+	}
+
+	// Elememt access:
+
+	reference operator[](size_type n) {
+		return *(_container + n);
+	}
+	const_reference operator[](size_type n) const {
+		return *(_container + n);
+	}
+	reference at(size_type n) {
+		if (n >= _size)
+			throw std::out_of_range("vector:at");
+		return *(_container + n);
+	}
+	const_reference at(size_type n) const {
+		if (n >= _size)
+			throw std::out_of_range("vector:at");
+		return *(_container + n);
+	}
+	reference front() {
+		return *(_container);
+	}
+	const_reference front() const {
+		return *(_container);
+	}
+	reference back() {
+		if (_size > 0)
+			return *(_container + _size - 1);
+		return *(_container);
+	}
+	const_reference back() const {
+		if (_size > 0)
+			return *(_container + _size - 1);
+		return *(_container);
+	}
+
+	// Modifiers:
+
+	template<typename InputIterator>
+	void assign(InputIterator first, InputIterator last, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type* = 0) {
+		clear();
+		size_type d_size = std::distance(first, last);
+		if (d_size <= _capacity())
+			for (size_type i=0; i< d_size; i++)
+				_alloc.construct(_container + i, *(first + i));
+		else {
+			reserve(d_size);
+			for (size_type i=0; i< d_size; i++)
+				_alloc.construct(_container + i, *(first + i));
+		}
+	}
+	void assign(size_type n, const value_type& val) {
+		clear();
+		if (n <= _capacity)
+			for (size_type i=0; i<n; i++)
+				_alloc.construct(_container, val);
+		else {
+			reserve(n);
+			for (size_type i=0; i<n; i++)
+				_alloc.construct(_container, val);
+		}
+	}
+	void push_back(const value_type& val) {
+		if (_size == _capacity) {
+			if (_size == 0)
+				reserve(1);
+			else
+				reserve(_capacity * 2);
+		}
+		_alloc.construct(_container + _size++, val);
+	}
+	void pop_back() {
+		_alloc.destroy(_container + --_size);
+	}
+	iterator insert(iterator position, const value_type& val) {
+
+	}
+	void insert(iterator position, size_type n, const value_type& val) {
+
+	}
+	template <typename InputIterator>
+	void insert(iterator position, InputIterator first, InputIterator last, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type* = 0) {
+
+	}
+
+	void clear() {
+		for (size_type i=0; i<_size; i++)
+			_alloc.destroy(_container + i);
 	}
 
 };
