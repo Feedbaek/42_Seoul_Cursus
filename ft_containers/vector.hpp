@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/06/13 22:48:48 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/06/14 22:48:55 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,16 +306,50 @@ public:
 			else
 				reserve(_capacity * 2);
 		}
-		_alloc.construct(_container + _size++, val);
+		_alloc.construct(_container + _size, val);
+		_size++;
 	}
 	void pop_back() {
 		_alloc.destroy(_container + --_size);
 	}
 	iterator insert(iterator position, const value_type& val) {
-
+		size_type rlen = (_container + _size) - &(*position);
+		size_type llen = &(*position) - _container;
+		if (_size == 0)
+			reserve(1);
+		else if (_size == _capacity) {
+			reserve(_capacity * 2);
+		}
+		iterator end_iter = end();
+		for (size_type i=0; i<rlen; i++) {
+			_alloc.construct(&(*(end_iter - i)), *(end_iter - i - 1));
+			_alloc.destroy(&(*(end_iter - i - 1)));
+		}
+		_alloc.construct(_container + llen, val);
+		_size++;
+		return (iterator(_container + llen));
 	}
 	void insert(iterator position, size_type n, const value_type& val) {
-
+		size_type rlen = (_container + _size) - &(*position);
+		size_type llen = &(*position) - _container;
+		if (_size + n > max_size())
+			throw (std::length_error("vector::insert(fill)"));
+		if (_size == 0)
+			reserve(n);
+		else if (_size + n > _capacity) {
+			if (_size + n < _capacity * 2)
+				reserve(_capacity * 2);
+			else
+				reserve(_size + n);
+		}
+		iterator end_iter = end();
+		for (size_type i=0; i<rlen; i++) {
+			_alloc.construct(&(*(end_iter + (n-1) - i)), *(end_iter - i - 1));
+			_alloc.destroy(&(*(end_iter - i - 1)));
+		}
+		for (size_type i=0; i<n; i++)
+			_alloc.construct(_container + llen + i, val);
+		_size += n;
 	}
 	template <typename InputIterator>
 	void insert(iterator position, InputIterator first, InputIterator last, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type* = 0) {
