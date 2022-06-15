@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/06/14 22:48:55 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/06/15 16:57:24 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,10 +229,11 @@ public:
 		if (n > _capacity) {
 			pointer _new_container = _alloc.allocate(n);
 			for (size_type i=0; i<_size; i++) {
-				_alloc.construct(_new_container + i, _container[i]);
+				_alloc.construct(_new_container + i, *(_container + i));
 				_alloc.destroy(_container + i);
 			}
-			_alloc.deallocate(_container, _capacity);
+			if (_container != 0)
+				_alloc.deallocate(_container, _capacity);
 			_container = _new_container;
 		}
 		_capacity = n;
@@ -279,7 +280,7 @@ public:
 	void assign(InputIterator first, InputIterator last, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type* = 0) {
 		clear();
 		size_type d_size = std::distance(first, last);
-		if (d_size <= _capacity())
+		if (d_size <= _capacity)
 			for (size_type i=0; i< d_size; i++)
 				_alloc.construct(_container + i, *(first + i));
 		else {
@@ -312,48 +313,115 @@ public:
 	void pop_back() {
 		_alloc.destroy(_container + --_size);
 	}
+	//void reserve(size_type n) {
+	//	if (n > max_size())
+	//		throw std::length_error("vector::reserve");
+	//	if (n > _capacity) {
+	//		pointer _new_container = _alloc.allocate(n);
+	//		for (size_type i=0; i<_size; i++) {
+	//			_alloc.construct(_new_container + i, *(_container + i));
+	//			_alloc.destroy(_container + i);
+	//		}
+	//		if (_container != 0)
+	//			_alloc.deallocate(_container, _capacity);
+	//		_container = _new_container;
+	//	}
+	//	_capacity = n;
+	//}
 	iterator insert(iterator position, const value_type& val) {
 		size_type rlen = (_container + _size) - &(*position);
 		size_type llen = &(*position) - _container;
-		if (_size == 0)
-			reserve(1);
-		else if (_size == _capacity) {
-			reserve(_capacity * 2);
+		pointer _new_container = _container;
+		size_type _new_capacity = _capacity;
+		if (_size == max_size())
+			throw std::length_error("vector::insert(single element)");
+		if (_size == 0) {
+			_new_container = _alloc.allocate(1);
+			_new_capacity = 1;
+		} else if (_size == _capacity) {
+			_new_container = _alloc.allocate(_capacity * 2);
+			_new_capacity *= 2;
 		}
-		iterator end_iter = end();
+		// position 이전 값들 옮기기
+		if (_container != _new_container)
+			for (size_type i=0; i<llen; i++) {
+				_alloc.construct(_new_container + i, *(_container + i));
+				_alloc.destroy(_container + i);
+			}
+		// position 이후 값들 옮기기
 		for (size_type i=0; i<rlen; i++) {
-			_alloc.construct(&(*(end_iter - i)), *(end_iter - i - 1));
-			_alloc.destroy(&(*(end_iter - i - 1)));
+			_alloc.construct(_new_container + _size - i, *(_container + _size-1 - i));
+			_alloc.destroy(_container + _size - i - 1);
 		}
-		_alloc.construct(_container + llen, val);
+		// 새로운 값 추가
+		_alloc.construct(_new_container + llen, val);
+		if (_container != _new_container)
+			_alloc.deallocate(_container, _capacity);
+		_container = _new_container;
+		_capacity = _new_capacity;
 		_size++;
 		return (iterator(_container + llen));
 	}
 	void insert(iterator position, size_type n, const value_type& val) {
 		size_type rlen = (_container + _size) - &(*position);
 		size_type llen = &(*position) - _container;
+		pointer _new_container = _container;
+		size_type _new_capacity = _capacity;
+		if (n == 0)
+			return ;
 		if (_size + n > max_size())
-			throw (std::length_error("vector::insert(fill)"));
-		if (_size == 0)
-			reserve(n);
-		else if (_size + n > _capacity) {
-			if (_size + n < _capacity * 2)
-				reserve(_capacity * 2);
-			else
-				reserve(_size + n);
+			throw std::length_error("vector::insert(fill)");
+		if (_size + n > _capacity) {
+			if (_size + n < _capacity * 2) {
+				_new_container = _alloc.allocate(_capacity * 2);
+				_new_capacity *= 2;
+			} else {
+				_new_container = _alloc.allocate(_size + n);
+				_new_capacity = _size + n;
+			}
 		}
-		iterator end_iter = end();
+		// position 이전 값들 옮기기
+		if (_container != _new_container)
+			for (size_type i=0; i<llen; i++) {
+				_alloc.construct(_new_container + i, *(_container + i));
+				_alloc.destroy(_container + i);
+			}
+		// position 이후 값들 옮기기
 		for (size_type i=0; i<rlen; i++) {
-			_alloc.construct(&(*(end_iter + (n-1) - i)), *(end_iter - i - 1));
-			_alloc.destroy(&(*(end_iter - i - 1)));
+			_alloc.construct(_new_container + _size-1 + n - i, *(_container + _size-1 - i);
+			_alloc.destroy(_container + _size-1 - i);
 		}
+		// 새로운 값 추가
 		for (size_type i=0; i<n; i++)
-			_alloc.construct(_container + llen + i, val);
+			_alloc.construct(_new_container + llen + i, val);
+		if (_container != _new_container)
+			_alloc.deallocate(_container, _capacity);
+		_container = _new_container;
+		_capacity = _new_capacity;
 		_size += n;
 	}
 	template <typename InputIterator>
 	void insert(iterator position, InputIterator first, InputIterator last, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type* = 0) {
-
+		size_type rlen = (_container + _size) - &(*position);
+		size_type llen = &(*position) - _container;
+		size_type num = std::distance(first, last);
+		size_type after_size = num + _size;
+		if (_size + num > max_size())
+			throw std::length_error("vector::insert(range)");
+		if (_size + num > _capacity) {
+			if (_size + num < _capacity * 2)
+				reserve(_capacity * 2);
+			else
+				reserve(_size + num);
+		}
+		iterator end_iter = end();
+		for (size_type i=0; i<rlen; i++) {
+			_alloc.construct(&(*(end_iter + (num-1) - i)), *(end_iter - i - 1));
+			_alloc.destroy(&(*(end_iter - i - 1)));
+		}
+		for (size_type i=0; i<num; i++)
+			_alloc.construct(_container + llen + i, *(first + i));
+		_size += num;
 	}
 
 	void clear() {

@@ -15,14 +15,15 @@ int main() {
 	a = 10;
 	//std::cout << a;
 	std::vector<int> v_i;
-	v_i.reserve(4);
+	//v_i.reserve(4);
 	//for (int i=0; i<4; i++)
 	//	v_i.push_back(i);
 	std::cout << "resize \n";
-	v_i.insert(v_i.begin(), 5, -1);
+	//v_i.insert(v_i.begin(), 5, -1);
 	//v_i.resize(11);
-	for (int i=0; i<v_i.capacity(); i++)
-		std::cout << v_i[i] << " ";
+	//for (int i=0; i<v_i.capacity(); i++)
+	v_i.push_back(-1);
+		std::cout << *(v_i.end()+1) << " ";
 	std::cout << std::endl;
 	std::cout << v_i.capacity() << "\n";
 	std::cout << v_i.size() << "\n";
