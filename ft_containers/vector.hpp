@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/06/16 19:19:41 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/06/17 16:02:44 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "iterator.hpp"
 # include "enable_if.hpp"
 # include "is_integral.hpp"
+# include "lexicographical_compare.hpp"
 
 namespace ft {
 
@@ -133,7 +134,7 @@ public:
 	typedef vector_reverse_iterator<iterator>					reverse_iterator;
 	typedef vector_reverse_iterator<const_iterator>				const_reverse_iterator;
 	typedef typename iterator_traits<iterator>::difference_type	difference_type;
-	typedef size_t												 size_type;
+	typedef size_t												size_type;
 
 private:
 	allocator_type _alloc;
@@ -477,6 +478,44 @@ public:
 	}
 
 };
+
+
+template<typename T>
+bool operator==(const vector<T>& lhs, const vector<T>& rhs) {
+	if (lhs._size != rhs._size)
+		return false;
+	typename vector<T>::const_iterator first1 = lhs.begin();
+	typename vector<T>::const_iterator first2 = rhs.begin();
+	for (vector<T>::size_type i=0; i<lhs._size; i++)
+		if (*(first1 + i) != *(first2 + i))
+			return false;
+	return true;
+}
+template<typename T>
+bool operator!=(const vector<T>& lhs, const vector<T>& rhs) {
+	return !(lhs == rhs);
+}
+template<typename T>
+bool operator<(const vector<T>& lhs, const vector<T>& rhs) {
+	return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+}
+template<typename T>
+bool operator<=(const vector<T>& lhs, const vector<T>& rhs) {
+	return !(lhs > rhs);
+}
+template<typename T>
+bool operator>(const vector<T>& lhs, const vector<T>& rhs) {
+	return lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
+}
+template<typename T>
+bool operator>=(const vector<T>& lhs, const vector<T>& rhs) {
+	return !(lhs < rhs);
+}
+
+template<typename T>
+void swap(vector<T>&x, vector<T>&y) {
+	x.swap(y);
+}
 
 }
 
