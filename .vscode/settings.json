@@ -75,6 +75,7 @@
 		"locale": "cpp",
 		"map": "cpp",
 		"mutex": "cpp",
-		"stack": "cpp"
+		"stack": "cpp",
+		"set": "cpp"
 	}
 }

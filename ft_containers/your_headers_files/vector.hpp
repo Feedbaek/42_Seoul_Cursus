@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/06/17 20:43:16 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/06/17 22:34:04 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "enable_if.hpp"
 # include "is_integral.hpp"
 # include "lexicographical_compare.hpp"
+# include "utils.hpp"
 
 namespace ft {
 
@@ -62,29 +63,29 @@ public:
 	const pointer operator->() const {
 		return p;
 	}
-	virtual vector_iterator& operator++() {
+	vector_iterator& operator++() {
 		++p;
 		return *this;
 	}
-	virtual vector_iterator operator++(int) {
+	vector_iterator operator++(int) {
 		vector_iterator tmp(*this);
 		++p;
 		return tmp;
 	}
-	virtual vector_iterator& operator--() {
+	vector_iterator& operator--() {
 		--p;
 		return *this;
 	}
-	virtual vector_iterator operator--(int) {
+	vector_iterator operator--(int) {
 		vector_iterator tmp(*this);
 		--p;
 		return tmp;
 	}
-	virtual vector_iterator operator+(int value) {
+	vector_iterator operator+(int value) {
 		vector_iterator tmp(*this);
 		return tmp += value;
 	}
-	virtual vector_iterator operator-(int value) {
+	vector_iterator operator-(int value) {
 		vector_iterator tmp(*this);
 		return tmp -= value;
 	}
@@ -103,18 +104,18 @@ public:
 	bool operator>=(const vector_iterator& a) const {
 		return p >= a.p;
 	}
-	virtual vector_iterator& operator+=(int value) {
+	vector_iterator& operator+=(int value) {
 		p += value;
 		return *this;
 	}
-	virtual vector_iterator& operator-=(int value) {
+	vector_iterator& operator-=(int value) {
 		p -= value;
 		return *this;
 	}
-	virtual reference operator[](int value) {
+	reference operator[](int value) {
 		return *(p + value);
 	}
-	virtual const reference operator[](int value) const {
+	const reference operator[](int value) const {
 		return *(p + value);
 	}
 };
@@ -225,7 +226,7 @@ public:
 			_size = n;
 		} else if (n < _size) {
 			for (size_type i=n; i<_size; i++)
-				_alloc.destroy();
+				_alloc.destroy(_container + i);
 			_size = n;
 		}
 	}
@@ -291,7 +292,7 @@ public:
 	template<typename InputIterator>
 	void assign(InputIterator first, InputIterator last, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type* = 0) {
 		clear();
-		size_type d_size = std::distance(first, last);
+		size_type d_size = ft::distance(first, last);
 		if (d_size <= _capacity)
 			for (size_type i=0; i< d_size; i++)
 				_alloc.construct(_container + i, *(first + i));
@@ -406,7 +407,7 @@ public:
 		size_type llen = &(*position) - _container;
 		pointer _new_container = _container;
 		size_type _new_capacity = _capacity;
-		size_type num = std::distance(first, last);
+		size_type num = ft::distance(first, last);
 		if (num == 0)
 			return ;
 		if (_size + num > max_size())
@@ -444,13 +445,13 @@ public:
 		return erase(iter, iter + 1);
 	}
 	iterator erase(iterator first, iterator last) {
-		size_type num = std::distance(first, last);
+		size_type num = ft::distance(first, last);
 		iterator _end = end();
 		for (size_type i=0; i<num; i++)
 			_alloc.destroy(&(*(first + i)));
 		for (size_type i=0; last + i != _end; i++) {
-			_alloc.construct(first + i, *(last + i));
-			_alloc.destroy(last + i);
+			_alloc.construct(&(*(first + i)), *(last + i));
+			_alloc.destroy(&(*(last + i)));
 		}
 		_size -= num;
 		return first;

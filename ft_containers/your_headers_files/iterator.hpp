@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:04:36 by minskim2          #+#    #+#             */
-/*   Updated: 2022/06/17 16:46:43 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/06/17 22:40:04 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,63 +61,70 @@ struct iterator_traits<const T*>
 	typedef const T&					reference;
 };
 
-template<typename Iter>
-class vector_reverse_iterator : public Iter {
+template<typename Iterator>
+class reverse_iterator : public iterator {
 public:
-	typedef Iter iterator_type;
+	typedef Iterator iterator_type;
 	typedef typename iterator_traits<Iter>::iterator_category	iterator_category;
 	typedef typename iterator_traits<Iter>::value_type			value_type;
 	typedef typename iterator_traits<Iter>::difference_type		difference_type;
 	typedef typename iterator_traits<Iter>::pointer				pointer;
 	typedef typename iterator_traits<Iter>::reference			reference;
 
+private:
+	iterator_type _iter;
+
 public:
-	vector_reverse_iterator() : Iter() {}
-	vector_reverse_iterator(pointer a): Iter(a) {}
-	vector_reverse_iterator(const vector_reverse_iterator& a) : Iter(a) {}
-	vector_reverse_iterator& operator=(const vector_reverse_iterator& a) {
-		this->p = a.p;
-		return *this;
+	reverse_iterator() : _iter() {}
+	explicit reverse_iterator(iterator_type it) : _iter(it - 1) {}
+	template<typename Iter>
+	reverse_iterator(const reverse_iterator<Iter>& rev_it) : _iter(rev_it.base()) {}
+
+	iterator_type base() {
+		return _iter;
 	}
-	~vector_reverse_iterator() {}
-	virtual vector_reverse_iterator& operator++() {
+
+	reference operator*() const {
+		return *_iter;
+	}
+	reverse_iterator& operator++() {
 		--(this->p);
 		return *this;
 	}
-	virtual vector_reverse_iterator operator++(int) {
-		vector_reverse_iterator tmp(*this);
+	reverse_iterator operator++(int) {
+		reverse_iterator tmp(*this);
 		--(this->p);
 		return tmp;
 	}
-	virtual vector_reverse_iterator& operator--() {
+	reverse_iterator& operator--() {
 		++(this->p);
 		return *this;
 	}
-	virtual vector_reverse_iterator operator--(int) {
-		vector_reverse_iterator tmp(*this);
+	reverse_iterator operator--(int) {
+		reverse_iterator tmp(*this);
 		++(this->p);
 		return tmp;
 	}
-	virtual vector_reverse_iterator operator+(int value) {
-		vector_reverse_iterator tmp(*this);
+	reverse_iterator operator+(int value) {
+		reverse_iterator tmp(*this);
 		return tmp - value;
 	}
-	virtual vector_reverse_iterator operator-(int value) {
-		vector_reverse_iterator tmp(*this);
+	reverse_iterator operator-(int value) {
+		reverse_iterator tmp(*this);
 		return tmp + value;
 	}
-	virtual vector_reverse_iterator& operator+=(int value) {
+	reverse_iterator& operator+=(int value) {
 		this->p -= value;
 		return *this;
 	}
-	virtual vector_reverse_iterator& operator-=(int value) {
+	reverse_iterator& operator-=(int value) {
 		this->p += value;
 		return *this;
 	}
-	virtual reference operator[](int value) {
+	reference operator[](int value) {
 		return *(this->p - value);
 	}
-	virtual const reference operator[](int value) const {
+	const reference operator[](int value) const {
 		return *(this->p - value);
 	}
 };
