@@ -1,6 +1,16 @@
-#include "vector.hpp"
-#include <vector>
+
 #include <iostream>
+
+#if 0 //CREATE A REAL STL EXAMPLE
+	#include <map>
+	#include <stack>
+	#include <vector>
+	namespace ft = std;
+#else
+	#include "map.hpp"
+	#include "stack.hpp"
+	#include "vector.hpp"
+#endif
 
 struct test_s
 {
@@ -14,8 +24,8 @@ int main() {
 	int a = int();
 	a = 10;
 	//std::cout << a;
-	std::vector<int> v_i;
-	std::vector<int> v_i_2;
+	ft::vector<int> v_i;
+	ft::vector<int> v_i_2;
 	v_i.reserve(10);
 	//v_i.erase(v_i.begin());
 	//v_i.assign(7, -2);

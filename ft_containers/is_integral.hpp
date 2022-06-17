@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:27:25 by minskim2          #+#    #+#             */
-/*   Updated: 2022/06/13 17:16:33 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/06/17 16:20:58 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,6 @@ struct is_integral<bool> {
 template<>
 struct is_integral<char> {
 	typedef char type;
-	const static bool value = true;
-};
-template<>
-struct is_integral<char16_t> {
-	typedef char16_t type;
-	const static bool value = true;
-};
-template<>
-struct is_integral<char32_t> {
-	typedef char32_t type;
 	const static bool value = true;
 };
 template<>

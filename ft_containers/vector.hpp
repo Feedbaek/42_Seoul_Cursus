@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/06/17 16:02:44 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/06/17 16:23:24 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -482,11 +482,12 @@ public:
 
 template<typename T>
 bool operator==(const vector<T>& lhs, const vector<T>& rhs) {
-	if (lhs._size != rhs._size)
+	if (lhs.size() != rhs.size())
 		return false;
 	typename vector<T>::const_iterator first1 = lhs.begin();
 	typename vector<T>::const_iterator first2 = rhs.begin();
-	for (vector<T>::size_type i=0; i<lhs._size; i++)
+	typename vector<T>::size_type num = lhs.size();
+	for (typename vector<T>::size_type i=0; i<num; i++)
 		if (*(first1 + i) != *(first2 + i))
 			return false;
 	return true;
