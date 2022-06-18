@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/06/17 20:43:16 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/06/18 19:38:45 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "enable_if.hpp"
 # include "is_integral.hpp"
 # include "lexicographical_compare.hpp"
+# include "utils.hpp"
 
 namespace ft {
 
@@ -56,37 +57,34 @@ public:
 	const reference operator*() const {
 		return *p;
 	}
-	pointer operator->() {
+	pointer operator->() const {
 		return p;
 	}
-	const pointer operator->() const {
-		return p;
-	}
-	virtual vector_iterator& operator++() {
+	vector_iterator& operator++() {
 		++p;
 		return *this;
 	}
-	virtual vector_iterator operator++(int) {
+	vector_iterator operator++(int) {
 		vector_iterator tmp(*this);
 		++p;
 		return tmp;
 	}
-	virtual vector_iterator& operator--() {
+	vector_iterator& operator--() {
 		--p;
 		return *this;
 	}
-	virtual vector_iterator operator--(int) {
+	vector_iterator operator--(int) {
 		vector_iterator tmp(*this);
 		--p;
 		return tmp;
 	}
-	virtual vector_iterator operator+(int value) {
+	vector_iterator operator+(difference_type n) {
 		vector_iterator tmp(*this);
-		return tmp += value;
+		return tmp += n;
 	}
-	virtual vector_iterator operator-(int value) {
+	vector_iterator operator-(difference_type n) {
 		vector_iterator tmp(*this);
-		return tmp -= value;
+		return tmp -= n;
 	}
 	difference_type operator-(const vector_iterator& a) const {
 		return p - a.p;
@@ -103,36 +101,32 @@ public:
 	bool operator>=(const vector_iterator& a) const {
 		return p >= a.p;
 	}
-	virtual vector_iterator& operator+=(int value) {
-		p += value;
+	vector_iterator& operator+=(difference_type n) {
+		p += n;
 		return *this;
 	}
-	virtual vector_iterator& operator-=(int value) {
-		p -= value;
+	vector_iterator& operator-=(difference_type n) {
+		p -= n;
 		return *this;
 	}
-	virtual reference operator[](int value) {
-		return *(p + value);
-	}
-	virtual const reference operator[](int value) const {
-		return *(p + value);
+	reference operator[](difference_type n) {
+		return *(p + n);
 	}
 };
 
 template<typename T>
 class vector {
-
 public:
 	typedef T													value_type;
-	typedef std::allocator<T>									allocator_type;
+	typedef std::allocator<value_type>							allocator_type;
 	typedef typename allocator_type::reference					reference;
 	typedef typename allocator_type::const_reference			const_reference;
 	typedef typename allocator_type::pointer					pointer;
 	typedef typename allocator_type::const_pointer				const_pointer;
-	typedef vector_iterator<T>									iterator;
-	typedef vector_iterator<const T>							const_iterator;
-	typedef vector_reverse_iterator<iterator>					reverse_iterator;
-	typedef vector_reverse_iterator<const_iterator>				const_reverse_iterator;
+	typedef vector_iterator<value_type>							iterator;
+	typedef vector_iterator<const value_type>					const_iterator;
+	typedef ft::reverse_iterator<iterator>						reverse_iterator;
+	typedef ft::reverse_iterator<const_iterator>				const_reverse_iterator;
 	typedef typename iterator_traits<iterator>::difference_type	difference_type;
 	typedef size_t												size_type;
 
@@ -148,9 +142,10 @@ public:
 	explicit vector(size_type n, const value_type& val=value_type(), const allocator_type& alloc = allocator_type())
 		: _alloc(alloc), _container(0), _capacity(0), _size(0) {
 		_container = _alloc.allocate(n);
-		_capacity = n;
 		for (size_type i=0; i<n; i++)
 			_alloc.construct(_container + i, val);
+		_capacity = n;
+		_size = n;
 	}
 	template<typename Iter>
 	vector(Iter first, Iter last, const allocator_type& alloc = allocator_type(), typename enable_if<!is_integral<Iter>::value, Iter>::type* = 0)
@@ -225,7 +220,7 @@ public:
 			_size = n;
 		} else if (n < _size) {
 			for (size_type i=n; i<_size; i++)
-				_alloc.destroy();
+				_alloc.destroy(_container + i);
 			_size = n;
 		}
 	}
@@ -291,7 +286,7 @@ public:
 	template<typename InputIterator>
 	void assign(InputIterator first, InputIterator last, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type* = 0) {
 		clear();
-		size_type d_size = std::distance(first, last);
+		size_type d_size = ft::distance(first, last);
 		if (d_size <= _capacity)
 			for (size_type i=0; i< d_size; i++)
 				_alloc.construct(_container + i, *(first + i));
@@ -304,14 +299,10 @@ public:
 	}
 	void assign(size_type n, const value_type& val) {
 		clear();
-		if (n <= _capacity)
-			for (size_type i=0; i<n; i++)
-				_alloc.construct(_container, val);
-		else {
+		if (n > _capacity)
 			reserve(n);
-			for (size_type i=0; i<n; i++)
-				_alloc.construct(_container, val);
-		}
+		for (size_type i=0; i<n; i++)
+			_alloc.construct(_container + i, val);
 		_size = n;
 	}
 	void push_back(const value_type& val) {
@@ -406,7 +397,7 @@ public:
 		size_type llen = &(*position) - _container;
 		pointer _new_container = _container;
 		size_type _new_capacity = _capacity;
-		size_type num = std::distance(first, last);
+		size_type num = ft::distance(first, last);
 		if (num == 0)
 			return ;
 		if (_size + num > max_size())
@@ -444,13 +435,13 @@ public:
 		return erase(iter, iter + 1);
 	}
 	iterator erase(iterator first, iterator last) {
-		size_type num = std::distance(first, last);
+		size_type num = ft::distance(first, last);
 		iterator _end = end();
 		for (size_type i=0; i<num; i++)
 			_alloc.destroy(&(*(first + i)));
 		for (size_type i=0; last + i != _end; i++) {
-			_alloc.construct(first + i, *(last + i));
-			_alloc.destroy(last + i);
+			_alloc.construct(&(*(first + i)), *(last + i));
+			_alloc.destroy(&(*(last + i)));
 		}
 		_size -= num;
 		return first;

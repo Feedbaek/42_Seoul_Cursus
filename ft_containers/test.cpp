@@ -20,7 +20,6 @@ int main() {
 	//std::cout << a;
 	std::vector<int> v_i;
 	std::vector<int> v_i_2(v_i);
-	std::cout << std::distance(v_i.begin(), v_i.end());
 	v_i.reserve(10);
 	std::vector<int>::iterator iter = v_i.begin();
 	//v_i.erase(v_i.begin());
