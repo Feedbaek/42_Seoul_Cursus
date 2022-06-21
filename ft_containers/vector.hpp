@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/06/18 19:38:45 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/06/21 21:23:51 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <memory>
 # include <cstddef>
 # include <iterator>
+# include <string>
 
 # include "iterator.hpp"
 # include "enable_if.hpp"
@@ -158,16 +159,20 @@ public:
 	}
 	~vector() {
 		clear();
-		_alloc.deallocate(_container, _capacity);
+		if (_container != 0)
+			_alloc.deallocate(_container, _capacity);
 		_capacity = 0;
+		_container = 0;
 	}
 
 	vector& operator=(const vector& a) {
 		if (&a == this)
 			return *this;
 		clear();
-		_alloc.deallocate(_container, _capacity);
+		if (_container != 0)
+			_alloc.deallocate(_container, _capacity);
 		_capacity = 0;
+		_container = 0;
 		assign(a.begin(), a.end());
 		return (*this);
 	}
@@ -346,7 +351,7 @@ public:
 		}
 		// 새로운 값 추가
 		_alloc.construct(_new_container + llen, val);
-		if (_container != _new_container)
+		if (_container != _new_container && _container != 0)
 			_alloc.deallocate(_container, _capacity);
 		_container = _new_container;
 		_capacity = _new_capacity;
@@ -385,7 +390,7 @@ public:
 		// 새로운 값 추가
 		for (size_type i=0; i<n; i++)
 			_alloc.construct(_new_container + llen + i, val);
-		if (_container != _new_container)
+		if (_container != _new_container && _container != 0)
 			_alloc.deallocate(_container, _capacity);
 		_container = _new_container;
 		_capacity = _new_capacity;
@@ -425,7 +430,7 @@ public:
 		// 새로운 값 추가
 		for (size_type i=0; i<num; i++)
 			_alloc.construct(_new_container + llen + i, *(first + i));
-		if (_container != _new_container)
+		if (_container != _new_container && _container != 0)
 			_alloc.deallocate(_container, _capacity);
 		_container = _new_container;
 		_capacity = _new_capacity;
