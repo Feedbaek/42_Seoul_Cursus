@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/06/21 21:23:51 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/06/22 15:04:52 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,10 +138,10 @@ private:
 	size_type _size;
 
 public:
-	explicit vector(const allocator_type& alloc = allocator_type())
-		: _alloc(alloc), _container(0), _capacity(0), _size(0) {}
-	explicit vector(size_type n, const value_type& val=value_type(), const allocator_type& alloc = allocator_type())
-		: _alloc(alloc), _container(0), _capacity(0), _size(0) {
+	explicit vector()
+		: _alloc(allocator_type()), _container(0), _capacity(0), _size(0) {}
+	explicit vector(size_type n, const value_type& val=value_type())
+		: _alloc(allocator_type()), _container(0), _capacity(0), _size(0) {
 		_container = _alloc.allocate(n);
 		for (size_type i=0; i<n; i++)
 			_alloc.construct(_container + i, val);
@@ -149,8 +149,8 @@ public:
 		_size = n;
 	}
 	template<typename Iter>
-	vector(Iter first, Iter last, const allocator_type& alloc = allocator_type(), typename enable_if<!is_integral<Iter>::value, Iter>::type* = 0)
-		: _alloc(alloc), _container(0), _capacity(0), _size(0) {
+	vector(Iter first, Iter last, typename enable_if<!is_integral<Iter>::value, Iter>::type* = 0)
+		: _alloc(allocator_type()), _container(0), _capacity(0), _size(0) {
 		assign(first, last);
 	}
 	vector(const vector& a)
