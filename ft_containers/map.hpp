@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 14:59:50 by minskim2          #+#    #+#             */
-/*   Updated: 2022/06/22 17:31:41 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/06/22 21:27:28 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ template<typename T>
 class map_iterator : public iterator<bidirectional_iterator_tag, T> {
 private:
 
-
-}
+};
 
 template<typename Key, typename T, typename Compare = std::less<Key>>
 class map {
@@ -55,7 +54,8 @@ public:
 	typedef allocator_type::const_reference		const_reference;
 	typedef allocator_type::pointer				pointer;
 	typedef allocator_type::const_pointer		const_pointer;
-	//typedef
+
+
 
 private:
 
