@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/04 21:33:10 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/05 05:20:03 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,14 @@ public:
 	bool operator==(const vector_iterator& a) const {
 		return p == a.p;
 	}
+	bool operator==(const const_vector_iterator<T>& a) const {
+		return p == a.base();
+	}
 	bool operator!=(const vector_iterator& a) const {
 		return p != a.p;
+	}
+	bool operator!=(const const_vector_iterator<T>& a) const {
+		return p != a.base();
 	}
 	reference operator*() {
 		return *p;
@@ -102,17 +108,32 @@ public:
 	difference_type operator-(const vector_iterator& a) const {
 		return p - a.p;
 	}
+	difference_type operator-(const const_vector_iterator<T>& a) const {
+		return p - a.base();
+	}
 	bool operator<(const vector_iterator& a) const {
 		return p < a.p;
+	}
+	bool operator<(const const_vector_iterator<T>& a) const {
+		return p < a.base();
 	}
 	bool operator>(const vector_iterator& a) const {
 		return p > a.p;
 	}
+	bool operator>(const const_vector_iterator<T>& a) const {
+		return p > a.base();
+	}
 	bool operator<=(const vector_iterator& a) const {
 		return p <= a.p;
 	}
+	bool operator<=(const const_vector_iterator<T>& a) const {
+		return p <= a.base();
+	}
 	bool operator>=(const vector_iterator& a) const {
 		return p >= a.p;
+	}
+	bool operator>=(const const_vector_iterator<T>& a) const {
+		return p >= a.base();
 	}
 	vector_iterator& operator+=(difference_type n) {
 		p += n;
@@ -135,10 +156,10 @@ template<typename T>
 class const_vector_iterator : public iterator<random_access_iterator_tag, T> {
 public:
 	typedef typename iterator<random_access_iterator_tag, T>::iterator_category	iterator_category;
-	typedef typename iterator<random_access_iterator_tag, T>::value_type			value_type;
-	typedef typename iterator<random_access_iterator_tag, T>::reference				reference;
-	typedef typename iterator<random_access_iterator_tag, T>::pointer				pointer;
-	typedef typename iterator<random_access_iterator_tag, T>::difference_type		difference_type;
+	typedef const typename iterator<random_access_iterator_tag, T>::value_type	value_type;
+	typedef const value_type&													reference;
+	typedef const value_type*													pointer;
+	typedef typename iterator<random_access_iterator_tag, T>::difference_type	difference_type;
 
 protected:
 	pointer p;
@@ -161,8 +182,14 @@ public:
 	bool operator==(const const_vector_iterator& a) const {
 		return p == a.p;
 	}
+	bool operator==(const vector_iterator<T>& a) const {
+		return p == a.base();
+	}
 	bool operator!=(const const_vector_iterator& a) const {
 		return p != a.p;
+	}
+	bool operator!=(const vector_iterator<T>& a) const {
+		return p != a.base();
 	}
 	reference operator*() {
 		return *p;
@@ -202,17 +229,32 @@ public:
 	difference_type operator-(const const_vector_iterator& a) const {
 		return p - a.p;
 	}
+	difference_type operator-(const vector_iterator<T>& a) const {
+		return p - a.base();
+	}
 	bool operator<(const const_vector_iterator& a) const {
 		return p < a.p;
+	}
+	bool operator<(const vector_iterator<T>& a) const {
+		return p < a.base();
 	}
 	bool operator>(const const_vector_iterator& a) const {
 		return p > a.p;
 	}
+	bool operator>(const vector_iterator<T>& a) const {
+		return p > a.base();
+	}
 	bool operator<=(const const_vector_iterator& a) const {
 		return p <= a.p;
 	}
+	bool operator<=(const vector_iterator<T>& a) const {
+		return p <= a.base();
+	}
 	bool operator>=(const const_vector_iterator& a) const {
 		return p >= a.p;
+	}
+	bool operator>=(const vector_iterator<T>& a) const {
+		return p >= a.base();
 	}
 	const_vector_iterator& operator+=(difference_type n) {
 		p += n;
@@ -230,56 +272,6 @@ public:
 		return p;
 	}
 };
-
-template<typename T>
-bool operator==(vector_iterator<T> lhs, const_vector_iterator<T> rhs) {
-	return lhs.base() == rhs.base();
-}
-template<typename T>
-typename vector_iterator<T>::difference_type operator-(vector_iterator<T> lhs, const_vector_iterator<T> rhs) {
-	return lhs->base() - rhs.base();
-}
-template<typename T>
-bool operator<(vector_iterator<T> lhs, const_vector_iterator<T> rhs) {
-	return lhs->base() < rhs.base();
-}
-template<typename T>
-bool operator>(vector_iterator<T> lhs, const_vector_iterator<T> rhs) {
-	return lhs->base() > rhs.base();
-}
-template<typename T>
-bool operator<=(vector_iterator<T> lhs, const_vector_iterator<T> rhs) {
-	return lhs->base() <= rhs.base();
-}
-template<typename T>
-bool operator>=(vector_iterator<T> lhs, const_vector_iterator<T> rhs) {
-	return lhs->base() >= rhs.base();
-}
-
-template<typename T>
-bool operator==(const_vector_iterator<T> lhs, vector_iterator<T> rhs) {
-	return lhs.base() == rhs.base();
-}
-template<typename T>
-typename const_vector_iterator<T>::difference_type operator-(const_vector_iterator<T> lhs, vector_iterator<T> rhs) {
-	return lhs->base() - rhs.base();
-}
-template<typename T>
-bool operator<(const_vector_iterator<T> lhs, vector_iterator<T> rhs) {
-	return lhs->base() < rhs.base();
-}
-template<typename T>
-bool operator>(const_vector_iterator<T> lhs, vector_iterator<T> rhs) {
-	return lhs->base() > rhs.base();
-}
-template<typename T>
-bool operator<=(const_vector_iterator<T> lhs, vector_iterator<T> rhs) {
-	return lhs->base() <= rhs.base();
-}
-template<typename T>
-bool operator>=(const_vector_iterator<T> lhs, vector_iterator<T> rhs) {
-	return lhs->base() >= rhs.base();
-}
 
 template<typename T>
 class vector {
