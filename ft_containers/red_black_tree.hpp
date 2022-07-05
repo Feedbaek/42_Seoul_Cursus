@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 19:13:04 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/04 20:47:47 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:39:19 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,6 @@ public:
 		return *this;
 	}
 
-	//node_pointer base() const {
-	//	return _node;
-	//}
-
 	tree_iterator& operator++() {
 		if (_node->right != 0) {
 			_node = min_node(_node->right);
@@ -114,6 +110,10 @@ public:
 	}
 	pointer operator->() const {
 		return &(_node->value);
+	}
+
+	node_pointer base() const {
+		return _node;
 	}
 };
 

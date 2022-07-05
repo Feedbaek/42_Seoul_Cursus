@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/05 05:20:03 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:46:57 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ template<typename T>
 class const_vector_iterator : public iterator<random_access_iterator_tag, T> {
 public:
 	typedef typename iterator<random_access_iterator_tag, T>::iterator_category	iterator_category;
-	typedef const typename iterator<random_access_iterator_tag, T>::value_type	value_type;
+	typedef typename iterator<random_access_iterator_tag, T>::value_type		value_type;
 	typedef const value_type&													reference;
 	typedef const value_type*													pointer;
 	typedef typename iterator<random_access_iterator_tag, T>::difference_type	difference_type;

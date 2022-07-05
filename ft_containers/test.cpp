@@ -2,7 +2,7 @@
 #include <vector>
 #include <map>
 
-#if 1 //CREATE A REAL STL EXAMPLE
+#if 0 //CREATE A REAL STL EXAMPLE
 	#include <map>
 	#include <stack>
 	#include <vector>
@@ -20,8 +20,8 @@ int main() {
 	ft::vector<int>::const_iterator it2 = v.begin();
 	if (it1 == it2)
 		std::cout << "equal\n";
-	//*it2 = 3;
-	std::cout << *it2;
+	*it2 = 3;
+	std::cout << *it1;
 	//std::map<char,int> mymap;
 
 	//mymap['b'] = 100;
