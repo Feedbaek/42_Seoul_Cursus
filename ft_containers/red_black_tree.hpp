@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 19:13:04 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/05 21:21:53 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/06 22:10:14 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 # include "iterator.hpp"
 # include "utils.hpp"
+# include "pair.hpp"
 
 namespace ft {
 
@@ -83,9 +84,9 @@ public:
 			_node = min_node(_node->right);
 			return *this;
 		}
-		while (_node->parent != 0 && _node != _node->parent->left)
+		while (_node->parent != _cmd_node && _node != _node->parent->left)
 			_node = _node->parent;
-		if (_node->parent != 0)
+		if (_node->parent != _cmd_node)
 			_node = _node->parent;
 		else
 			_node = _cmd_node->right;
@@ -101,9 +102,9 @@ public:
 			_node = max_node(_node->left);
 			return *this;
 		}
-		while (_node->parent != 0 && _node != _node->parent->right)
+		while (_node->parent != _cmd_node && _node != _node->parent->right)
 			_node = _node->parent;
-		if (_node->parent != 0)
+		if (_node->parent != _cmd_node)
 			_node = _node->parent;
 		else
 			_node = _cmd_node->right;
@@ -203,9 +204,9 @@ public:
 			_node = min_node(_node->right);
 			return *this;
 		}
-		while (_node->parent != 0 && _node != _node->parent->left)
+		while (_node->parent != _cmd_node && _node != _node->parent->left)
 			_node = _node->parent;
-		if (_node->parent != 0)
+		if (_node->parent != _cmd_node)
 			_node = _node->parent;
 		else
 			_node = _cmd_node->right;
@@ -221,9 +222,9 @@ public:
 			_node = max_node(_node->left);
 			return *this;
 		}
-		while (_node->parent != 0 && _node != _node->parent->right)
+		while (_node->parent != _cmd_node && _node != _node->parent->right)
 			_node = _node->parent;
-		if (_node->parent != 0)
+		if (_node->parent != _cmd_node)
 			_node = _node->parent;
 		else
 			_node = _cmd_node->right;
@@ -359,7 +360,7 @@ public:
 
 // Modifiers:
 	pair<iterator,bool> insert(const value_type& val) {
-
+		return insertValue(val);
 	}
 	iterator insert(iterator position, const value_type& val) {
 
@@ -367,6 +368,54 @@ public:
 	template<typename InputIterator>
 	void insert(InputIterator first, InputIterator last) {
 
+	}
+
+// tree에 일단 node를 삽입하고 pair를 반환하는 함수
+	pair<iterator, bool> insertNode(const node_pointer node) {
+		node_pointer parser = getRoot();
+		node_pointer parent;
+		if (parser == 0) {
+			setRoot(node);
+			return make_pair(iterator(node), true);
+		}
+		while (parser != 0) {
+			if (_comp(parser->value, node->value)) {
+				parent = parser;
+				parser = parser->right;
+			} else if (_comp(node->value, parser->value)) {
+				parent = parser;
+				parser = parser->left;
+			} else
+				return make_pair(iterator(parser), false);
+		}
+		if (_comp(parent->value, node->value)) {
+			parent->right = node;
+			node->parent = parent;
+		} else {
+			parent->left = node;
+			node->parent = parent;
+		}
+		return (make_pair(iterator(node), true));
+	}
+
+	void fixAfterInsert(node_pointer node) {
+		node_pointer parent, g_parent;
+		while (node != getRoot() && getColor(node))
+	}
+
+// tree에 val값의 노드를 만들어 삽입하고 균형을 맞춤
+	pair<iterator, bool> insertValue(const value_type& val) {
+		node_pointer node = _node_alloc.allocate(1);
+		_node_alloc.construct(node, node_type(val));
+		pair<iterator, bool> ret = insertNode(node);
+		if (ret.second == true) {
+			_size++;
+			fixAfertInsert(node);
+		} else {
+			_node_alloc.destroy(node);
+			_node_alloc.allocate(node, 1);
+		}
+		return ret;
 	}
 
 	node_pointer min_node(node_pointer node) const {
@@ -386,6 +435,41 @@ public:
 
 	node_pointer getRoot() const {
 		return _cmd_node->left;
+	}
+	void setRoot(node_pointer node) {
+		_cmd_node->left = node;
+		if (node != 0)
+			node->parent = _cmd_node;
+	}
+	Color getColor(node_pointer node) {
+		if (node == 0)
+			return BLACK;
+		return node->color;
+	}
+	void setColor(node_pointer node, Color color) {
+		if (node == 0)
+			return;
+		node->color = color;
+	}
+	node_pointer getParent(node_pointer node) {
+		if (node == 0 || node == getRoot())
+			return 0;
+		return node->parent;
+	}
+	node_pointer getGrandparent(node_pointer node) {
+		node_pointer parent = getParent(node);
+		if (parent == 0)
+			return 0;
+		return getParent(parent);
+	}
+	node_pointer getUncle(node_pointer node) {
+		node_pointer parent = getParent(node);
+		node_pointer grand_parent = getGrandparent(node);
+		if (parent == 0 || grand_parent == 0)
+			return 0;
+		if (parent == grand_parent->left)
+			return grand_parent->right;
+		return grand_parent->left;
 	}
 	node_pointer getEnd() const {
 		return _cmd_node->right;
