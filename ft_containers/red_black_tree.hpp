@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 19:13:04 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/06 22:10:14 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/07 22:16:55 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -363,11 +363,15 @@ public:
 		return insertValue(val);
 	}
 	iterator insert(iterator position, const value_type& val) {
-
+		(void)position;
+		return insertValue(val).first;
 	}
 	template<typename InputIterator>
 	void insert(InputIterator first, InputIterator last) {
-
+		while (first != last) {
+			insertValue(*first);
+			first++;
+		}
 	}
 
 // tree에 일단 node를 삽입하고 pair를 반환하는 함수
@@ -398,9 +402,89 @@ public:
 		return (make_pair(iterator(node), true));
 	}
 
+	void rotateLeft(node_pointer node) {
+		node_pointer rightChild = node->right;
+		if (rightChild == 0)
+			return ;
+		node->right = rightChild->left;
+		if (node->right != 0)
+			node->right->parent = node;
+		rightChild->parent = node->parent;
+		if (node == getRoot())
+			setRoot(rightChild);
+		else if (node == node->parent->left)
+			node->parent->left = rightChild;
+		else
+			node->parent->right = rightChild;
+		rightChild->left = node;
+		node->parent = rightChild;
+	}
+	void rotateRight(node_pointer node) {
+		node_pointer leftChild = node->left;
+		if (leftChild == 0)
+			return ;
+		node->left = leftChild->right;
+		if (node->left != 0)
+			node->left->parent = node;
+		leftChild->parent = node->parent;
+		if (node == getRoot())
+			setRoot(leftChild);
+		else if (node == node->parent->right)
+			node->parent->right = leftChild;
+		else
+			node->parent->left = leftChild;
+		leftChild->right = node;
+		node->parent = leftChild;
+	}
+
+	void insert_red_uncle(node_pointer& node) {
+		setColor(getParent(node), BLACK);
+		setColor(getUncle(node), BLACK);
+		setColor(getGrandparent(node), RED);
+		node = getGrandparent(node);
+	}
+	void insert_black_uncle_right_node(node_pointer& node, node_pointer& parent) {
+		if (parent == getGrandparent(node)->left) {
+			rotateLeft(parent);
+			//node = parent;
+			//parent = getParent(node);
+		} else (parent == getGrandparent(node)->right) {
+			rotateRight(parent);
+			//node = parent;
+			//parent = getParent(node);
+		}
+	}
+	void insert_black_uncle_left_node(node_pointer& node, node_pointer& parent, node_pointer& g_parent) {
+		if (parent == g_parent->left)
+			rotateRight(g_parent);
+		else
+			rotateLeft(g_parent);
+		setColor(parent, BLACK);
+		setColor(g_parent, RED);
+		node = g_parent;
+	}
+
 	void fixAfterInsert(node_pointer node) {
-		node_pointer parent, g_parent;
-		while (node != getRoot() && getColor(node))
+		node_pointer parent, g_parent, uncle;
+		while (node != getRoot() && getColor(node) == RED && getColor(getParent(node)) == RED) {
+			parent = getParent(node);
+			g_parent = getGrandparent(node);
+			if (g_parent == 0)
+				break;
+			uncle = getUncle(node);
+			if (getColor(uncle) == RED) {
+				insert_red_uncle(node);
+			} else if (parent == g_parent->left) {
+				if (node == parent->right)
+					insert_black_uncle_right_node(node, parent);
+				insert_black_uncle_left_node(node, parent, g_parent);
+			} else if (parent == g_parent->right) {
+				if (node == parent->left)
+					insert_black_uncle_right_node(node, parent);
+				insert_black_uncle_left_node(node, parent, g_parent);
+			}
+		}
+		setColor(getRoot(), BLACK);
 	}
 
 // tree에 val값의 노드를 만들어 삽입하고 균형을 맞춤
@@ -410,7 +494,7 @@ public:
 		pair<iterator, bool> ret = insertNode(node);
 		if (ret.second == true) {
 			_size++;
-			fixAfertInsert(node);
+			fixAfterInsert(node);
 		} else {
 			_node_alloc.destroy(node);
 			_node_alloc.allocate(node, 1);
@@ -462,14 +546,19 @@ public:
 			return 0;
 		return getParent(parent);
 	}
+	node_pointer getSibling(node_pointer node) {
+		node_pointer parent = getParent(node);
+		if (parent == 0)
+			return 0;
+		if (node == parent->left)
+			return parent->right;
+		return parent->left;
+	}
 	node_pointer getUncle(node_pointer node) {
 		node_pointer parent = getParent(node);
-		node_pointer grand_parent = getGrandparent(node);
-		if (parent == 0 || grand_parent == 0)
+		if (parent = 0)
 			return 0;
-		if (parent == grand_parent->left)
-			return grand_parent->right;
-		return grand_parent->left;
+		return getSibling(parent);
 	}
 	node_pointer getEnd() const {
 		return _cmd_node->right;
