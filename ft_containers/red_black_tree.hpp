@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 19:13:04 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/07 22:16:55 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/09 20:02:51 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ namespace ft {
 template<typename T>
 class tree_iterator : public iterator<bidirectional_iterator_tag, T> {
 public:
-	typedef tree_node<T>	node;
+	typedef tree_node<T>	node_type;
 	typedef tree_node<T>*	node_pointer;
 
 	typedef bidirectional_iterator_tag	iterator_category;
@@ -145,7 +145,7 @@ public:
 template<typename T>
 class tree_const_iterator : public iterator<bidirectional_iterator_tag, T> {
 public:
-	typedef tree_node<T>				node;
+	typedef tree_node<T>				node_type;
 	typedef tree_node<T>*				node_pointer;
 
 	typedef bidirectional_iterator_tag	iterator_category;
@@ -370,8 +370,90 @@ public:
 	void insert(InputIterator first, InputIterator last) {
 		while (first != last) {
 			insertValue(*first);
-			first++;
+			++first;
 		}
+	}
+
+	void erase(iterator position) {
+		deleteValue(*position);
+	}
+	size_type erase(const value_type& k) {
+		return deleteValue(k);
+	}
+	void erase(iterator first, iterator last) {
+		while (first != last) {
+			deleteValue(*first);
+			++first;
+		}
+	}
+
+	node_pointer deleteNode(node_pointer node, const value_type& val) {
+		node_pointer tmp1, tmp2;
+		Color color;
+		if (node == 0)
+			return 0;
+		if (_comp(node->value, val))
+			return deleteNode(node->right, val);
+		if (_comp(val, node->value))
+			return deleteNode(node->left, val);
+		if (node->left == 0 || node->right == 0)
+			return node;
+		tmp1 = min_node(node->right);
+		if (tmp1->parent == node) {
+			if (node->parent->left == node)
+				node->parent->left = tmp1;
+			if (node->parent->right == node)
+				node->parent->right = tmp1;
+			tmp1->left = node->left;
+			node->left->parent = tmp1;
+			node->left = 0;
+			tmp1->parent = node->parent;
+			node->parent = tmp1;
+			node->right = tmp1->right;
+			tmp1->right = node;
+			color = tmp1->color;
+			tmp1->Color = node->color;
+			node->color = color;
+		} else {
+			if (node->parent->left == node)
+				node->parent->left = tmp1;
+			if (node->parent->right == node)
+				node->parent->right = tmp1;
+			if (tmp1->parent->left == tmp1)
+				tmp1->parent->left = node;
+			if (tmp1->parent->right == tmp1)
+				tmp1->parent->right = node;
+			tmp2 = tmp1->parent;
+			node->right->parent = tmp1;
+			tmp1->parent = node->parent;
+			node->parent = tmp2;
+			tmp1->left = node->left;
+			node->left->parent = tmp1;
+			node->left = 0;
+			tmp2 = tmp1->right;
+			tmp1->right = node->right;
+			node->right = tmp2;
+			color = tmp1->color;
+			tmp1->color = tmp2->color;
+			tmp2->color = color;
+		}
+		return deleteNode(tmp1->right, val);
+	}
+
+	void fixAfterDelete(node_pointer node) {
+// ===============================================================================
+		// 여기까지 함
+		// -22.07.09
+// ===============================================================================
+	}
+
+	size_type deleteValue(const value_type& val) {
+		node_pointer target = deleteNode(getRoot(), val)
+		if (target == 0)
+			return 0;
+		fixAfterDelete(target);
+		_size--;
+		return 1;
 	}
 
 // tree에 일단 node를 삽입하고 pair를 반환하는 함수
@@ -466,7 +548,7 @@ public:
 
 	void fixAfterInsert(node_pointer node) {
 		node_pointer parent, g_parent, uncle;
-		while (node != getRoot() && getColor(node) == RED && getColor(getParent(node)) == RED) {
+		while (node != getRoot() && getColor(getParent(node)) == RED) {
 			parent = getParent(node);
 			g_parent = getGrandparent(node);
 			if (g_parent == 0)
