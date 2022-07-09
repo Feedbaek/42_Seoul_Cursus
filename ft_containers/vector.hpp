@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/05 15:46:57 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/09 19:47:41 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,7 @@ public:
 	bool operator!=(const const_vector_iterator<T>& a) const {
 		return p != a.base();
 	}
-	reference operator*() {
-		return *p;
-	}
-	const reference operator*() const {
+	reference operator*() const {
 		return *p;
 	}
 	pointer operator->() const {
@@ -191,10 +188,7 @@ public:
 	bool operator!=(const vector_iterator<T>& a) const {
 		return p != a.base();
 	}
-	reference operator*() {
-		return *p;
-	}
-	const reference operator*() const {
+	reference operator*() const {
 		return *p;
 	}
 	pointer operator->() const {
