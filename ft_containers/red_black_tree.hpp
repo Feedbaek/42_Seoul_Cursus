@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 19:13:04 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/09 20:02:51 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/11 22:50:49 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -387,6 +387,17 @@ public:
 		}
 	}
 
+
+
+	void swap(rbtree& x) {
+		if (this == &x)
+			return;
+// ==========================================================================
+// 여기까지 함
+// 22.07.11
+// ==========================================================================
+	}
+
 	node_pointer deleteNode(node_pointer node, const value_type& val) {
 		node_pointer tmp1, tmp2;
 		Color color;
@@ -440,11 +451,111 @@ public:
 		return deleteNode(tmp1->right, val);
 	}
 
+		void	deleteRedCase(node_pointer& node) {
+		node_pointer child = node->left != my_nullptr ? node->left : node->right;
+		if (node == node->parent->left)
+			node->parent->left = child;
+		else
+			node->parent->right = child;
+		if (child != my_nullptr)
+			child->parent = node->parent;
+		setColor(child, BLACK);
+		_node_alloc.destroy(node);
+		_node_alloc.deallocate(node, 1);
+	}
+	void	deleteRootCase(node_pointer root) {
+		if (root->right)
+			setRoot(root->right);
+		else
+			setRoot(root->left);
+		_node_alloc.destroy(root);
+		_node_alloc.deallocate(root, 1);
+		setColor(getRoot(), BLACK);
+		return;
+	}
+
+	void	deleteCase1(node_pointer& s, node_pointer& p) {
+		setColor(s, BLACK);
+		setColor(p, RED);
+		if (s == p->right)
+			rotateLeft(p);
+		if (s == p->left)
+			rotateRight(p);
+	}
+	void	deleteCase2(node_pointer s, node_pointer p, node_pointer& node) {
+		setColor(s, RED);
+		if (getColor(p) == RED)
+			setColor(p, BLACK);
+		else
+			setColor(p, DBLACK);
+		node = p;
+	}
+	void	deleteCase3(node_pointer& s, node_pointer& p) {
+		if (s == p->right) {
+			setColor(s->left, BLACK);
+			setColor(s, RED);
+			rotateRight(s);
+			s = p->right;
+		}
+		if (s == p->left) {
+			setColor(s->right, BLACK);
+			setColor(s, RED);
+			rotateLeft(s);
+			s = p->left;
+		}
+	}
+	void	deleteCase4(node_pointer& s, node_pointer& p) {
+		if (s == p->right) {
+			setColor(s, getColor(p));
+			setColor(p, BLACK);
+			setColor(s->right, BLACK);
+			rotateLeft(p);
+		}
+		if (s == p->left) {
+			setColor(s, getColor(p));
+			setColor(p, BLACK);
+			setColor(s->left, BLACK);
+			rotateRight(p);
+		}
+	}
+
 	void fixAfterDelete(node_pointer node) {
-// ===============================================================================
-		// 여기까지 함
-		// -22.07.09
-// ===============================================================================
+		if (node == 0)
+			return;
+		if (node == getRoot()) {
+			delete_root_case(node);
+			return;
+		}
+		if (getColor(node) == RED || getColor(node->left) == RED || getColor(node->right == RED)) {
+			delete_red_case(node);
+			return ;
+		}
+		node_pointer s=0, p=0, tmp=node;
+		setColor(tmp, DBLACK);
+		while (tmp != getRoot() && getColor(tmp) == DBLACK) {
+			p = tmp->parent;
+			if (tmp == p->left)
+				s = p->right;
+			else
+				s = p->left;
+			if (getColor(s) == RED)
+				deleteCase1(s, p);
+			else if (getColor(s->left) == BLACK && getColor(s->right) == BLACK)
+				deleteCase2(s, p, tmp);
+			else {
+				if ((tmp == p->left && getColor(s->right) == BLACK)
+				|| (tmp == p->right && getColor(s->left) == BLACK)
+					deleteCase3(s, p);
+					break;
+			}
+		}
+		if (node == node->parent->left)
+			node->parent->left = 0;
+		else
+			node->parent->right = 0;
+		_node_alloc.destroy(node);
+		_node_alloc.deallocate(node, 1);
+		setColor(getRoot(), BLACK);
 	}
 
 	size_type deleteValue(const value_type& val) {
