@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 19:13:04 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/11 22:50:49 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/12 20:17:03 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ public:
 	typedef T*							pointer;
 
 private:
-	node_pointer _cmd_node;		// left == root, right == end
 	node_pointer _node;
 
 	node_pointer min_node(node_pointer node) {
@@ -54,13 +53,12 @@ private:
 	}
 
 public:
-	tree_iterator() : _cmd_node(0), _node(0) {}
-	tree_iterator(const tree_iterator& a) : _cmd_node(a._cmd_node), _node(a._node) {}
+	tree_iterator() : _node(0) {}
+	tree_iterator(const tree_iterator& a) : _node(a._node) {}
 	tree_iterator(const tree_const_iterator<T>& a) {
 		_node = a.base();
-		_cmd_node = a.cmd();
 	}
-	tree_iterator(node_pointer cmd, node_pointer node) : _cmd_node(cmd), _node(node) {}
+	tree_iterator(node_pointer node) : _node(node) {}
 
 	virtual ~tree_iterator() {}
 
@@ -68,14 +66,12 @@ public:
 		if (this == &a)
 			return *this;
 		_node = a._node;
-		_cmd_node = a._cmd_node;
 		return *this;
 	}
 	tree_iterator& operator=(const tree_const_iterato<T>& a) {
 		if (this == &a)
 			return *this;
 		_node = a.base();
-		_cmd_node = a.cmd()
 		return *this;
 	}
 
@@ -84,12 +80,10 @@ public:
 			_node = min_node(_node->right);
 			return *this;
 		}
-		while (_node->parent != _cmd_node && _node != _node->parent->left)
+		while (_node->parent != 0 && _node != _node->parent->left)
 			_node = _node->parent;
-		if (_node->parent != _cmd_node)
+		if (_node->parent)
 			_node = _node->parent;
-		else
-			_node = _cmd_node->right;
 		return *this;
 	}
 	tree_iterator operator++(int) {
@@ -102,12 +96,10 @@ public:
 			_node = max_node(_node->left);
 			return *this;
 		}
-		while (_node->parent != _cmd_node && _node != _node->parent->right)
+		while (_node->parent != 0 && _node != _node->parent->right)
 			_node = _node->parent;
-		if (_node->parent != _cmd_node)
+		if (_node->parent)
 			_node = _node->parent;
-		else
-			_node = _cmd_node->right;
 		return *this;
 	}
 	tree_iterator operator--(int) {
@@ -137,9 +129,6 @@ public:
 	node_pointer base() const {
 		return _node;
 	}
-	node_pointer cmd() const {
-		return _cmd_node;
-	}
 };
 
 template<typename T>
@@ -156,7 +145,6 @@ public:
 
 private:
 	node_pointer _node;
-	node_pointer _cmd_node;
 
 	node_pointer min_node(node_pointer node) {
 		if (node == 0)
@@ -174,27 +162,24 @@ private:
 	}
 
 public:
-	tree_const_iterator() : _cmd_node(0), _node(0) {}
-	tree_const_iterator(const tree_const_iterator& a) : _cmd_node(a._cmd_node), _node(a._node) {}
+	tree_const_iterator() : _node(0) {}
+	tree_const_iterator(const tree_const_iterator& a) : _node(a._node) {}
 	tree_const_iterator(const tree_iterator& a) {
-		_cmd_node = a.cmd();
 		_node = a.node();
 	}
-	tree_const_iterator(node_pointer cmd, node_pointer node) : _cmd_node(cmd), _node(node) {}
+	tree_const_iterator(node_pointer node) : _node(node) {}
 
 	virtual ~tree_const_iterator() {}
 
 	tree_const_iterator& operator=(const tree_const_iterator& a) {
 		if (this == &a)
 			return *this;
-		_cmd_node = a._cmd_node;
 		_node = a._node;
 		return *this;
 	}
 	tree_const_iterator& operator=(const tree_iterator<T>& a) {
 		if (this == &a)
 			return *this;
-		_cmd_node = a.cmd();
 		_node = a._node;
 		return *this;
 	}
@@ -204,12 +189,10 @@ public:
 			_node = min_node(_node->right);
 			return *this;
 		}
-		while (_node->parent != _cmd_node && _node != _node->parent->left)
+		while (_node->parent != 0 && _node != _node->parent->left)
 			_node = _node->parent;
-		if (_node->parent != _cmd_node)
+		if (_node->parent)
 			_node = _node->parent;
-		else
-			_node = _cmd_node->right;
 		return *this;
 	}
 	tree_const_iterator operator++(int) {
@@ -222,12 +205,10 @@ public:
 			_node = max_node(_node->left);
 			return *this;
 		}
-		while (_node->parent != _cmd_node && _node != _node->parent->right)
+		while (_node->parent != 0 && _node != _node->parent->right)
 			_node = _node->parent;
-		if (_node->parent != _cmd_node)
+		if (_node->parent)
 			_node = _node->parent;
-		else
-			_node = _cmd_node->right;
 		return *this;
 	}
 	tree_const_iterator operator--(int) {
@@ -254,9 +235,6 @@ public:
 		return _node != a.base();
 	}
 
-	node_pointer cmd() const {
-		return _cmd_node;
-	}
 	node_pointer base() const {
 		return _node;
 	}
@@ -288,7 +266,7 @@ private:
 	value_compare _comp;
 	allocator_type _alloc;
 	node_alloc_type _node_alloc;
-	node_pointer _cmd_node;  // left == root, right == end
+	node_pointer _cmd_node;  // left == root
 	size_type _size;
 
 public:
@@ -323,28 +301,28 @@ public:
 
 // Iterators:
 	iterator begin() {
-		return iterator(_cmd_node, min_node(getRoot()));
+		return iterator(min_node(_cmd_node));
 	}
 	const_iterator begin() const {
-		return const_iterator(_cmd_node, min_node(getRoot()));
+		return const_iterator(min_node(_cmd_node));
 	}
 	iterator end() {
-		return iterator(_cmd_node, _cmd_node->right);
+		return iterator(_cmd_node);
 	}
 	const_iterator end() const {
-		return const_iterator(_cmd_node, _cmd_node->right);
+		return const_iterator(_cmd_node);
 	}
 	reverse_iterator rbegin() {
-		return reverse_iterator(_cmd_node, min_node(getRoot()));
+		return reverse_iterator(end());
 	}
 	const_reverse_iterator rbegin() const {
-		return const_reverse_iterator(_cmd_node, min_node(getRoot()));
+		return const_reverse_iterator(end());
 	}
 	reverse_iterator rend() {
-		return reverse_iterator(_cmd_node, _cmd_node->right);
+		return reverse_iterator(begin());
 	}
 	const_reverse_iterator rend() const {
-		return const_reverse_iterator(_cmd_node, _cmd_node->right);
+		return const_reverse_iterator(begin());
 	}
 
 // Capacity:
@@ -387,15 +365,64 @@ public:
 		}
 	}
 
-
-
 	void swap(rbtree& x) {
 		if (this == &x)
 			return;
-// ==========================================================================
-// 여기까지 함
-// 22.07.11
-// ==========================================================================
+		value_compare tmp_cmp = x._comp;
+		node_alloc_type tmp_node_alloc = x._node_alloc;
+		node_pointer tmp_cmd = x._cmd_node;
+		size_type tmp_size = x._size;
+
+		x._comp = _comp;
+		x._node_alloc = _node_alloc;
+		x._cmd_node = _cmd_node;
+		x._size = _size;
+
+		_comp = tmp_cmp;
+		_node_alloc = tmp_node_alloc;
+		_cmd_node = tmp_cmd;
+		_size = tmp_size;
+	}
+	void clear() {
+		deleteTree(getRoot())
+		setRoot(0);
+		_size = 0;
+	}
+	iterator find(const value_type& k) const {
+		node_pointer tmp = getRoot();
+		while (tmp != 0) {
+			if (_comp(tmp->value, k))
+				tmp = tmp->right;
+			else if (_comp(k, tmp->value))
+				tmp = tmp->left;
+			else
+				break;
+		}
+		if (tmp == 0)
+			return (iterator(_cmd_node));
+		return (iterator(tmp));
+	}
+	size_type count(const value_type& k) const {
+		iterator tmp = find(k);
+		size_type cnt = 0;
+		if (tmp == end())
+			return 0;
+		while (tmp != end()) {
+			if (!_comp(*tmp, k) && !_comp(k, *tmp))
+				++cnt;
+			++tmp;
+		}
+		return cnt;
+	}
+
+private:
+	void deleteTree(node_pointer node) {
+		if (node == 0)
+			return;
+		deleteTree(node->left);
+		deleteTree(node->right);
+		_node_alloc.destroy(node);
+		_node_alloc.deallocate(node, 1);
 	}
 
 	node_pointer deleteNode(node_pointer node, const value_type& val) {
@@ -452,12 +479,16 @@ public:
 	}
 
 		void	deleteRedCase(node_pointer& node) {
-		node_pointer child = node->left != my_nullptr ? node->left : node->right;
+		node_pointer child;
+		if (node->left != 0)
+			child = node->left
+		else
+			child = node->right;
 		if (node == node->parent->left)
 			node->parent->left = child;
 		else
 			node->parent->right = child;
-		if (child != my_nullptr)
+		if (child != 0)
 			child->parent = node->parent;
 		setColor(child, BLACK);
 		_node_alloc.destroy(node);
@@ -752,9 +783,6 @@ public:
 		if (parent = 0)
 			return 0;
 		return getSibling(parent);
-	}
-	node_pointer getEnd() const {
-		return _cmd_node->right;
 	}
 
 	void copy_tree(node_pointer node) {
