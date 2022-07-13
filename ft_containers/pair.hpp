@@ -6,12 +6,14 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 20:43:09 by minskim2          #+#    #+#             */
-/*   Updated: 2022/06/21 21:23:26 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/13 18:35:59 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PAIR_HPP
 # define PAIR_HPP
+
+namespace ft {
 
 template<typename T1 ,typename T2>
 struct pair {
@@ -63,6 +65,8 @@ bool operator> (const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) {
 template<typename T1, typename T2>
 bool operator>=(const pair<T1,T2>& lhs, const pair<T1,T2>& rhs) {
 	return !(lhs<rhs);
+}
+
 }
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 21:29:49 by minskim2          #+#    #+#             */
-/*   Updated: 2022/06/27 22:01:30 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/13 21:44:11 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ struct tree_node {
 	tree_node*		right;
 	color_type		color;
 
-	tree_node() : value(value_type()), parent(0), left(0), right(0), color(RED) {
+	tree_node() : value(), parent(0), left(0), right(0), color(RED) {
 	}
 	tree_node(const value_type& val, tree_node* pr = 0, tree_node* lf = 0, tree_node* ri = 0, color_type col = RED)
 		: value(val), parent(pr), left(lf), right(ri), color(col) {
@@ -67,6 +67,16 @@ struct tree_node {
 		right = a.right;
 		color = a.color;
 		return (*this);
+	}
+	bool operator==(const tree_node& other) {
+		if (value == other.value)
+			return true;
+		return false;
+	}
+	bool operator!=(const tree_node& other) {
+		if (value != other.value)
+			return true;
+		return false;
 	}
 };
 
