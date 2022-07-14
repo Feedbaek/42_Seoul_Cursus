@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/09 19:47:41 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/14 21:16:04 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <cstddef>
 # include <iterator>
 # include <string>
+# include <limits>
 
 # include "iterator.hpp"
 # include "enable_if.hpp"
@@ -268,6 +269,11 @@ public:
 };
 
 template<typename T>
+vector_iterator<T> operator+(typename vector_iterator<T>::difference_type n, const vector_iterator<T>& iterator) { vector_iterator<T> itr = iterator; return (itr + n); }
+template<typename T>
+const_vector_iterator<T> operator+(typename const_vector_iterator<T>::difference_type n, const const_vector_iterator<T>& iterator) { const_vector_iterator<T> itr = iterator; return (itr + n); }
+
+template<typename T, typename Alloc = std::allocator<T> >
 class vector {
 public:
 	typedef T													value_type;
@@ -303,11 +309,11 @@ public:
 	template<typename Iter>
 	vector(Iter first, Iter last, typename enable_if<!is_integral<Iter>::value, Iter>::type* = 0)
 		: _alloc(allocator_type()), _container(0), _capacity(0), _size(0) {
-		assign(first, last);
+		insert(_container, first, last);
 	}
 	vector(const vector& a)
 		: _alloc(allocator_type()), _container(0), _capacity(0), _size(0) {
-		assign(a.begin(), a.end());
+		insert(_container, a.begin(), a.end());
 	}
 	~vector() {
 		clear();
@@ -362,7 +368,9 @@ public:
 		return this->_size;
 	}
 	size_type max_size() const {
-		return _alloc.max_size();
+		if ((size_type) std::numeric_limits<difference_type>::max() < std::numeric_limits<size_type>::max() / sizeof(value_type))
+			return (size_type) std::numeric_limits<difference_type>::max();
+		return std::numeric_limits<size_type>::max() / sizeof(value_type);
 	}
 	void resize(size_type n, value_type val = value_type()) {
 		if (n > _capacity) {
@@ -445,12 +453,12 @@ public:
 		clear();
 		size_type d_size = ft::distance(first, last);
 		if (d_size <= _capacity)
-			for (size_type i=0; i< d_size; i++)
-				_alloc.construct(_container + i, *(first + i));
+			for (size_type i=0; &*first != &*last; ++first, ++i)
+				_alloc.construct(_container + i, *first);
 		else {
 			reserve(d_size);
-			for (size_type i=0; i< d_size; i++)
-				_alloc.construct(_container + i, *(first + i));
+			for (size_type i=0; &*first != &*last; ++first, ++i)
+				_alloc.construct(_container + i, *first);
 		}
 		_size = d_size;
 	}
@@ -581,7 +589,7 @@ public:
 		}
 		// 새로운 값 추가
 		for (size_type i=0; i<num; i++)
-			_alloc.construct(_new_container + llen + i, *(first + i));
+			_alloc.construct(_new_container + llen + i, *(first++));
 		if (_container != _new_container && _container != 0)
 			_alloc.deallocate(_container, _capacity);
 		_container = _new_container;

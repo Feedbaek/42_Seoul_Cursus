@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 21:29:49 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/13 21:44:11 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/14 21:07:00 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,14 @@
 
 namespace ft {
 
-template<typename InputIterator>
-typename iterator_traits<InputIterator>::difference_type distance(InputIterator first, InputIterator last) {
-	typename iterator_traits<InputIterator>::difference_type diff = 0;
-	typename iterator_traits<InputIterator>::difference_type sign = 1;
-	if (first > last) {
-		InputIterator tmp = first;
-		first = last;
-		last = tmp;
-		sign = -1;
+template < typename InputIt >
+typename ft::iterator_traits<InputIt>::difference_type	distance(InputIt first, InputIt last) {
+	typename ft::iterator_traits<InputIt>::difference_type	dist = 0;
+	while (first != last){
+		++first;
+		++dist;
 	}
-	for (;first != last; first++, diff++) {	}
-	return sign * diff;
+	return dist;
 }
 
 enum Color {

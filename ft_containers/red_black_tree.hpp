@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 19:13:04 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/13 21:58:28 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/14 22:05:42 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ private:
 
 public:
 	tree_iterator() : _node(0) {}
-	tree_iterator(const tree_iterator& a) : _node(a._node) {}
+	explicit tree_iterator(const tree_iterator& a) : _node(a._node) {}
 	tree_iterator(const tree_const_iterator<T>& a) {
 		_node = a.base();
 	}
@@ -168,7 +168,7 @@ private:
 
 public:
 	tree_const_iterator() : _node(0) {}
-	tree_const_iterator(const tree_const_iterator& a) : _node(a._node) {}
+	explicit tree_const_iterator(const tree_const_iterator& a) : _node(a._node) {}
 	tree_const_iterator(const tree_iterator<T>& a) {
 		_node = a.base();
 	}
@@ -247,6 +247,12 @@ public:
 
 template<typename T, typename Compare>
 class red_black_tree {
+private:
+	typedef red_black_tree								rbtree;
+	typedef tree_node<T>								node_type;
+	typedef tree_node<T>*								node_pointer;
+	typedef std::allocator<node_type>					node_alloc_type;
+
 public:
 	typedef T											value_type;
 	typedef Compare										value_compare;
@@ -261,11 +267,6 @@ public:
 	typedef tree_const_iterator<T>						const_iterator;
 	typedef ft::reverse_iterator<iterator>				reverse_iterator;
 	typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
-
-	typedef red_black_tree								rbtree;
-	typedef tree_node<T>								node_type;
-	typedef tree_node<T>*								node_pointer;
-	typedef std::allocator<node_type>					node_alloc_type;
 
 private:
 	value_compare _comp;
@@ -288,6 +289,14 @@ public:
 			copy_tree(a.getRoot());
 	}
 
+	void copy_tree(node_pointer node) {
+		if (node != 0) {
+			insertValue(node->value);
+			copy_tree(node->left);
+			copy_tree(node->right);
+		}
+	}
+
 	virtual ~red_black_tree() {
 		clear();
 		_node_alloc.destroy(_cmd_node);
@@ -302,6 +311,7 @@ public:
 		_alloc = a._alloc;
 		_node_alloc = a._node_alloc;
 		copy_tree(a.getRoot());
+		_size = a._size;
 		return *this;
 	}
 
@@ -353,19 +363,18 @@ public:
 	template<typename InputIterator>
 	void insert(InputIterator first, InputIterator last) {
 		while (first != last) {
-			insertValue(*first);
-			++first;
+			insertValue(*(first++));
 		}
 	}
 
-	void erase(iterator position) {
+	void erase(const_iterator position) {
 		deleteValue(*position);
 	}
 	size_type erase(const value_type& k) {
 		return deleteValue(k);
 	}
-	void erase(iterator first, iterator last) {
-		for (iterator it = first; it != last; ) {
+	void erase(const_iterator first, const_iterator last) {
+		for (const_iterator it = first; it != last; ) {
 			erase(it++);
 		}
 	}
@@ -373,19 +382,19 @@ public:
 	void swap(rbtree& x) {
 		if (this == &x)
 			return;
-		value_compare tmp_cmp = x._comp;
-		node_alloc_type tmp_node_alloc = x._node_alloc;
-		node_pointer tmp_cmd = x._cmd_node;
-		size_type tmp_size = x._size;
+		value_compare	tmp_comp = x._comp;
+		node_alloc_type	tmp_node_alloc = x._node_alloc;
+		node_pointer	tmp_cmd_node = x._cmd_node;
+		size_type		tmp_size = x._size;
 
 		x._comp = _comp;
 		x._node_alloc = _node_alloc;
 		x._cmd_node = _cmd_node;
 		x._size = _size;
 
-		_comp = tmp_cmp;
+		_comp = tmp_comp;
 		_node_alloc = tmp_node_alloc;
-		_cmd_node = tmp_cmd;
+		_cmd_node = tmp_cmd_node;
 		_size = tmp_size;
 	}
 	void clear() {
@@ -396,12 +405,12 @@ public:
 	iterator find(const value_type& k) const {
 		node_pointer tmp = getRoot();
 		while (tmp != 0) {
-			if (_comp(tmp->value, k))
-				tmp = tmp->right;
-			else if (_comp(k, tmp->value))
-				tmp = tmp->left;
-			else
+			if (!_comp(tmp->value, k) && !_comp(k, tmp->value))
 				break;
+			else if (_comp(tmp->value, k))
+				tmp = tmp->right;
+			else
+				tmp = tmp->left;
 		}
 		if (tmp == 0)
 			return (iterator(_cmd_node));
@@ -409,13 +418,12 @@ public:
 	}
 	size_type count(const value_type& k) const {
 		iterator tmp = find(k);
-		size_type cnt = 0;
 		if (tmp == end())
 			return 0;
-		while (tmp != end()) {
-			if (!_comp(*tmp, k) && !_comp(k, *tmp))
+		size_type cnt = 0;
+		for (iterator it = tmp; it != end(); ++it) {
+			if (!_comp(*it, k) && !_comp(k, *it))
 				++cnt;
-			++tmp;
 		}
 		return cnt;
 	}
@@ -582,7 +590,8 @@ private:
 				if ((tmp == p->left && getColor(s->right) == BLACK)
 				|| (tmp == p->right && getColor(s->left) == BLACK))
 					deleteCase3(s, p);
-					break;
+				deleteCase4(s, p);
+				break;
 			}
 		}
 		if (node == node->parent->left)
@@ -604,22 +613,22 @@ private:
 	}
 
 // tree에 일단 node를 삽입하고 pair를 반환하는 함수
-	pair<iterator, bool> insertNode(const node_pointer node) {
-		node_pointer parser = getRoot();
+	pair<iterator, bool> insertNode(node_pointer node) {
+		node_pointer tmp = getRoot();
 		node_pointer parent;
-		if (parser == 0) {
+		if (tmp == 0) {
 			setRoot(node);
-			return make_pair(iterator(node), true);
+			return ft::make_pair(iterator(node), true);
 		}
-		while (parser != 0) {
-			if (_comp(parser->value, node->value)) {
-				parent = parser;
-				parser = parser->right;
-			} else if (_comp(node->value, parser->value)) {
-				parent = parser;
-				parser = parser->left;
+		while (tmp) {
+			if (_comp(tmp->value, node->value)) {
+				parent = tmp;
+				tmp = tmp->right;
+			} else if (_comp(node->value, tmp->value)) {
+				parent = tmp;
+				tmp = tmp->left;
 			} else
-				return make_pair(iterator(parser), false);
+				return ft::make_pair(iterator(tmp), false);
 		}
 		if (_comp(parent->value, node->value)) {
 			parent->right = node;
@@ -628,7 +637,7 @@ private:
 			parent->left = node;
 			node->parent = parent;
 		}
-		return (make_pair(iterator(node), true));
+		return (ft::make_pair(iterator(node), true));
 	}
 
 	void rotateLeft(node_pointer node) {
@@ -639,7 +648,7 @@ private:
 		if (node->right != 0)
 			node->right->parent = node;
 		rightChild->parent = node->parent;
-		if (node == getRoot())
+		if (getParent(node) == 0)
 			setRoot(rightChild);
 		else if (node == node->parent->left)
 			node->parent->left = rightChild;
@@ -656,7 +665,7 @@ private:
 		if (node->left != 0)
 			node->left->parent = node;
 		leftChild->parent = node->parent;
-		if (node == getRoot())
+		if (getParent(node) == 0)
 			setRoot(leftChild);
 		else if (node == node->parent->right)
 			node->parent->right = leftChild;
@@ -697,6 +706,7 @@ private:
 
 	void fixAfterInsert(node_pointer node) {
 		node_pointer parent, g_parent, uncle;
+
 		while (node != getRoot() && getColor(node) == RED && getColor(getParent(node)) == RED) {
 			parent = getParent(node);
 			g_parent = getGrandparent(node);
@@ -723,12 +733,12 @@ private:
 		node_pointer node = _node_alloc.allocate(1);
 		_node_alloc.construct(node, node_type(val));
 		pair<iterator, bool> ret = insertNode(node);
-		if (ret.second == true) {
-			_size++;
-			fixAfterInsert(node);
-		} else {
+		if (ret.second == false) {
 			_node_alloc.destroy(node);
 			_node_alloc.deallocate(node, 1);
+		} else {
+			_size++;
+			fixAfterInsert(node);
 		}
 		return ret;
 	}
@@ -753,6 +763,7 @@ private:
 	}
 	void setRoot(node_pointer node) {
 		_cmd_node->left = node;
+		_cmd_node->right = node;
 		if (node != 0)
 			node->parent = _cmd_node;
 	}
@@ -767,7 +778,7 @@ private:
 		node->color = color;
 	}
 	node_pointer getParent(node_pointer node) {
-		if (node == 0 || node == getRoot())
+		if (node == 0 || node->parent == _cmd_node)
 			return 0;
 		return node->parent;
 	}
@@ -791,15 +802,6 @@ private:
 			return 0;
 		return getSibling(parent);
 	}
-
-	void copy_tree(node_pointer node) {
-		if (node != 0) {
-			insertValue(node->value);
-			copy_tree(node->left);
-			copy_tree(node->right);
-		}
-	}
-
 
 };
 

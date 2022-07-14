@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 14:59:50 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/13 21:49:30 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/14 21:47:20 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ public:
 
 // Element access:
 	mapped_type& operator[](const key_type& k) {
-		return (*((insert(make_pair(k ,mapped_type()))).first)).second;
+		return (*((insert(ft::make_pair(k ,mapped_type()))).first)).second;
 	}
 
 // Modifiers:
@@ -137,7 +137,7 @@ public:
 		_tree.erase(position);
 	}
 	size_type erase(const key_type& k) {
-		return _tree.erase(make_pair(k, mapped_type()));
+		return _tree.erase(ft::make_pair(k, mapped_type()));
 	}
 	void erase(iterator first, iterator last) {
 		_tree.erase(first, last);
@@ -159,13 +159,13 @@ public:
 
 // Operations:
 	iterator find(const key_type& k) {
-		return _tree.find(make_pair(k, mapped_type()));
+		return _tree.find(ft::make_pair(k, mapped_type()));
 	}
 	const_iterator find(const key_type& k) const {
-		return _tree.find(make_pair(k, mapped_type()));
+		return _tree.find(ft::make_pair(k, mapped_type()));
 	}
 	size_type count(const key_type& k) const {
-		return _tree.count(make_pair(k, mapped_type()));
+		return _tree.count(ft::make_pair(k, mapped_type()));
 	}
 	iterator lower_bound(const key_type& k) {
 		iterator st = begin();
@@ -208,10 +208,10 @@ public:
 		return st;
 	}
 	pair<const_iterator, const_iterator> equal_range(const key_type& k) const {
-		return make_pair(lower_bound(k), upper_bound(k));
+		return ft::make_pair(lower_bound(k), upper_bound(k));
 	}
 	pair<iterator, iterator> equal_range(const key_type& k) {
-		return make_pair(lower_bound(k), upper_bound(k));
+		return ft::make_pair(lower_bound(k), upper_bound(k));
 	}
 	allocator_type get_allocator() const {
 		return allocator_type();
