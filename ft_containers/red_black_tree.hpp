@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 19:13:04 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/14 22:05:42 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/15 10:55:35 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ private:
 
 public:
 	tree_iterator() : _node(0) {}
-	explicit tree_iterator(const tree_iterator& a) : _node(a._node) {}
-	tree_iterator(const tree_const_iterator<T>& a) {
+	tree_iterator(const tree_iterator& a) : _node(a._node) {}
+	explicit tree_iterator(const tree_const_iterator<T>& a) {
 		_node = a.base();
 	}
 	tree_iterator(node_pointer node) : _node(node) {}
@@ -168,7 +168,7 @@ private:
 
 public:
 	tree_const_iterator() : _node(0) {}
-	explicit tree_const_iterator(const tree_const_iterator& a) : _node(a._node) {}
+	tree_const_iterator(const tree_const_iterator& a) : _node(a._node) {}
 	tree_const_iterator(const tree_iterator<T>& a) {
 		_node = a.base();
 	}

@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/14 21:16:04 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/15 10:23:44 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ public:
 	vector_iterator(): p(0) {}
 	vector_iterator(pointer a): p(a) {}
 	vector_iterator(const vector_iterator& a) : p(a.p) {}
-	vector_iterator(const const_vector_iterator<T>& a) {
+	explicit vector_iterator(const const_vector_iterator<T>& a) {
 		p = a.base();
 	}
 	vector_iterator& operator=(const vector_iterator& a) {
@@ -166,7 +166,7 @@ public:
 	const_vector_iterator(): p(0) {}
 	const_vector_iterator(pointer a): p(a) {}
 	const_vector_iterator(const const_vector_iterator& a) : p(a.p) {}
-	const_vector_iterator(const vector_iterator<T>& a) {
+	explicit const_vector_iterator(const vector_iterator<T>& a) {
 		p = a.base();
 	}
 	const_vector_iterator& operator=(const const_vector_iterator& a) {

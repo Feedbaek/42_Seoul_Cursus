@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 14:59:50 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/14 21:47:20 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/15 10:36:20 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,8 +188,8 @@ public:
 		return st;
 	}
 	const_iterator lower_bound(const key_type& k) const {
-		iterator st = begin();
-		iterator en = end();
+		const_iterator st = begin();
+		const_iterator en = end();
 		while (st != en) {
 			if (_comp(st->first, k) == false)
 				break;
@@ -198,8 +198,8 @@ public:
 		return st;
 	}
 	const_iterator upper_bound(const key_type& k) const {
-		iterator st = begin();
-		iterator en = end();
+		const_iterator st = begin();
+		const_iterator en = end();
 		while (st != en) {
 			if (_comp(k, st->first) == true)
 				break;
