@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 19:13:04 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/15 10:55:35 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/18 21:07:50 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -485,8 +485,8 @@ private:
 			tmp1->right = node->right;
 			node->right = tmp2;
 			color = tmp1->color;
-			tmp1->color = tmp2->color;
-			tmp2->color = color;
+			tmp1->color = node->color;
+			node->color = color;
 		}
 		return deleteNode(tmp1->right, val);
 	}
@@ -582,6 +582,8 @@ private:
 				s = p->right;
 			else
 				s = p->left;
+			if (!s)
+				break;
 			if (getColor(s) == RED)
 				deleteCase1(s, p);
 			else if (getColor(s->left) == BLACK && getColor(s->right) == BLACK)

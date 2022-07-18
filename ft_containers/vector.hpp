@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/15 10:23:44 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/18 21:25:17 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -397,7 +397,7 @@ public:
 	}
 	void reserve(size_type n) {
 		if (n > max_size())
-			throw std::length_error("vector::reserve");
+			throw std::length_error("Error -> vector::reserve");
 		if (n > _capacity) {
 			pointer _new_container = _alloc.allocate(n);
 			for (size_type i=0; i<_size; i++) {
@@ -421,12 +421,12 @@ public:
 	}
 	reference at(size_type n) {
 		if (n >= _size)
-			throw std::out_of_range("vector:at");
+			throw std::out_of_range("Error -> vector:at");
 		return *(_container + n);
 	}
 	const_reference at(size_type n) const {
 		if (n >= _size)
-			throw std::out_of_range("vector:at");
+			throw std::out_of_range("Error -> vector:at");
 		return *(_container + n);
 	}
 	reference front() {
@@ -436,14 +436,10 @@ public:
 		return *(_container);
 	}
 	reference back() {
-		if (_size > 0)
-			return *(_container + _size - 1);
-		return *(_container);
+		return *(_container + _size - 1);
 	}
 	const_reference back() const {
-		if (_size > 0)
-			return *(_container + _size - 1);
-		return *(_container);
+		return *(_container + _size - 1);
 	}
 
 	// Modifiers:
@@ -490,7 +486,7 @@ public:
 		pointer _new_container = _container;
 		size_type _new_capacity = _capacity;
 		if (_size == max_size())
-			throw std::length_error("vector::insert(single element)");
+			throw std::length_error("Error -> vector::insert(single element)");
 		if (_size == 0) {
 			_new_container = _alloc.allocate(1);
 			_new_capacity = 1;
@@ -526,7 +522,7 @@ public:
 		if (n == 0)
 			return ;
 		if (_size + n > max_size())
-			throw std::length_error("vector::insert(fill)");
+			throw std::length_error("Error -> vector::insert(fill)");
 		if (_size + n > _capacity) {
 			if (_size + n < _size * 2) {
 				_new_container = _alloc.allocate(_size * 2);
@@ -566,7 +562,7 @@ public:
 		if (num == 0)
 			return ;
 		if (_size + num > max_size())
-			throw std::length_error("vector::insert(range)");
+			throw std::length_error("Error -> vector::insert(range)");
 		if (_size + num > _capacity) {
 			if (_size + num < _size * 2) {
 				_new_container = _alloc.allocate(_size * 2);
