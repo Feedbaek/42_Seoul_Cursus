@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/19 10:32:30 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/19 21:07:52 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ template<typename T>
 class vector_iterator;
 
 template<typename T>
-class vector_iterator : public iterator<random_access_iterator_tag, T> {
+class vector_iterator : public ft::iterator<random_access_iterator_tag, T> {
 public:
 	typedef typename iterator<random_access_iterator_tag, T>::iterator_category	iterator_category;
 	typedef typename iterator<random_access_iterator_tag, T>::value_type			value_type;
@@ -151,7 +151,7 @@ public:
 };
 
 template<typename T>
-class const_vector_iterator : public iterator<random_access_iterator_tag, T> {
+class const_vector_iterator : public ft::iterator<random_access_iterator_tag, T> {
 public:
 	typedef typename iterator<random_access_iterator_tag, T>::iterator_category	iterator_category;
 	typedef typename iterator<random_access_iterator_tag, T>::value_type		value_type;
@@ -368,9 +368,10 @@ public:
 		return this->_size;
 	}
 	size_type max_size() const {
-		if ((size_type) std::numeric_limits<difference_type>::max() < std::numeric_limits<size_type>::max() / sizeof(value_type))
-			return (size_type) std::numeric_limits<difference_type>::max();
-		return std::numeric_limits<size_type>::max() / sizeof(value_type);
+		return _alloc.max_size();
+		//if ((size_type) std::numeric_limits<difference_type>::max() < std::numeric_limits<size_type>::max() / sizeof(value_type))
+		//	return (size_type) std::numeric_limits<difference_type>::max();
+		//return std::numeric_limits<size_type>::max() / sizeof(value_type);
 	}
 	void resize(size_type n, value_type val = value_type()) {
 		if (n > _capacity) {

@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 19:13:04 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/19 10:26:29 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/19 22:38:46 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ template<typename T>
 class tree_const_iterator;
 
 template<typename T>
-class tree_iterator : public iterator<bidirectional_iterator_tag, T> {
+class tree_iterator : public ft::iterator<bidirectional_iterator_tag, T> {
 private:
 	typedef tree_node<T>	node_type;
 	typedef tree_node<T>*	node_pointer;
@@ -73,8 +73,7 @@ public:
 		return *this;
 	}
 	tree_iterator& operator=(const tree_const_iterator<T>& a) {
-		if (this != &a)
-			_node = a.base();
+		_node = a.base();
 		return *this;
 	}
 
@@ -137,7 +136,7 @@ public:
 };
 
 template<typename T>
-class tree_const_iterator : public iterator<bidirectional_iterator_tag, T> {
+class tree_const_iterator : public ft::iterator<bidirectional_iterator_tag, T> {
 private:
 	typedef tree_node<T>				node_type;
 	typedef tree_node<T>*				node_pointer;
@@ -183,8 +182,7 @@ public:
 		return *this;
 	}
 	tree_const_iterator& operator=(const tree_iterator<T>& a) {
-		if (this != &a)
-			_node = a._node;
+		_node = a.base();
 		return *this;
 	}
 
@@ -350,9 +348,7 @@ public:
 		return _size;
 	}
 	size_type max_size() const {
-		if (((size_type) std::numeric_limits<difference_type>::max()) < std::numeric_limits<size_type>::max() / (sizeof(node_type) + sizeof(pointer)))
-			return ((size_type) std::numeric_limits<difference_type>::max());
-		return std::numeric_limits<size_type>::max() / (sizeof(node_type) + sizeof(pointer));
+		return std::numeric_limits<size_type>::max() / (sizeof(node_type) - 8);
 	}
 
 // Modifiers:
