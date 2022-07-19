@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 19:13:04 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/18 21:07:50 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/19 10:26:29 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RED_BLACK_TREE_HPP
 
 # include <memory>
+# include <limits>
 # include <cstddef>
 
 # include "iterator.hpp"
@@ -349,7 +350,9 @@ public:
 		return _size;
 	}
 	size_type max_size() const {
-		return _node_alloc.max_size();
+		if (((size_type) std::numeric_limits<difference_type>::max()) < std::numeric_limits<size_type>::max() / (sizeof(node_type) + sizeof(pointer)))
+			return ((size_type) std::numeric_limits<difference_type>::max());
+		return std::numeric_limits<size_type>::max() / (sizeof(node_type) + sizeof(pointer));
 	}
 
 // Modifiers:
