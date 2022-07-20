@@ -6,12 +6,12 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/02 18:04:36 by minskim2          #+#    #+#              #
-#    Updated: 2022/07/19 23:44:33 by minskim2         ###   ########.fr        #
+#    Updated: 2022/07/20 11:34:54 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 SRCS = main.cpp
 NEWSRCS = new_main.cpp
 HEADER = ./

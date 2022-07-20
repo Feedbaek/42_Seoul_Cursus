@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 19:13:04 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/19 22:38:46 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/20 11:37:54 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -348,7 +348,7 @@ public:
 		return _size;
 	}
 	size_type max_size() const {
-		return std::numeric_limits<size_type>::max() / (sizeof(node_type) - 8);
+		return std::numeric_limits<size_type>::max() / (sizeof(node_type) - sizeof(node_pointer));
 	}
 
 // Modifiers:

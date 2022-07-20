@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 18:04:31 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/19 21:07:52 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/20 11:44:21 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,9 +369,6 @@ public:
 	}
 	size_type max_size() const {
 		return _alloc.max_size();
-		//if ((size_type) std::numeric_limits<difference_type>::max() < std::numeric_limits<size_type>::max() / sizeof(value_type))
-		//	return (size_type) std::numeric_limits<difference_type>::max();
-		//return std::numeric_limits<size_type>::max() / sizeof(value_type);
 	}
 	void resize(size_type n, value_type val = value_type()) {
 		if (n > _capacity) {
@@ -422,12 +419,12 @@ public:
 	}
 	reference at(size_type n) {
 		if (n >= _size)
-			throw std::out_of_range("Error -> vector:at");
+			throw std::out_of_range("vector");
 		return *(_container + n);
 	}
 	const_reference at(size_type n) const {
 		if (n >= _size)
-			throw std::out_of_range("Error -> vector:at");
+			throw std::out_of_range("vector");
 		return *(_container + n);
 	}
 	reference front() {

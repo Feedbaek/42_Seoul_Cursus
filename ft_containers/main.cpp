@@ -6,23 +6,25 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 20:02:15 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/19 23:36:35 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/20 11:56:08 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
 #include <deque>
-#if 0 //CREATE A REAL STL EXAMPLE
+#if 1 //CREATE A REAL STL EXAMPLE
 	#include <map>
 	#include <stack>
 	#include <vector>
+	#include <set>
 	namespace ft = std;
 #else
 	#include <map.hpp>
 	#include <stack.hpp>
 	#include <stack>
 	#include <vector.hpp>
+	#include <set.hpp>
 #endif
 
 #include <stdlib.h>
@@ -125,5 +127,19 @@ int main(int argc, char** argv) {
 		std::cout << *it;
 	}
 	std::cout << std::endl;
+
+	ft::set<int> set_int;
+	for (int i = 0; i < COUNT; ++i)
+	{
+		set_int.insert(rand());
+	}
+	sum = 0;
+	for (int i = 0; i < 10000; i++)
+	{
+		int access = rand();
+		sum += map_int[access];
+	}
+	std::cout << "should be constant with the same seed: " << sum << std::endl;
+
 	return (0);
 }

@@ -2026,6 +2026,6 @@ int main(void){
     VectorTest();
     StackTest();
     MapTest();
-    system("leaks a.out");
+    system("leaks test");
     return (0);
 }
