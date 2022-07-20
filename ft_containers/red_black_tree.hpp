@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 19:13:04 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/20 11:37:54 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/20 18:25:38 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,10 +247,10 @@ public:
 template<typename T, typename Compare>
 class red_black_tree {
 private:
-	typedef red_black_tree								rbtree;
-	typedef tree_node<T>								node_type;
-	typedef tree_node<T>*								node_pointer;
-	typedef std::allocator<node_type>					node_alloc_type;
+	typedef red_black_tree													rbtree;
+	typedef tree_node<T>													node_type;
+	typedef tree_node<T>*													node_pointer;
+	typedef typename std::allocator<T>::template rebind<node_type>::other	node_alloc_type;
 
 public:
 	typedef T											value_type;

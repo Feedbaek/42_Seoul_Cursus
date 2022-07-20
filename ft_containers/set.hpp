@@ -6,7 +6,7 @@
 /*   By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 20:52:27 by minskim2          #+#    #+#             */
-/*   Updated: 2022/07/19 22:58:19 by minskim2         ###   ########.fr       */
+/*   Updated: 2022/07/20 20:51:31 by minskim2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ template <class InputIterator>
 	void clear() { return (_tree.clear()); }
 
 // Observers:
-	key_compare				key_comp() const { return (key_compare()); }
+	key_compare key_comp() const { return (key_compare()); }
 	value_compare value_comp() const {
 		return value_compare();
 	}
