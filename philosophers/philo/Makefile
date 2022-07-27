@@ -6,12 +6,12 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/15 19:26:51 by minskim2          #+#    #+#              #
-#    Updated: 2021/10/21 18:45:43 by minskim2         ###   ########.fr        #
+#    Updated: 2022/07/27 15:34:57 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=gcc
-CFLAGS = -Werror -Wextra -Wall
+CFLAGS = -Werror -Wextra -Wall -g3 -fsanitize=thread
 SRCS =	srcs/philo.c \
 	srcs/tools0.c \
 	srcs/init.c \
