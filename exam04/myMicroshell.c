@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+int parse_arg(t_list **cmds, char *arg) {
+
+}
+
 int main (int argc, char **argv, char **env) {
 	t_list *cmds;
 	int i;
@@ -14,6 +18,5 @@ int main (int argc, char **argv, char **env) {
 		parse_arg(&cmds, argv[i++]);
 	if (cmds)
 		ret = exec_cmds(&cmds, env);
-	list_clear(&cmds);
 	return ret;
 }
