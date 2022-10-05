@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <sys/wait.h>
 
 #define SIDE_OUT	0
 #define SIDE_IN		1
