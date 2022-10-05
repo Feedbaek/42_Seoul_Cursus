@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/wait.h>
 
 #define SIDE_IN		1
 #define SIDE_OUT	0
@@ -78,6 +79,7 @@ int add_args(t_list *cmd, char *arg) {
 	if (cmd->length)
 		free(cmd->args);
 	cmd->args = tmp;
+	cmd->length++;
 	return EXIT_SUCCESS;
 }
 
@@ -113,7 +115,7 @@ int parse_argv(t_list **cmds, char *argv) {
 	else if (is_break)
 		(*cmds)->type = TYPE_BREAK;
 	else
-		add_args(*cmds, argv);
+		return add_args(*cmds, argv);
 	return EXIT_SUCCESS;
 }
 
@@ -127,13 +129,13 @@ int rewind(t_list **cmds) {
 int exec_cmd(t_list *cmd, char envp) {
 	pid_t pid;
 	int status;
-	int ret;
+	int ret = EXIT_FAILURE;
 	int pipe_open = 0;
 
 	if (cmd->type == TYPE_PIPE || (cmd->prev && cmd->prev->type == TYPE_PIPE)) {
 		pipe_open = 1;
 		if (pipe(cmd->pipe) < 0)
-			exit_fatal();
+			return exit_fatal();
 	}
 	pid = fork();
 	if (pid < 0)
@@ -141,7 +143,7 @@ int exec_cmd(t_list *cmd, char envp) {
 	else if (pid == 0) {
 		if (cmd->type == TYPE_PIPE && dup2(cmd->pipe[SIDE_IN], STDOUT) < 0)
 			return exit_fatal();
-		if (cmd->prev->type == TYPE_PIPE && dup2(cmd->pipe[SIDE_OUT], STDIN) < 0)
+		if (cmd->prev && cmd->prev->type == TYPE_PIPE && dup2(cmd->prev->pipe[SIDE_OUT], STDIN) < 0)
 			return exit_fatal();
 		if ((ret = execve(cmd->args[0], cmd->args, envp)) < 0) {
 			show_error("error: cannot execute ");
@@ -151,8 +153,18 @@ int exec_cmd(t_list *cmd, char envp) {
 		exit(ret);
 	}
 	else {
-		if ()
+		waitpid(pid, &status, 0);
+		if (pipe_open) {
+			close(cmd->pipe[SIDE_IN]);
+			if (!cmd->next || cmd->type == TYPE_BREAK)
+				close(cmd->pipe[SIDE_OUT]);
+		}
+		if (cmd->prev && cmd->prev->type == TYPE_PIPE)
+			close(cmd->prev->pipe[SIDE_OUT]);
+		if (WIFEXITED(status))
+			ret = WEXITSTATUS(status);
 	}
+	return ret;
 }
 
 int exec_cmds(t_list **cmds, char envp) {
@@ -162,9 +174,9 @@ int exec_cmds(t_list **cmds, char envp) {
 
 	rewind(cmds);
 	while (*cmds) {
-		ret = EXIT_SUCCESS;
 		crt = *cmds;
 		if (strcmp(crt->args[0], "cd") == 0) {
+			ret = EXIT_SUCCESS;
 			if (crt->length < 2) {
 				show_error("error: cd: bad arguments\n");
 				ret = EXIT_FAILURE;
@@ -178,8 +190,12 @@ int exec_cmds(t_list **cmds, char envp) {
 			}
 		}
 		else
-			exec_cmd(*cmds, envp);
+			ret = exec_cmd(*cmds, envp);
+		if ((*cmds)->next == 0)
+			break;
+		*cmds = (*cmds)->next;
 	}
+	return ret;
 }
 
 int main(int argc, char **argv, char **envp) {
@@ -188,6 +204,7 @@ int main(int argc, char **argv, char **envp) {
 	int i = 1;
 	while (argv[i] < argc) {
 		parse_argv(&cmds, argv[i]);
+		++i;
 	}
 	if (cmds)
 		ret = exec_cmds(cmds, envp);

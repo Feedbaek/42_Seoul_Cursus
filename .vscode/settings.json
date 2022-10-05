@@ -76,6 +76,8 @@
 		"map": "cpp",
 		"mutex": "cpp",
 		"stack": "cpp",
-		"set": "cpp"
+		"set": "cpp",
+		"string.h": "c",
+		"unistd.h": "c"
 	}
 }
