@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # rc pid 실행을 수행한다.
 rc default
 
