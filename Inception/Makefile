@@ -10,6 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
+all: build run
+
 mariadb:
 	sudo docker stop mariadb | \
 	sudo docker rm mariadb | \
@@ -30,7 +32,6 @@ build: mariadb wordpress nginx
 run:
 	cd srcs/ && docker compose up
 
-all: build run
 
 clean:
 	sudo docker stop mariadb
@@ -42,8 +43,7 @@ clean:
 	sudo docker stop nginx
 	sudo docker rm nginx
 
-	sudo rm -rf ./srcs/requirements/mariadb/tools/db_volumes
-	sudo rm -rf ./srcs/requirements/wordpress/tools/wp_volumes
+	sudo rm -rf /home/minskim2/data/
 
 fclean: clean
 	sudo docker rmi my_mariadb

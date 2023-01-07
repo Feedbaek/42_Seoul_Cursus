@@ -1,23 +1,5 @@
 #!/bin/sh
 
-# rc pid 실행을 수행한다.
-#rc default
-
-# datadir에 기본 셋업을 진행한다.
-#/etc/init.d/mariadb setup
-
-# SQL 쿼리문을 넣기위해 잠시 실행한다.
-#rc-service mariadb start
-
-# wordpress database 생성 SQL문
-#mysql -u root < /home/create_wordpressdb_user.sql
-
-# mysql_secure_installation 설정이 담긴 sql쿼리문
-#mysql -u root < /home/mysql_secure_installation.sql
-
-#rc-service mariadb stop
-
-
 # mysql 데이터 디렉토리 초기화
 mysql_install_db --user=mysql --datadir=/var/lib/mysql/
 
@@ -32,19 +14,49 @@ chmod 777 /var/lib/mysql
 sleep 1
 
 
+# ===================================================
+
 # wordpress database 생성 SQL문
-mysql -u root < /home/create_wordpressdb_user.sql
+
+# database 생성
+mysql -e "create database $MY_MYSQL_DATABASE;"
+
+# database 유저 생성
+mysql -e "create user '$MY_MYSQL_USER'@'%' identified by '$MY_MYSQL_PASSWORD';"
+
+# database 권한
+mysql -e "GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, CREATE VIEW, EVENT, TRIGGER, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EXECUTE ON $MY_MYSQL_DATABASE.* TO '$MY_MYSQL_USER'@'%';"
+
+# 적용
+mysql -e "FLUSH PRIVILEGES;"
+
+# =====================================================
 
 # mysql_secure_installation 설정이 담긴 sql쿼리문
-mysql -u root < /home/mysql_secure_installation.sql
+
+# -- mariadb 10.5부터 native, socket 인증방식 동시사용가능, native인증으로 고정 및 root 패스워드 변경
+mysql -e "ALTER USER root@localhost IDENTIFIED VIA mysql_native_password USING PASSWORD('$MY_MYSQL_ROOT_PASSWORD'); \
+DELETE FROM mysql.user WHERE User=''; \
+DROP DATABASE IF EXISTS test; \
+DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'; \
+FLUSH PRIVILEGES;"
+
+
+# -- '@localhost' 익명연결 허용 삭제
+#mysql -e "DELETE FROM mysql.user WHERE User='';"
+
+# -- testdb 삭제
+#mysql -e "DROP DATABASE IF EXISTS test;"
+#mysql -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';"
+
+# -- 적용
+#mysql -e "FLUSH PRIVILEGES;"
+
 
 # mysqld_safe BackGround 종료
-mysqladmin -u root --password=1436 shutdown
+mysqladmin -u root --password=$MY_MYSQL_ROOT_PASSWORD shutdown
 
 sleep 1
 
 # ForeGround로 실행한다.
 /usr/bin/mysqld_safe
-
-# ForeGround로 실행한다.
-#/usr/bin/mysqld_safe

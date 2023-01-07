@@ -9,7 +9,9 @@ services:
     expose:
       - "3306"
     volumes:
-      - ./requirements/mariadb/tools/db_volumes:/var/lib/mysql
+      - /home/minskim2/data/db_volumes:/var/lib/mysql
+    networks:
+      - intra
 
   wp:
     depends_on:
@@ -21,7 +23,9 @@ services:
     expose:
       - "9000"
     volumes:
-      - ./requirements/wordpress/tools/wp_volumes:/var/www/html
+      - /home/minskim2/data/wp_volumes:/var/www/html
+    networks:
+      - intra
 
   ng:
     depends_on:
@@ -33,8 +37,14 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ./requirements/wordpress/tools/wp_volumes:/var/www/html
+      - /home/minskim2/data/wp_volumes:/var/www/html
+    networks:
+      - intra
 
 volumes:
   db_volumes:
   wp_volumes:
+
+networks:
+  intra:
+    driver: bridge

@@ -7,13 +7,13 @@ FROM alpine:3.16
 RUN apk update && apk upgrade && apk add --no-cache mariadb mariadb-client dumb-init
 
 # mysql_secure_installation 설정이 담긴 sql쿼리문
-COPY conf/mysql_secure_installation.sql /home/
+#COPY conf/mysql_secure_installation.sql /home/
 
 # sql server 설정 since alpine 3.9 First Global config file, main directives
 COPY conf/mariadb-server.cnf /etc/my.cnf.d/
 
 # wordpress database 설정
-COPY conf/create_wordpressdb_user.sql /home/
+#COPY conf/create_wordpressdb_user.sql /home/
 
 # sql 시작 스크립트
 COPY conf/start_mariadb.sh /home
