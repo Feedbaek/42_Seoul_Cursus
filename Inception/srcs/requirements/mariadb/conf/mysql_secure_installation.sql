@@ -1,12 +1,12 @@
--- mariadb 10.5부터 native, socket 인증방식 동시사용가능, native인증으로 고정 및 root 패스워드 변경
+-- sincd mariadb 10.5, native, socket are Ok, native authorization root password change
 ALTER USER root@localhost IDENTIFIED VIA mysql_native_password USING PASSWORD('1436');
 
--- '@localhost' 익명연결 허용 삭제
+-- '@localhost' ananymous delete
 DELETE FROM mysql.user WHERE User='';
 
--- testdb 삭제
+-- testdb delete
 DROP DATABASE IF EXISTS test;
 DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
 
--- 적용
+-- flush
 FLUSH PRIVILEGES;

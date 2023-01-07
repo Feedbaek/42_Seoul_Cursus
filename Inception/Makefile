@@ -10,34 +10,45 @@
 #                                                                              #
 # **************************************************************************** #
 
-CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-SRCS = main.cpp
-NEWSRCS = new_main.cpp
-HEADER = ./
-NAME = a.out
-OBJECTS = $(SRCS:.cpp=.o)
-NEWOBJECTS = $(NEWSRCS:.cpp=.o)
+mariadb:
+	sudo docker stop mariadb | \
+	sudo docker rm mariadb | \
+	sudo docker build -t my_mariadb ./srcs/requirements/mariadb/
 
-all: $(NAME)
+wordpress:
+	sudo docker stop wordpress | \
+	sudo docker rm wordpress | \
+	sudo docker build -t my_wordpress ./srcs/requirements/wordpress/
 
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $^ -o $@ -I$(HEADER)
+nginx:
+	sudo docker stop nginx | \
+	sudo docker rm nginx | \
+	sudo docker build -t my_nginx ./srcs/requirements/nginx/
 
-$(NAME): $(OBJECTS)
-	$(CXX) $^ -o $@
+build: mariadb wordpress nginx
 
-test: $(NEWOBJECTS)
-	$(CXX) $^ -o $@
+run:
+	cd srcs/ && docker compose up
+
+all: build run
 
 clean:
-	rm -rf $(OBJECTS)
-	rm -rf $(NEWOBJECTS)
+	sudo docker stop mariadb
+	sudo docker rm mariadb
+
+	sudo docker stop wordpress
+	sudo docker rm wordpress
+
+	sudo docker stop nginx
+	sudo docker rm nginx
+
+	sudo rm -rf ./srcs/requirements/mariadb/tools/db_volumes
+	sudo rm -rf ./srcs/requirements/wordpress/tools/wp_volumes
 
 fclean: clean
-	rm -rf $(NAME)
-	rm -rf test
-	rm -rf *.log
+	sudo docker rmi my_mariadb
+	sudo docker rmi my_wordpress
+	sudo docker rmi my_nginx
 
 re:
 	$(MAKE) fclean

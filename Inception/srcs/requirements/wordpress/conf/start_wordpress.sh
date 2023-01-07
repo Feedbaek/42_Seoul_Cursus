@@ -1,38 +1,11 @@
 #!/bin/sh
-#[ -f /run-pre.sh ] && /run-pre.sh
 
-#if [ ! -d /usr/html ] ; then
-#echo "[i] Creating directories..."
-#mkdir -p /usr/html
-#echo "[i] Fixing permissions..."
-#chown -R nginx:nginx /usr/html
-#else
-#echo "[i] Fixing permissions..."
-#chown -R nginx:nginx /usr/html
-#fi
+wp-cli core download --locale=en_GB --path=/var/www/html
 
-#chown -R nginx:www-data /usr/html
+wp-cli config create --force --dbname=$MY_MYSQL_DATABASE --dbuser=$MY_MYSQL_USER --dbpass=$MY_MYSQL_PASSWORD --dbhost=$MY_MYSQL_HOST --path=/var/www/html
 
+wp-cli core install --url=$DOMAIN_NAME --title="WordPress Website Title" --admin_user=$ADMIN_USER --admin_password=$ADMIN_PASSWORD --admin_email=$ADMIN_EMAIL --path=/var/www/html
 
-# start php-fpm
-mkdir -p /usr/logs/php-fpm
+#wp-cli user create $REG_USER $REG_EMAIL --user_pass=$REG_PASSWORD --path=/var/www/html
+
 php-fpm8 -F
-
-# start nginx
-#mkdir -p /usr/logs/nginx
-#mkdir -p /tmp/nginx
-#chown nginx /tmp/nginx
-#nginx
-
-
-#rc default
-
-#/etc/init.d/lighttpd setup
-
-#rc-service lighttpd start
-
-#rc-update add lighttpd default
-
-#apk add wget php5-mysql mysql mysql-client php5-zlib
-
-#/etc/init.d/lighttpd restart

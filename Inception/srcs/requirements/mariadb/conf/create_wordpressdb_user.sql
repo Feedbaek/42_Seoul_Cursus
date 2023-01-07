@@ -1,11 +1,11 @@
--- database 생성
+-- create database
 create database wordpress;
 
--- database 유저생성
+-- create database user
 create user 'wordpressuser'@'%' identified by '1436';
 
--- database 권한
+-- privileges database
 GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, CREATE VIEW, EVENT, TRIGGER, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EXECUTE ON wordpress.* TO 'wordpressuser'@'%';
 
--- 적용
+-- flush
 FLUSH PRIVILEGES;
