@@ -10,8 +10,7 @@ services:
       - "3306"
     volumes:
       - /home/minskim2/data/db_volumes:/var/lib/mysql
-    networks:
-      - intra
+
 
   wp:
     depends_on:
@@ -24,8 +23,6 @@ services:
       - "9000"
     volumes:
       - /home/minskim2/data/wp_volumes:/var/www/html
-    networks:
-      - intra
 
   ng:
     depends_on:
@@ -38,13 +35,8 @@ services:
       - "443:443"
     volumes:
       - /home/minskim2/data/wp_volumes:/var/www/html
-    networks:
-      - intra
+
 
 volumes:
   db_volumes:
   wp_volumes:
-
-networks:
-  intra:
-    driver: bridge
