@@ -2,6 +2,8 @@
 
 if [ ! -d /var/www/html/wp-admin ]; then
 
+sleep 2
+
 wp-cli core download --locale=en_GB --path=/var/www/html
 
 wp-cli config create --force --dbname=$MARIADB_DATABASE --dbuser=$MARIADB_USER --dbpass=$MARIADB_PASSWORD --dbhost=$MARIADB_HOST --path=/var/www/html

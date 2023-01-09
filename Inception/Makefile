@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 18:04:36 by minskim2          #+#    #+#              #
-#    Updated: 2022/12/29 11:34:54 by minskim2         ###   ########.fr        #
+#    Updated: 2023/01/10 03:20:06 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ nginx:
 build: mariadb wordpress nginx
 
 run:
+	mkdir -p /home/minskim2/data/mariadb
+	mkdir -p /home/minskim2/data/wordpress
 	cd srcs/ && docker compose up
 
 

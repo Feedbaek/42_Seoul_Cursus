@@ -11,6 +11,7 @@ RUN apk update && apk upgrade && apk add --no-cache mariadb mariadb-client dumb-
 
 # sql server 설정 since alpine 3.9 First Global config file, main directives
 COPY conf/mariadb-server.cnf /etc/my.cnf.d/
+RUN chmod 755 /etc/my.cnf.d/mariadb-server.cnf
 
 # wordpress database 설정
 #COPY conf/create_wordpressdb_user.sql /home/
