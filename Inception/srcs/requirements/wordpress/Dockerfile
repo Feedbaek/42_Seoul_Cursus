@@ -1,6 +1,7 @@
 FROM alpine:3.16
 
-RUN apk add dumb-init bash curl less vim ca-certificates git tzdata zip \
+RUN apk update && apk upgrade && \
+	apk add dumb-init bash curl less vim ca-certificates git tzdata zip ssmtp \
 	libmcrypt-dev zlib-dev gmp-dev \
 	freetype-dev libjpeg-turbo-dev libpng-dev \
 	php8-fpm php8-json php8-zlib php8-xml php8-xmlwriter php8-simplexml php8-pdo php8-phar php8-openssl \

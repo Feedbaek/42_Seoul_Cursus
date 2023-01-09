@@ -36,15 +36,6 @@ run:
 clean:
 	cd srcs/ && docker compose down
 
-#sudo docker stop mariadb
-#sudo docker rm mariadb
-
-#sudo docker stop wordpress
-#sudo docker rm wordpress
-
-#sudo docker stop nginx
-#sudo docker rm nginx
-
 
 fclean: clean
 	sudo rm -rf /home/minskim2/data/
