@@ -1,42 +1,50 @@
 version: '3'
 
 services:
-  db:
-    image: my_mariadb
+  mariadb:
     container_name: mariadb
+    build: ./requirements/mariadb
     restart: always
     env_file: .env
     expose:
       - "3306"
     volumes:
       - /home/minskim2/data/db_volumes:/var/lib/mysql
+    networks:
+      - intra
 
-
-  wp:
+  wordpress:
     depends_on:
-      - db
-    image: my_wordpress
+      - mariadb
     container_name: wordpress
+    build: ./requirements/wordpress
     restart: always
     env_file: .env
     expose:
       - "9000"
     volumes:
       - /home/minskim2/data/wp_volumes:/var/www/html
+    networks:
+      - intra
 
-  ng:
+  nginx:
     depends_on:
-      - wp
-    image: my_nginx
+      - wordpress
     container_name: nginx
+    build: ./requirements/nginx
     restart: always
     env_file: .env
     ports:
       - "443:443"
     volumes:
       - /home/minskim2/data/wp_volumes:/var/www/html
-
+    networks:
+      - intra
 
 volumes:
   db_volumes:
   wp_volumes:
+
+networks:
+  intra:
+    driver: bridge

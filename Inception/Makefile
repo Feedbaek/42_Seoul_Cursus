@@ -10,22 +10,22 @@
 #                                                                              #
 # **************************************************************************** #
 
-all: build run
+all: run
 
 mariadb:
 	sudo docker stop mariadb | \
 	sudo docker rm mariadb | \
-	sudo docker build -t my_mariadb ./srcs/requirements/mariadb/
+	sudo docker build -t mariadb ./srcs/requirements/mariadb/
 
 wordpress:
 	sudo docker stop wordpress | \
 	sudo docker rm wordpress | \
-	sudo docker build -t my_wordpress ./srcs/requirements/wordpress/
+	sudo docker build -t wordpress ./srcs/requirements/wordpress/
 
 nginx:
 	sudo docker stop nginx | \
 	sudo docker rm nginx | \
-	sudo docker build -t my_nginx ./srcs/requirements/nginx/
+	sudo docker build -t nginx ./srcs/requirements/nginx/
 
 build: mariadb wordpress nginx
 
@@ -34,21 +34,21 @@ run:
 
 
 clean:
-	sudo docker stop mariadb
-	sudo docker rm mariadb
+	cd srcs/ && docker compose down
 
-	sudo docker stop wordpress
-	sudo docker rm wordpress
+#sudo docker stop mariadb
+#sudo docker rm mariadb
 
-	sudo docker stop nginx
-	sudo docker rm nginx
+#sudo docker stop wordpress
+#sudo docker rm wordpress
 
-	sudo rm -rf /home/minskim2/data/
+#sudo docker stop nginx
+#sudo docker rm nginx
+
 
 fclean: clean
-	sudo docker rmi my_mariadb
-	sudo docker rmi my_wordpress
-	sudo docker rmi my_nginx
+	sudo rm -rf /home/minskim2/data/
+	docker rmi srcs-mariadb | docker rmi srcs-wordpress | docker rmi srcs-nginx
 
 re:
 	$(MAKE) fclean
