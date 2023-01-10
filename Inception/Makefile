@@ -6,7 +6,7 @@
 #    By: minskim2 <minskim2@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 18:04:36 by minskim2          #+#    #+#              #
-#    Updated: 2023/01/10 13:18:13 by minskim2         ###   ########.fr        #
+#    Updated: 2023/01/10 21:34:42 by minskim2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ all: run
 
 # wsl2에서 systemd을 사용할 수 없기 때문에 service로 도커 서버 실행
 dockerd:
+	sudo service docker start | sleep 3
 	sudo chmod 666 /var/run/docker.sock
-	sudo service docker start
 	sudo sh -c "echo '127.0.0.1 minskim2.42.fr' >> /etc/hosts"
 
 mariadb:
