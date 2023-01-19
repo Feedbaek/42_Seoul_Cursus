@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  nestjs:
+    container_name: nestjs
+    build: ./requirements/nestjs
+    restart: always
+    env_file: .env
+    ports:
+      - "3000:3000"
+    #volumes:
+    #  - type: volume
+    #    source: db_volume
+    #    target: /data
+    #    volume:
+    #      nocopy: true
+    #  - type: bind
+    #    source: /home/minskim2/data/mariadb
+    #    target: /var/lib/mysql
+    networks:
+      - intra
+
+#volumes:
+#  db_volume:
+#  wp_volume:
+
+networks:
+  intra:
+    driver: bridge
