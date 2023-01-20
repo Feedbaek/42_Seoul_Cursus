@@ -8,21 +8,20 @@ services:
     env_file: .env
     ports:
       - "3000:3000"
-    #volumes:
-    #  - type: volume
-    #    source: db_volume
-    #    target: /data
-    #    volume:
-    #      nocopy: true
-    #  - type: bind
-    #    source: /home/minskim2/data/mariadb
-    #    target: /var/lib/mysql
+    volumes:
+      - type: volume
+        source: nestjs_volume
+        target: /data
+        volume:
+          nocopy: true
+      - type: bind
+        source: ~/ft_transcendence
+        target: /ft_transcendence
     networks:
       - intra
 
-#volumes:
-#  db_volume:
-#  wp_volume:
+volumes:
+  nestjs_volume:
 
 networks:
   intra:

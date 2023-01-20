@@ -1,8 +1,13 @@
 #!/bin/sh
 
 # 프로젝트 생성
-#nest new ft_tscen
-cd /ft_tscen
+if [ ! -d /ft_transcendence/src ]; then
+	git clone https://github.com/Feedbaek/ft_transcendence.git
+fi
+cd /ft_transcendence
+
+# nestjs 설치
+npm install
 
 # 서버 실행
 npm run start:dev
